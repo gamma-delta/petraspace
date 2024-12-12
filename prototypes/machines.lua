@@ -4,62 +4,78 @@ local Table = require("__stdlib2__/stdlib/utils/table")
 local item_sounds = require("__base__/prototypes/item_sounds")
 local sounds = require("__base__/prototypes/entity/sounds")
 
-data:extend{
-  {
-    type = "recipe-category",
-    name = "dust-spraydown",
-  },
-  {
-    type = "recipe",
-    name = "dust-spraydown-water",
-    category = "dust-spraydown",
-    icon = "__base__/graphics/icons/fluid/water.png",
-    ingredients = {{ type="fluid", name="water", amount=200 }},
-    results = {},
-    energy_required = 1,
-    -- prod mods add pollution, so does that make this even more effective?
-    -- either way, it's interesting
-    allow_productivity = true,
-    allow_quality = false,
-    
-    crafting_machine_tint = {
-      primary = {r = 0.45, g = 0.78, b = 1.000, a = 1.000},
-      secondary = {r = 0.591, g = 0.856, b = 1.000, a = 1.000},
-      tertiary = {r = 0.381, g = 0.428, b = 0.536, a = 0.502},
-      quaternary = {r = 0.499, g = 0.797, b = 0.8, a = 0.733},
-    }
-  },
-}
+function metal_machine_item(entity_id, icon, subgroup, order, splat)
+  return Table.merge({
+    type = "item",
+    name = entity_id,
+    icon = icon,
+    subgroup = subgroup,
+    order = order,
+    inventory_move_sound = item_sounds.metal_large_inventory_move,
+    pick_sound = item_sounds.metal_large_inventory_pickup,
+    drop_sound = item_sounds.metal_large_inventory_move,
+    place_result = entity_id,
+    stack_size = 10,
+  }, splat)
+end
 
-local dust_sprayer = Data.Util.duplicate("furnace", "electric-furnace", "dust-sprayer", true)
-Table.merge(dust_sprayer, {
-  -- a pump uses 30
-  energy_usage = "50kW",
-  crafting_speed = 1,
-  crafting_categories = {"dust-spraydown"},
-  energy_source = {
-    type = "electric",
-    usage_priority = "secondary-input",
-    -- I think this is at passive? Don't consume energy just to stay awake
-    -- so that it doesn't passively remove dust
-    drain = "0W",
-    emissions_per_minute = { dust = -40 },
-  },
-  minable = {mining_time=0.25, result = "electrostatic-funneler"},
-  -- urhghhh
-  source_inventory_size = 0,
-  fluid_boxes = {
+data:extend{
+-- === Card programmers === --
+  Table.merge(
+    Data.Util.duplicate(
+      "assembling-machine", "assembling-machine-3",
+      "orbital-data-programmer", true
+    ), {
+      energy_usage = "500kW",
+      crafting_speed = 1,
+      crafting_categories = {"orbital-data-card"},
+      energy_source = {
+        type = "electric",
+        usage_priority = "secondary-input",
+        drain = "50kW",
+        emissions_per_minute = { dust=5, pollution=2 },
+      },
+      minable = {mining_time=0.25, result = "orbital-data-programmer"},
+      source_inventory_size = 1,
+    }
+  ),
+  metal_machine_item(
+    "orbital-data-programmer", "__base__/graphics/icons/fluid/steam.png",
+    "production-machine", "ea[orbital-data-programmer]"
+  ),
+-- === Dust === --
+  Table.merge(
+    Data.Util.duplicate("furnace", "electric-furnace", "dust-sprayer", true),
     {
-      production_type = "input",
-      volume = 1000,
-      pipe_connections = {{ flow_direction="input", direction = defines.direction.north, position = {0, -1} }},
+      -- a pump uses 30
+      energy_usage = "50kW",
+      crafting_speed = 1,
+      crafting_categories = {"dust-spraydown"},
+      energy_source = {
+        type = "electric",
+        usage_priority = "secondary-input",
+        -- I think this is at passive? Don't consume energy just to stay awake
+        -- so that it doesn't passively remove dust
+        drain = "0W",
+        emissions_per_minute = { dust = -40 },
+      },
+      minable = {mining_time=0.25, result = "dust-sprayer"},
+      -- urhghhh
+      source_inventory_size = 0,
+      fluid_boxes = {
+        {
+          production_type = "input",
+          volume = 1000,
+          pipe_connections = {{ flow_direction="input", direction = defines.direction.north, position = {0, -1} }},
+        }
+      },
+      fluid_boxes_off_when_no_fluid_recipe = false,
     }
-  },
-  fluid_boxes_off_when_no_fluid_recipe = false,
-})
-
-data:extend{
-  dust_sprayer,
+  ),
+  metal_machine_item(
+    "dust-sprayer", "__base__/graphics/icons/fluid/steam.png",
+    "production-machine", "w[dust-sprayer]"
+  ),
   {
     -- this is deranged
     type = "electric-energy-interface",
@@ -98,28 +114,8 @@ data:extend{
     open_sound = sounds.electric_large_open,
     close_sound = sounds.electric_large_close,
   },
-  {
-    type = "item",
-    name = "dust-sprayer",
-    icon = "__base__/graphics/icons/fluid/steam.png",
-    subgroup = "production-machine",
-    order = "w[dust-sprayer]",
-    inventory_move_sound = item_sounds.metal_large_inventory_move,
-    pick_sound = item_sounds.metal_large_inventory_pickup,
-    drop_sound = item_sounds.metal_large_inventory_move,
-    place_result = "dust-sprayer",
-    stack_size = 10,
-  },
-  {
-    type = "item",
-    name = "electrostatic-funneler",
-    icon = "__base__/graphics/icons/fluid/steam.png",
-    subgroup = "production-machine",
-    order = "x[electrostatic-funneler]",
-    inventory_move_sound = item_sounds.metal_large_inventory_move,
-    pick_sound = item_sounds.metal_large_inventory_pickup,
-    drop_sound = item_sounds.metal_large_inventory_move,
-    place_result = "electrostatic-funneler",
-    stack_size = 10,
-  }
+  metal_machine_item(
+    "electrostatic-funneler", "__base__/graphics/icons/fluid/steam.png",
+    "production-machine", "wa[electrostatic]"
+  ),
 }

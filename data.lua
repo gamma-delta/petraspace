@@ -1,9 +1,9 @@
 local requires = {
   "dust-pollution",
+
   "items",
   "planets",
   "machines",
-  "items",
   "fluids",
   "recipes",
   "resources",

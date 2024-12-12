@@ -31,6 +31,38 @@ local function recipe(name)
 end
 
 data:extend{
+-- === Data cards === --
+  {
+    type = "technology",
+    name = "data-cards",
+    icon = "__base__/graphics/icons/space-science-pack.png",
+    icon_size = 64,
+    prerequisites = { "advanced-electronics" },
+    unit = {
+      count = 200,
+      ingredients = science("rgb"),
+      time = 30,
+    },
+    effects = { recipe("blank-data-card"), recipe("format-expired-data-card") },
+  },
+  {
+    type = "technology",
+    name = "astronomy",
+    icon = "__space-age__/graphics/icons/solar-system-edge.png",
+    icon_size = 64,
+    prerequisites = { "data-cards", "low-density-structure" },
+    unit = {
+      count = 500,
+      ingredients = science("rgb"),
+      time = 60,
+    },
+    effects = { 
+      --recipe("orbital-data-collector"),
+      recipe("orbital-data-card"),
+      recipe("orbital-science-pack"),
+    },
+  },
+-- === Aluminum === --
   {
     type = "technology",
     name = "bauxite-hint",
@@ -47,15 +79,15 @@ data:extend{
     name = "simple-bauxite-extraction",
     icons = icons.simple_bauxite,
     icon_size = 64,
-    effects = {
-      recipe("simple-bauxite-extraction"),
-      recipe("aluminum-nuggets-to-plates"),
-    },
     prerequisites = {"sulfur-processing", "bauxite-hint"},
     unit = {
       count = 150,
       ingredients = science("rgb"),
       time = 30,
+    },
+    effects = {
+      recipe("simple-bauxite-extraction"),
+      recipe("aluminum-nuggets-to-plates"),
     },
   },
   {
@@ -63,13 +95,6 @@ data:extend{
     name = "advanced-bauxite-extraction",
     icons = icons.advanced_bauxite,
     icon_size = 64,
-    effects = {
-      recipe("bauxite-to-liquor"),
-      recipe("bauxite-liquor-electrolysis"),
-      recipe("casting-aluminum-plate"),
-      recipe("casting-aluminum-nugget"),
-      recipe("casting-low-density-structure"),
-    },
     prerequisites = {
       "simple-bauxite-extraction",
       "metallurgic-science-pack",
@@ -80,7 +105,14 @@ data:extend{
       count = 1500,
       ingredients = science("rgbpsMEA"),
       time = 60,
-    }
+    },
+    effects = {
+      recipe("bauxite-to-liquor"),
+      recipe("bauxite-liquor-electrolysis"),
+      recipe("casting-aluminum-plate"),
+      recipe("casting-aluminum-nugget"),
+      recipe("casting-low-density-structure"),
+    },
   }
 }
 
@@ -91,3 +123,6 @@ for i, v in ipairs(foundry_tech.effects) do
     break
   end
 end
+
+-- why launch a rocket if you are unaware of anything up there?
+table.insert(data.raw["technology"]["rocket-silo"].prerequisites, "astronomy")

@@ -1,7 +1,78 @@
 local icons = require("__petraspace__/prototypes/icons")
 
 data:extend{
-  -- === Aluminum recipes ===
+-- === Data cards === --
+  {
+    type = "recipe",
+    name = "blank-data-card",
+    category = "electronics-or-assembling",
+    enabled = false,
+    ingredients = {
+      { type="item", name="processing-unit", amount=5 },
+      { type="item", name="steel-plate", amount=1 },
+      { type="item", name="copper-wire", amount=2 },
+    },
+    energy_required = 3,
+    results = {{ type="item", name="blank-data-card", amount=1 }},
+  },
+  {
+    type = "recipe",
+    name = "format-expired-data-card",
+    category = "electronics-or-assembling",
+    enabled = false,
+    ingredients = {{ type="item", name="expired-data-card", amount=1 }},
+    -- this is so low because i want you to use the cards, darnit
+    results = {{ type="item", name="blank-data-card", amount=1, probability = 0.1 }},
+    allow_quality = false,
+    allow_productivity = true,
+    icon = "__base__/graphics/icons/checked-green.png",
+  },
+  {
+    type = "recipe-category",
+    name = "orbital-data-card",
+  },
+  {
+    type = "recipe",
+    name = "orbital-data-card-high-pressure",
+    category = "orbital-data-card",
+    enabled = false,
+    ingredients = {
+      { type="item", name="blank-data-card", amount=1 },
+      { type="item", name="advanced-circuit", amount=1 },
+    },
+    energy_required = 2,
+    results = {{ type="item", name="orbital-data-card", amount=1 }},
+    -- this means you can do it in space, Viate, and Aquilo, but not Fulgora
+    surface_conditions = {{ property="pressure", min=500 }},
+    -- nice try
+    allow_productivity = false,
+    allow_quality = false,
+    icons = {
+      { icon = "__base__/graphics/icons/nauvis.png", },
+      { icon = "__base__/graphics/icons/automation-science-pack.png", },
+    }
+  },
+  {
+    type = "recipe",
+    name = "orbital-data-card-low-pressure",
+    category = "orbital-data-card",
+    enabled = false,
+    ingredients = {
+      { type="item", name="blank-data-card", amount=1 },
+      { type="item", name="electronic-circuit", amount=1 },
+    },
+    energy_required = 1.5,
+    results = {{ type="item", name="orbital-data-card", amount=1 }},
+    surface_conditions = {{ property="pressure", max=500 }},
+    allow_productivity = false,
+    allow_quality = false,
+    icons = {
+      { icon = "__space-age__/graphics/icons/solar-system-edge.png", },
+      { icon = "__base__/graphics/icons/automation-science-pack.png", },
+    }
+  },
+  
+-- === Aluminum recipes ===
   {
     type = "recipe",
     name = "aluminum-nuggets-to-plates",
@@ -21,11 +92,14 @@ data:extend{
     enabled = false,
     ingredients = {
       {type="item", name="bauxite-ore", amount=5},
-      {type="fluid", name="sulfuric-acid", amount=500},
-      {type="fluid", name="steam", amount=1000},
+      {type="fluid", name="sulfuric-acid", amount=200},
+      {type="fluid", name="steam", amount=500},
     },
     energy_required = 30,
-    results = {{ type="item", name="aluminum-nugget", amount=1, probability=0.2 }},
+    results = {
+      { type="item", name="aluminum-nugget", amount=1, probability=0.2 },
+      { type="item", name="stone", amount_min=0, amount_max=5 },
+    },
     auto_recycle=false,
     allow_productivity = true,
     icons = icons.simple_bauxite,
@@ -73,7 +147,8 @@ data:extend{
     enabled = false,
     ingredients = {
       { type="fluid", name="bauxite-liquor", amount=100 },
-      { type="item", name="carbon-fiber", amount=1 },
+      -- two electrodes, two items
+      { type="item", name="carbon-fiber", amount=2 },
     },
     -- it's atomic number 13. also this makes the math dreadful
     energy_required = 13,
@@ -118,6 +193,56 @@ data:extend{
     },
     allow_productivity = true,
   },
+
+  -- === Dust deleters === --
+  {
+    type = "recipe-category",
+    name = "dust-spraydown",
+  },
+  {
+    type = "recipe",
+    name = "dust-spraydown-water",
+    category = "dust-spraydown",
+    icon = "__base__/graphics/icons/fluid/water.png",
+    ingredients = {{ type="fluid", name="water", amount=200 }},
+    results = {},
+    energy_required = 1,
+    -- prod mods add pollution, so does that make this even more effective?
+    -- either way, it's interesting
+    allow_productivity = true,
+    allow_quality = false,
+    
+    crafting_machine_tint = {
+      primary = {r = 0.45, g = 0.78, b = 1.000, a = 1.000},
+      secondary = {r = 0.591, g = 0.856, b = 1.000, a = 1.000},
+      tertiary = {r = 0.381, g = 0.428, b = 0.536, a = 0.502},
+      quaternary = {r = 0.499, g = 0.797, b = 0.8, a = 0.733},
+    }
+  },
+
+-- === Science! === --
+  {
+    type = "recipe",
+    name = "orbital-science-pack",
+    enabled = false,
+    -- the hard part should be the card logistics
+    energy_required = 8,
+    ingredients = {
+      { type="item", name="orbital-data-card", amount=20 },
+      { type="item", name="electric-motor", amount=2 },
+      { type="item", name="space-platform", amount=1 },
+      -- does not require LDS to make it not too similar to yellow science,
+      -- and because LDS is really expensive at this stage
+    },
+    results = {
+      { type="item", name="orbital-science-pack", amount=2 },
+      -- this is just enough to break even if you get nuts productivity
+      { type="item", name="blank-data-card", amount=1, chance=0.25 },
+    },
+    allow_productivity = true,
+    -- i dunno, maybe the science imparts quality onto it
+    allow_quality = true,
+  }
 }
 
 -- Fix up LDS recipes
