@@ -1,0 +1,17 @@
+{
+  "name": "petraspace",
+  "version": "0.0.0",
+  "title": "Petrak@'s Space Mod",
+  "author": "petrak@",
+  "factorio_version": "2.0",
+  "dependencies": [
+    "space-age >= 2.0.0",
+    "stdlib >= 1.0.0"
+  ],
+  "quality_required": true,
+  "space_travel_required": true,
+  "spoiling_required": true,
+  "freezing_required": true,
+  "segmented_units_required": true,
+  "expansion_shaders_required": true,
+}
