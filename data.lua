@@ -1,5 +1,13 @@
 local requires = {
-  "dust-pollution", "machines", "planets",
+  "dust-pollution",
+  "items",
+  "planets",
+  "machines",
+  "items",
+  "fluids",
+  "recipes",
+  "resources",
+  "technologies",
 }
 
 for _,req in ipairs(requires) do

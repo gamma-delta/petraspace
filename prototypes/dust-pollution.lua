@@ -62,6 +62,8 @@ data:extend{
       "not-on-map", "not-flammable",
       "no-automated-item-insertion", "no-automated-item-removal",
     },
+    -- i think this goes thru to the runtime??
+    immune_to_dust = true,
   },
 }
 

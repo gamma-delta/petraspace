@@ -4,48 +4,31 @@ local Table = require("__stdlib2__/stdlib/utils/table")
 local item_sounds = require("__base__/prototypes/item_sounds")
 local sounds = require("__base__/prototypes/entity/sounds")
 
-local function spraydown(fluid_name, amount, speed, colors)
-  return {
-    type = "recipe",
-    name = "dust-spraydown-" .. fluid_name,
-    localised_name = { "recipe-name.dust-spraydown-with", { "fluid-name."..fluid_name } },
-    category = "dust-spraydown",
-    crafting_machine_tint = colors,
-    -- TODO: create a Dust image
-    icon = "__base__/graphics/icons/fluid/water.png",
-    ingredients = { {type="fluid", name=fluid_name, amount=amount} },
-    results = {},
-    energy_required = speed,
-    -- prod mods add pollution, so does that make this even more effective?
-    -- either way, it's interesting
-    allow_productivity = true,
-    allow_quality = false,
-  }
-end
-
 data:extend{
   {
     type = "recipe-category",
     name = "dust-spraydown",
   },
   {
-    type = "recipe-category",
-    name = "electrostatic-funneler",
+    type = "recipe",
+    name = "dust-spraydown-water",
+    category = "dust-spraydown",
+    icon = "__base__/graphics/icons/fluid/water.png",
+    ingredients = {{ type="fluid", name="water", amount=200 }},
+    results = {},
+    energy_required = 1,
+    -- prod mods add pollution, so does that make this even more effective?
+    -- either way, it's interesting
+    allow_productivity = true,
+    allow_quality = false,
+    
+    crafting_machine_tint = {
+      primary = {r = 0.45, g = 0.78, b = 1.000, a = 1.000},
+      secondary = {r = 0.591, g = 0.856, b = 1.000, a = 1.000},
+      tertiary = {r = 0.381, g = 0.428, b = 0.536, a = 0.502},
+      quaternary = {r = 0.499, g = 0.797, b = 0.8, a = 0.733},
+    }
   },
-  spraydown("water", 200, 1, {
-    primary = {r = 0.45, g = 0.78, b = 1.000, a = 1.000},
-    secondary = {r = 0.591, g = 0.856, b = 1.000, a = 1.000},
-    tertiary = {r = 0.381, g = 0.428, b = 0.536, a = 0.502},
-    quaternary = {r = 0.499, g = 0.797, b = 0.8, a = 0.733},
-  }),
-  -- longer time means that it spends more time crafting
-  spraydown("holmium-solution", 30, 15, {
-    -- borrowed i mean stolen from the holmium solution crafting recipe
-    primary = {r = 0.598, g = 0.274, b = 0.501, a = 0.502}, -- #98457f80
-    secondary = {r = 0.524, g = 0.499, b = 0.521, a = 0.502}, -- #857f8480
-    tertiary = {r = 0.716, g = 0.716, b = 0.716, a = 0.502}, -- #b6b6b680
-    quaternary = {r = 0.768, g = 0.487, b = 0.684, a = 0.502}, -- #c37cae80
-  }),
 }
 
 local dust_sprayer = Data.Util.duplicate("furnace", "electric-furnace", "dust-sprayer", true)

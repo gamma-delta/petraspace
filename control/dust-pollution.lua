@@ -11,6 +11,7 @@ function create_secret_beacon(evt)
 
   if surface.pollutant_type and surface.pollutant_type.name == "dust" 
       and entity.prototype.effect_receiver ~= nil
+      and not entity.prototype.immune_to_dust
   then
     local secret_beacon = surface.create_entity{
       name = "dust-secret-beacon",

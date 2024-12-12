@@ -1,0 +1,28 @@
+data:extend{
+  {
+    type = "fluid",
+    name = "bauxite-liquor",
+    icon = "__petraspace__/graphics/icons/fluid/red-mud.png",
+    subgroup = "fluid",
+    order = "b[new-fluid]-e[petraspace]-a[bauxite-liquor]",
+    default_temperature = 1500,
+    max_temperature = 1500,
+    heat_capacity = "0.01kJ",
+    base_color = { 0.8, 0.45, 0.21 },
+    flow_color = { 0.85, 0.50, 0.40 },
+    auto_barrel = false,
+  },
+  {
+    type = "fluid",
+    name = "molten-aluminum",
+    icon = "__petraspace__/graphics/icons/fluid/molten-aluminum.png",
+    subgroup = "fluid",
+    order = "b[new-fluid]-e[petraspace]-b[molten-aluminum]",
+    default_temperature = 1500,
+    max_temperature = 1500,
+    heat_capacity = "0.01kJ",
+    base_color = { 0.8, 0.7, 0.9 },
+    flow_color = { 0.67, 0.60, 0.7 },
+    auto_barrel = false,
+  },
+}
