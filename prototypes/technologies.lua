@@ -37,7 +37,7 @@ data:extend{
     name = "data-cards",
     icon = "__base__/graphics/icons/space-science-pack.png",
     icon_size = 64,
-    prerequisites = { "advanced-electronics" },
+    prerequisites = { "advanced-circuit" },
     unit = {
       count = 200,
       ingredients = science("rgb"),
@@ -58,7 +58,8 @@ data:extend{
     },
     effects = { 
       --recipe("orbital-data-collector"),
-      recipe("orbital-data-card"),
+      recipe("orbital-data-card-high-pressure"),
+      recipe("orbital-data-card-low-pressure"),
       recipe("orbital-science-pack"),
     },
   },

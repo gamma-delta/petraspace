@@ -2,6 +2,7 @@ local Data = require("__stdlib2__/stdlib/data/data")
 local Table = require("__stdlib2__/stdlib/utils/table")
 
 local item_sounds = require("__base__/prototypes/item_sounds")
+local item_tints = require("__base__/prototypes/item-tints")
 
 local rocket_cap = 1000 * kg;
 
@@ -102,16 +103,20 @@ data:extend{
 }
 
 -- === Science! === --
-local function science_pack(name, icon, tint)
-  Table.merge(
-    Data.Util.duplicate("item", "automation-science-pack"),
+local function science_pack(name, order, icon, tint)
+  return Table.merge(
+    Data.Util.duplicate("tool", "automation-science-pack", name),
     {
-      name = name,
       icon = icon,
+      order = order,
       random_tint_color = tint,
     }
   )
 end
 data:extend{
-  science_pack("orbital-science-pack", "__base__/graphics/icons/automation-science-pack.png", nil),
+  science_pack(
+    "orbital-science-pack", "d[chemical-science-pack]-a",
+    "__base__/graphics/icons/automation-science-pack.png",
+    item_tints.bluish_science
+  ),
 }

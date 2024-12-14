@@ -22,7 +22,8 @@ data:extend{
     enabled = false,
     ingredients = {{ type="item", name="expired-data-card", amount=1 }},
     -- this is so low because i want you to use the cards, darnit
-    results = {{ type="item", name="blank-data-card", amount=1, probability = 0.1 }},
+    results = {{ type="item", name="blank-data-card", amount=1, probability = 0.25 }},
+    show_amount_in_title = false,
     allow_quality = false,
     allow_productivity = true,
     icon = "__base__/graphics/icons/checked-green.png",
@@ -106,7 +107,7 @@ data:extend{
   },
   {
     type = "recipe",
-    name = "bauxite-to-liquor",
+    name = "bauxite-liquor",
     category = "metallurgy",
     subgroup = "aluminum-processes",
     order = "zb[bauxite-to-liquor]",
@@ -151,7 +152,9 @@ data:extend{
       { type="item", name="carbon-fiber", amount=2 },
     },
     -- it's atomic number 13. also this makes the math dreadful
-    energy_required = 13,
+    -- i want the number of EM plants and foundries to be quite mismatched,
+    -- because it makes the setups look more interesting
+    energy_required = 130,
     results = {
       { type="fluid", name="molten-aluminum", amount=50 },
       { type="item", name="bauxite-ore", amount_min = 1, amount_max = 20, probability = 0.5 },
@@ -228,20 +231,23 @@ data:extend{
     -- the hard part should be the card logistics
     energy_required = 8,
     ingredients = {
-      { type="item", name="orbital-data-card", amount=20 },
-      { type="item", name="electric-motor", amount=2 },
-      { type="item", name="space-platform", amount=1 },
+      { type="item", name="orbital-data-card", amount=5 },
+      { type="item", name="electric-engine-unit", amount=2 },
+      { type="item", name="space-platform-foundation", amount=1 },
       -- does not require LDS to make it not too similar to yellow science,
       -- and because LDS is really expensive at this stage
     },
     results = {
       { type="item", name="orbital-science-pack", amount=2 },
-      -- this is just enough to break even if you get nuts productivity
-      { type="item", name="blank-data-card", amount=1, chance=0.25 },
+      -- you can only craft these in normal assembling machines;
+      -- with 4 legendary prod 3s that makes you break even
+      { type="item", name="blank-data-card", amount=1, probability=0.5 },
     },
+    main_product = "orbital-science-pack",
     allow_productivity = true,
     -- i dunno, maybe the science imparts quality onto it
     allow_quality = true,
+    maximum_productivity = 1,
   }
 }
 
