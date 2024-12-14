@@ -8,6 +8,8 @@ local requires = {
   "recipes",
   "resources",
   "technologies",
+
+  "simulations",
 }
 
 for _,req in ipairs(requires) do

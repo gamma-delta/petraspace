@@ -196,8 +196,25 @@ data:extend{
     },
     allow_productivity = true,
   },
+}
+
+-- Fix up LDS recipes
+data.raw["recipe"]["low-density-structure"].ingredients = {
+  { type="item", name="steel-plate", amount=2 },
+  { type="item", name="copper-plate", amount=10 },
+  { type="item", name="aluminum-plate", amount=1 },
+  { type="item", name="plastic-bar", amount=5 },
+}
+-- Foundries only allow 2 fluids :<
+data.raw["recipe"]["casting-low-density-structure"].ingredients = {
+  { type="fluid", name="molten-copper", amount=250 },
+  { type="fluid", name="molten-aluminum", amount=8 },
+  { type="item", name="steel-plate", amount=2 },
+  { type="item", name="plastic-bar", amount=5 },
+}
 
   -- === Dust deleters === --
+data:extend{
   {
     type = "recipe-category",
     name = "dust-spraydown",
@@ -251,17 +268,5 @@ data:extend{
   }
 }
 
--- Fix up LDS recipes
-data.raw["recipe"]["low-density-structure"].ingredients = {
-  { type="item", name="steel-plate", amount=2 },
-  { type="item", name="copper-plate", amount=10 },
-  { type="item", name="aluminum-plate", amount=1 },
-  { type="item", name="plastic-bar", amount=5 },
-}
--- Foundries only allow 2 fluids :<
-data.raw["recipe"]["casting-low-density-structure"].ingredients = {
-  { type="fluid", name="molten-copper", amount=250 },
-  { type="fluid", name="molten-aluminum", amount=8 },
-  { type="item", name="steel-plate", amount=2 },
-  { type="item", name="plastic-bar", amount=5 },
-}
+-- === Misc changes === --
+

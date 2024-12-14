@@ -108,7 +108,7 @@ data:extend{
       time = 60,
     },
     effects = {
-      recipe("bauxite-to-liquor"),
+      recipe("bauxite-liquor"),
       recipe("bauxite-liquor-electrolysis"),
       recipe("casting-aluminum-plate"),
       recipe("casting-aluminum-nugget"),
