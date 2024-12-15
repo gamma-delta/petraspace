@@ -1,0 +1,8 @@
+#!/bin/bash
+
+INPUT=$1
+OUTPUT=$2
+
+magick -background none \
+  $INPUT'[64x64]' $INPUT'[32x32]' $INPUT'[16x16]' $INPUT'[8x8]' +append \
+  $OUTPUT

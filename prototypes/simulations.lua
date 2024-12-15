@@ -12,13 +12,11 @@ local sim_spoiling_cards = {
     
     game.surfaces[1].create_entities_from_blueprint_string{
       string = "]] .. bp_spoiling_cards .. [[",
-      position = {0, 0}
+      position = {0, 0},
     }
 
-    script.on_nth_tick(1, function()
-      local spoiled_cards_chest = game.surfaces[1].find_entities_filtered{name="wooden-chest"}[1]
-      spoiled_cards_chest.insert{name="orbital-data-card", count=20, spoil_percent=0.5}
-    end)
+    local spoiled_cards_chest = game.surfaces[1].find_entities_filtered{name="wooden-chest"}[1]
+    spoiled_cards_chest.insert{name="orbital-data-card", count=20, spoil_percent=0.5}
   ]],
 }
 

@@ -1,3 +1,5 @@
+local Table = require("__stdlib2__/stdlib/utils/table")
+
 local icons = require("__petraspace__/prototypes/icons")
 
 local function science(s)
@@ -30,12 +32,17 @@ local function recipe(name)
   return { type="unlock-recipe", recipe=name }
 end
 
+-- Make sure that the labs can actually take all of this stuff
+for _,lab in pairs(data.raw["lab"]) do
+  Table.merge(lab.inputs, {"orbital-science-pack"}, true)
+end
+
 data:extend{
 -- === Data cards === --
   {
     type = "technology",
     name = "data-cards",
-    icon = "__base__/graphics/icons/space-science-pack.png",
+    icon = "__petraspace__/graphics/icons/blank-data-card.png",
     icon_size = 64,
     prerequisites = { "advanced-circuit" },
     unit = {
@@ -47,9 +54,9 @@ data:extend{
   },
   {
     type = "technology",
-    name = "astronomy",
-    icon = "__space-age__/graphics/icons/solar-system-edge.png",
-    icon_size = 64,
+    name = "orbital-science-pack",
+    icon = "__petraspace__/graphics/technologies/orbital-science-pack.png",
+    icon_size = 256,
     prerequisites = { "data-cards", "low-density-structure" },
     unit = {
       count = 500,
@@ -125,5 +132,9 @@ for i, v in ipairs(foundry_tech.effects) do
   end
 end
 
+table.insert(data.raw["technology"]["low-density-structure"].prerequisites, "simple-bauxite-extraction")
+
 -- why launch a rocket if you are unaware of anything up there?
-table.insert(data.raw["technology"]["rocket-silo"].prerequisites, "astronomy")
+local rocket_silo = data.raw["technology"]["rocket-silo"]
+table.insert(rocket_silo.prerequisites, "orbital-science-pack")
+table.insert(rocket_silo.unit.ingredients, {"orbital-science-pack", 1})

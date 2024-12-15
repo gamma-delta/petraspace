@@ -37,19 +37,19 @@ data:extend{
   Table.merge(data_card_props(), {
     name = "blank-data-card",
     order = "a[blank]",
-    icon = "__base__/graphics/icons/automation-science-pack.png",
+    icon = "__petraspace__/graphics/icons/blank-data-card.png",
   }),
   Table.merge(data_card_props(), {
     name = "expired-data-card",
     order = "z[expired]",
-    icon = "__base__/graphics/icons/military-science-pack.png",
+    icon = "__petraspace__/graphics/icons/expired-data-card.png",
   }),
 }
 data:extend{
   -- Do this in chunks because apparently this doesn't believe expired-data-card is real
   make_programmed_card(
     "orbital-data-card",
-    "__base__/graphics/icons/space-science-pack.png",
+    "__petraspace__/graphics/icons/orbital-data-card.png",
     "ba",
     data.raw["planet"]["nauvis"].surface_properties["day-night-cycle"]
   ),
@@ -116,7 +116,7 @@ end
 data:extend{
   science_pack(
     "orbital-science-pack", "d[chemical-science-pack]-a",
-    "__base__/graphics/icons/automation-science-pack.png",
+    "__petraspace__/graphics/icons/orbital-science-pack.png",
     item_tints.bluish_science
   ),
 }

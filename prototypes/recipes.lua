@@ -50,7 +50,7 @@ data:extend{
     allow_quality = false,
     icons = {
       { icon = "__base__/graphics/icons/nauvis.png", },
-      { icon = "__base__/graphics/icons/automation-science-pack.png", },
+      { icon = "__petraspace__/graphics/icons/orbital-data-card.png", },
     }
   },
   {
@@ -69,7 +69,7 @@ data:extend{
     allow_quality = false,
     icons = {
       { icon = "__space-age__/graphics/icons/solar-system-edge.png", },
-      { icon = "__base__/graphics/icons/automation-science-pack.png", },
+      { icon = "__petraspace__/graphics/icons/orbital-data-card.png", },
     }
   },
   
@@ -245,8 +245,7 @@ data:extend{
     type = "recipe",
     name = "orbital-science-pack",
     enabled = false,
-    -- the hard part should be the card logistics
-    energy_required = 8,
+    energy_required = 21,
     ingredients = {
       { type="item", name="orbital-data-card", amount=5 },
       { type="item", name="electric-engine-unit", amount=2 },
@@ -255,10 +254,11 @@ data:extend{
       -- and because LDS is really expensive at this stage
     },
     results = {
-      { type="item", name="orbital-science-pack", amount=2 },
+      { type="item", name="orbital-science-pack", amount=3 },
       -- you can only craft these in normal assembling machines;
       -- with 4 legendary prod 3s that makes you break even
-      { type="item", name="blank-data-card", amount=1, probability=0.5 },
+      { type="item", name="blank-data-card", 
+        amount_min=1, amount_max=5, probability=0.5 },
     },
     main_product = "orbital-science-pack",
     allow_productivity = true,
@@ -269,4 +269,9 @@ data:extend{
 }
 
 -- === Misc changes === --
-
+local space_plat = data.raw["recipe"]["space-platform-foundation"]
+space_plat.ingredients = {
+  { type="item", name="copper-cable", amount=20 },
+  { type="item", name="steel-plate", amount=15 },
+  { type="item", name="low-density-structure", amount=1 },
+}
