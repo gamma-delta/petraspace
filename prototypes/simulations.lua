@@ -1,3 +1,4 @@
+
 local bp_spoiling_cards = require("__petraspace__/prototypes/simulations/spoiling-cards.blueprint.lua")
 
 local sim_spoiling_cards = {

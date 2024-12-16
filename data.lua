@@ -1,8 +1,11 @@
 local requires = {
   "dust-pollution",
 
+  "tiles",
+  "decorations",
+  "worldgen/planets",
+
   "items",
-  "planets",
   "machines",
   "fluids",
   "recipes",
