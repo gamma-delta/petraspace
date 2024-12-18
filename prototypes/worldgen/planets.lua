@@ -76,3 +76,23 @@ data:extend{
     asteroid_spawn_definitions = {},
   },
 }
+
+-- Post fixups so I can truly make per-planet recipes
+local planet_names = Table.map(
+  data.raw["planet"],
+  function(p) return p.name end
+)
+
+for _,planet in pairs(data.raw["planet"]) do
+  for _,planet_name in ipairs(planet_names) do
+    local amount
+    if planet.name == planet_name then
+      amount = 1
+    else
+      amount = 0
+    end
+    local quiddity = "is-" .. planet.name
+    planet.surface_properties[quiddity] = 1.0
+  end
+end
+

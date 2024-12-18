@@ -9,10 +9,10 @@ data:extend{
     enabled = false,
     ingredients = {
       { type="item", name="processing-unit", amount=5 },
-      { type="item", name="steel-plate", amount=1 },
+      { type="item", name="low-density-structure", amount=1 },
       { type="item", name="copper-wire", amount=2 },
     },
-    energy_required = 3,
+    energy_required = 10,
     results = {{ type="item", name="blank-data-card", amount=1 }},
   },
   {
@@ -42,7 +42,10 @@ data:extend{
       { type="item", name="advanced-circuit", amount=1 },
     },
     energy_required = 2,
-    results = {{ type="item", name="orbital-data-card", amount=1 }},
+    results = {{
+      type="item", name="orbital-data-card", amount=1,
+      percent_spoiled=0.8,
+    }},
     -- this means you can do it in space, Viate, and Aquilo, but not Fulgora
     surface_conditions = {{ property="pressure", min=500 }},
     -- nice try
@@ -255,16 +258,14 @@ data:extend{
     },
     results = {
       { type="item", name="orbital-science-pack", amount=3 },
-      -- you can only craft these in normal assembling machines;
-      -- with 4 legendary prod 3s that makes you break even
       { type="item", name="blank-data-card", 
-        amount_min=1, amount_max=5, probability=0.5 },
+        amount_min=1, amount_max=5, probability=0.9,
+        ignored_by_productivity=true, ignored_by_stats=true },
     },
     main_product = "orbital-science-pack",
     allow_productivity = true,
     -- i dunno, maybe the science imparts quality onto it
     allow_quality = true,
-    maximum_productivity = 1,
   }
 }
 

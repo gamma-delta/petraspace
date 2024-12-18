@@ -1,0 +1,32 @@
+Decided to split this into multiple files for ease of use.
+
+Stage 1: Nauvis.
+
+Red, Green, and Blue Science.
+MO here is making the early game more interesting
+(is change for the sake of change worth it?)
+- Make steel require coal or carbon, so you can't make it without carbon.
+  Perhaps make foundry recipe require CO2?
+- Blurcuits require silicon, which is laboriously extracted from stone & sulfuric acid
+- Laser components, for lasers. Difficult to craft on Nauvis due to high pressure (?)
+
+LDS requires aluminum. How do I make it prohibitively expensive but still possible on Nauvis?
+Drop from your crashed spaceship?
+(have since implemented this as bauxite inclusions)
+
+Orbital data. Craft telescopes that you must supply with power and data cards.
+- Programmed data cards spoil into blank cards again
+- Nauvis does not produce very good orbital data due to high pressure
+- But Viate does! Hold your horses
+Astrodynamic science pack:
+- Orbital data card(s)
+- Space platform (now feat. LDS?)
+- Electric motor
+Consume some small number of these to discover Viate.
+(the engineer is incapable of looking up)
+Note you cannot build thrusters yet.
+
+Do I want to make data cards really cheap and reusable?
+Or each one an investment?
+I like the second -- better reuse them because otherwise you're throwing away
+nice data cards.

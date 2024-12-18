@@ -1,0 +1,36 @@
+The second trip to Fulgora has you making the Subatomic Science Pack.
+(oooh I wonder what happened to the Fulgorans? why can you extract
+plutonium from scrap? ooooh)
+
+Particle Accelerators.
+Because I think factorio should have a horrid fiddly multiblock.
+- Make "particle stream" or whatever a fluid. Its energy is represented
+  as its heat (it's all joules in the backend!)
+- The accelerator is made out of many stretches of fluidboxes.
+- Source component takes raw atomic mix and turns it into particle stream.
+- Normal "pipes" cool down the particle stream, especially turns.
+  = Can impl these as FluidEnergySources, although I need somewhere to
+    void the energy to...
+- Accelerator components heat up the particle stream.
+- The center accelerator component has a FluidEnergySource that consumes
+  particle stream and outputs power based on its heat.
+  Has some very high passive power drain but cheap to run recipes,
+  so you "power" it with high-energy particles and the more energy you give it,
+  the quicker goes the irradiation.
+
+Two possible design ideas:
+- Stream mode.
+  Make the heat penalties for sitting in connectors very high, and make
+  accelerators shut down (or explode?!) if there's too much fluid in them.
+  This way you have to produce streams of particles and can't let them buffer.
+  (Any amount of fluid sitting in a boiler can eventually reach infinity degrees,
+  because the input and output pipes are both the same fluidbox.)
+- Storage mode.
+  Have particle storage be an explicit part of the design.
+  Heat particles higher and higher overnight, then dump their energy during the
+  day.
+  The "storage tanks" are secretly FluidEnergySources that cool down the fluid.
+  Can probably do this by having the irradiator take a small amount of energy
+  to remain running and a huge amount to do the craft; this way you're encouraged
+  to get the fluid as hot as possible to make the crafts go faster.
+

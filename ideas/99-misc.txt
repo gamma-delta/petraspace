@@ -1,0 +1,16 @@
+=== Environmental Station ===
+(If I go thru with planet Chronos, this will be the Chronos/Gleba/Vulcanus
+research.)
+Acts as a bigger radar.
+Can read basically any information I can think it ought to:
+- Pollution levels
+- Evolution level
+- Time of day
+- Wind X/Y
+- Planet gravity?
+- Nastiest enemy in range?
+I want to feel like this is a pretty epic upgrade...
+but I'm ok with it being the worst of them.
+(For example, use this to turn on electrostatic funnelers only at night!)
+
+Would be funny to have a radioactive item that decays in several years.
