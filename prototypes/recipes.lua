@@ -250,7 +250,8 @@ data:extend{
     enabled = false,
     energy_required = 21,
     ingredients = {
-      { type="item", name="orbital-data-card", amount=5 },
+      { type="item", name="orbital-data-card", amount=5,
+        ignored_by_stats=5 },
       { type="item", name="electric-engine-unit", amount=2 },
       { type="item", name="space-platform-foundation", amount=1 },
       -- does not require LDS to make it not too similar to yellow science,
@@ -260,12 +261,30 @@ data:extend{
       { type="item", name="orbital-science-pack", amount=3 },
       { type="item", name="blank-data-card", 
         amount_min=1, amount_max=5, probability=0.9,
-        ignored_by_productivity=true, ignored_by_stats=true },
+        ignored_by_productivity=9999, ignored_by_stats=5 },
     },
     main_product = "orbital-science-pack",
     allow_productivity = true,
     -- i dunno, maybe the science imparts quality onto it
     allow_quality = true,
+  },
+
+  -- Particle accelerators
+  {
+    type = "recipe-category",
+    name = "particle-irradiation",
+  },
+  {
+    type = "recipe",
+    name = "enrich-uranium",
+    enabled = true,
+    energy_required = 24,
+    ingredients = {
+      { type="item", name="uranium-238" },
+    },
+    results = {
+      { type="item", name="uranium-235" }
+    },
   }
 }
 

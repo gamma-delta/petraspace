@@ -1,6 +1,4 @@
 local requires = {
-  "dust-pollution",
-
   "tiles",
   "decorations",
   "worldgen/planets",
@@ -11,6 +9,9 @@ local requires = {
   "recipes",
   "resources",
   "technologies",
+
+  "particle-accelerator",
+  "dust-pollution",
 
   "simulations",
 }

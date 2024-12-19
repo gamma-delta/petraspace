@@ -1,5 +1,6 @@
-local pmg = require("__petraspace__/prototypes/worldgen/planet-map-gen")
+local Table = require("__stdlib2__/stdlib/utils/table")
 
+local pmg = require("__petraspace__/prototypes/worldgen/planet-map-gen")
 local effects = require("__core__.lualib.surface-render-parameter-effects")
 
 data:extend{

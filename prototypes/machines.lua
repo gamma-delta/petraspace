@@ -4,7 +4,7 @@ local Table = require("__stdlib2__/stdlib/utils/table")
 local item_sounds = require("__base__/prototypes/item_sounds")
 local sounds = require("__base__/prototypes/entity/sounds")
 
-function metal_machine_item(entity_id, icon, subgroup, order, splat)
+local function metal_machine_item(entity_id, icon, subgroup, order, splat)
   return Table.merge({
     type = "item",
     name = entity_id,
@@ -88,7 +88,7 @@ data:extend{
       emissions_per_minute = { dust = -300 },
       buffer = "10MJ",
     },
-    minable = {mining_time=0.25, result = "electrostatic-funneler"},
+    minable = {mining_time=1, result = "electrostatic-funneler"},
     flags = {"player-creation", "placeable-neutral"},
     max_health = 200,
     picture = {
@@ -117,5 +117,10 @@ data:extend{
   metal_machine_item(
     "electrostatic-funneler", "__base__/graphics/icons/fluid/steam.png",
     "production-machine", "wa[electrostatic]"
+  ),
+  -- Stuff defined elsewhere
+  metal_machine_item(
+    "induction-coil", "__petraspace__/graphics/icons/induction-coil.png",
+    "particle-accelerator", "b"
   ),
 }
