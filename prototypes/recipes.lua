@@ -280,10 +280,10 @@ data:extend{
     enabled = true,
     energy_required = 24,
     ingredients = {
-      { type="item", name="uranium-238" },
+      { type="item", name="uranium-238", amount=1 },
     },
     results = {
-      { type="item", name="uranium-235" }
+      { type="item", name="uranium-235", amount=1 },
     },
   }
 }

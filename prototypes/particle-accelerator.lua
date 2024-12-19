@@ -31,32 +31,28 @@ data:extend{
 do -- Inductor coil
   local pics = {
     horz = {
-      structure = {
-        filename = "__petraspace__/graphics/entities/induction-coil/induction-coil.png",
-        size = { 224, 96 },
-      },
+      filename = "__petraspace__/graphics/entities/induction-coil/induction-coil.png",
+      size = { 224, 96 },
     },
     vert = {
-      structure = {
-        filename = "__petraspace__/graphics/entities/induction-coil/induction-coil-vert.png",
-        size = { 96, 224 },
-      },
+      filename = "__petraspace__/graphics/entities/induction-coil/induction-coil-vert.png",
+      size = { 96, 224 },
     }
   }
   local power_usage = particle_specific_heat * coil_heat_increase
 
   data:extend{
     {
-      type = "boiler",
+      type = "pump",
       name = "induction-coil",
       flags = {"placeable-neutral", "placeable-player", "player-creation"},
-      max_heath = 1000,
+      max_health = 1000,
       icon = "__petraspace__/graphics/icons/induction-coil.png",
       subgroup = "particle-accelerator",
       order = "b",
       collision_box = {{-3.4, -1.4}, {3.4, 1.4}},
       selection_box = {{-3.5, -1.5}, {3.5, 1.5}},
-      pictures = {
+      animations = {
         -- Default has it being horz
         north = pics.horz,
         south = pics.horz,
@@ -66,18 +62,19 @@ do -- Inductor coil
       burning_cooldown = 0,
       minable = {mining_time=2, result = "induction-coil"},
 
-      mode = "heat-fluid-inside",
-      energy_consumption = power_usage .. "J",
+      energy_usage = power_usage.."J",
       energy_source = {
         type = "electric",
-        buffer_capacity = power_usage.. "J",
+        buffer_capacity = power_usage.."J",
         usage_priority = "secondary-input",
         drain = "100kJ",
       },
+      -- make sure the pumping speed is lower than the volume,
+      -- so fluid stays in there to get heated.
+      pumping_speed = 1,
       fluid_box = {
-        volume = 1,
+        volume = 10,
         pipe_covers = pipecoverspictures(),
-        production_type = "input-output",
         pipe_connections = {
           {
             flow_direction = "input",
@@ -92,8 +89,6 @@ do -- Inductor coil
         },
         filter = "particle-stream",
       },
-      -- unused, but the game still needs it?
-      output_fluid_box = { volume = 1, pipe_connections = {} },
     },
   }
 end
