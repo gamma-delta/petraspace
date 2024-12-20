@@ -4,25 +4,35 @@ local Table = require("__stdlib2__/stdlib/utils/table")
 
 local putil = require("__petraspace__/control/utils")
 
-putil.setup_on_type_by_tick("induction-coil", 1, function(coil)
-  local working = coil.status == defines.entity_status.working
-  
-  local fluidboxes = coil.fluidbox
-  -- Figure out which fluid box actually holds the fricking plasma
-  -- because boilers HAVE to have a second fluid box gwah
-  -- also they can?? be null??
-  if not fluidboxes then return end
-  
-  for i=1,#fluidboxes do
+local function all_particles_hooked_up(fluid_box)
+  for i=1,#fluid_box do
+    local fluid = fluid_box[i]
     -- apparently???? these can also???? be null?????
-    local fluid = fluidboxes[i]
-
-    if fluid and fluid.name == "particle-stream" then
-      -- fiddle with temp
-      local delta = working and 100 or -200
-      fluid.temperature = fluid.temperature + delta
-      fluidboxes[i] = fluid
-      break
+    if fluid then
+      -- Check that it's particle stream
+      local filter = fluid_box.get_filter(i)
+      if filter and filter.name == "particle-stream" then
+        local connections = fluid_box.get_connections(i)
+        local pipes = fluid_box.get_pipe_connections(i)
+        -- game.print("connections: " .. serpent.line(connections))
+        -- game.print("pipes: " .. serpent.line(pipes))
+        -- Every pipe needs to be connected
+        if #connections ~= #pipes then
+          return false
+        end
+      end
     end
   end
+  return true
+end
+
+putil.setup_on_type_by_tick("induction-coil", 1, function(coil)
+  local ok = all_particles_hooked_up(coil.fluidbox)
+  coil.custom_status = (not ok)
+    and {
+      label = {"text.particle-stream-unconnected"},
+      diode = defines.entity_status_diode.red
+    } or nil
+  -- for some reason disabled_by_script doesn't work
+  coil.active = ok
 end)

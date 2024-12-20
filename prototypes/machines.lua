@@ -81,6 +81,7 @@ data:extend{
     type = "electric-energy-interface",
     name = "electrostatic-funneler",
     icon = "__space-age__/graphics/icons/lightning-collector.png",
+    gui_mode = "none",
     energy_usage = "10MW",
     energy_source = {
       type = "electric",
@@ -118,9 +119,27 @@ data:extend{
     "electrostatic-funneler", "__base__/graphics/icons/fluid/steam.png",
     "production-machine", "wa[electrostatic]"
   ),
+
   -- Stuff defined elsewhere
+  -- Particle physics
   metal_machine_item(
-    "induction-coil", "__petraspace__/graphics/icons/induction-coil.png",
+    "sputtering-coil", "__base__/graphics/icons/fluid/steam.png",
+    "particle-accelerator", "a"
+  ),
+  metal_machine_item(
+    "induction-coil", "__base__/graphics/icons/fluid/steam.png",
     "particle-accelerator", "b"
+  ),
+  metal_machine_item(
+    "containment-coil-c", "__base__/graphics/icons/fluid/steam.png",
+    "particle-accelerator", "c"
+  ),
+  metal_machine_item(
+    "containment-coil-l", "__base__/graphics/icons/fluid/steam.png",
+    "particle-accelerator", "e"
+  ),
+  metal_machine_item(
+    "irradiation-chamber", "__base__/graphics/icons/fluid/steam.png",
+    "particle-accelerator", "f"
   ),
 }

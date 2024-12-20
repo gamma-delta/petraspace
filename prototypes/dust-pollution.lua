@@ -31,6 +31,8 @@ data:extend{
     hidden = true,
     effect = {
       speed = -0.01,
+      -- 1% of this is to offset slowdown energy reduction
+      consumption = 0.02,
     },
     tier = 1,
     -- whatever
