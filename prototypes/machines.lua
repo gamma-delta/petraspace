@@ -120,26 +120,61 @@ data:extend{
     "production-machine", "wa[electrostatic]"
   ),
 
-  -- Stuff defined elsewhere
   -- Particle physics
+  {
+    type = "item-subgroup",
+    name = "particle-accelerator-machines",
+    group = "production",
+    -- after space
+    order = "h",
+  },
+  {
+    type = "assembling-machine",
+    name = "particle-trap",
+    minable = {mining_time=2, result = "particle-trap"},
+    collision_box = {{-3.4, -3.4}, {3.4, 3.4}},
+    selection_box = {{-3.5, -3.5}, {3.5, 3.5}},
+    crafting_speed = 1,
+    crafting_categories = { "particle-trap" },
+    energy_usage = "1GW",
+    allowed_effects = { "speed", "productivity", "pollution" },
+    energy_source = { type = "electric", usage_priority = "secondary-input" },
+
+    fluid_boxes = {
+      {
+        volume = 1000,
+        production_type = "input",
+        pipe_covers = pipecoverspictures(),
+        pipe_connections = { {
+          direction = defines.direction.west,
+          position = { -3, 2 },
+          flow_direction = "input",
+        } },
+      },
+      {
+        volume = 1000,
+        production_type = "input",
+        pipe_covers = pipecoverspictures(),
+        pipe_connections = { { 
+          direction = defines.direction.east,
+          position = { 3, -2 },
+          flow_direction = "input",
+        } },
+      },
+    },
+    
+    graphics_set = {
+      animation = {
+        north = {
+          filename = "__petraspace__/graphics/entities/particle-trap.png",
+          size = {448, 448},
+          scale = 0.5,
+        }
+      }
+    }
+  },
   metal_machine_item(
-    "sputtering-coil", "__base__/graphics/icons/fluid/steam.png",
-    "particle-accelerator", "a"
-  ),
-  metal_machine_item(
-    "induction-coil", "__base__/graphics/icons/fluid/steam.png",
-    "particle-accelerator", "b"
-  ),
-  metal_machine_item(
-    "containment-coil-c", "__base__/graphics/icons/fluid/steam.png",
-    "particle-accelerator", "c"
-  ),
-  metal_machine_item(
-    "containment-coil-l", "__base__/graphics/icons/fluid/steam.png",
-    "particle-accelerator", "e"
-  ),
-  metal_machine_item(
-    "irradiation-chamber", "__base__/graphics/icons/fluid/steam.png",
-    "particle-accelerator", "f"
+    "particle-trap", "__base__/graphics/icons/fluid/steam.png",
+    "particle-accelerator-machines", "a"
   ),
 }

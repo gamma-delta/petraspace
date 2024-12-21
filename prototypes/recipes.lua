@@ -272,39 +272,23 @@ data:extend{
   -- Particle accelerators
   {
     type = "recipe-category",
-    name = "particle-sputtering",
+    name = "particle-trap",
   },
   {
     type = "recipe",
-    name = "particle-stream",
-    category = "particle-sputtering",
+    name = "full-muon-trap",
+    category = "particle-trap",
     enabled = true,
     energy_required = 1,
     ingredients = {
       { type="fluid", name="electrolyte", amount=10, fluidbox_index=1 },
       { type="fluid", name="holmium-solution", amount=10, fluidbox_index=2 },
+      { type="item", name="empty-muon-trap", amount=1 },
     },
     results = {
-      { type="fluid", name="particle-stream", amount=1 },
+      { type="item", name="full-muon-trap", amount=1 }
     },
   },
-  {
-    type = "recipe-category",
-    name = "particle-irradiation",
-  },
-  {
-    type = "recipe",
-    category = "particle-irradiation",
-    name = "enrich-uranium",
-    enabled = true,
-    energy_required = 24,
-    ingredients = {
-      { type="item", name="uranium-238", amount=1 },
-    },
-    results = {
-      { type="item", name="uranium-235", amount=1 },
-    },
-  }
 }
 
 -- === Misc changes === --

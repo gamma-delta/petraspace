@@ -102,6 +102,56 @@ data:extend{
   ),
 }
 
+-- Particle physics
+data:extend{
+  {
+    type = "item-subgroup",
+    name = "particle-accelerator",
+    group = "intermediate-products",
+    -- after uranium
+    order = "j",
+  },
+  {
+    type = "item",
+    name = "empty-muon-trap",
+    icon = "__petraspace__/graphics/icons/muon-trap.png",
+    stack_size = 1,
+
+    category = "particle-accelerator",
+    order = "a",
+  },
+  {
+    -- gotta put it somewhere...
+    type = "ammo-category",
+    name = "subatomic-mishap",
+  },
+  {
+    type = "item",
+    name = "full-muon-trap",
+    stack_size = 1,
+
+    category = "particle-accelerator",
+    order = "a",
+    icon = "__petraspace__/graphics/icons/full-muon-trap.png",
+
+    spoil_ticks = 10*60,
+    spoil_to_trigger_result = { 
+      items_per_trigger = 1,
+      trigger = {
+        type = "direct",
+        action_delivery = {
+          type = "instant",
+          source_effects = {
+            type = "create-entity",
+            entity_name = "subatomic-mishap-explosion",
+            show_in_tooltip = true,
+          }
+        }
+      }
+    }
+  },
+}
+
 -- === Science! === --
 local function science_pack(name, order, icon, tint)
   return Table.merge(

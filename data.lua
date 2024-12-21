@@ -1,4 +1,6 @@
 local requires = {
+  "squibs",
+
   "tiles",
   "decorations",
   "worldgen/planets",
@@ -10,7 +12,6 @@ local requires = {
   "resources",
   "technologies",
 
-  "particle-accelerator",
   "dust-pollution",
 
   "simulations",
