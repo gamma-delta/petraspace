@@ -14,3 +14,14 @@ but I'm ok with it being the worst of them.
 (For example, use this to turn on electrostatic funnelers only at night!)
 
 Would be funny to have a radioactive item that decays in several years.
+
+=== Gravitational Anomalies ===
+The way you discover the Shattered Planet.
+Somewhat of a new game plus? It's impractically expensive to make
+the superluminal jump over there again.
+Or perhaps there is a gravity well making it impossible to
+go there again.
+
+Discover gravitational anomaly data first off the (little tiny)
+surface of the moon of Vulcanus.
+(see: relativity & Mercury orbit)
