@@ -90,7 +90,7 @@ data:extend{
       buffer = "10MJ",
     },
     minable = {mining_time=1, result = "electrostatic-funneler"},
-    flags = {"player-creation", "placeable-neutral"},
+    flags = {"placeable-player", "placeable-neutral", "player-creation"},
     max_health = 200,
     picture = {
       layers = {
@@ -131,12 +131,15 @@ data:extend{
   {
     type = "assembling-machine",
     name = "particle-trap",
+    flags = {"placeable-player", "placeable-neutral", "player-creation"},
+    icon = "__base__/graphics/icons/fluid/steam.png",
     minable = {mining_time=2, result = "particle-trap"},
     collision_box = {{-3.4, -3.4}, {3.4, 3.4}},
     selection_box = {{-3.5, -3.5}, {3.5, 3.5}},
     crafting_speed = 1,
     crafting_categories = { "particle-trap" },
-    energy_usage = "1GW",
+    -- one lightning bolt has 1GJ in it, but collectors are 40% efficient.
+    energy_usage = "300MW",
     allowed_effects = { "speed", "productivity", "pollution" },
     energy_source = { type = "electric", usage_priority = "secondary-input" },
 

@@ -10,7 +10,7 @@ local function setup_on_type_by_tick(entity_name, ticks, fn)
     -- and now for the actual logic
     local entity = evt.entity or evt.destination
     if entity.name == entity_name then
-      game.print("Registering " .. tostring(entity) .. " for tick evts")
+      -- game.print("Registering " .. tostring(entity) .. " for tick evts")
       storage.on_type_by_tick[entity_name][entity] = true
     end
   end
@@ -28,7 +28,6 @@ local function setup_on_type_by_tick(entity_name, ticks, fn)
       -- No entities of this type have been placed
       return
     end
-    -- game.print(serpent.line(storage))
     local to_remove = {}
     for entity,_ in pairs(storage.on_type_by_tick[entity_name]) do
       if entity.valid then

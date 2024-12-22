@@ -18,7 +18,7 @@ local function create_secret_beacon(evt)
       force = evt.force,
       raise_built = true,
     }
-    game.print("Created beacon " .. tostring(secret_beacon) .. " parented to " .. tostring(entity))
+    -- game.print("Created beacon " .. tostring(secret_beacon) .. " parented to " .. tostring(entity))
     Entity.set_data(secret_beacon, { parent=entity })
   end
 end

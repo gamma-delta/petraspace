@@ -114,10 +114,11 @@ data:extend{
   {
     type = "item",
     name = "empty-muon-trap",
-    icon = "__petraspace__/graphics/icons/muon-trap.png",
     stack_size = 1,
+    weight = rocket_cap / 100,
 
-    category = "particle-accelerator",
+    icon = "__petraspace__/graphics/icons/muon-trap.png",
+    subgroup = "particle-accelerator",
     order = "a",
   },
   {
@@ -129,8 +130,10 @@ data:extend{
     type = "item",
     name = "full-muon-trap",
     stack_size = 1,
+    -- by all means, try to get this onto a rocket
+    weight = rocket_cap / 100,
 
-    category = "particle-accelerator",
+    subgroup = "particle-accelerator",
     order = "a",
     icon = "__petraspace__/graphics/icons/full-muon-trap.png",
 
@@ -150,6 +153,11 @@ data:extend{
       }
     }
   },
+  make_programmed_card(
+    "subatomic-data-card",
+    "__petraspace__/graphics/icons/orbital-data-card.png",
+    "be", 60*60*15
+  ),
 }
 
 -- === Science! === --
