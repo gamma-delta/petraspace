@@ -1,3 +1,5 @@
+-- Entities that are machines, and their items
+
 local Data = require("__stdlib2__/stdlib/data/data")
 local Table = require("__stdlib2__/stdlib/utils/table")
 

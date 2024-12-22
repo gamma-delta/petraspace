@@ -19,10 +19,12 @@ local function viate_settings()
     cliff_settings = {
       name = "cliff",
       cliff_elevation_interval = 70,
-      cliff_elevation_0 = 10,
+      cliff_elevation_0 = 0,
     },
+    autoplace_controls = {},
     autoplace_settings = {
       tile = { settings = to_set{
+        "viate-smooth-basalt",
         "viate-dust-crests",
         "viate-dust-lumpy",
         "viate-dust-patchy",

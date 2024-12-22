@@ -38,21 +38,44 @@ data:extend{
     order = "f-a",
   },
   Table.merge(
+    Data.Util.duplicate("tile", "dust-crests", "viate-smooth-basalt"),
+    {
+      autoplace = {probability_expression="elevation<=0"},
+      -- they're not very clear on what this means
+      variants = tile_variations_template_with_transitions(
+        "__petraspace__/graphics/tiles/viate/smooth-basalt.png",
+        {
+          max_size = 4,
+          [1] = { weights = {0.085, 0.085, 0.085, 0.085, 0.087, 0.085, 0.065, 0.085, 0.045, 0.045, 0.045, 0.045, 0.005, 0.025, 0.045, 0.045 } },
+          [2] = { probability = 1, weights = {0.018, 0.020, 0.015, 0.025, 0.015, 0.020, 0.025, 0.015, 0.025, 0.025, 0.010, 0.025, 0.020, 0.025, 0.025, 0.010 }, },
+          [4] = { probability = 0.1, weights = {0.018, 0.020, 0.015, 0.025, 0.015, 0.020, 0.025, 0.015, 0.025, 0.025, 0.010, 0.025, 0.020, 0.025, 0.025, 0.010 }, },
+        }
+      ),
+      absorptions_per_second = { dust = 2 / 60 / (32*32) },
+    }
+  ),
+  Table.merge(
     Data.Util.duplicate("tile", "dust-crests", "viate-dust-crests"),
     {
-      autoplace = {probability_expression="expression_in_range_base(0.8, -10, 1.7, 0.2) + noise_layer_noise(33) + elevation"}  
+      autoplace = {
+        probability_expression="(elevation>0) / viate_roughness"
+      }
     }
   ),
   Table.merge(
     Data.Util.duplicate("tile", "dust-lumpy", "viate-dust-lumpy"),
     {
-      autoplace = {probability_expression="expression_in_range_base(0.8, -10, 1.7, 0.2) + noise_layer_noise(34)"}  
+      autoplace = {
+        probability_expression="(elevation>0) * viate_roughness"
+      }
     }
   ),
   Table.merge(
     Data.Util.duplicate("tile", "dust-patchy", "viate-dust-patchy"),
     {
-      autoplace = {probability_expression="expression_in_range_base(0.8, -10, 12, 0.2) + noise_layer_noise(35) + elevation / 2"}  
+      autoplace = {
+        probability_expression="(elevation>0) * viate_roughness * (elevation/3)"
+      }
     }
   ),
 }

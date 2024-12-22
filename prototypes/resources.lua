@@ -10,7 +10,7 @@ data:extend{
     {
       map_color = { 0.75, 0.50, 0.45 },
       mining_visualization_tint = { 0.75, 0.50, 0.45 },
-      icon = "__petraspace__/graphics/icons/bauxite-1.png",
+      icon = "__petraspace__/graphics/icons/bauxite/1.png",
       minable = {
         mining_particle = "stone-particle",
         mining_time = 1,
@@ -54,17 +54,18 @@ data:extend{
         scale = 0.5,
       } },
       autoplace = {
-        probability_expression = [[
-          viate_cliff_placing * 0.9 * multioctave_noise{
-            x=x, y=y,
-            seed0=map_seed+123456789,
-            seed1=0,
-            persistence=0.2,
-            octaves=2,
-            input_scale=1/300
-          }
-        ]],
-        richness_expression = "200 + viate_cliff_placing * (70+sqrt(distance))",
+        local_expressions = {
+          -- Only spawn near elevation=0, with a bias towards the lowlands
+          near_zero = "20 - abs(elevation) * (1 - ((elevation>0) * 0.5))",
+          flavor = [[ multioctave_noise{
+            x=x, y=y, persistence=0.75,
+            octaves=3,
+            seed0=map_seed, seed1="ice",
+            input_scale=0.2
+          } ]],
+        },
+        probability_expression = "near_zero + flavor/20",
+        richness_expression = "(near_zero + flavor*30) * 5 * (70+sqrt(distance))",
       },
       factoriopedia_simulation = {
         init = make_resource("ice-deposit"),

@@ -139,7 +139,7 @@ make_tile_undusty("hazard-concrete-left", conc_absorb)
 make_tile_undusty("hazard-concrete-right", conc_absorb)
 -- very high to encourage making refined concrete on fulgora instead of
 -- just paving with the normal concrete
-local refined_conc_absorb = 1.2
+local refined_conc_absorb = 1.0
 make_tile_undusty("refined-concrete", refined_conc_absorb)
 make_tile_undusty("refined-hazard-concrete-left", refined_conc_absorb)
 make_tile_undusty("refined-hazard-concrete-right", refined_conc_absorb)
@@ -149,4 +149,4 @@ make_tile_undusty("refined-hazard-concrete-right", refined_conc_absorb)
 -- you actually have to worry about disposing of dust
 -- on fulgora
 make_tile_undusty("oil-ocean-shallow", 1.0)
-make_tile_undusty("oil-ocean-deep", 1.5)
+make_tile_undusty("oil-ocean-deep", 2.5)

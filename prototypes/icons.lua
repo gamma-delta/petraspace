@@ -10,7 +10,7 @@ local simple_bauxite = {
     shift = { 16, -16 },
   },
   {
-    icon = "__petraspace__/graphics/icons/bauxite-1.png",
+    icon = "__petraspace__/graphics/icons/bauxite/1.png",
     scale = 0.75,
     shift = { 0, 8 },
   },
@@ -27,7 +27,7 @@ local advanced_bauxite = {
     shift = { 16, 16 },
   },
   {
-    icon = "__petraspace__/graphics/icons/bauxite-1.png",
+    icon = "__petraspace__/graphics/icons/bauxite/1.png",
     scale = 0.75,
     shift = { 0, -8 },
   },

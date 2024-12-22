@@ -132,7 +132,7 @@ data:extend{
     allow_productivity = true,
     icons = {
       {
-        icon = "__petraspace__/graphics/icons/bauxite-1.png",
+        icon = "__petraspace__/graphics/icons/bauxite/1.png",
         scale = 0.75,
         shift = { 0, -8 },
       },
@@ -329,12 +329,4 @@ data:extend{
     -- i dunno, maybe the science imparts quality onto it
     allow_quality = true,
   },
-}
-
--- === Misc changes === --
-local space_plat = data.raw["recipe"]["space-platform-foundation"]
-space_plat.ingredients = {
-  { type="item", name="copper-cable", amount=20 },
-  { type="item", name="steel-plate", amount=15 },
-  { type="item", name="low-density-structure", amount=1 },
 }

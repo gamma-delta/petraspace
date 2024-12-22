@@ -9,36 +9,58 @@ data:extend{
     name = "viate_starting_area_radius",
     expression = "0.15",
   },
+  -- Define everything mostly by elevation
+  -- - Large dark basalt basins; little debris, good dust absorption
+  -- - Dusty midlands with craters
+  -- Elevation>0 is the midlands
+  -- TODO use distorted spot noise to create the basins,
+  -- with voronoi to do roughness ("distance from meteor impact")
   {
     type = "noise-expression",
     name = "viate_elevation",
     local_expressions = {
-      -- factorio devs document noise expressions challenge
-      -- todo: this sucks
-      main = [[ voronoi_pyramid_noise{
+      -- Use voronoise to outline the basic basins.
+      -- https://catlikecoding.com/unity/tutorials/pseudorandom-noise/voronoi-noise/
+      voronoi = [[ voronoi_spot_noise{
         x=x+1000, y=y+1000,
-        seed0 = map_seed,
-        seed1 = 0,
-        grid_size = 300,
-        distance_type = "manhattan",
-        jitter = 0.1
+        seed0=map_seed, seed1="voronoi",
+        grid_size = 150,
+        distance_type = "euclidean",
+        jitter = 0.7
       } ]],
-      extra = [[ basis_noise{
+      -- keep params the same so that the cells are in the same place
+      voronoi_cells = [[ voronoi_cell_id{
+        x=x+1000, y=y+1000,
+        seed0=map_seed, seed1="voronoi",
+        grid_size = 150,
+        distance_type = "euclidean",
+        jitter = 0.7
+      } ]],
+      basins = [[
+        max(5, 20 + (voronoi * voronoi_cells))
+      ]],
+      canals = [[ min(0, -(0.2-abs(basis_noise{
         x=x, y=y,
-        seed0 = map_seed, seed1 = 0,
+        seed0=map_seed, seed1="canals",
         input_scale = 0.02
-      } ]]
+      }))) ]],
+      ridges = [[ max(0, 0.4-abs(basis_noise{
+        x=x, y=y,
+        seed0=map_seed, seed1="ridges",
+        input_scale = 0.07
+      })) / 8 ]],
     },
-    expression = "main",
+    expression = "basins + canals + ridges",
   },
   {
+    -- Used for highlands
     type = "noise-expression",
-    name = "viate_cliff_placing",
-    -- no tau :<
-    expression = [[
-      (max(
-        cos(2*pi*(viate_elevation-cliff_elevation_0)/cliff_elevation_interval) - 0.8,
-      0) * 5) ^ 10]],
+    name = "viate_roughness",
+    expression = [[ basis_noise{
+      x=x, y=y/7,
+      seed0=map_seed, seed1='roughness',
+      input_scale = 0.3
+    } ]]
   },
   {
     type = "planet",

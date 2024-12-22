@@ -71,13 +71,13 @@ data:extend{
       subgroup = "raw-resource",
       -- after copper, before uranium
       order = "fa[bauxite-ore]",
-      icon = "__petraspace__/graphics/icons/bauxite-1.png",
+      icon = "__petraspace__/graphics/icons/bauxite/1.png",
       pictures =
       {
-        {size = 64, filename = "__petraspace__/graphics/icons/bauxite-1.png", scale = 0.5, mipmap_count = 4},
-        {size = 64, filename = "__petraspace__/graphics/icons/bauxite-2.png", scale = 0.5, mipmap_count = 4},
-        {size = 64, filename = "__petraspace__/graphics/icons/bauxite-3.png", scale = 0.5, mipmap_count = 4},
-        {size = 64, filename = "__petraspace__/graphics/icons/bauxite-4.png", scale = 0.5, mipmap_count = 4},
+        {size = 64, filename = "__petraspace__/graphics/icons/bauxite/1.png", scale = 0.5, mipmap_count = 4},
+        {size = 64, filename = "__petraspace__/graphics/icons/bauxite/2.png", scale = 0.5, mipmap_count = 4},
+        {size = 64, filename = "__petraspace__/graphics/icons/bauxite/3.png", scale = 0.5, mipmap_count = 4},
+        {size = 64, filename = "__petraspace__/graphics/icons/bauxite/4.png", scale = 0.5, mipmap_count = 4},
       },
     }
   ),

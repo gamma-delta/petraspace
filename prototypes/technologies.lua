@@ -74,7 +74,7 @@ data:extend{
   {
     type = "technology",
     name = "bauxite-hint",
-    icon = "__petraspace__/graphics/icons/bauxite-1.png",
+    icon = "__petraspace__/graphics/icons/bauxite/1.png",
     icon_size = 64,
     effects = {},
     research_trigger = {
@@ -123,18 +123,3 @@ data:extend{
     },
   }
 }
-
-local foundry_tech = data.raw["technology"]["foundry"]
-for i, v in ipairs(foundry_tech.effects) do
-  if v.type == "unlock-recipe" and v.recipe == "casting-low-density-structure" then
-    table.remove(foundry_tech.effects, i)
-    break
-  end
-end
-
-table.insert(data.raw["technology"]["low-density-structure"].prerequisites, "simple-bauxite-extraction")
-
--- why launch a rocket if you are unaware of anything up there?
-local rocket_silo = data.raw["technology"]["rocket-silo"]
-table.insert(rocket_silo.prerequisites, "orbital-science-pack")
-table.insert(rocket_silo.unit.ingredients, {"orbital-science-pack", 1})
