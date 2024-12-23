@@ -1,6 +1,5 @@
 local Table = require("__stdlib2__/stdlib/utils/table")
 
-local pmg = require("__petraspace__/prototypes/worldgen/planet-map-gen")
 local effects = require("__core__.lualib.surface-render-parameter-effects")
 
 data:extend{
@@ -27,6 +26,13 @@ data:extend{
     category = "resource",
     richness = true,
   },
+  -- Cliffs won't spawn at y=0, so make a HUGE difference in height
+  -- and just make the basins really really deep.
+  {
+    type = "noise-expression",
+    name = "viate_above_basins",
+    expression = "viate_elevation >= 10"
+  },
   -- Define everything mostly by elevation
   -- - Large dark basalt basins; little debris, good dust absorption
   -- - Dusty midlands with craters
@@ -46,7 +52,7 @@ data:extend{
         clamp(
           basis_noise{
             x=x, y=y, seed0=map_seed, seed1="viate_basin_spots",
-            input_scale = 0.012 * control:viate_spotness:frequency
+            input_scale = 0.003 * control:viate_spotness:frequency
           }
           * slider_to_linear(control:viate_spotness:size, 0.7, 2)
           * 2,
@@ -67,7 +73,7 @@ data:extend{
         if(
           (basin_spots * basin_noise) > basin_required,
           ((basin_spots * basin_noise) - basin_required) * -100,
-          10
+          20
         )
       ]],
       canals = [[
@@ -89,9 +95,7 @@ data:extend{
         )
       ]],
     },
-    -- Cliffs won't spawn at y=0, so make a HUGE difference in height
-    -- and just make the basins really really deep. (see -100 above)
-    expression = "50 + basins + canals",
+    expression = "70 + basins + canals",
   },
   {
     -- Used for highlands
@@ -116,7 +120,7 @@ data:extend{
           maximum_spot_basement_radius = 128,
           region_size = 2048 * control:viate_meteors:size,
           candidate_point_count = 100
-        } * 10
+        } * 5
       ]],
       flavor = [[
         multioctave_noise{
@@ -136,13 +140,47 @@ data:extend{
     icon = "__space-age__/graphics/icons/vulcanus.png",
     starmap_icon = "__space-age__/graphics/icons/starmap-planet-vulcanus.png",
     starmap_icon_size = 512,
+    map_gen_settings = {
+      property_expression_names = {
+        elevation = "viate_elevation",
+
+        cliffiness = "cliffiness_basic",
+        -- it does not look like you can change this?
+        cliff_elevation = "cliff_elevation_from_elevation",
+        cliff_smoothing = 0.0,
+        richness = 3.5,
+      },
+      cliff_settings = {
+        name = "cliff",
+        cliff_elevation_interval = 60,
+        cliff_elevation_0 = 10,
+      },
+      autoplace_controls = {
+        ["viate_basin"]={},
+        ["viate_spotness"]={},
+        ["viate_meteors"]={},
+      },
+      autoplace_settings = {
+        tile = { settings = {
+          ["viate-smooth-basalt"] = {},
+          ["viate-dust-crests"] = {},
+          ["viate-dust-lumpy"] = {},
+          ["viate-dust-patchy"] = {},
+        } },
+        decorative = { settings = {
+          ["viate-crust"] = {}
+        } },
+        entity = { settings = {
+          ["ice-deposit"] = {}
+        } },
+      }
+    },
     gravity_pull = 10,
     distance = 10,
     orientation = 0.1,
     magnitude = 1.5,
     order = "d[fulgora]-a",
     subgroup = "planets",
-    map_gen_settings = pmg.viate_settings(),
     pollutant_type = "dust",
     solar_power_in_space = 300,
     platform_procession_set =
@@ -167,23 +205,3 @@ data:extend{
     asteroid_spawn_definitions = {},
   },
 }
-
--- Post fixups so I can truly make per-planet recipes
-local planet_names = Table.map(
-  data.raw["planet"],
-  function(p) return p.name end
-)
-
-for _,planet in pairs(data.raw["planet"]) do
-  for _,planet_name in ipairs(planet_names) do
-    local amount
-    if planet.name == planet_name then
-      amount = 1
-    else
-      amount = 0
-    end
-    local quiddity = "is-" .. planet.name
-    planet.surface_properties[quiddity] = 1.0
-  end
-end
-

@@ -3,7 +3,8 @@ local requires = {
 
   "tiles",
   "decorations",
-  "worldgen/planets",
+
+  "planets/viate",
 
   "items",
   "machines",
