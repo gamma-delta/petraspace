@@ -55,16 +55,21 @@ data:extend{
       } },
       autoplace = {
         local_expressions = {
-          -- Only spawn near elevation=0, with a bias towards the lowlands
-          near_zero = "20 - abs(elevation) * (1 - ((elevation>0) * 0.5))",
+          spread = 10,
+          near_zero = "(spread - abs(elevation)) / spread",
           flavor = [[ multioctave_noise{
             x=x, y=y, persistence=0.75,
             octaves=3,
             seed0=map_seed, seed1="ice",
             input_scale=0.2
           } ]],
+          blobs = [[ basis_noise{
+            x=x, y=y,
+            seed0=map_seed, seed1="ice-blobs",
+            input_scale=0.006
+          } > 0.4 ]],
         },
-        probability_expression = "near_zero + flavor/20",
+        probability_expression = "near_zero * blobs - flavor/3",
         richness_expression = "(near_zero + flavor*30) * 5 * (70+sqrt(distance))",
       },
       factoriopedia_simulation = {

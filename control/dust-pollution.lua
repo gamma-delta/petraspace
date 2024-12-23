@@ -1,7 +1,19 @@
 local Event = require("__stdlib2__/stdlib/event/event").set_protected_mode(true)
 local Entity = require("__stdlib2__/stdlib/entity/entity")
+-- extends lua's table, apparently?
+local table = require('__stdlib2__/stdlib/utils/table')
 
 local putil = require("__petraspace__/control/utils")
+
+local special_dust_immune = {
+  ["dust-secret-beacon"] = true,
+}
+local function is_dust_immune(entity)
+  return
+    special_dust_immune[entity.name]
+    or entity.prototype.effect_receiver == nil
+    or entity.prototype.module_inventory_size == 0
+end
 
 local function create_secret_beacon(evt)
   local entity = evt.entity or evt.destination
@@ -10,7 +22,7 @@ local function create_secret_beacon(evt)
   -- TODO: how to mark entity as immune to dust?
   -- ancillary keys don't get carried through to the runtime stage
   if surface.pollutant_type and surface.pollutant_type.name == "dust" 
-      and entity.prototype.effect_receiver ~= nil
+    and not is_dust_immune(entity)
   then
     local secret_beacon = surface.create_entity{
       name = "dust-secret-beacon",

@@ -9,6 +9,24 @@ data:extend{
     name = "viate_starting_area_radius",
     expression = "0.15",
   },
+  {
+    type = "autoplace-control",
+    -- size = 0 value
+    -- frequency = noise scale
+    name = "viate_basin",
+    category = "terrain",
+  },
+  {
+    type = "autoplace-control",
+    name = "viate_spotness",
+    category = "terrain",
+  },
+  {
+    type = "autoplace-control",
+    name = "viate_meteors",
+    category = "resource",
+    richness = true,
+  },
   -- Define everything mostly by elevation
   -- - Large dark basalt basins; little debris, good dust absorption
   -- - Dusty midlands with craters
@@ -19,48 +37,98 @@ data:extend{
     type = "noise-expression",
     name = "viate_elevation",
     local_expressions = {
-      -- Use voronoise to outline the basic basins.
-      -- https://catlikecoding.com/unity/tutorials/pseudorandom-noise/voronoi-noise/
-      voronoi = [[ voronoi_spot_noise{
-        x=x+1000, y=y+1000,
-        seed0=map_seed, seed1="voronoi",
-        grid_size = 150,
-        distance_type = "euclidean",
-        jitter = 0.7
-      } ]],
-      -- keep params the same so that the cells are in the same place
-      voronoi_cells = [[ voronoi_cell_id{
-        x=x+1000, y=y+1000,
-        seed0=map_seed, seed1="voronoi",
-        grid_size = 150,
-        distance_type = "euclidean",
-        jitter = 0.7
-      } ]],
-      basins = [[
-        max(5, 20 + (voronoi * voronoi_cells))
+      -- so "coverage" in the GUI is actually `size`,
+      -- and "scale" is `frequency`??
+      -- anyways: use spot noise to create the basins, but mask it on perlin noise
+      -- to add some ~interest~
+      -- basin_spots and basin_noise both get higher the *more* basin-y it is
+      basin_spots = [[
+        clamp(
+          basis_noise{
+            x=x, y=y, seed0=map_seed, seed1="viate_basin_spots",
+            input_scale = 0.012 * control:viate_spotness:frequency
+          }
+          * slider_to_linear(control:viate_spotness:size, 0.7, 2)
+          * 2,
+        0, 1)
       ]],
-      canals = [[ min(0, -(0.2-abs(basis_noise{
-        x=x, y=y,
-        seed0=map_seed, seed1="canals",
-        input_scale = 0.02
-      }))) ]],
-      ridges = [[ max(0, 0.4-abs(basis_noise{
-        x=x, y=y,
-        seed0=map_seed, seed1="ridges",
-        input_scale = 0.07
-      })) / 8 ]],
+      basin_noise = [[
+        max(0, multioctave_noise{
+          x=x, y=y,
+          seed0=map_seed, seed1="viate_basin_noise",
+          input_scale = 0.03 * control:viate_basin:frequency,
+          persistence = 0.7, octaves = 4
+        } - 0.1)
+      ]],
+      basin_required = "(0.7 / slider_rescale(control:viate_basin:size, 12)) * 0.1",
+      -- make the bottoms of the basins REALLY DEEP
+      -- to make sure that ice doesn't spawn in the middle
+      basins = [[
+        if(
+          (basin_spots * basin_noise) > basin_required,
+          ((basin_spots * basin_noise) - basin_required) * -100,
+          10
+        )
+      ]],
+      canals = [[
+        lerp(
+          (0.4-abs(multioctave_noise{
+            x=x, y=y*0.7,
+            seed0=map_seed, seed1="canals",
+            persistence=0.9,
+            octaves=3,
+            input_scale = 0.007
+          })) * multioctave_noise{
+            x=x, y=y,
+            seed0=map_seed, seed1="canals2",
+            persistence=0.4,
+            octaves=2,
+            input_scale = 0.004
+          },
+          0, -20
+        )
+      ]],
     },
-    expression = "basins + canals + ridges",
+    -- Cliffs won't spawn at y=0, so make a HUGE difference in height
+    -- and just make the basins really really deep. (see -100 above)
+    expression = "50 + basins + canals",
   },
   {
     -- Used for highlands
     type = "noise-expression",
-    name = "viate_roughness",
-    expression = [[ basis_noise{
-      x=x, y=y/7,
-      seed0=map_seed, seed1='roughness',
-      input_scale = 0.3
-    } ]]
+    name = "viate_meteorness",
+    local_expressions = {
+      meteor_size = [[ basis_noise{
+        x=x, y=y, seed0=map_seed, seed1="viate_meteor_size",
+        input_scale=0.03
+      } + 1 ]],
+      -- spot_noise::seed1 does not accept strings
+      raw_spots = [[
+        spot_noise{
+          x=x, y=y, seed0=map_seed, seed1=12345,
+          density_expression = 10,
+          spot_quantity_expression = 10000 * meteor_size * meteor_size 
+            * control:viate_meteors:frequency,
+          spot_radius_expression = 100 * meteor_size 
+            * control:viate_meteors:richness,
+          spot_favorability_expression = 1,
+          basement_value = 0,
+          maximum_spot_basement_radius = 128,
+          region_size = 2048 * control:viate_meteors:size,
+          candidate_point_count = 100
+        } * 10
+      ]],
+      flavor = [[
+        multioctave_noise{
+          x=x, y=y,
+          seed0=map_seed, seed1="viate_meteor_flavor",
+          persistence=0.7,
+          octaves=7,
+          input_scale = 0.09
+        } * 0.5 + 0.5
+      ]]
+    },
+    expression = "raw_spots * flavor"
   },
   {
     type = "planet",

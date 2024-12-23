@@ -52,30 +52,34 @@ data:extend{
         }
       ),
       absorptions_per_second = { dust = 2 / 60 / (32*32) },
+      map_color = { 0.2, 0.21, 0.25 }
     }
   ),
   Table.merge(
     Data.Util.duplicate("tile", "dust-crests", "viate-dust-crests"),
     {
       autoplace = {
-        probability_expression="(elevation>0) / viate_roughness"
-      }
+        probability_expression="(elevation>0) / viate_meteorness"
+      },
+      map_color = { 0.6, 0.61, 0.65 }
     }
   ),
   Table.merge(
     Data.Util.duplicate("tile", "dust-lumpy", "viate-dust-lumpy"),
     {
       autoplace = {
-        probability_expression="(elevation>0) * viate_roughness"
-      }
+        probability_expression="(elevation>0) * viate_meteorness*viate_meteorness"
+      },
+      map_color = { 0.75, 0.71, 0.75 }
     }
   ),
   Table.merge(
     Data.Util.duplicate("tile", "dust-patchy", "viate-dust-patchy"),
     {
       autoplace = {
-        probability_expression="(elevation>0) * viate_roughness * (elevation/3)"
-      }
+        probability_expression="(elevation>0) * viate_meteorness * (elevation/3)"
+      },
+      map_color = { 0.8, 0.81, 0.85 }
     }
   ),
 }
