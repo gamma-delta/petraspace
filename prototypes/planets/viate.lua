@@ -73,7 +73,7 @@ data:extend{
         if(
           (basin_spots * basin_noise) > basin_required,
           ((basin_spots * basin_noise) - basin_required) * -100,
-          20
+          0
         )
       ]],
       canals = [[
@@ -95,7 +95,7 @@ data:extend{
         )
       ]],
     },
-    expression = "70 + basins + canals",
+    expression = "20 + basins + canals",
   },
   {
     -- Used for highlands
@@ -151,7 +151,7 @@ data:extend{
         richness = 3.5,
       },
       cliff_settings = {
-        name = "cliff",
+        name = "cliff-viate",
         cliff_elevation_interval = 60,
         cliff_elevation_0 = 10,
       },

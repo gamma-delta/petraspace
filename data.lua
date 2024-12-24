@@ -1,5 +1,5 @@
 local requires = {
-  "squibs",
+  "entities/squibs",
 
   "tiles",
   "decorations",
@@ -7,11 +7,12 @@ local requires = {
   "planets/viate",
 
   "items",
-  "machines",
+  "entities/machines",
   "fluids",
   "recipes",
-  "resources",
+  "entities/resources",
   "technologies",
+  "entities/misc",
 
   "dust-pollution",
 

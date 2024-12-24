@@ -24,7 +24,7 @@ local viate_transitions = {
 }
 
 local function viate_tile(cfg)
-  return {
+  return Table.merge({
     type = "tile",
     name = cfg.name,
     order = "b[natural]-j[viate]-" .. cfg.order,
@@ -48,7 +48,7 @@ local function viate_tile(cfg)
     map_color = cfg.map_color,
 
     scorch_mark_color = {0.318, 0.222, 0.152},
-  }
+  }, cfg.etc)
 end
 
 local dusty_absorb = {
@@ -69,7 +69,10 @@ data:extend{
     absorptions_per_second = { dust = 2 / 60 / (32*32) },
     autoplace = {probability_expression="viate_above_basins==0"},
     texture = "__petraspace__/graphics/tiles/viate/smooth-basalt.png",
-    map_color = { 0.2, 0.21, 0.25 }
+    map_color = { 0.2, 0.21, 0.25 },
+    etc = {
+      
+    }
   },
   viate_tile{
     name = "viate-dust-crests",
