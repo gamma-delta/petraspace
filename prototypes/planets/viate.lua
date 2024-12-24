@@ -23,8 +23,7 @@ data:extend{
   {
     type = "autoplace-control",
     name = "viate_meteors",
-    category = "resource",
-    richness = true,
+    category = "terrain",
   },
   -- Cliffs won't spawn at y=0, so make a HUGE difference in height
   -- and just make the basins really really deep.
@@ -52,7 +51,7 @@ data:extend{
         clamp(
           basis_noise{
             x=x, y=y, seed0=map_seed, seed1="viate_basin_spots",
-            input_scale = 0.003 * control:viate_spotness:frequency
+            input_scale = 0.002 * control:viate_spotness:frequency
           }
           * slider_to_linear(control:viate_spotness:size, 0.7, 2)
           * 2,
@@ -95,61 +94,65 @@ data:extend{
         )
       ]],
     },
-    expression = "20 + basins + canals",
+    expression = "20 + basins",
   },
   {
-    -- Used for highlands
+    type = "noise-expression",
+    name = "viate_meteor_size_noise",
+    expression = [[ basis_noise{
+      x=x, y=y, seed0=map_seed, seed1="viate_meteor_size",
+      input_scale=0.03
+    } + 1 ]]
+  },
+  {
+    type = "noise-function",
+    name = "viate_meteor_spot_noise",
+    parameters = { "radius" },
+    expression = [[
+      spot_noise{
+        x=x, y=y, seed0=map_seed, seed1=12345,
+        density_expression = 1000000,
+        spot_quantity_expression = viate_meteor_size_noise^2
+          * 10000,
+        spot_radius_expression = radius,
+        spot_favorability_expression = 1,
+        basement_value = 0,
+        maximum_spot_basement_radius = 300,
+        region_size = 512,
+        candidate_point_count = 20,
+        suggested_minimum_candidate_point_spacing = 100
+      } * 5
+    ]]
+  },
+  {
     type = "noise-expression",
     name = "viate_meteorness",
     local_expressions = {
-      meteor_size = [[ basis_noise{
-        x=x, y=y, seed0=map_seed, seed1="viate_meteor_size",
-        input_scale=0.03
-      } + 1 ]],
       -- spot_noise::seed1 does not accept strings
-      raw_spots = [[
-        spot_noise{
-          x=x, y=y, seed0=map_seed, seed1=12345,
-          density_expression = 10,
-          spot_quantity_expression = 10000 * meteor_size * meteor_size 
-            * control:viate_meteors:frequency,
-          spot_radius_expression = 100 * meteor_size 
-            * control:viate_meteors:richness,
-          spot_favorability_expression = 1,
-          basement_value = 0,
-          maximum_spot_basement_radius = 128,
-          region_size = 512 * control:viate_meteors:size,
-          candidate_point_count = 1
-        } * 5
-      ]],
+      raw_spots = [[ viate_meteor_spot_noise(
+        70 * viate_meteor_size_noise
+      ) ]],
       flavor = [[
         multioctave_noise{
           x=x, y=y,
           seed0=map_seed, seed1="viate_meteor_flavor",
-          persistence=0.7,
+          persistence=0.5,
           octaves=7,
           input_scale = 0.09
-        } * 0.5 + 0.5
+        } * 0.4 + 0.6
       ]]
     },
     expression = "raw_spots * flavor"
   },
   {
     type = "noise-expression",
-    name = "viate_meteor_spots",
-    -- Use same config as meteors but have tiny little peaks
+    name = "viate_meteor_spot",
+    -- Use same config as meteors but have a tiny radius,
+    -- so that they're spotlike
     expression = [[
-      spot_noise{
-        x=x, y=y, seed0=map_seed, seed1=12345,
-        density_expression = 10,
-        spot_quantity_expression = 10,
-        spot_radius_expression = 2,
-        spot_favorability_expression = 1,
-        basement_value = 0,
-        maximum_spot_basement_radius = 128,
-        region_size = 512 * control:viate_meteors:size,
-        candidate_point_count = 1
-      } * 5
+      viate_meteor_spot_noise(1)
+      >
+      slider_to_linear(control:viate_meteors:size, 0, 3)
     ]],
   },
   {
@@ -186,7 +189,10 @@ data:extend{
           ["viate-dust-patchy"] = {},
         } },
         decorative = { settings = {
-          ["viate-crust"] = {}
+          ["viate-crust"] = {},
+          ["viate-medium-maria-rock"] = {},
+          ["viate-small-maria-rock"] = {},
+          ["viate-tiny-maria-rock"] = {},
         } },
         entity = { settings = {
           ["ice-deposit"] = {},

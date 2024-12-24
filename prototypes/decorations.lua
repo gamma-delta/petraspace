@@ -5,7 +5,7 @@ local viate_crust_decal = Data.Util.duplicate(
   "optimized-decorative", "sand-decal", "viate-crust"
 )
 viate_crust_decal.autoplace.probability_expression = 
-  "(elevation>20) * 0.04 / (1+viate_meteorness)"
+  "(elevation>20) * 0.001 * viate_meteorness"
 
 for i,tbl in ipairs(viate_crust_decal.pictures) do
   tbl.filename = string.format(
@@ -19,10 +19,13 @@ local function viate_maria_edge_pebble(cfg)
   local rocc = Data.Util.duplicate(
     "optimized-decorative", cfg.src, cfg.name
   )
-  rocc.autoplace.probability_expression = [[
-    (3 - abs(viate_elevation-10) + (viate_elevation<10)) *
-  ]] .. cfg.prob
-  rocc.autoplace.order = "a[doodad]-a[rock]-c[maria]-" .. cfg.order
+  rocc.autoplace = {
+    order = "a[doodad]-a[rock]-c[maria]-" .. cfg.order,
+    probability_expression = [[
+      (3 - abs(viate_elevation-10) + (viate_elevation<10)) *
+    ]] .. cfg.prob,
+    control = "rocks",
+  }
   data:extend{rocc}
 end
 
@@ -30,19 +33,19 @@ viate_maria_edge_pebble{
   src = "medium-volcanic-rock",
   name = "viate-medium-maria-rock",
   order = "a",
-  prob = 0.02,
+  prob = 0.05,
 }
 viate_maria_edge_pebble{
   src = "small-volcanic-rock",
   name = "viate-small-maria-rock",
   order = "b",
-  prob = 0.03,
+  prob = 0.07,
 }
 viate_maria_edge_pebble{
   src = "tiny-volcanic-rock",
   name = "viate-tiny-maria-rock",
   order = "c",
-  prob = 0.07,
+  prob = 0.1,
 }
 
 data:extend(
@@ -51,7 +54,7 @@ data:extend(
       Data.Util.duplicate("simple-entity", "huge-rock", "viate-meteorite"),
       {
         autoplace = {
-          probability_expression = "viate_meteor_spot > 1"
+          probability_expression = "viate_meteor_spot"
         }
       }
     )

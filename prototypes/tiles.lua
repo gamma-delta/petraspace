@@ -81,11 +81,11 @@ data:extend{
     absorptions_per_second = dusty_absorb,
     autoplace = {
       probability_expression=[[
-        (viate_above_basins) * (viate_meteorness / 100)^2
+        (viate_above_basins) * 0.01
       ]]
     },
     texture = "__space-age__/graphics/terrain/aquilo/dust-crests.png",
-    map_color = { 0.6, 0.61, 0.65 },
+    map_color = { 0.8, 0.81, 0.85 },
   },
   viate_tile{
     name = "viate-dust-lumpy",
@@ -94,11 +94,11 @@ data:extend{
     absorptions_per_second = dusty_absorb,
     autoplace = {
       probability_expression=[[
-        (viate_above_basins) * (viate_meteorness / 110)^3
+        (viate_above_basins) * (viate_meteorness / 10)^2
       ]]
     },
     texture = "__space-age__/graphics/terrain/aquilo/dust-lumpy.png",
-    map_color = { 0.7, 0.71, 0.75 },
+    map_color = { 0.7, 0.71, 0.80 },
   },
   viate_tile{
     name = "viate-dust-patchy",
@@ -107,10 +107,10 @@ data:extend{
     absorptions_per_second = dusty_absorb,
     autoplace = {
       probability_expression=[[
-        (viate_above_basins) * (viate_meteorness / 130)^4
+        (viate_above_basins) * (viate_meteorness / 8)^4
       ]]
     },
     texture = "__space-age__/graphics/terrain/aquilo/dust-lumpy.png",
-    map_color = { 0.8, 0.81, 0.85 }
+    map_color = { 0.6, 0.61, 0.7 }
   },
 }
