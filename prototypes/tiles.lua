@@ -80,7 +80,9 @@ data:extend{
     offset = 1,
     absorptions_per_second = dusty_absorb,
     autoplace = {
-      probability_expression="(viate_above_basins) / viate_meteorness"
+      probability_expression=[[
+        (viate_above_basins) * (viate_meteorness / 100)^2
+      ]]
     },
     texture = "__space-age__/graphics/terrain/aquilo/dust-crests.png",
     map_color = { 0.6, 0.61, 0.65 },
@@ -91,7 +93,9 @@ data:extend{
     offset = 2,
     absorptions_per_second = dusty_absorb,
     autoplace = {
-      probability_expression="(viate_above_basins) * viate_meteorness*viate_meteorness"
+      probability_expression=[[
+        (viate_above_basins) * (viate_meteorness / 110)^3
+      ]]
     },
     texture = "__space-age__/graphics/terrain/aquilo/dust-lumpy.png",
     map_color = { 0.7, 0.71, 0.75 },
@@ -102,7 +106,9 @@ data:extend{
     offset = 3,
     absorptions_per_second = dusty_absorb,
     autoplace = {
-      probability_expression="(viate_above_basins) * viate_meteorness * (elevation/3)"
+      probability_expression=[[
+        (viate_above_basins) * (viate_meteorness / 130)^4
+      ]]
     },
     texture = "__space-age__/graphics/terrain/aquilo/dust-lumpy.png",
     map_color = { 0.8, 0.81, 0.85 }

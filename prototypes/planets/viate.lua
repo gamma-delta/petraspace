@@ -118,8 +118,8 @@ data:extend{
           spot_favorability_expression = 1,
           basement_value = 0,
           maximum_spot_basement_radius = 128,
-          region_size = 2048 * control:viate_meteors:size,
-          candidate_point_count = 100
+          region_size = 512 * control:viate_meteors:size,
+          candidate_point_count = 1
         } * 5
       ]],
       flavor = [[
@@ -133,6 +133,24 @@ data:extend{
       ]]
     },
     expression = "raw_spots * flavor"
+  },
+  {
+    type = "noise-expression",
+    name = "viate_meteor_spots",
+    -- Use same config as meteors but have tiny little peaks
+    expression = [[
+      spot_noise{
+        x=x, y=y, seed0=map_seed, seed1=12345,
+        density_expression = 10,
+        spot_quantity_expression = 10,
+        spot_radius_expression = 2,
+        spot_favorability_expression = 1,
+        basement_value = 0,
+        maximum_spot_basement_radius = 128,
+        region_size = 512 * control:viate_meteors:size,
+        candidate_point_count = 1
+      } * 5
+    ]],
   },
   {
     type = "planet",
@@ -171,7 +189,8 @@ data:extend{
           ["viate-crust"] = {}
         } },
         entity = { settings = {
-          ["ice-deposit"] = {}
+          ["ice-deposit"] = {},
+          ["viate-meteorite"] = {},
         } },
       }
     },
