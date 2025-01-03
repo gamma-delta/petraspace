@@ -6,6 +6,21 @@ local item_tints = require("__base__/prototypes/item-tints")
 
 local rocket_cap = 1000 * kg;
 
+local function make_pics(prefix, count, etc)
+  local out = {}
+  for i=1,count do
+    local row = Table.merge(
+      {
+        filename = 
+          string.format("__petraspace__/graphics/icons/%s/%s.png", prefix, i)
+      }
+      etc
+    )
+    table.append(out, row)
+  end
+  return out
+end
+
 local function data_card_props() return {
   type = "item",
   subgroup = "data-cards",
@@ -55,6 +70,22 @@ data:extend{
   ),
 }
 
+-- Silicon and derivatives
+
+-- Regolith
+data:extend{
+  Table.merge(
+    Data.Util.duplicate("item", "stone", "regolith"),
+    {
+      subgroup = "raw-resource",
+      -- after copper, before uranium
+      order = "fa[bauxite-ore]",
+      icon = "__petraspace__/graphics/icons/regolith/1.png",
+      pictures = make_pics("regolith", 4, {size=64, scale=0.5, mipmap_count = 4})
+    }
+  ),
+}
+
   -- === Aluminum === --
 data:extend{
   {
@@ -72,13 +103,7 @@ data:extend{
       -- after copper, before uranium
       order = "fa[bauxite-ore]",
       icon = "__petraspace__/graphics/icons/bauxite/1.png",
-      pictures =
-      {
-        {size = 64, filename = "__petraspace__/graphics/icons/bauxite/1.png", scale = 0.5, mipmap_count = 4},
-        {size = 64, filename = "__petraspace__/graphics/icons/bauxite/2.png", scale = 0.5, mipmap_count = 4},
-        {size = 64, filename = "__petraspace__/graphics/icons/bauxite/3.png", scale = 0.5, mipmap_count = 4},
-        {size = 64, filename = "__petraspace__/graphics/icons/bauxite/4.png", scale = 0.5, mipmap_count = 4},
-      },
+      pictures = make_pics("bauxite", 4, {size=64, scale=0.5, mipmap_count = 4})
     }
   ),
   Table.merge(

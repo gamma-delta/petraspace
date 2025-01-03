@@ -19,6 +19,7 @@ Regolith has many ways to process it.
 - Wash with water into a little bit of silicon, stone, and iron ore.
 - Wash with sulfuric acid into a lot of silicon, a little bit of stone, and a chance of aluminum nuggets.
   Aluminum lets you make more LDS!
+  But there's no steel on Viate, due to no carbon.
   (I've fiddled with these recipes since)
 
 The landmark research here is the Logistic Railgun, which you can only build on

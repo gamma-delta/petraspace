@@ -32,3 +32,13 @@ Take a note out of Nullius' book: plastic!
 Everybody needs plastic!
 Perhaps make it out of wood in some way, so you actually have reason to create
 wood farms on Nauvis.
+
+=== Space Elevator ===
+
+What if it was just a bidirectional underground belt?
+Or secretly a train?
+(In fact, SE just has the space elevator be a train teleporter, somehow)
+A single train car would be a lot more interesting than a bidi belt.
+
+It would need a "behind-the-scenes" area to hide the trains and stuff.
+However if I learned anything from FF's impl, that's going to be a pain.

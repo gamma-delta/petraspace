@@ -8,15 +8,13 @@ MO here is making the early game more interesting
 - Make steel require coal or carbon, so you can't make it without carbon.
   Perhaps make foundry recipe require CO2?
 - Blurcuits require silicon, which is laboriously extracted from stone & sulfuric acid
-- Laser components, for lasers. Difficult to craft on Nauvis due to high pressure (?)
+- Precision optical components, for lasers.
+  Difficult to craft on Nauvis due to high pressure (?)
 
 LDS requires aluminum. How do I make it prohibitively expensive but still possible on Nauvis?
 Drop from your crashed spaceship?
 (have since implemented this as bauxite inclusions)
 Flying robot frames also probably require LDS?
-
-LDS might be like Nullius' plastic, in that you can get more and more efficient recipes for it.
-However this would mean messing up Fulgora.
 
 Orbital data. Craft telescopes that you must supply with power and data cards.
 - Programmed data cards spoil into blank cards again
@@ -28,7 +26,7 @@ Astrodynamic science pack:
 - Electric motor
 Consume some small number of these to discover Viate.
 (the engineer is incapable of looking up)
-Note you cannot build thrusters yet.
+The distance between Nauvis and Viate's orbits should be quite small.
 
 Do I want to make data cards really cheap and reusable?
 Or each one an investment?

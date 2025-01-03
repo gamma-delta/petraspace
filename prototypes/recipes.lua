@@ -1,6 +1,14 @@
 local icons = require("__petraspace__/prototypes/icons")
 
 data:extend{
+-- === Regolith processing === --
+  {
+    type = "recipe",
+    name = "washing-regolith",
+    -- because it requires Wet
+    category = "advanced-crafting"
+  },
+  
 -- === Data cards === --
   {
     type = "recipe",
@@ -326,7 +334,6 @@ data:extend{
     },
     main_product = "orbital-science-pack",
     allow_productivity = true,
-    -- i dunno, maybe the science imparts quality onto it
-    allow_quality = true,
+    allow_quality = false,
   },
 }

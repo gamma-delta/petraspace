@@ -69,4 +69,5 @@ data:extend{
 }
 
 local function pollution_squib(name, pollutant, smoke_color)
+  
 end
