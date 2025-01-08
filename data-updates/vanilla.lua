@@ -6,6 +6,21 @@ space_plat.ingredients = {
   { type="item", name="low-density-structure", amount=1 },
 }
 
+-- Fix up LDS recipes
+data.raw["recipe"]["low-density-structure"].ingredients = {
+  { type="item", name="steel-plate", amount=2 },
+  { type="item", name="copper-plate", amount=10 },
+  { type="item", name="aluminum-plate", amount=1 },
+  { type="item", name="plastic-bar", amount=5 },
+}
+-- Foundries only allow 2 fluids :<
+data.raw["recipe"]["casting-low-density-structure"].ingredients = {
+  { type="fluid", name="molten-copper", amount=250 },
+  { type="fluid", name="molten-aluminum", amount=8 },
+  { type="item", name="steel-plate", amount=2 },
+  { type="item", name="plastic-bar", amount=5 },
+}
+
 -- === Technology === --
 local foundry_tech = data.raw["technology"]["foundry"]
 for i, v in ipairs(foundry_tech.effects) do
