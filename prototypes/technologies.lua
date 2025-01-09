@@ -85,7 +85,8 @@ data:extend{
   {
     type = "technology",
     name = "simple-bauxite-extraction",
-    icons = icons.simple_bauxite,
+    -- TODO
+    icon = "__petraspace__/graphics/icons/bauxite/1.png",
     icon_size = 64,
     prerequisites = {"sulfur-processing", "bauxite-hint"},
     unit = {
@@ -101,7 +102,7 @@ data:extend{
   {
     type = "technology",
     name = "advanced-bauxite-extraction",
-    icons = icons.advanced_bauxite,
+    icon = "__petraspace__/graphics/icons/fluid/molten-aluminum.png",
     icon_size = 64,
     prerequisites = {
       "simple-bauxite-extraction",

@@ -61,7 +61,7 @@ data:extend{
         max(0, multioctave_noise{
           x=x, y=y,
           seed0=map_seed, seed1="viate_basin_noise",
-          input_scale = 0.03 * control:viate_basin:frequency,
+          input_scale = 0.01 * control:viate_basin:frequency,
           persistence = 0.7, octaves = 4
         } - 0.1)
       ]],
@@ -137,9 +137,9 @@ data:extend{
           x=x, y=y,
           seed0=map_seed, seed1="viate_meteor_flavor",
           persistence=0.5,
-          octaves=7,
+          octaves=4,
           input_scale = 0.09
-        } * 0.4 + 0.6
+        } * 0.2 + 0.8
       ]]
     },
     expression = "raw_spots * flavor"
@@ -204,7 +204,7 @@ data:extend{
     distance = 10,
     orientation = 0.1,
     magnitude = 1.5,
-    order = "d[fulgora]-a",
+    order = "a[nauvis]-a",
     subgroup = "planets",
     pollutant_type = "dust",
     solar_power_in_space = 300,
@@ -228,5 +228,19 @@ data:extend{
     },
     asteroid_spawn_influence = 1,
     asteroid_spawn_definitions = {},
+    surface_render_parameters = {
+      -- TODO: could maybe use this to render meteor shadows?
+      clouds = nil,
+      day_night_cycle_color_lookup = {
+        -- sharpish transitions, i guess, to mimic the sharp
+        -- terminator that the real moon has
+        -- but it can't be too sharp because then the solar panel
+        -- power cut off looks really weird
+        { 0.30, "identity" },
+        { 0.45, "__petraspace__/graphics/luts/viate-night.png" },
+        { 0.65, "__petraspace__/graphics/luts/viate-night.png" },
+        { 0.75, "identity" },
+      }
+    }
   },
 }

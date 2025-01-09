@@ -13,10 +13,10 @@ local function make_pics(prefix, count, etc)
       {
         filename = 
           string.format("__petraspace__/graphics/icons/%s/%s.png", prefix, i)
-      }
+      },
       etc
     )
-    table.append(out, row)
+    table.insert(out, row)
   end
   return out
 end

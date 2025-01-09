@@ -61,9 +61,10 @@ data:extend{
       { type="item", name="aluminum-nugget", amount=1, probability=0.2 },
       { type="item", name="stone", amount_min=0, amount_max=5 },
     },
-    auto_recycle=false,
+    auto_recycle = false,
     allow_productivity = true,
-    icons = icons.simple_bauxite,
+    -- TODO
+    icons = simple_bauxite,
   },
   {
     type = "recipe",
@@ -121,6 +122,7 @@ data:extend{
     },
     main_product = "molten-aluminum",
     allow_productivity = true,
+    icons = advanced_bauxite,
   },
   {
     type = "recipe",

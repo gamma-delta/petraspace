@@ -21,6 +21,18 @@ local viate_transitions = {
     layout = tile_spritesheet_layout.transition_4_4_8_1_1,
     overlay_enabled = false
   },
+  {
+    -- stolen from vanilla dirt->water
+    -- i think this makes the basalt appear "sunken"?
+    to_tiles = {"viate-smooth-basalt"},
+    transition_group = water_transition_group_id,
+    -- dark enough
+    -- aquilo uses the ice transition even when it's dust, which I guess
+    -- makes sense
+    spritesheet = "__base__/graphics/terrain/water-transitions/nuclear-ground.png",
+    layout = tile_spritesheet_layout.transition_8_8_8_2_4,
+    background_enabled = false,
+  },
 }
 
 local function viate_tile(cfg)
@@ -52,7 +64,7 @@ local function viate_tile(cfg)
 end
 
 local dusty_absorb = {
-  dust = 0.5 / 60 / (32*32)
+  dust = 0.1 / 60 / (32*32)
 }
 
 data:extend{
@@ -86,6 +98,7 @@ data:extend{
     },
     texture = "__space-age__/graphics/terrain/aquilo/dust-crests.png",
     map_color = { 0.8, 0.81, 0.85 },
+    etc = { transitions=viate_transitions },
   },
   viate_tile{
     name = "viate-dust-lumpy",
@@ -99,6 +112,7 @@ data:extend{
     },
     texture = "__space-age__/graphics/terrain/aquilo/dust-lumpy.png",
     map_color = { 0.7, 0.71, 0.80 },
+    etc = { transitions=viate_transitions },
   },
   viate_tile{
     name = "viate-dust-patchy",
@@ -110,7 +124,8 @@ data:extend{
         (viate_above_basins) * (viate_meteorness / 8)^4
       ]]
     },
-    texture = "__space-age__/graphics/terrain/aquilo/dust-lumpy.png",
-    map_color = { 0.6, 0.61, 0.7 }
+    texture = "__space-age__/graphics/terrain/aquilo/dust-patchy.png",
+    map_color = { 0.6, 0.61, 0.7 },
+    etc = { transitions=viate_transitions },
   },
 }

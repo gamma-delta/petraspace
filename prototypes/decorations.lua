@@ -21,9 +21,11 @@ local function viate_maria_edge_pebble(cfg)
   )
   rocc.autoplace = {
     order = "a[doodad]-a[rock]-c[maria]-" .. cfg.order,
+    local_expressions = { prob = cfg.prob } ,
     probability_expression = [[
-      (3 - abs(viate_elevation-10) + (viate_elevation<10)) *
-    ]] .. cfg.prob,
+      ((3 - abs(viate_elevation-10) + (viate_elevation<10)) * prob)
+      + (prob * 0.2)
+    ]],
     control = "rocks",
   }
   data:extend{rocc}
