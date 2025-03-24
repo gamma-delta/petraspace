@@ -41,23 +41,10 @@ data:extend{
 -- === Data cards === --
   {
     type = "technology",
-    name = "data-cards",
-    icon = "__petraspace__/graphics/icons/blank-data-card.png",
-    icon_size = 64,
-    prerequisites = { "advanced-circuit" },
-    unit = {
-      count = 200,
-      ingredients = science("rgb"),
-      time = 30,
-    },
-    effects = { recipe("blank-data-card"), recipe("format-expired-data-card") },
-  },
-  {
-    type = "technology",
     name = "orbital-science-pack",
     icon = "__petraspace__/graphics/technologies/orbital-science-pack.png",
     icon_size = 256,
-    prerequisites = { "data-cards", "low-density-structure" },
+    prerequisites = { "low-density-structure" },
     unit = {
       count = 500,
       ingredients = science("rgb"),
@@ -76,6 +63,7 @@ data:extend{
     name = "bauxite-hint",
     icon = "__petraspace__/graphics/icons/bauxite/1.png",
     icon_size = 64,
+    prerequisites = { "electric-mining-drill" },
     effects = {},
     research_trigger = {
       type = "mine-entity",
@@ -96,7 +84,7 @@ data:extend{
     },
     effects = {
       recipe("simple-bauxite-extraction"),
-      recipe("aluminum-nuggets-to-plates"),
+      recipe("native-aluminum-to-plate"),
     },
   },
   {
@@ -119,7 +107,6 @@ data:extend{
       recipe("bauxite-liquor"),
       recipe("bauxite-liquor-electrolysis"),
       recipe("casting-aluminum-plate"),
-      recipe("casting-aluminum-nugget"),
       recipe("casting-low-density-structure"),
     },
   }

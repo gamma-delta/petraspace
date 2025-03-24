@@ -50,7 +50,8 @@ data:extend{
     energy_required = 8,
     ingredients = {
       {type="item", name="regolith", amount=10},
-      -- 1 water = 10 steam
+      -- 1 ice = 20 water = 200 steam
+      -- so each of these is five ice (at freddie's)
       {type="fluid", name="steam", amount=1000},
     },
     results = {
@@ -71,13 +72,12 @@ data:extend{
     energy_required = 8,
     ingredients = {
       {type="item", name="regolith", amount=10},
-      -- 1 water = 10 steam
       {type="fluid", name="sulfuric-acid", amount=20},
     },
     results = {
       -- TODO: silicon
       {type="item", name="stone", amount=9},
-      {type="item", name="aluminum-nugget", amount=1},
+      {type="item", name="native-aluminum", amount=1},
     },
     icons = {
       { icon="__base__/graphics/icons/fluid/sulfuric-acid.png" },

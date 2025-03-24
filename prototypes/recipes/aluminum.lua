@@ -36,12 +36,12 @@ local advanced_bauxite = {
 data:extend{
   {
     type = "recipe",
-    name = "aluminum-nuggets-to-plates",
+    name = "native-aluminum-to-plate",
     category = "smelting",
     subgroup = "aluminum-processes",
-    order = "za[aluminum-nuggets-to-plates]",
+    order = "za[native-aluminum-to-plate]",
     enabled = false,
-    ingredients = {{ type="item", name="aluminum-nugget", amount=2 }},
+    ingredients = {{ type="item", name="native-aluminum", amount=2 }},
     results = {{ type="item", name="aluminum-plate", amount=1 }},
   },
   {
@@ -58,7 +58,7 @@ data:extend{
     },
     energy_required = 30,
     results = {
-      { type="item", name="aluminum-nugget", amount=1, probability=0.2 },
+      { type="item", name="native-aluminum", amount=1, probability=0.2 },
       { type="item", name="stone", amount_min=0, amount_max=5 },
     },
     auto_recycle = false,
@@ -140,23 +140,4 @@ data:extend{
     },
     allow_productivity = true,
   },
-  -- this way, for EVEN MOAR PRODUCTIVITY, you can smelt the nuggets into
-  -- ingots
-  {
-    type = "recipe",
-    name = "casting-aluminum-nugget",
-    category = "metallurgy",
-    subgroup = "aluminum-processes",
-    order = "ze[casting-aluminum-nugget]",
-    enabled = false,
-    ingredients = {
-      { type="fluid", name="molten-aluminum", amount=5 },
-    },
-    energy_required = 1,
-    results = {
-      { type="item", name="aluminum-nugget", amount=1 },
-    },
-    allow_productivity = true,
-  },
-  
 }

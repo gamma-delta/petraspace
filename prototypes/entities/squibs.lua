@@ -64,6 +64,24 @@ data:extend{
           },
         }
       }
+    },
+    factoriopedia_simulation = {
+      init = [[
+        game.simulation.camera_alt_info = true
+        game.simulation.camera_zoom = 4
+      ]],
+      init_update_count = 60 * 8,
+      -- the Lua docs for create_entity are wrong
+      -- and say that the entity name is "item"
+      update = [[
+        if game.tick % (60 * 12) == 0 then
+          game.surfaces[1].create_entity{
+            name="item-on-ground",
+            position={0,0},
+            stack={name="antimatter-magnetic-bottle", count=1}
+          }
+        end
+      ]]
     }
   },
 }

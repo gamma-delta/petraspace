@@ -35,7 +35,7 @@ local function make_programmed_card(name, icon, order, spoil_time)
     name = name,
     icon = icon,
     order = order,
-    spoil_result = "expired-data-card",
+    spoil_result = nil,
     spoil_ticks = spoil_time,
   })
 end
@@ -49,23 +49,11 @@ data:extend{
     -- right before science
     order = "x",
   },
-  Table.merge(data_card_props(), {
-    name = "blank-data-card",
-    order = "a[blank]",
-    icon = "__petraspace__/graphics/icons/blank-data-card.png",
-  }),
-  Table.merge(data_card_props(), {
-    name = "expired-data-card",
-    order = "z[expired]",
-    icon = "__petraspace__/graphics/icons/expired-data-card.png",
-  }),
-}
-data:extend{
-  -- Do this in chunks because apparently this doesn't believe expired-data-card is real
   make_programmed_card(
     "orbital-data-card",
     "__petraspace__/graphics/icons/orbital-data-card.png",
     "ba",
+    -- survive for 1 rotation
     data.raw["planet"]["nauvis"].surface_properties["day-night-cycle"]
   ),
 }
@@ -107,13 +95,13 @@ data:extend{
     }
   ),
   Table.merge(
-    Data.Util.duplicate("item", "iron-plate", "aluminum-nugget"),
+    Data.Util.duplicate("item", "iron-ore", "native-aluminum"),
     {
-      weight = rocket_cap / 2000,
-      -- right after steel plates
       subgroup = "aluminum-processes",
-      order = "b[aluminum-nugget]",
-      icon = "__petraspace__/graphics/icons/aluminum-ingot.png",
+      -- after copper, before uranium
+      order = "a[native-aluminum]",
+      icon = "__petraspace__/graphics/icons/native-aluminum/1.png",
+      pictures = make_pics("native-aluminum", 3, {size=64, scale=0.5, mipmap_count = 4})
     }
   ),
   Table.merge(
@@ -121,8 +109,8 @@ data:extend{
     {
       weight = rocket_cap / 500,
       subgroup = "aluminum-processes",
-      order = "c[aluminum-plate]",
-      icon = "__petraspace__/graphics/icons/aluminum-ingot.png",
+      order = "b[aluminum-plate]",
+      icon = "__petraspace__/graphics/icons/aluminum-plate.png",
     }
   ),
 }
@@ -136,16 +124,7 @@ data:extend{
     -- after uranium
     order = "j",
   },
-  {
-    type = "item",
-    name = "empty-muon-trap",
-    stack_size = 1,
-    weight = rocket_cap / 100,
 
-    icon = "__petraspace__/graphics/icons/muon-trap.png",
-    subgroup = "particle-accelerator",
-    order = "a",
-  },
   {
     -- gotta put it somewhere...
     type = "ammo-category",
@@ -153,14 +132,14 @@ data:extend{
   },
   {
     type = "item",
-    name = "full-muon-trap",
+    name = "antimatter-magnetic-bottle",
     stack_size = 1,
     -- by all means, try to get this onto a rocket
     weight = rocket_cap / 100,
 
+    icon = "__petraspace__/graphics/icons/antimatter-magnetic-bottle.png",
     subgroup = "particle-accelerator",
     order = "a",
-    icon = "__petraspace__/graphics/icons/full-muon-trap.png",
 
     spoil_ticks = 10*60,
     spoil_to_trigger_result = { 
