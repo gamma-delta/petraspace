@@ -1,3 +1,5 @@
+local pglobals = require("__petraspace__/globals")
+
 -- === Recipes === --
 local space_plat = data.raw["recipe"]["space-platform-foundation"]
 space_plat.ingredients = {
@@ -37,7 +39,12 @@ local rocket_silo = data.raw["technology"]["rocket-silo"]
 table.insert(rocket_silo.prerequisites, "orbital-science-pack")
 table.insert(rocket_silo.unit.ingredients, {"orbital-science-pack", 1})
 
+-- Let you place the rocket silo on airless moons but not space platforms
+data.raw["rocket-silo"]["rocket-silo"].surface_conditions = 
+  {{property="gravity", min=1}}
+
 -- Augh
+-- Stick anything in a lunar rocket silo
 for _,item in pairs(data.raw["item"]) do
   if item.send_to_orbit_mode == nil or item.send_to_orbit_mode == "not-sendable" then
     item.send_to_orbit_mode = "manual"

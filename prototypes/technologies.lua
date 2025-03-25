@@ -51,9 +51,8 @@ data:extend{
       time = 60,
     },
     effects = { 
-      --recipe("orbital-data-collector"),
-      recipe("orbital-data-card-high-pressure"),
-      recipe("orbital-data-card-low-pressure"),
+      -- recipe("data-card-programmer"),
+      recipe("orbital-data-card"),
       recipe("orbital-science-pack"),
     },
   },

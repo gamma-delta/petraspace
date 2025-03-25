@@ -26,24 +26,24 @@ data:extend{
   Table.merge(
     Data.Util.duplicate(
       "assembling-machine", "assembling-machine-3",
-      "orbital-data-programmer", true
+      "data-card-programmer", true
     ), {
       energy_usage = "500kW",
       crafting_speed = 1,
-      crafting_categories = {"orbital-data-card"},
+      crafting_categories = {"data-card-programming"},
       energy_source = {
         type = "electric",
         usage_priority = "secondary-input",
         drain = "50kW",
         emissions_per_minute = { dust=5, pollution=2 },
       },
-      minable = {mining_time=0.25, result = "orbital-data-programmer"},
+      minable = {mining_time=0.25, result = "data-card-programmer"},
       source_inventory_size = 1,
     }
   ),
   metal_machine_item(
-    "orbital-data-programmer", "__base__/graphics/icons/fluid/steam.png",
-    "production-machine", "ea[orbital-data-programmer]"
+    "data-card-programmer", "__base__/graphics/icons/fluid/steam.png",
+    "production-machine", "ea[data-card-programmer]"
   ),
 -- === Dust === --
   Table.merge(

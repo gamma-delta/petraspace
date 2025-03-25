@@ -1,4 +1,5 @@
 local function setup_on_type_by_tick(entity_name, ticks, fn)
+  -- Todo, do this spread across multiple ticks ig
   local Event = require("__stdlib2__/stdlib/event/event").set_protected_mode(true)
 
   local function register(evt)
@@ -45,6 +46,20 @@ local function setup_on_type_by_tick(entity_name, ticks, fn)
   end)
 end
 
+local function register_any_built(callback)
+  local Event = require("__stdlib2__/stdlib/event/event").set_protected_mode(true)
+  local cb2 = function(evt)
+    evt["entity"] = evt.entity or evt.destination
+    callback(evt)
+  end
+  Event.register(defines.events.on_built_entity, cb2)
+  Event.register(defines.events.on_robot_built_entity, cb2)
+  Event.register(defines.events.on_entity_cloned, cb2)
+  Event.register(defines.events.on_space_platform_built_entity, cb2)
+  Event.register(defines.events.script_raised_built, cb2)
+end
+
 return {
-  setup_on_type_by_tick = setup_on_type_by_tick
+  setup_on_type_by_tick = setup_on_type_by_tick,
+  register_any_built = register_any_built,
 }

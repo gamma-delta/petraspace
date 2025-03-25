@@ -16,12 +16,13 @@ data:extend{
   Table.merge(
     Data.Util.duplicate("item", "rocket-silo", "lunar-rocket-silo"),
     {
-      place_result = "lunar-rocket-silo"
+      place_result = "lunar-rocket-silo",
     }
   ),
   Table.merge(
     Data.Util.duplicate("rocket-silo", "rocket-silo", "lunar-rocket-silo", "lunar-rocket-silo"),
     {
+      surface_conditions = {{property = "gravity", min = 1}},
       -- always launches "to the moon"
       launch_to_space_platforms = false,
       rocket_entity = "lunar-rocket-rsr",

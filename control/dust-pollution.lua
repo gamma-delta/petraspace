@@ -16,7 +16,7 @@ local function is_dust_immune(entity)
 end
 
 local function create_secret_beacon(evt)
-  local entity = evt.entity or evt.destination
+  local entity = evt.entity
   local surface = entity.surface
 
   -- TODO: how to mark entity as immune to dust?
@@ -35,10 +35,7 @@ local function create_secret_beacon(evt)
   end
 end
 
-Event.register(defines.events.on_built_entity, create_secret_beacon)
-Event.register(defines.events.on_robot_built_entity, create_secret_beacon)
-Event.register(defines.events.on_entity_cloned, create_secret_beacon)
-Event.register(defines.events.script_raised_built, create_secret_beacon)
+putil.register_any_built(create_secret_beacon)
 
 putil.setup_on_type_by_tick("dust-secret-beacon", 60 * 10, function(secret_beacon)
   local dat = Entity.get_data(secret_beacon)

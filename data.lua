@@ -4,6 +4,7 @@ local requires = {
   "tiles",
   "decorations",
 
+  "planets",
   "planets/viate",
 
   "items",
