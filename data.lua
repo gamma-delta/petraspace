@@ -8,6 +8,7 @@ local requires = {
 
   "items",
   "entities/machines",
+  "entities/rockets",
   "fluids",
   "recipes",
   "entities/resources",

@@ -97,7 +97,7 @@ local function pollution_squib(name, pollutant, amount, color_inner, color_outer
     emissions_per_second = {[pollutant] = amount / lifetime},
     cyclic = false,
     duration = lifetime * 60,
-    fade_in_duration = 10,
+    fade_in_duration = 20,
     fade_away_duration = 40,
     animation = {
       layers = {
@@ -129,7 +129,6 @@ local function pollution_squib(name, pollutant, amount, color_inner, color_outer
 end
 
 data:extend{
-  pollution_squib("dust-squib-small", "dust", 10, {0.7, 0.72, 0.8, 0.2}),
-  pollution_squib("dust-squib-large", "dust", 50, {0.7, 0.72, 0.8, 0.2}),
-  pollution_squib("dust-squib-huge", "dust", 1000, {0.7, 0.72, 0.8, 0.2}),
+  pollution_squib("dust-squib-white", "dust", 20, {0.7, 0.72, 0.8, 0.2}),
+  pollution_squib("dust-squib-reddish", "dust", 20, {0.9, 0.65, 0.6, 0.2}),
 }
