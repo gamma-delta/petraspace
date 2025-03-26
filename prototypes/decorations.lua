@@ -169,7 +169,19 @@ data:extend(
           probability_expression = "viate_meteor_spot > 0"
         },
         -- This way, more than one doesn't try to generate in each crater
-        map_generator_bounding_box = {{-20, -20}, {20, 20}}
+        map_generator_bounding_box = {{-20, -20}, {20, 20}},
+        minable = {
+          mining_particle = "stone-particle",
+          mining_time = 3,
+          results = {
+           {type = "item", name = "regolith", amount_min = 10, amount_max = 20},
+           {type = "item", name = "iron-ore", amount_min = 5, amount_max = 15},
+           {type = "item", name = "stone", amount_min = 5, amount_max = 30},
+        } },
+        dying_trigger_effect = {
+          type = "create-entity",
+          entity_name = "dust-squib-white",
+        }
       }
     )
   }
