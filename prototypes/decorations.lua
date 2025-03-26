@@ -1,18 +1,25 @@
 local Table = require("__stdlib2__/stdlib/utils/table")
 local Data = require("__stdlib2__/stdlib/data/data")
 
+local hit_itself = { 
+  layers={water_tile=true, doodad=true},
+  colliding_with_tiles=true
+}
+
 local viate_crust_decal = Data.Util.duplicate(
   "optimized-decorative", "sand-decal", "viate-crust"
 )
-viate_crust_decal.autoplace.probability_expression = 
-  "(elevation>20) * 0.001 * viate_meteorness"
-
+viate_crust_decal.autoplace.probability_expression = [[
+  (viate_elevation >= 20)
+  * (viate_meteorness < 1) / (1-viate_meteorness) * 0.01
+]]
+-- Intersect with itself, but appear under other rocks and stuff
+viate_crust_decal.collision_mask = hit_itself
 for i,tbl in ipairs(viate_crust_decal.pictures) do
   tbl.filename = string.format(
     "__petraspace__/graphics/decorations/viate/crust-decal-%i.png", i
   )
 end
-
 data:extend{ viate_crust_decal }
 
 local function viate_maria_edge_pebble(cfg)
@@ -24,10 +31,11 @@ local function viate_maria_edge_pebble(cfg)
     local_expressions = { prob = cfg.prob } ,
     probability_expression = [[
       ((3 - abs(viate_elevation-10) + (viate_elevation<10)) * prob)
-      + (prob * 0.2)
+        + (prob * 0.2)
     ]],
     control = "rocks",
   }
+  rocc.collision_mask_connector = hit_itself
   data:extend{rocc}
 end
 viate_maria_edge_pebble{
@@ -65,6 +73,7 @@ local function viate_crater_lining_pebble(cfg)
     ]],
     control = "rocks",
   }
+  rocc.collision_mask = hit_itself
   data:extend{rocc}
 end
 viate_crater_lining_pebble{
@@ -87,10 +96,74 @@ viate_crater_lining_pebble{
   prob = 0.6,
 }
 
+local function viate_maria_flavor(cfg)
+  local deco = Data.Util.duplicate("optimized-decorative", cfg.src, cfg.name)
+  deco.autoplace = {
+    -- Place after the maria liners so they don't overflow
+    order = "a[doodad]-z[maria-flavor]-" .. cfg.order,
+    local_expressions = {prob = cfg.prob},
+    probability_expression = [[
+      (viate_elevation < -5) * prob * 0.02
+    ]],
+  }
+  deco.collision_mask = hit_itself
+  data:extend{ deco }
+end
+viate_maria_flavor{
+  src="waves-decal",
+  name="viate-maria-waves",
+  order="a",
+  prob=0.03
+}
+viate_maria_flavor{
+  src="pumice-relief-decal",
+  name="viate-maria-pumice",
+  order="b",
+  prob=0.20
+}
+viate_maria_flavor{
+  src="nuclear-ground-patch",
+  name="viate-maria-dirt",
+  order="c",
+  prob=0.05
+}
+
+local function viate_random_crater(cfg)
+  local deco = Data.Util.duplicate("optimized-decorative", cfg.src, cfg.name)
+  deco.autoplace = {
+    -- Place after the maria liners so they don't overflow
+    order = "a[doodad]-b[crater]-" .. cfg.order,
+    local_expressions = {prob = cfg.prob},
+    probability_expression = [[
+      (viate_above_basins) * prob * 0.3
+    ]],
+  }
+  deco.collision_mask = hit_itself
+  data:extend{ deco }
+end
+viate_random_crater{
+  src="calcite-stain-small",
+  name="viate-white-stain",
+  order="a",
+  prob=0.017
+}
+viate_random_crater{
+  src="crater-large",
+  name="viate-crater-large",
+  order="b",
+  prob=0.01
+}
+viate_random_crater{
+  src="crater-small",
+  name="viate-crater-small",
+  order="c",
+  prob=0.015
+}
+
 data:extend(
   {
     Table.merge(
-      Data.Util.duplicate("simple-entity", "huge-rock", "viate-meteorite"),
+      Data.Util.duplicate("simple-entity", "huge-volcanic-rock", "viate-meteorite"),
       {
         autoplace = {
           probability_expression = "viate_meteor_spot > 0"

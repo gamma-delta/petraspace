@@ -103,11 +103,9 @@ data:extend{
             x=x, y=y, persistence=0.75,
             octaves=3,
             seed0=map_seed, seed1="regolith",
-            input_scale=0.2
+            input_scale=0.02
           } * 0.5 + 0.6 ]],
         },
-        -- Spawn in a ring around the meteorite, but not directly under it.
-        -- apparently the meteor refuses to spawn on top?
         probability_expression = [[
           (viate_above_basins * (viate_meteor_spot < 0.7))
           * (viate_meteorness > 5)
