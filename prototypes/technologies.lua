@@ -44,7 +44,7 @@ data:extend{
     name = "orbital-science-pack",
     icon = "__petraspace__/graphics/technologies/orbital-science-pack.png",
     icon_size = 256,
-    prerequisites = { "low-density-structure" },
+    prerequisites = { "low-density-structure", "laser" },
     unit = {
       count = 500,
       ingredients = science("rgb"),
@@ -57,6 +57,7 @@ data:extend{
     },
   },
 -- === Aluminum === --
+-- TODO: do i do this as a tip and trick?
   {
     type = "technology",
     name = "bauxite-hint",

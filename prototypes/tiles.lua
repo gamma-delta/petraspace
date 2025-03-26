@@ -82,13 +82,10 @@ data:extend{
     autoplace = {probability_expression="viate_above_basins==0"},
     texture = "__petraspace__/graphics/tiles/viate/smooth-basalt.png",
     map_color = { 0.2, 0.21, 0.25 },
-    etc = {
-      
-    }
   },
   viate_tile{
     name = "viate-dust-crests",
-    order = "b",
+    order = "zzz",
     offset = 1,
     absorptions_per_second = dusty_absorb,
     autoplace = {
@@ -97,17 +94,17 @@ data:extend{
       ]]
     },
     texture = "__space-age__/graphics/terrain/aquilo/dust-crests.png",
-    map_color = { 0.8, 0.81, 0.85 },
+    map_color = { 0.6, 0.61, 0.7 },
     etc = { transitions=viate_transitions },
   },
   viate_tile{
     name = "viate-dust-lumpy",
-    order = "c",
+    order = "bb",
     offset = 2,
     absorptions_per_second = dusty_absorb,
     autoplace = {
       probability_expression=[[
-        (viate_above_basins) * (viate_meteorness / 10)^2
+        (viate_above_basins) * (viate_meteorness_deco / 50)
       ]]
     },
     texture = "__space-age__/graphics/terrain/aquilo/dust-lumpy.png",
@@ -116,16 +113,16 @@ data:extend{
   },
   viate_tile{
     name = "viate-dust-patchy",
-    order = "d",
+    order = "ba",
     offset = 3,
     absorptions_per_second = dusty_absorb,
     autoplace = {
       probability_expression=[[
-        (viate_above_basins) * (viate_meteorness / 8)^4
+        (viate_above_basins) * (viate_meteorness > 5)
       ]]
     },
     texture = "__space-age__/graphics/terrain/aquilo/dust-patchy.png",
-    map_color = { 0.6, 0.61, 0.7 },
+    map_color = { 0.8, 0.81, 0.85 },
     etc = { transitions=viate_transitions },
   },
 }

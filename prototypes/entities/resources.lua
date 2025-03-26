@@ -76,5 +76,48 @@ data:extend{
         init = make_resource("ice-deposit"),
       }
     }
+  ),
+  Table.merge(
+    Data.Util.duplicate("resource", "stone", "regolith-deposit"),
+    {
+      -- dark brown?
+      map_color = { 0.6, 0.2, 0.1 },
+      -- mining_visualization_tint = { 0.75, 0.75, 0.1 },
+      icon = "__petraspace__/graphics/icons/regolith/1.png",
+      minable = {
+        mining_particle = "stone-particle",
+        mining_time = 2,
+        result = "regolith",
+      },
+      stages = { sheet = {
+        filename = "__petraspace__/graphics/entities/regolith-ore.png",
+        priority = "extra-high",
+        size = 128,
+        frame_count = 8,
+        variation_count = 8,
+        scale = 0.5,
+      } },
+      autoplace = {
+        local_expressions = {
+          flavor = [[ multioctave_noise{
+            x=x, y=y, persistence=0.75,
+            octaves=3,
+            seed0=map_seed, seed1="regolith",
+            input_scale=0.2
+          } * 0.5 + 0.6 ]],
+        },
+        -- Spawn in a ring around the meteorite, but not directly under it.
+        -- apparently the meteor refuses to spawn on top?
+        probability_expression = [[
+          (viate_above_basins * (viate_meteor_spot < 0.7))
+          * (viate_meteorness > 5)
+          * flavor
+        ]],
+        richness_expression = "viate_meteorness * (70 + sqrt(distance))",
+      },
+      factoriopedia_simulation = {
+        init = make_resource("regolith-deposit"),
+      }
+    }
   )
 }

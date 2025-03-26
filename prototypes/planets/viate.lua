@@ -111,16 +111,16 @@ data:extend{
     expression = [[
       spot_noise{
         x=x, y=y, seed0=map_seed, seed1=12345,
-        density_expression = 1000000,
+        density_expression = 10000000,
         spot_quantity_expression = viate_meteor_size_noise^2
-          * 10000,
+          * 7000,
         spot_radius_expression = radius,
         spot_favorability_expression = 1,
         basement_value = 0,
         maximum_spot_basement_radius = 300,
-        region_size = 512,
+        region_size = 1024,
         candidate_point_count = 20,
-        suggested_minimum_candidate_point_spacing = 100
+        suggested_minimum_candidate_point_spacing = 400
       } * 5
     ]]
   },
@@ -138,11 +138,32 @@ data:extend{
           seed0=map_seed, seed1="viate_meteor_flavor",
           persistence=0.5,
           octaves=4,
-          input_scale = 0.09
+          input_scale = 0.13
         } * 0.2 + 0.8
       ]]
     },
     expression = "raw_spots * flavor"
+  },
+  {
+    type = "noise-expression",
+    -- For things like the tile rings around the meteors so they don't look
+    -- too artificial
+    name = "viate_meteorness_deco",
+    local_expressions = {
+      -- spot_noise::seed1 does not accept strings
+      raw_spots = [[ viate_meteor_spot_noise(
+        70 * viate_meteor_size_noise
+      ) ]],
+      flavor = [[
+        multioctave_noise{
+          x=x, y=y, seed0=map_seed, seed1="viate_meteorness_deco",
+          persistence=0.7, octaves=4, input_scale=0.92
+        }
+      ]]
+    },
+    expression = [[
+      viate_meteorness * (flavor / 3 + 1)
+    ]]
   },
   {
     type = "noise-expression",
@@ -193,9 +214,13 @@ data:extend{
           ["viate-medium-maria-rock"] = {},
           ["viate-small-maria-rock"] = {},
           ["viate-tiny-maria-rock"] = {},
+          ["viate-medium-crater-rock"] = {},
+          ["viate-small-crater-rock"] = {},
+          ["viate-tiny-crater-rock"] = {},
         } },
         entity = { settings = {
           ["ice-deposit"] = {},
+          ["regolith-deposit"] = {},
           ["viate-meteorite"] = {},
         } },
       }

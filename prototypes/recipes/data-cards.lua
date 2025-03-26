@@ -9,9 +9,8 @@ data:extend{
     category = "data-card-programming",
     enabled = false,
     ingredients = {
-      -- TODO: precision optical components
-      { type="item", name="low-density-structure", amount=1 },
-      { type="item", name="advanced-circuit", amount=1 },
+      { type="item", name="precision-optical-component", amount=1 },
+      { type="item", name="processing-unit", amount=1 },
     },
     energy_required = 2,
     results = {{

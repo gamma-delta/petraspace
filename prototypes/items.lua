@@ -2,6 +2,7 @@ local Data = require("__stdlib2__/stdlib/data/data")
 local Table = require("__stdlib2__/stdlib/utils/table")
 
 local item_sounds = require("__base__/prototypes/item_sounds")
+local spage_sounds = require("__space-age__/prototypes/item_sounds")
 local item_tints = require("__base__/prototypes/item-tints")
 
 local rocket_cap = 1000 * kg;
@@ -27,6 +28,7 @@ local function data_card_props() return {
   stack_size = 100,
   weight = rocket_cap / 1000,
   pick_sound = item_sounds.electric_small_inventory_pickup,
+  drop_sound = item_sounds.electric_small_inventory_move,
   move_sound = item_sounds.electric_small_inventory_move,
 } end
 local function make_programmed_card(name, icon, order, spoil_time)
@@ -58,7 +60,23 @@ data:extend{
   ),
 }
 
--- Silicon and derivatives
+data:extend{
+  Table.merge(
+    Data.Util.duplicate("item", "electronic-circuit", "precision-optical-component"),
+    {
+      -- between electric engines and robot frames
+      order = "c[advanced-intermediates]-ba[poc]",
+      icon = "__petraspace__/graphics/icons/precision-optical-component.png",
+
+      -- glassy sound, maybe? i don't want to use science's glassy tink
+      -- cause it's only for science
+      pick_sound = spage_sounds.ice_inventory_pickup,
+      drop_sound = spage_sounds.ice_inventory_move,
+      move_sound = spage_sounds.ice_inventory_move,
+      weight = rocket_cap / 400,
+    }
+  )
+}
 
 -- Regolith
 data:extend{
@@ -66,8 +84,8 @@ data:extend{
     Data.Util.duplicate("item", "stone", "regolith"),
     {
       subgroup = "raw-resource",
-      -- after copper, before uranium
-      order = "fa[bauxite-ore]",
+      -- after bauxite?
+      order = "fb[regolith]",
       icon = "__petraspace__/graphics/icons/regolith/1.png",
       pictures = make_pics("regolith", 4, {size=64, scale=0.5, mipmap_count = 4})
     }

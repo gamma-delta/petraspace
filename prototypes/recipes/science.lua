@@ -5,8 +5,7 @@ data:extend{
     enabled = false,
     energy_required = 21,
     ingredients = {
-      { type="item", name="orbital-data-card", amount=5,
-        ignored_by_stats=5 },
+      { type="item", name="orbital-data-card", amount=5 },
       { type="item", name="electric-engine-unit", amount=2 },
       { type="item", name="space-platform-foundation", amount=1 },
       -- does not require LDS to make it not too similar to yellow science,

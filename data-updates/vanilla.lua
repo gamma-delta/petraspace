@@ -8,6 +8,20 @@ space_plat.ingredients = {
   { type="item", name="low-density-structure", amount=1 },
 }
 
+-- Make things use POC
+table.insert(
+  data.raw["recipe"]["laser-turret"].ingredients,
+  {type="item", name="precision-optical-component", amount=5}
+)
+local scrapping = data.raw["recipe"]["scrap-recycling"]
+for i, v in ipairs(scrapping.results) do
+  if v.name == "advanced-circuit" then
+    v.name = "precision-optical-component"
+    break
+  end
+end
+
+
 -- Fix up LDS recipes
 data.raw["recipe"]["low-density-structure"].ingredients = {
   { type="item", name="steel-plate", amount=2 },
@@ -31,6 +45,12 @@ for i, v in ipairs(foundry_tech.effects) do
     break
   end
 end
+
+-- I wonder why lamp isn't a prereq of optics anymore
+local laser = data.raw["technology"]["laser"]
+table.insert(laser.prerequisites, "lamp")
+-- it doesn't have any effects by default. why include it??
+laser.effects = {{type="unlock-recipe", recipe="precision-optical-component-high-pressure"}}
 
 table.insert(data.raw["technology"]["low-density-structure"].prerequisites, "simple-bauxite-extraction")
 
