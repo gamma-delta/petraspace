@@ -1,4 +1,5 @@
 local pglobals = require("__petraspace__/globals")
+local rocket_cap = 1000 * kg;
 
 -- === Recipes === --
 local space_plat = data.raw["recipe"]["space-platform-foundation"]
@@ -70,3 +71,15 @@ for _,item in pairs(data.raw["item"]) do
     item.send_to_orbit_mode = "manual"
   end
 end
+
+-- Make slower items easier to ship up to space
+data.raw["item"]["transport-belt"].weight = rocket_cap / 200
+data.raw["item"]["fast-transport-belt"].weight = rocket_cap / 100
+data.raw["item"]["express-transport-belt"].weight = rocket_cap / 100
+-- turbo is already 50
+data.raw["item"]["inserter"].weight = rocket_cap / 100
+data.raw["item"]["long-handed-inserter"].weight = rocket_cap / 50
+data.raw["item"]["bulk-inserter"].weight = rocket_cap / 25
+data.raw["item"]["stack-inserter"].weight = rocket_cap / 10
+
+data.raw["item"]["assembling-machine-1"].weight = rocket_cap / 100

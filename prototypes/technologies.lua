@@ -8,6 +8,7 @@ local function science(s)
     g = { "logistic-science-pack", 1 },
     b = { "chemical-science-pack", 1 },
     m = { "military-science-pack", 1 },
+    o = { "orbital-science-pack", 1 },
     p = { "production-science-pack", 1 },
     y = { "utility-science-pack", 1 },
     s = { "space-science-pack", 1 },
@@ -51,9 +52,29 @@ data:extend{
       time = 60,
     },
     effects = { 
-      -- recipe("data-card-programmer"),
-      recipe("orbital-data-card"),
+      recipe("data-card-programmer"),
+      recipe("orbital-data-card-high-pressure"),
       recipe("orbital-science-pack"),
+    },
+  },
+  {
+    type = "technology",
+    name = "discover-viate",
+    icon = "__space-age__/graphics/technology/vulcanus.png",
+    icon_size = 256,
+    prerequisites = { "orbital-science-pack" },
+    unit = {
+      count = 1000,
+      ingredients = science("rgbo"),
+      time = 60,
+    },
+    effects = { 
+      {
+        type = "unlock-space-location",
+        space_location = "viate",
+        -- dunno what this does
+        use_icon_overlay_constant = true,
+      }
     },
   },
 -- === Aluminum === --
