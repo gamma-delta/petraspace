@@ -43,6 +43,7 @@ data:extend{
     -- or if the noise from 0-1 beats the overhang.
     -- So at distance 1 there's a 1/5 chance to fail, 2/5, 3/5, etc
     -- (for lepton_overhang_ok=5)
+    -- Plus a little bonus so it's more differentiated
     -- Based on the angle; with a small enough scale this should disallow floating rocks
     -- because once an angle "loses" the check it can never win it again by going further.
     -- Also, clock noise needs to be retyped by hand every time cause noise
