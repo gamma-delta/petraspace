@@ -6,7 +6,18 @@ local tile_collision_masks = require("__base__/prototypes/tile/tile-collision-ma
 local tile_graphics = require("__base__/prototypes/tile/tile-graphics")
 local tile_spritesheet_layout = tile_graphics.tile_spritesheet_layout
 
+local pglobals = require("globals")
+
 data:extend{
+  pglobals.make_blobby_radius_expr{
+    name = "viate_has_ground",
+    input_scale = "150",
+    radius = "1200",
+    overhang_ok = "70",
+    overhang_bonus = "0.9",
+    seed = '"viate_has_ground"',
+    persistence = "0.4",
+  },
   {
     type = "noise-expression",
     name = "viate_starting_area_radius",
@@ -208,6 +219,7 @@ data:extend{
       },
       autoplace_settings = {
         tile = { settings = {
+          ["viate-empty-space"] = {},
           ["viate-smooth-basalt"] = {},
           ["viate-dust-crests"] = {},
           ["viate-dust-lumpy"] = {},
@@ -352,6 +364,17 @@ data:extend{
     group = "tiles",
     order = "f-a",
   },
+  -- Place empty space *first*, then fill the hole
+  pglobals.make_empty_space(
+    "viate",
+    {
+      offset = viate_offset,
+      order = "![before-everything]",
+      autoplace = {
+        probability_expression = "(viate_has_ground == 0) * 999999",
+      }
+    }
+  ),
   viate_tile{
     name = "viate-smooth-basalt",
     order = "a",

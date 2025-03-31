@@ -7,6 +7,26 @@ local tile_spritesheet_layout = tile_graphics.tile_spritesheet_layout
 
 local pglobals = require("globals")
 
+-- Three sectors:
+-- - Mixed Carbon/sulfur ore
+-- - Steam geysers (that ebb and flow in time with the rotation?)
+-- - Not sure what to put here, but I don't want to divide it just into two.
+
+-- What's everything you need to get rockets?
+-- - Blurcuits: Plastic, copper, iron, H2SO4
+-- - POC: Copper, iron, hvy. oil
+-- - LDS: Plastic, copper, iron, Aluminum
+-- - Thruster & Oxidizer: lots of stuff
+-- So total bill is:
+-- - Copper & Iron from lava
+-- - Oil products from coal liquefaction
+-- - Steam & water from ... steam
+-- - Aluminum is the interesting part. Perhaps make a shit recipe to extract
+--   traces of bauxite from stone; then you have to use the old bad Al recipe.
+-- I should probably only block out Lepton once I have the rest of the mod
+-- blocked out, *especially* Vulc II.
+-- But I like the idea of having to use the old bad recipes again.
+
 data:extend{
   {
     type = "noise-expression",
@@ -31,30 +51,13 @@ data:extend{
     name = "lepton_clock",
     expression = "atan2(y, x)",
   },
-  {
-    type = "noise-expression",
+  pglobals.make_blobby_radius_expr{
     name = "lepton_has_ground",
-    local_expressions = {
-      hang = "distance - lepton_radius",
-      -- input scale. i can't pass a non-constant to the basis_noise
-      is = "3 / distance"
-    },
-    -- Have ground if it's in the safe zone,
-    -- or if the noise from 0-1 beats the overhang.
-    -- So at distance 1 there's a 1/5 chance to fail, 2/5, 3/5, etc
-    -- (for lepton_overhang_ok=5)
-    -- Plus a little bonus so it's more differentiated
-    -- Based on the angle; with a small enough scale this should disallow floating rocks
-    -- because once an angle "loses" the check it can never win it again by going further.
-    -- Also, clock noise needs to be retyped by hand every time cause noise
-    -- functions require constants
-    expression = [[
-        (distance <= lepton_radius)
-        | (multioctave_noise{
-            x=x*is, y=y*is, seed0=map_seed, seed1="lepton-has-ground",
-            persistence=0.7, octaves=3
-          }/2+0.5 > (hang/lepton_overhang_ok*lepton_overhang_bonus))
-    ]]
+    input_scale = "3",
+    radius = "lepton_radius",
+    overhang_ok = "lepton_overhang_ok",
+    overhang_bonus = "lepton_overhang_bonus",
+    seed = '"lepton_has_ground"'
   },
   {
     type = "noise-expression",
@@ -66,8 +69,6 @@ data:extend{
 -- I don't have any idea what this does
 local lepton_offset = 80
 
--- Empty space always spawns if there is no other tile spawned there
--- (very low order, probability=1000)
 data:extend{
   {
     type = "item-subgroup",
@@ -75,19 +76,15 @@ data:extend{
     group = "tiles",
     order = "f-b",
   },
-  pglobals.copy_then(
-    data.raw["tile"]["empty-space"],
+  -- Place empty space *first*, then fill the hole
+  pglobals.make_empty_space(
+    "lepton",
     {
-      name = "lepton-space",
-      subgroup = "lepton-tiles",
       offset = lepton_offset,
-      default_cover_tile = nil,
-    	collision_mask = {
-    		colliding_with_tiles_only = true,
-    		not_colliding_with_itself = true,
-    		layers = data.raw.tile["empty-space"].collision_mask.layers,
-    	},
-    	destroys_dropped_items = true,
+      order = "![before-everything]",
+      autoplace = {
+        probability_expression = "(lepton_has_ground == 0) * 999999",
+      }
     }
   ),
   pglobals.copy_then(
@@ -97,7 +94,7 @@ data:extend{
       subgroup = "lepton-tiles",
       offset = lepton_offset + 1,
       autoplace = {
-        probability_expression="lepton_has_ground"
+        probability_expression="1"
       },
     }
   ),
@@ -155,8 +152,8 @@ data:extend{{
     },
     autoplace_settings = {
       tile = { settings = pglobals.set_with({}){
+        "lepton-empty-space",
         "lepton-cracks-hot",
-        "lepton-space",
       } },
       decorative = { settings = {} },
       entity = { settings = {} },

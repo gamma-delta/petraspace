@@ -36,9 +36,62 @@ local function surface_prop(planet, prop_name)
   return prop_value or default
 end
 
+local function make_empty_space(prefix, etc)
+  return copy_then(
+    data.raw["tile"]["empty-space"],
+    {
+      name = prefix .. "-empty-space",
+      subgroup = prefix .. "-tiles",
+      default_cover_tile = nil,
+    	collision_mask = {
+    		colliding_with_tiles_only = true,
+    		not_colliding_with_itself = true,
+    		layers = data.raw.tile["empty-space"].collision_mask.layers,
+    	},
+    	destroys_dropped_items = true,
+    },
+    etc or {}
+  )
+end
+
+local function make_blobby_radius_expr(cfg)
+  local out = {
+    type = "noise-expression",
+    name = cfg.name,
+    local_expressions = {
+      hang = "distance - " .. cfg.radius,
+      is = cfg.input_scale .. " / distance",
+      radius = cfg.radius,
+      overhang_ok = cfg.overhang_ok,
+      overhang_bonus = cfg.overhang_bonus,
+      persistence = cfg.persistence or "0.7",
+      octaves = cfg.octaves or "3",
+    },
+    -- Have ground if it's in the safe zone,
+    -- or if the noise from 0-1 beats the overhang.
+    -- So at distance 1 there's a 1/5 chance to fail, 2/5, 3/5, etc
+    -- (for overhang_ok=5)
+    -- Plus a little bonus so it's more differentiated
+    -- Based on the angle; with a small enough scale this should disallow floating rocks
+    -- because once an angle "loses" the check it can never win it again by going further.
+    -- Also, clock noise needs to be done by macro every time cause noise
+    -- functions require constants
+    expression = string.format([[
+        (distance <= radius)
+        | (multioctave_noise{
+            x=x*is, y=y*is, seed0=map_seed, seed1=%s,
+            persistence=persistence, octaves=octaves
+          }/2+0.5 > (hang/lepton_overhang_ok*lepton_overhang_bonus))
+    ]], cfg.seed)
+  }
+  return copy_then(out, cfg.etc or {})
+end
+
 return {
   planet_moon_map = planet_moon_map,
   copy_then = copy_then,
   set_with = set_with,
   set = set,
+  make_empty_space = make_empty_space,
+  make_blobby_radius_expr = make_blobby_radius_expr,
 }

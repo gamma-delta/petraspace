@@ -5,8 +5,6 @@ local requires = {
   "decorations",
 
   "planets",
-  "planets/viate",
-  "planets/lepton",
 
   "items",
   "entities/machines",
