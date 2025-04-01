@@ -1,6 +1,8 @@
 local Data = require("__stdlib2__/stdlib/data/data")
 local Table = require("__stdlib2__/stdlib/utils/table")
 
+local pglobals = require("globals")
+
 local function rocket_part_recipe(gravity)
   -- Nauvis at 10m/s^2 is our baseline.
   local default_fuel = 100
@@ -26,6 +28,11 @@ local function rocket_part_recipe(gravity)
     },
     results = {{type="item", name="rocket-part", amount=1}},
     allow_productivity = true,
+    surface_conditions = {
+      -- this shouldn't be possible to get on the wrong surface,
+      -- but it will at least make a handy tooltip.
+      { property = "gravity", min = gravity, max = gravity }
+    },
     localised_name = {
       "",
       {"item-name.rocket-part"},
@@ -47,9 +54,9 @@ end
 
 -- Edit some rocket silo stuff here, not in data-updates,
 -- so i can clone the edited version into the lunar one
-local vanilla_rocket = data.raw["rocket-silo"]["rocket-silo"]
-vanilla_rocket.fluid_boxes_off_when_no_fluid_recipe = false
-vanilla_rocket.fluid_boxes = {
+local vanilla_rs = data.raw["rocket-silo"]["rocket-silo"]
+vanilla_rs.fluid_boxes_off_when_no_fluid_recipe = false
+vanilla_rs.fluid_boxes = {
   -- Fuel
   {
     production_type = "input",
@@ -78,7 +85,15 @@ vanilla_rocket.fluid_boxes = {
   }
 }
 -- Update it via script later
-vanilla_rocket.fixed_recipe = nil
+vanilla_rs.fixed_recipe = nil
+-- Add my blue-tinted light overlays to suggest oxidizer
+vanilla_rs.hole_light_sprite.filename = "__petraspace__/graphics/entities/rocket-silo/hole-light.png"
+vanilla_rs.rocket_glow_overlay_sprite.filename = "__petraspace__/graphics/entities/rocket-silo/over-glow.png"
+-- and same for the rocket
+local vanilla_rocket = data.raw["rocket-silo-rocket"]["rocket-silo-rocket"]
+vanilla_rocket.rocket_glare_overlay_sprite.filename = "__petraspace__/graphics/entities/rocket-silo/over-glare.png"
+vanilla_rocket.rocket_flame_animation.filename = "__petraspace__/graphics/entities/rocket-silo/jet.png"
+vanilla_rocket.rocket_sprite.layers[2].filename = "__petraspace__/graphics/entities/rocket-silo/static-emission.png"
 
 data:extend{
   -- Make this a new entity so we can listen for it in events
@@ -98,15 +113,22 @@ data:extend{
       place_result = "lunar-rocket-silo",
     }
   ),
-  Table.merge(
-    Data.Util.duplicate("rocket-silo", "rocket-silo", "lunar-rocket-silo", "lunar-rocket-silo"),
-    {
-      surface_conditions = {{property = "gravity", min = 1}},
-      -- always launches "to the moon"
-      launch_to_space_platforms = false,
-      rocket_entity = "lunar-rocket-rsr",
-      -- for testing
-      rocket_parts_required = 1,
-    }
-  ),
 }
+
+local lrs = pglobals.copy_then(
+  Data.Util.duplicate("rocket-silo", "rocket-silo", "lunar-rocket-silo", "lunar-rocket-silo"),
+  {
+    surface_conditions = {{property = "gravity", min = 1}},
+    -- always launches "to the moon"
+    launch_to_space_platforms = false,
+    rocket_entity = "lunar-rocket-rsr",
+    -- for testing
+    rocket_parts_required = 1,
+  }
+)
+lrs.door_back_sprite.filename = "__petraspace__/graphics/entities/lunar-rocket-silo/door-back.png"
+lrs.door_front_sprite.filename = "__petraspace__/graphics/entities/lunar-rocket-silo/door-front.png"
+lrs.arm_01_back_animation.filename = "__petraspace__/graphics/entities/lunar-rocket-silo/arms-back.png"
+lrs.arm_02_right_animation.filename = "__petraspace__/graphics/entities/lunar-rocket-silo/arms-right.png"
+lrs.arm_03_front_animation.filename = "__petraspace__/graphics/entities/lunar-rocket-silo/arms-front.png"
+data:extend{lrs}
