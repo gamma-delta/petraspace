@@ -45,6 +45,8 @@ Event.register(defines.events.on_cargo_pod_finished_ascending, function(evt)
     local moony_dest = pglobals.planet_moon_map[origin_surface_name]
     -- game.print("Found cargo pod " .. tostring(pod) .. ", sending to " .. tostring(moony_dest))
     if moony_dest then
+      -- This won't redirect the pods to a landing pad. I have a bug report open.
+      -- https://forums.factorio.com/viewtopic.php?t=127944
       pod.cargo_pod_destination = {
         type = defines.cargo_destination.surface,
         surface = moony_dest

@@ -111,11 +111,11 @@ energy_dust(furnaces["recycler"].energy_source, 15)
 -- todo: make tesla turrets dusty? it will be quite the PITA to impl
 -- you'll never use them on Viate or Fulgora anyways
 
-local poles = data.raw["electric-pole"]
-passive_dust(poles["small-electric-pole"], 5)
-passive_dust(poles["medium-electric-pole"], 7)
-passive_dust(poles["big-electric-pole"], 10)
-passive_dust(poles["substation"], 20)
+-- local poles = data.raw["electric-pole"]
+-- passive_dust(poles["small-electric-pole"], 5)
+-- passive_dust(poles["medium-electric-pole"], 7)
+-- passive_dust(poles["big-electric-pole"], 10)
+-- passive_dust(poles["substation"], 20)
 
 -- the blades kick up dust.
 -- it's a fun inversion to have pollution produced by boilers (and not engines),
