@@ -39,7 +39,47 @@ for _,lab in pairs(data.raw["lab"]) do
 end
 
 data:extend{
--- === Data cards === --
+  -- Should I do this as a tip and trick?
+  {
+    type = "technology",
+    name = "bauxite-hint",
+    icon = "__petraspace__/graphics/icons/bauxite/1.png",
+    icon_size = 64,
+    prerequisites = { "electric-mining-drill" },
+    effects = {},
+    research_trigger = {
+      type = "mine-entity",
+      entity = "bauxite-ore",
+    },
+  },
+  {
+    type = "technology",
+    name = "simple-bauxite-extraction",
+    -- TODO
+    icon = "__petraspace__/graphics/icons/bauxite/1.png",
+    icon_size = 64,
+    prerequisites = {"sulfur-processing", "bauxite-hint"},
+    unit = {
+      count = 150,
+      ingredients = science("rgb"),
+      time = 30,
+    },
+    effects = {
+      recipe("simple-bauxite-extraction"),
+      recipe("native-aluminum-to-plate"),
+    },
+  },
+}
+-- I wonder why lamp isn't a prereq of optics anymore
+local laser = data.raw["technology"]["laser"]
+table.insert(laser.prerequisites, "lamp")
+-- it doesn't have any effects by default. why include it??
+laser.effects = {{type="unlock-recipe", recipe="precision-optical-component-high-pressure"}}
+
+table.insert(data.raw["technology"]["low-density-structure"].prerequisites, "simple-bauxite-extraction")
+
+data:extend{
+-- Push into space --
   {
     type = "technology",
     name = "orbital-science-pack",
@@ -74,40 +114,17 @@ data:extend{
         space_location = "viate",
         -- dunno what this does
         use_icon_overlay_constant = true,
-      }
-    },
-  },
--- === Aluminum === --
--- TODO: do i do this as a tip and trick?
-  {
-    type = "technology",
-    name = "bauxite-hint",
-    icon = "__petraspace__/graphics/icons/bauxite/1.png",
-    icon_size = 64,
-    prerequisites = { "electric-mining-drill" },
-    effects = {},
-    research_trigger = {
-      type = "mine-entity",
-      entity = "bauxite-ore",
-    },
-  },
-  {
-    type = "technology",
-    name = "simple-bauxite-extraction",
-    -- TODO
-    icon = "__petraspace__/graphics/icons/bauxite/1.png",
-    icon_size = 64,
-    prerequisites = {"sulfur-processing", "bauxite-hint"},
-    unit = {
-      count = 150,
-      ingredients = science("rgb"),
-      time = 30,
-    },
-    effects = {
-      recipe("simple-bauxite-extraction"),
-      recipe("native-aluminum-to-plate"),
-    },
-  },
+      },
+      recipe("ice-melting"),
+    }
+  }
+}
+-- why launch a rocket if you are unaware of anything up there?
+local rocket_silo = data.raw["technology"]["rocket-silo"]
+table.insert(rocket_silo.prerequisites, "discover-viate")
+table.insert(rocket_silo.unit.ingredients, {"orbital-science-pack", 1})
+
+data:extend{
   {
     type = "technology",
     name = "advanced-bauxite-extraction",
@@ -120,8 +137,8 @@ data:extend{
       "carbon-fiber",
     },
     unit = {
-      count = 1500,
-      ingredients = science("rgbpsMEA"),
+      count = 4000,
+      ingredients = science("rgbpMEA"),
       time = 60,
     },
     effects = {

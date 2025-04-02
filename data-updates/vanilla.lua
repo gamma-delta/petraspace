@@ -47,19 +47,6 @@ for i, v in ipairs(foundry_tech.effects) do
   end
 end
 
--- I wonder why lamp isn't a prereq of optics anymore
-local laser = data.raw["technology"]["laser"]
-table.insert(laser.prerequisites, "lamp")
--- it doesn't have any effects by default. why include it??
-laser.effects = {{type="unlock-recipe", recipe="precision-optical-component-high-pressure"}}
-
-table.insert(data.raw["technology"]["low-density-structure"].prerequisites, "simple-bauxite-extraction")
-
--- why launch a rocket if you are unaware of anything up there?
-local rocket_silo = data.raw["technology"]["rocket-silo"]
-table.insert(rocket_silo.prerequisites, "orbital-science-pack")
-table.insert(rocket_silo.unit.ingredients, {"orbital-science-pack", 1})
-
 -- Let you place the rocket silo on airless moons but not space platforms
 data.raw["rocket-silo"]["rocket-silo"].surface_conditions = 
   {{property="gravity", min=1}}
