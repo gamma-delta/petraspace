@@ -27,6 +27,8 @@ data:extend{
     type = "recipe",
     name = "concrete-from-regolith",
     category = "crafting-with-fluid",
+    subgroup = "raw-material",
+    order = "c[chemistry]-za"
     enabled = false,
     energy_required = 10,
     -- require sulfur?
@@ -46,6 +48,8 @@ data:extend{
     type = "recipe",
     name = "washing-regolith",
     category = "crafting-with-fluid",
+    subgroup = "raw-material",
+    order = "c[chemistry]-zb"
     enabled = false,
     energy_required = 8,
     ingredients = {
@@ -55,9 +59,9 @@ data:extend{
       {type="fluid", name="steam", amount=1000},
     },
     results = {
-      -- TODO: silicon
       {type="item", name="stone", amount=5},
-      {type="item", name="iron-ore", amount=3},
+      {type="item", name="iron-ore", amount=10},
+      {type="item", name="bauxite", amount=1},
     },
     icons = {
       { icon="__base__/graphics/icons/fluid/steam.png" },
@@ -67,17 +71,25 @@ data:extend{
   {
     type = "recipe",
     name = "dissolving-regolith",
-    category = "crafting-with-fluid",
+    category = "chemistry",
     enabled = false,
     energy_required = 8,
     ingredients = {
       {type="item", name="regolith", amount=10},
-      {type="fluid", name="sulfuric-acid", amount=20},
+      {type="fluid", name="sulfuric-acid", amount=10},
     },
     results = {
-      -- TODO: silicon
-      {type="item", name="stone", amount=9},
+      {type="item", name="stone", amount=10},
       {type="item", name="native-aluminum", amount=1},
+      {type="item", name="copper-ore", amount=1},
+      -- One sulfur makes 10 H2SO4. Naively looping it around will not
+      -- produce enough to close the loop; you need >20% productivity.
+      -- Filling this recipe and the sulfuric acid recipe with 3 prod mods
+      -- should barely close the loop.
+      -- However you also need enough iron ore to react it ...
+      -- and use the sulfur to get rid of your excess bauxite from the
+      -- washing recipe.
+      {type="item", name="sulfur", amount=1, probability=0.8},
     },
     icons = {
       { icon="__base__/graphics/icons/fluid/sulfuric-acid.png" },

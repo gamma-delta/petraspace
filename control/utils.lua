@@ -1,3 +1,16 @@
+local function register_any_built(callback)
+  local Event = require("__stdlib2__/stdlib/event/event").set_protected_mode(true)
+  local cb2 = function(evt)
+    evt["entity"] = evt.entity or evt.destination
+    callback(evt)
+  end
+  Event.register(defines.events.on_built_entity, cb2)
+  Event.register(defines.events.on_robot_built_entity, cb2)
+  Event.register(defines.events.on_entity_cloned, cb2)
+  Event.register(defines.events.on_space_platform_built_entity, cb2)
+  Event.register(defines.events.script_raised_built, cb2)
+end
+
 local function setup_on_type_by_tick(entity_name, ticks, fn)
   -- Todo, do this spread across multiple ticks ig
   local Event = require("__stdlib2__/stdlib/event/event")
@@ -15,10 +28,7 @@ local function setup_on_type_by_tick(entity_name, ticks, fn)
       storage.on_type_by_tick[entity_name][entity] = true
     end
   end
-  Event.register(defines.events.on_built_entity, register)
-  Event.register(defines.events.on_robot_built_entity, register)
-  Event.register(defines.events.on_entity_cloned, register)
-  Event.register(defines.events.script_raised_built, register)
+  register_any_built(register)
   
   Event.on_nth_tick(ticks, function()
     -- i think storage doesn't exist properly until this point
@@ -44,19 +54,6 @@ local function setup_on_type_by_tick(entity_name, ticks, fn)
       storage.on_type_by_tick[entity_name] = nil
     end
   end)
-end
-
-local function register_any_built(callback)
-  local Event = require("__stdlib2__/stdlib/event/event").set_protected_mode(true)
-  local cb2 = function(evt)
-    evt["entity"] = evt.entity or evt.destination
-    callback(evt)
-  end
-  Event.register(defines.events.on_built_entity, cb2)
-  Event.register(defines.events.on_robot_built_entity, cb2)
-  Event.register(defines.events.on_entity_cloned, cb2)
-  Event.register(defines.events.on_space_platform_built_entity, cb2)
-  Event.register(defines.events.script_raised_built, cb2)
 end
 
 return {

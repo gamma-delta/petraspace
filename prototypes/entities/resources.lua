@@ -108,10 +108,10 @@ data:extend{
         },
         probability_expression = [[
           (viate_above_basins * (viate_meteor_spot < 0.7))
-          * (viate_meteorness > 5)
+          * (viate_meteorness > max(5 - sqrt(distance / 100), 3.8))
           * flavor
         ]],
-        richness_expression = "viate_meteorness * (70 + sqrt(distance))",
+        richness_expression = "viate_meteorness * (100 + sqrt(distance))",
       },
       factoriopedia_simulation = {
         init = make_resource("regolith-deposit"),
