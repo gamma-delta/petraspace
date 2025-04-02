@@ -17,7 +17,7 @@ local requires = {
 
   "dust-pollution",
 
-  "simulations",
+  "tips-and-tricks",
 }
 
 for _,req in ipairs(requires) do

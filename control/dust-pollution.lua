@@ -18,6 +18,7 @@ end
 local function create_secret_beacon(evt)
   local entity = evt.entity
   local surface = entity.surface
+  log(tostring(entity) .. " HI DUST")
 
   -- TODO: how to mark entity as immune to dust?
   -- ancillary keys don't get carried through to the runtime stage
@@ -30,7 +31,8 @@ local function create_secret_beacon(evt)
       force = evt.force,
       raise_built = true,
     }
-    -- game.print("Created beacon " .. tostring(secret_beacon) .. " parented to " .. tostring(entity))
+    game.print("Created beacon " .. tostring(secret_beacon) .. " parented to " .. tostring(entity))
+    log("Created beacon " .. tostring(secret_beacon) .. " parented to " .. tostring(entity))
     Entity.set_data(secret_beacon, { parent=entity })
   end
 end

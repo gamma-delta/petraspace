@@ -117,6 +117,21 @@ data:extend{
       },
       recipe("ice-melting"),
     }
+  },
+  -- there's APPARENTLY no tip trigger for mining an entity???
+  -- why are these separate things
+  {
+    type = "technology",
+    name = "viate-dust",
+    hidden = true,
+    -- who cares
+    icon = "__space-age__/graphics/technology/vulcanus.png",
+    icon_size = 256,
+    effects = {},
+    research_trigger = {
+      type = "mine-entity",
+      entity = "viate-meteorite",
+    },
   }
 }
 -- why launch a rocket if you are unaware of anything up there?

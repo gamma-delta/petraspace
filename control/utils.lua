@@ -1,6 +1,6 @@
 local function setup_on_type_by_tick(entity_name, ticks, fn)
   -- Todo, do this spread across multiple ticks ig
-  local Event = require("__stdlib2__/stdlib/event/event").set_protected_mode(true)
+  local Event = require("__stdlib2__/stdlib/event/event")
 
   local function register(evt)
     if not storage.on_type_by_tick[entity_name] then

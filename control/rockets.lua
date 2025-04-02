@@ -35,8 +35,11 @@ putil.register_any_built(function(evt)
   end
 end)
 
-Event.register(defines.events.on_cargo_pod_finished_ascending, function(evt)
-  local pod = evt.cargo_pod
+-- This still doesn't work despite what rseding said on the forums
+-- https://forums.factorio.com/viewtopic.php?p=667721#p667721
+-- Just like in 1984
+Event.register(defines.events.on_rocket_launch_ordered, function(evt)
+  local pod = evt.rocket.attached_cargo_pod
   if pod.name == "lunar-cargo-pod" then
     local origin_surface_name = 
       pod.cargo_pod_origin
@@ -45,8 +48,6 @@ Event.register(defines.events.on_cargo_pod_finished_ascending, function(evt)
     local moony_dest = pglobals.planet_moon_map[origin_surface_name]
     -- game.print("Found cargo pod " .. tostring(pod) .. ", sending to " .. tostring(moony_dest))
     if moony_dest then
-      -- This won't redirect the pods to a landing pad. I have a bug report open.
-      -- https://forums.factorio.com/viewtopic.php?t=127944
       pod.cargo_pod_destination = {
         type = defines.cargo_destination.surface,
         surface = moony_dest
