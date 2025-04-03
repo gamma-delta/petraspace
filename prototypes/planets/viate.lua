@@ -186,10 +186,10 @@ data:extend(
            {type = "item", name = "stone", amount_min = 5, amount_max = 30},
            {type = "item", name = "native-aluminum", amount_min = 20, amount_max = 30},
         } },
-        dying_trigger_effect = {
-          type = "create-entity",
-          entity_name = "dust-squib-white",
-        }
+        -- dying_trigger_effect = {
+        --   type = "create-entity",
+        --   entity_name = "dust-squib-white",
+        -- }
       }
     )
   }

@@ -4,6 +4,7 @@ data:extend{
   {
     type = "tips-and-tricks-item",
     name = "viate-welcome",
+    category = "space-age",
     tag = "[planet=viate]",
     order = "![before-fulgora]-a",
     trigger = {type="research", technology="discover-viate"},
@@ -12,10 +13,11 @@ data:extend{
   {
     type = "tips-and-tricks-item",
     name = "viate-dust",
+    category = "space-age",
     order = "![before-fulgora]-b",
     indent = 1,
     tag = "[fluid=steam]",
-    trigger = {type="research", technology="viate-dust"},
+    trigger = {type="surface", surface="viate"},
     simulation = viate_tnt.dust,
   }
 }

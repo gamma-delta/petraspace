@@ -14,6 +14,12 @@ for i, v in ipairs(scrapping.results) do
   end
 end
 
+-- These things are SO expensive. Why?
+data.raw["recipe"]["heat-pipe"].ingredients = {
+  { type="item", name="copper-plate", amount=5 },
+  { type="item", name="steel-plate", amount=2 },
+  { type="fluid", name="water", amount=100 },
+}
 
 -- Fix up LDS recipes
 data.raw["recipe"]["low-density-structure"].ingredients = {
@@ -62,14 +68,24 @@ data.raw["item"]["bulk-inserter"].weight = rocket_cap / 25
 data.raw["item"]["stack-inserter"].weight = rocket_cap / 10
 
 data.raw["item"]["assembling-machine-1"].weight = rocket_cap / 100
+-- you use chemmy plants much more than in vanilla,
+-- frankly i'm surprised they didn't already update it
+data.raw["item"]["chemical-plant"].stack_size = 50
+data.raw["item"]["chemical-plant"].weight = rocket_cap / 50
 
 -- Move gasses to be gasses
-local pg = data.raw["fluid"]["petroleum-gas"]
-pg.subgroup = "gasses"
-pg.order = "a[existing-gas]-a"
-local nh3 = data.raw["fluid"]["ammonia"]
-nh3.subgroup = "gasses"
-nh3.order = "a[existing-gas]-b"
+local function togas(name, order)
+  local gas = data.raw["fluid"][name]
+  gas.subgroup = "gasses",
+  gas.order = "a[existing-gas]-" .. order
+end
+togas("steam", "a")
+togas("petroleum-gas", "b")
+togas("ammonia", "c")
+togas("fluorine", "d")
+-- i guess it's a "gas"
+-- source: they might be giants
+togas("fusion-plasma", "e")
 
 table.insert(data.raw["assembling-machine"]["chemical-plant"].crafting_categories, "electrochemistry")
 table.insert(data.raw["assembling-machine"]["electromagnetic-plant"].crafting_categories, "electrochemistry")

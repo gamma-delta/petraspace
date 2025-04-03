@@ -68,8 +68,8 @@ data:extend{
     energy_required = 21,
     ingredients = {
       { type="item", name="orbital-data-card", amount=5 },
-      { type="item", name="ice", amount=5 },
-      { type="item", name="fast-transport-belt", amount=1 },
+      { type="item", name="bauxite-ore", amount=5 },
+      { type="item", name="radar", amount=1 },
     },
     results = {
       { type="item", name="orbital-science-pack", amount=3 },
@@ -77,4 +77,14 @@ data:extend{
     allow_productivity = true,
     allow_quality = true,
   },
+}
+
+-- Do I want to introduce viate skip? it would be funny.
+local spience = data.raw["recipe"]["space-science-pack"]
+-- Spience makes 5 of them
+spience.ingredients = {
+  {type="item", name="space-platform-foundation", amount=1},
+  {type="item", name="precision-optical-component", amount=5},
+  {type="item", name="heat-pipe", amount=5},
+  {type="item", name="rocket-fuel", amount=5},
 }

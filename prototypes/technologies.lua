@@ -118,26 +118,57 @@ data:extend{
       recipe("ice-melting"),
     }
   },
-  -- there's APPARENTLY no tip trigger for mining an entity???
-  -- why are these separate things
   {
     type = "technology",
-    name = "viate-dust",
-    hidden = true,
-    -- who cares
+    name = "lunar-rocket-silo",
+    -- TODO
     icon = "__space-age__/graphics/technology/vulcanus.png",
     icon_size = 256,
-    effects = {},
+    -- why go up there if you don't know anything
+    prerequisites = { "discover-viate" },
+    unit = {
+      count = 1000,
+      ingredients = science("rgbo"),
+      time = 60,
+    },
+    effects = { 
+      recipe("lunar-rocket-silo"),
+    }
+  },
+}
+
+data:extend{
+  {
+    type = "technology",
+    name = "discover-regolith",
+    icon = "__petraspace__/graphics/technology/discover-regolith.png",
+    icon_size = 256,
+    prerequisites = { "discover-viate" },
     research_trigger = {
       type = "mine-entity",
-      entity = "viate-meteorite",
+      entity = "regolith-deposit",
+    },
+    effects = { 
+      recipe("washing-regolith"),
+      recipe("dissolving-regolith"),
+      recipe("stone-bricks-from-regolith"),
+      recipe("concrete-from-regolith"),
     },
   }
 }
--- why launch a rocket if you are unaware of anything up there?
-local rocket_silo = data.raw["technology"]["rocket-silo"]
-table.insert(rocket_silo.prerequisites, "discover-viate")
-table.insert(rocket_silo.unit.ingredients, {"orbital-science-pack", 1})
+-- Play with tech costs.
+-- To give some fun progress feeling on Viate, make it a trigger tech.
+-- I'd rather have it be "melt or mine N ice", but these are both not
+-- possible in the trigger system due to WOKE
+-- so I will just set it to crafting enough aluminum to make all the stuff.
+local tech_cse = data.raw["technology"]["chcs-concentrated-solar-energy"]
+tech_cse.prerequisites = {"discover-viate"}
+tech_cse.unit = nil
+tech_cse.research_trigger = {
+  type = "craft-item",
+  item = "aluminum-plate",
+  count = 200,
+}
 
 data:extend{
   {

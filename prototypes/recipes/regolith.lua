@@ -61,7 +61,7 @@ data:extend{
     results = {
       {type="item", name="stone", amount=5},
       {type="item", name="iron-ore", amount=10},
-      {type="item", name="bauxite-ore", amount=1},
+      {type="item", name="bauxite-ore", amount=5},
     },
     icons = {
       { icon="__base__/graphics/icons/fluid/steam.png" },
@@ -82,15 +82,16 @@ data:extend{
     },
     results = {
       {type="item", name="stone", amount=10},
-      {type="item", name="native-aluminum", amount=1},
+      {type="item", name="native-aluminum", amount=5},
       {type="item", name="copper-ore", amount=2},
       -- One sulfur makes 10 H2SO4. Naively looping it around will not
       -- produce enough to close the loop; you need >20% productivity.
-      -- Filling this recipe and the sulfuric acid recipe with 3 prod mods
+      -- Filling this recipe and the sulfuric acid recipe with 3 prod1 mods
       -- should barely close the loop.
       -- However you also need enough iron ore to react it ...
       -- and use the sulfur to get rid of your excess bauxite from the
       -- washing recipe.
+      -- You will probably be relying on shipments of S from Nauvis for a while.
       {type="item", name="sulfur", amount=1, probability=0.8},
     },
     icons = {

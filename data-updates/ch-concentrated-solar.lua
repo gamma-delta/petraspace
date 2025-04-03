@@ -1,7 +1,7 @@
 local hsm = data.raw["recipe"]["chcs-heliostat-mirror"]
 hsm.ingredients = {
   {type="item", name="electronic-circuit", amount=5},
-  {type="item", name="aluminum-plate", amount = 5}, -- FeC -> Al
+  {type="item", name="aluminum-plate", amount=5}, -- FeC -> Al
   {type="item", name="precision-optical-component", amount = 5}, -- Cu -> POC
 }
 
