@@ -1,14 +1,6 @@
 local pglobals = require("__petraspace__/globals")
 local rocket_cap = 1000 * kg;
 
--- === Recipes === --
-local space_plat = data.raw["recipe"]["space-platform-foundation"]
-space_plat.ingredients = {
-  { type="item", name="copper-cable", amount=20 },
-  { type="item", name="steel-plate", amount=15 },
-  { type="item", name="low-density-structure", amount=1 },
-}
-
 -- Make things use POC
 table.insert(
   data.raw["recipe"]["laser-turret"].ingredients,
@@ -70,3 +62,20 @@ data.raw["item"]["bulk-inserter"].weight = rocket_cap / 25
 data.raw["item"]["stack-inserter"].weight = rocket_cap / 10
 
 data.raw["item"]["assembling-machine-1"].weight = rocket_cap / 100
+
+-- Move gasses to be gasses
+local pg = data.raw["fluid"]["petroleum-gas"]
+pg.subgroup = "gasses"
+pg.order = "a[existing-gas]-a"
+local nh3 = data.raw["fluid"]["ammonia"]
+nh3.subgroup = "gasses"
+nh3.order = "a[existing-gas]-b"
+
+table.insert(data.raw["assembling-machine"]["chemical-plant"].crafting_categories, "electrochemistry")
+table.insert(data.raw["assembling-machine"]["electromagnetic-plant"].crafting_categories, "electrochemistry")
+
+-- Remove OG rocket juice recipes
+data.raw["recipe"]["thruster-fuel"].hidden = true
+data.raw["recipe"]["thruster-oxidizer"].hidden = true
+data.raw["recipe"]["advanced-thruster-fuel"].hidden = true
+data.raw["recipe"]["advanced-thruster-oxidizer"].hidden = true

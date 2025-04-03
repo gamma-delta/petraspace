@@ -4,6 +4,7 @@ local welcome = {
 
   -- Instead of manually placing things (cringe!) just generate a map.
   -- I scouted this location ahead of time.
+  -- TODO this doesn't work at all
   init = [[
     local map_string = ">>>eNp1U7+LE0EUnrkYciZ3Z5AgCHJJcZ1E8LSwkOwqiIjov7BONpM4uJmJ8yPHKWKKKxUbG6/xWptrxEKrA0EUFA6trjuxsVCJKNoIcSabSXY2uYF5+fZ9b95735vJHADgJMgAUC6i24pELAi5auCAkQiAnmd3LkRRSCRO+g6FDDlB+ZB1OphXGXfiDg8zVlMZ85ji9nq1joQTvNiMFOOE4qCLqXQZFbUYR0EYkWYzyRyxDBERog2R5AqtCNdnnCnG/mETQbqJhZjs6GxyVjYhGcUz/GtIYp70zxPOaHoeixGRN4lqB3Wj06lLkeoSMd1tlrPwltNJVoQcdZKeY0IiLgltBYhjFLQZEVK5lbNTjZeEipqKkzBAIWkELbwuXAVZyTF2Ki9IRVtCYhqkdBUUR1TrSustdImeixkyoc4cYn8bS8y4U2IpZkSHSYqFcA+pKERU6SGlXt/RMdNlBhDRdoRMXQ6A5b3na72NZWD24D6oDAZma7Sv/xVmA9iLo6F22pUdXQ+oXND74iQdhHdL25c/33nswTjylD8C/ZFnp249Vyy47h9IrVhwNpHnzHD9SoC4qNQlRlHz/gTE5IYhIXz4/cXW3ze7Nfjv2c+P1+o3PHj6UulHf3W7psmckTs3NptPzHpppQCbc98bUXse/PDerG8ezJoTJWP8c9rsXM0AWFzSaOuBNpUTwLZWs2lKPmwO1x+r5IsFn7y0Dj2I8yb5sjFvjRkWHHcGY+g/8qFftuzxSYg+vwqSPTQmCt/Zsq8T9VONTF9EUkfKs+LPuIa8KdgYm6+ZcTd6nrs5++U/9WHGABP1W/viL8PYVPFv0R+OOzN+lH3PfWkGmCSb9171/gMm8lBF<<<"
     local mesd = helpers.parse_map_exchange_string(map_string)

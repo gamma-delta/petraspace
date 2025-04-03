@@ -34,7 +34,7 @@ local function poc_recipe(hi_pressure)
     surface_conditions = {{property="pressure", [pressure_bound]=500}},
     icons = {
       { icon = icon_under },
-      { icon = "__petraspace__/graphics/icons/orbital-data-card.png" },
+      { icon = "__petraspace__/graphics/icons/precision-optical-component.png" },
     }
   }
 end

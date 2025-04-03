@@ -1,5 +1,6 @@
 local requires = {
   "vanilla",
+  "ch-concentrated-solar",
 }
 
 for _,req in ipairs(requires) do
