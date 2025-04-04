@@ -18,6 +18,10 @@ local requires = {
   "dust-pollution",
 
   "tips-and-tricks",
+
+  -- Have to do "updates" here because otherwise recycling has a bad time
+  "data-updates-at-home/vanilla",
+  "data-updates-at-home/ch-concentrated-solar",
 }
 
 for _,req in ipairs(requires) do

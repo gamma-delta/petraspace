@@ -1,4 +1,6 @@
-local function icon_regolith_over(target)
+local pglobals = require("globals")
+
+local function icon_regolith_over(target, under)
   return {
     {
       icon = target,
@@ -21,7 +23,10 @@ data:extend{
     ingredients = {{type="item", name="regolith", amount=2}},
     results = {{type="item", name="stone-brick", amount=1}},
     allow_productivity = true,
-    icons = icon_regolith_over("__base__/graphics/icons/stone-brick.png")
+    icons = pglobals.icons.mini_over(
+      "__petraspace__/graphics/icons/regolith/1.png",
+      "__base__/graphics/icons/stone-brick.png"
+    ),
   },
   {
     type = "recipe",
@@ -42,7 +47,10 @@ data:extend{
     },
     results = {{type="item", name="concrete", amount=12}},
     allow_productivity = true,
-    icons = icon_regolith_over("__base__/graphics/icons/concrete.png")
+    icons = pglobals.icons.mini_over(
+      "__petraspace__/graphics/icons/regolith/1.png",
+      "__base__/graphics/icons/concrete.png"
+    ),
   },
   {
     type = "recipe",
@@ -63,10 +71,10 @@ data:extend{
       {type="item", name="iron-ore", amount=10},
       {type="item", name="bauxite-ore", amount=5},
     },
-    icons = {
-      { icon="__base__/graphics/icons/fluid/steam.png" },
-      { icon="__petraspace__/graphics/icons/regolith/1.png", scale=0.5 },
-    }
+    icons = pglobals.icons.mini_over(
+      "__base__/graphics/icons/fluid/steam.png",
+      "__petraspace__/graphics/icons/regolith/1.png"
+    ),
   },
   {
     type = "recipe",
@@ -94,9 +102,9 @@ data:extend{
       -- You will probably be relying on shipments of S from Nauvis for a while.
       {type="item", name="sulfur", amount=1, probability=0.8},
     },
-    icons = {
-      { icon="__base__/graphics/icons/fluid/sulfuric-acid.png" },
-      { icon="__petraspace__/graphics/icons/regolith/1.png", scale=0.5 },
-    }
+    icons = pglobals.icons.mini_over(
+      "__base__/graphics/icons/fluid/sulfuric-acid.png",
+      "__petraspace__/graphics/icons/regolith/1.png"
+    ),
   },
 }

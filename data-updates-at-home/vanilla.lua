@@ -15,7 +15,9 @@ for i, v in ipairs(scrapping.results) do
 end
 
 -- These things are SO expensive. Why?
-data.raw["recipe"]["heat-pipe"].ingredients = {
+local heat_pipe_recipe = data.raw["recipe"]["heat-pipe"]
+heat_pipe_recipe.category = "advanced-crafting"
+heat_pipe_recipe.ingredients = {
   { type="item", name="copper-plate", amount=5 },
   { type="item", name="steel-plate", amount=2 },
   { type="fluid", name="water", amount=100 },
@@ -76,7 +78,7 @@ data.raw["item"]["chemical-plant"].weight = rocket_cap / 50
 -- Move gasses to be gasses
 local function togas(name, order)
   local gas = data.raw["fluid"][name]
-  gas.subgroup = "gasses",
+  gas.subgroup = "gasses"
   gas.order = "a[existing-gas]-" .. order
 end
 togas("steam", "a")

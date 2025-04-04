@@ -87,6 +87,64 @@ local function make_blobby_radius_expr(cfg)
   return copy_then(out, cfg.etc or {})
 end
 
+local icons = {
+  mini_over = function(mini, background)
+    return {
+      {
+        icon = background,
+      },
+      {
+        icon = mini,
+        scale = 0.3333,
+        shift = {-8, -8}
+      },
+    }
+  end,
+  one_into_two = function(input, out1, out2)
+    return {
+      {
+        icon = input,
+        scale = 0.75,
+        shift = {0, -8},
+      },
+      {
+        icon = out1,
+        scale = 0.5,
+        shift = {-16, 16},
+        draw_background = true
+      },
+      {
+        icon = out2,
+        scale = 0.5,
+        shift = {-16, 16},
+        draw_background = true
+      }
+    }
+  end,
+  two_into_one = function(in1, in2, output)
+    -- Convention set by light oil cracking is to have the inputs under the out
+    return {
+      {
+        icon = in1,
+        scale = 0.5,
+        shift = {-16, -16},
+        draw_background = true
+      },
+      {
+        icon = in2,
+        scale = 0.5,
+        shift = {-16, -16},
+        draw_background = true
+      },
+      {
+        icon = output,
+        scale = 0.75,
+        shift = {0, 8},
+      },
+    }
+  end
+}
+
 return {
   planet_moon_map = planet_moon_map,
   copy_then = copy_then,
@@ -94,4 +152,5 @@ return {
   set = set,
   make_empty_space = make_empty_space,
   make_blobby_radius_expr = make_blobby_radius_expr,
+  icons = icons,
 }

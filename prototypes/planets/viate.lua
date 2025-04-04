@@ -564,6 +564,7 @@ data:extend{
     autoplace = {probability_expression="viate_above_basins==0"},
     texture = "__petraspace__/graphics/tiles/viate/smooth-basalt.png",
     map_color = { 0.2, 0.21, 0.25 },
+    etc = {walking_speed_modifier = 1.2}
   },
   viate_tile{
     name = "viate-dust-crests",

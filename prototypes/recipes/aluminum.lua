@@ -40,6 +40,7 @@ data:extend{
     category = "smelting",
     order = "za[native-aluminum-to-plate]",
     enabled = false,
+    energy_required = 3.2,
     ingredients = {{ type="item", name="native-aluminum", amount=2 }},
     results = {{ type="item", name="aluminum-plate", amount=1 }},
   },

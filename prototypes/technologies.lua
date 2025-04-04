@@ -4,26 +4,33 @@ local icons = require("__petraspace__/prototypes/icons")
 
 local function science(s)
   local mapping = {
-    r = { "automation-science-pack", 1 },
-    g = { "logistic-science-pack", 1 },
-    b = { "chemical-science-pack", 1 },
-    m = { "military-science-pack", 1 },
-    o = { "orbital-science-pack", 1 },
-    p = { "production-science-pack", 1 },
-    y = { "utility-science-pack", 1 },
-    s = { "space-science-pack", 1 },
-    M = { "metallurgic-science-pack", 1 },
-    E = { "electromagnetic-science-pack", 1 },
-    A = { "agricultural-science-pack", 1 },
-    C = { "cryogenic-science-pack", 1 },
-    P = { "prometheum-science-pack", 1 },
+    r = "automation-science-pack",
+    g = "logistic-science-pack",
+    b = "chemical-science-pack",
+    m = "military-science-pack",
+    o = "orbital-science-pack",
+    p = "production-science-pack",
+    y = "utility-science-pack",
+    s = "space-science-pack",
+    M = "metallurgic-science-pack",
+    E = "electromagnetic-science-pack",
+    A = "agricultural-science-pack",
+    C = "cryogenic-science-pack",
+    P = "prometheum-science-pack",
   }
   
   local unit = {}
+  -- this is so dumb
+  local count = 1
   s:gsub(".", function(c)
+    local as_num = tonumber(c)
+    if as_num then
+      count = as_num
+    end
     local v = mapping[c]
     if v then
-      table.insert(unit, v)
+      table.insert(unit, {v, count})
+      count = 1
     end
   end)
   return unit
@@ -104,8 +111,8 @@ data:extend{
     icon_size = 256,
     prerequisites = { "orbital-science-pack" },
     unit = {
-      count = 1000,
-      ingredients = science("rgbo"),
+      count = 500,
+      ingredients = science("2r2g2bo"),
       time = 60,
     },
     effects = { 
@@ -127,8 +134,8 @@ data:extend{
     -- why go up there if you don't know anything
     prerequisites = { "discover-viate" },
     unit = {
-      count = 1000,
-      ingredients = science("rgbo"),
+      count = 500,
+      ingredients = science("2r2g2bo"),
       time = 60,
     },
     effects = { 
@@ -141,8 +148,7 @@ data:extend{
   {
     type = "technology",
     name = "discover-regolith",
-    icon = "__petraspace__/graphics/technology/discover-regolith.png",
-    icon_size = 256,
+    icon = "__petraspace__/graphics/technologies/discover-regolith.png",
     prerequisites = { "discover-viate" },
     research_trigger = {
       type = "mine-entity",
@@ -165,12 +171,41 @@ local tech_cse = data.raw["technology"]["chcs-concentrated-solar-energy"]
 tech_cse.prerequisites = {"discover-viate"}
 tech_cse.unit = nil
 tech_cse.research_trigger = {
-  type = "craft-item",
-  item = "aluminum-plate",
-  count = 200,
+  type = "mine-entity",
+  item = "ice-deposit",
+}
+
+-- Okay so i guess you can skip Viate if you REALLY want to for some godforsaken
+-- reason
+local tech_vanilla_spience = data.raw["technology"]["space-science-pack"]
+tech_vanilla_spience.prerequisites = {"discover-viate"}
+tech_vanilla_spience.research_trigger = nil
+tech_vanilla_spience.unit = {
+  count = 1000,
+  time = 60,
+  ingredients = science("rgbo"),
+}
+tech_vanilla_spience.effects = { recipe("space-science-pack") }
+local tech_vanilla_rocket = data.raw["technology"]["rocket-silo"]
+tech_vanilla_rocket.prerequisites = { "space-science-pack" }
+tech_vanilla_rocket.unit = {
+  count = 1000,
+  time = 60,
+  ingredients = science("2r2b2g2os"),
+}
+tech_vanilla_rocket.effects = {
+  recipe("rocket-silo"),
+  recipe("cargo-landing-pad"),
+  recipe("space-platform-foundation"),
+  recipe("space-platform-starter-pack"),
 }
 
 data:extend{
+  -- Each pair of inner planets has its own cool technology.
+  -- Fulgora+Vulc already is ... deep oil ocean rails? seems lame.
+  -- may play with that.
+  -- Fulgora+Gleba is Logi system (complex robotics and swarming behaviors)
+  -- Gleba+Vulcanus is ... some kind of productivity probably. Or Fertilizer.
   {
     type = "technology",
     name = "advanced-bauxite-extraction",

@@ -3,6 +3,7 @@ local Table = require("__stdlib2__/stdlib/utils/table")
 
 local pglobals = require("globals")
 
+data.raw["recipe"]["rocket-part"].hidden = true
 local function rocket_part_recipe(gravity)
   -- Nauvis at 10m/s^2 is our baseline.
   local default_fuel = 100

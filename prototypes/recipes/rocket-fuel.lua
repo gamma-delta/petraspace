@@ -1,4 +1,5 @@
 -- And rocket oxidizer
+local pglobals = require("globals")
 
 data:extend{
   {
@@ -11,31 +12,18 @@ data:extend{
 
 local function rocket_juice_icon(result)
   return function(original_icon)
-    return {
-      {
-        icon = result,
-        icon_size = 64,
-        shift = {2, 0},
-      },
-      {
-        icon = original_icon,
-        icon_size = 64,
-        scale = 0.333,
-        shift = {-6, -6},
-        draw_background = true,
-      },
-      -- {icon = "__petraspace__/graphics/icons/transform-arrow.png"},
-    }
+    return pglobals.icons.mini_over(original_icon, result)
   end
 end
 local fuel_icon = rocket_juice_icon("__space-age__/graphics/icons/fluid/thruster-fuel.png")
 local oxy_icon = rocket_juice_icon("__space-age__/graphics/icons/fluid/thruster-oxidizer.png")
 
 local function to_rocket_juice(result, iconator, order_stub)
-  return function (name, unit, amt, type)
+  -- amount is the amount produced by 1 drop, or 1 item
+  -- fluid ingredients are scaled by 10 first
+  return function (name, amount, type)
     type = type or "fluid"
-    local drops_per_second = 10
-    local time = amt / drops_per_second
+    local multiplier = (type == "fluid") and 10 or 1
 
     -- please don't do any funny business here
     local ingr_proto = data.raw[type][name]
@@ -46,9 +34,9 @@ local function to_rocket_juice(result, iconator, order_stub)
       type = "recipe",
       name = result .. "-from-" .. name,
       category = "chemistry-or-cryogenics",
-      ingredients = {{ type=type, name=name, amount=unit }},
-      energy_required = time,
-      results = {{ type="fluid", name=result, amount=amt }},
+      ingredients = {{ type=type, name=name, amount=1*multiplier }},
+      energy_required = 1,
+      results = {{ type="fluid", name=result, amount=amount*multiplier }},
       subgroup = "rocket-juice",
       order = "z[auto]-" .. order_stub,
       localised_name = {
@@ -87,27 +75,14 @@ data:extend{
     },
     -- So the play here is to just make a buttload of chemmy plants
     -- and use *efficiency* modules, not speed mods
-    energy_required = 600,
+    energy_required = 300,
     subgroup = "chemistry",
     order = "d[electro]-a",
-    -- TODO
-    icons = {
-      {
-        icon = "__base__/graphics/icons/fluid/water.png",
-        scale = 0.666,
-        shift = {0, -4},
-      },
-      {
-        icon = "__petraspace__/graphics/icons/fluid/molecule-hydrogen.png",
-        scale = 0.333,
-        shift = {-8, 4},
-      },
-      {
-        icon = "__petraspace__/graphics/icons/fluid/molecule-oxygen.png",
-        scale = 0.333,
-        shift = {8, 4},
-      },
-    }
+    icons = pglobals.icons.one_into_two(
+      "__base__/graphics/icons/fluid/water.png",
+      "__petraspace__/graphics/icons/fluid/molecule-hydrogen.png",
+      "__petraspace__/graphics/icons/fluid/molecule-oxygen.png"
+    ),
   },
   {
     type = "recipe",
@@ -125,10 +100,14 @@ data:extend{
     subgroup = "chemistry",
     order = "d[electro]-b",
     -- TODO
-    icon = "__base__/graphics/icons/fluid/water.png",
+    icons = pglobals.icons.one_into_two(
+      "__space-age__/graphics/icons/fluid/electrolyte.png",
+      "__petraspace__/graphics/icons/fluid/molecule-hydrogen.png",
+      "__petraspace__/graphics/icons/fluid/molecule-oxygen.png"
+    ),
   },
-  to_fuel("hydrogen", 10, 5),
-  to_oxy("oxygen", 10, 10),
+  to_fuel("hydrogen", 0.5),
+  to_oxy("oxygen", 1),
 
   -- Phase 1: nitrogen compound oxidizers, ammonia or kerosene fuel
   {
@@ -155,7 +134,7 @@ data:extend{
     icon = "__space-age__/graphics/icons/fluid/ammonia.png",
   },
   -- is this just silly?
-  to_fuel("ammonia", 10, 20),
+  to_fuel("ammonia", 2),
   {
     type = "recipe",
     name = "nitric-acid",
@@ -174,7 +153,7 @@ data:extend{
     subgroup = "chemistry",
     order = "e[synthesis]-b",
   },
-  to_oxy("nitric-acid", 10, 30),
+  to_oxy("nitric-acid", 2),
   -- or you can do the one block vertical difficulty curve for the beef
   {
     type = "recipe",
@@ -187,11 +166,11 @@ data:extend{
     },
     energy_required = 35,
     results = {
-      {type="fluid", name="thruster-oxidizer", amount=70},
+      {type="fluid", name="thruster-oxidizer", amount=300},
     },
     subgroup = "rocket-juice",
     order = "b[oxy]-a",
     icons = oxy_icon("__petraspace__/graphics/icons/fluid/molecule-nitric-acid.png"),
   },
-  to_fuel("rocket-fuel", 10, 100, "item"),
+  to_fuel("rocket-fuel", 500, "item"),
 }
