@@ -5,7 +5,7 @@ data:extend{
     enabled = false,
     ingredients = {
       { type="item", name="precision-optical-component", amount=20 },
-      { type="item", name="radar", amount=1 },
+      { type="item", name="radar", amount=5 },
       { type="item", name="steel-plate", amount=15 },
       { type="item", name="processing-unit", amount=30 },
     },
@@ -68,8 +68,9 @@ data:extend{
     energy_required = 21,
     ingredients = {
       { type="item", name="orbital-data-card", amount=5 },
-      { type="item", name="bauxite-ore", amount=5 },
-      { type="item", name="radar", amount=1 },
+      -- for lack of a better idea
+      { type="item", name="fast-transport-belt", amount=1 },
+      { type="item", name="radar", amount=2 },
     },
     results = {
       { type="item", name="orbital-science-pack", amount=3 },

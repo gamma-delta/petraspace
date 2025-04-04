@@ -124,9 +124,9 @@ data:extend{
       -- be used for things
       {type="item", name = "iron-stick", amount=4},
     },
-    -- surface_conditions = {
-    --   {property="atmospheric-nitrogen", min=30}
-    -- },
+    surface_conditions = {
+      {property="atmospheric-nitrogen", min=30}
+    },
     energy_required = 5,
     results = {{type="fluid", name="ammonia", amount=10}},
     subgroup = "chemistry",

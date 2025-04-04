@@ -18,6 +18,7 @@ local function metal_machine_item(entity_id, icon, subgroup, order, splat)
     drop_sound = item_sounds.metal_large_inventory_move,
     place_result = entity_id,
     stack_size = 10,
+    weight = 1000*kg / 10,
   }, splat)
 end
 

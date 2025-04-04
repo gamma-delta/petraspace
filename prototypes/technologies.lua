@@ -123,6 +123,8 @@ data:extend{
         use_icon_overlay_constant = true,
       },
       recipe("ice-melting"),
+      recipe("orbital-data-card-low-pressure"),
+      recipe("precision-optical-component-low-pressure"),
     }
   },
   {
@@ -149,7 +151,7 @@ data:extend{
     type = "technology",
     name = "discover-regolith",
     icon = "__petraspace__/graphics/technologies/discover-regolith.png",
-    prerequisites = { "discover-viate" },
+    prerequisites = { "lunar-rocket-silo" },
     research_trigger = {
       type = "mine-entity",
       entity = "regolith-deposit",
@@ -166,19 +168,18 @@ data:extend{
 -- To give some fun progress feeling on Viate, make it a trigger tech.
 -- I'd rather have it be "melt or mine N ice", but these are both not
 -- possible in the trigger system due to WOKE
--- so I will just set it to crafting enough aluminum to make all the stuff.
 local tech_cse = data.raw["technology"]["chcs-concentrated-solar-energy"]
-tech_cse.prerequisites = {"discover-viate"}
+tech_cse.prerequisites = {"lunar-rocket-silo"}
 tech_cse.unit = nil
 tech_cse.research_trigger = {
   type = "mine-entity",
-  item = "ice-deposit",
+  entity = "ice-deposit",
 }
 
 -- Okay so i guess you can skip Viate if you REALLY want to for some godforsaken
 -- reason
 local tech_vanilla_spience = data.raw["technology"]["space-science-pack"]
-tech_vanilla_spience.prerequisites = {"discover-viate"}
+tech_vanilla_spience.prerequisites = {"lunar-rocket-silo"}
 tech_vanilla_spience.research_trigger = nil
 tech_vanilla_spience.unit = {
   count = 1000,

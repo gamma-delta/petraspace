@@ -18,12 +18,13 @@ local requires = {
   "dust-pollution",
 
   "tips-and-tricks",
-
-  -- Have to do "updates" here because otherwise recycling has a bad time
-  "data-updates-at-home/vanilla",
-  "data-updates-at-home/ch-concentrated-solar",
 }
 
 for _,req in ipairs(requires) do
   require("__petraspace__/prototypes/" .. req)
 end
+
+-- must do these here because otherwise quality can't make the recycling
+-- recipes correctly
+require "data-updates-at-home/vanilla"
+require "data-updates-at-home/ch-concentrated-solar"

@@ -131,3 +131,9 @@ lrs.arm_01_back_animation.filename = "__petraspace__/graphics/entities/lunar-roc
 lrs.arm_02_right_animation.filename = "__petraspace__/graphics/entities/lunar-rocket-silo/arms-right.png"
 lrs.arm_03_front_animation.filename = "__petraspace__/graphics/entities/lunar-rocket-silo/arms-front.png"
 data:extend{lrs}
+
+-- thanks, xorimuth!
+-- https://forums.factorio.com/viewtopic.php?t=127944
+for _, hatch in pairs(data.raw["cargo-landing-pad"]["cargo-landing-pad"].cargo_station_parameters.hatch_definitions) do
+  table.insert(hatch.receiving_cargo_units, "lunar-cargo-pod")
+end

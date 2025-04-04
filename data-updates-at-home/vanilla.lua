@@ -6,6 +6,10 @@ table.insert(
   data.raw["recipe"]["laser-turret"].ingredients,
   {type="item", name="precision-optical-component", amount=5}
 )
+table.insert(
+  data.raw["recipe"]["night-vision-equipment"].ingredients,
+  {type="item", name="precision-optical-component", amount=20}
+)
 local scrapping = data.raw["recipe"]["scrap-recycling"]
 for i, v in ipairs(scrapping.results) do
   if v.name == "advanced-circuit" then

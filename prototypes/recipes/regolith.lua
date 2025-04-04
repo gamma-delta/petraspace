@@ -23,6 +23,7 @@ data:extend{
     ingredients = {{type="item", name="regolith", amount=2}},
     results = {{type="item", name="stone-brick", amount=1}},
     allow_productivity = true,
+    allow_decomposition = false,
     icons = pglobals.icons.mini_over(
       "__petraspace__/graphics/icons/regolith/1.png",
       "__base__/graphics/icons/stone-brick.png"
@@ -47,6 +48,7 @@ data:extend{
     },
     results = {{type="item", name="concrete", amount=12}},
     allow_productivity = true,
+    allow_decomposition = false,
     icons = pglobals.icons.mini_over(
       "__petraspace__/graphics/icons/regolith/1.png",
       "__base__/graphics/icons/concrete.png"
@@ -66,6 +68,8 @@ data:extend{
       -- so each of these is five ice (at freddie's)
       {type="fluid", name="steam", amount=1000},
     },
+    allow_productivity = true,
+    allow_decomposition = false,
     results = {
       {type="item", name="stone", amount=5},
       {type="item", name="iron-ore", amount=10},
@@ -88,6 +92,8 @@ data:extend{
       {type="item", name="regolith", amount=10},
       {type="fluid", name="sulfuric-acid", amount=10},
     },
+    allow_productivity = true,
+    allow_decomposition = false,
     results = {
       {type="item", name="stone", amount=10},
       {type="item", name="native-aluminum", amount=5},

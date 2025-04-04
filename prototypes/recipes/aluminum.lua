@@ -65,6 +65,7 @@ data:extend{
     },
     auto_recycle = false,
     allow_productivity = true,
+    allow_decomposition = false,
     -- TODO
     icons = simple_bauxite,
   },
@@ -89,6 +90,7 @@ data:extend{
     enabled = false,
     unlock_results = true,
     allow_productivity = true,
+    allow_decomposition = true,
     icons = {
       {
         icon = "__petraspace__/graphics/icons/bauxite/1.png",
@@ -124,6 +126,7 @@ data:extend{
     },
     main_product = "molten-aluminum",
     allow_productivity = true,
+    allow_decomposition = true,
     icons = advanced_bauxite,
   },
   {
@@ -140,6 +143,7 @@ data:extend{
     results = {
       { type="item", name="aluminum-plate", amount=1 },
     },
+    allow_decomposition = true,
     allow_productivity = true,
   },
 }
