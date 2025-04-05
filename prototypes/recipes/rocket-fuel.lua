@@ -109,6 +109,7 @@ data:extend{
   to_fuel("hydrogen", 0.5),
   to_oxy("oxygen", 1),
 
+  -- or you can do the one block vertical difficulty curve for the beef
   -- Phase 1: nitrogen compound oxidizers, ammonia or kerosene fuel
   {
     type = "recipe",
@@ -154,7 +155,6 @@ data:extend{
     order = "e[synthesis]-b",
   },
   to_oxy("nitric-acid", 2),
-  -- or you can do the one block vertical difficulty curve for the beef
   {
     type = "recipe",
     name = "n2o4-thruster-oxidizer",
@@ -170,7 +170,11 @@ data:extend{
     },
     subgroup = "rocket-juice",
     order = "b[oxy]-a",
-    icons = oxy_icon("__petraspace__/graphics/icons/fluid/molecule-nitric-acid.png"),
+    icons = pglobals.icons.two_into_one(
+      "__petraspace__/graphics/icons/fluid/molecule-nitric-acid.png",
+      "__base__/graphics/icons/copper-plate.png",
+      "__space-age__/graphics/icons/fluid/thruster-oxidizer.png",
+    ),
   },
   to_fuel("rocket-fuel", 500, "item"),
 }

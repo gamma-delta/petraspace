@@ -15,7 +15,6 @@ local function poc_recipe(hi_pressure)
     enabled = false,
     -- i want your first craft of this on Viate to feel REALLY GOOD AND FAST
     -- therefore, the space recipe can't be *too* complicated, so you get to it soon.
-    -- or feature sulfur.
     energy_required = hi_pressure and 20 or 4,
     ingredients = {
       { type="item", name="advanced-circuit", amount=5 },
