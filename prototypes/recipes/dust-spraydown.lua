@@ -7,10 +7,12 @@ data:extend{
     type = "recipe",
     name = "dust-spraydown-water",
     category = "dust-spraydown",
+    subgroup = "chemistry",
     icon = "__base__/graphics/icons/fluid/water.png",
     ingredients = {{ type="fluid", name="water", amount=200 }},
     results = {},
     energy_required = 1,
+    locked = true,
     -- prod mods add pollution, so does that make this even more effective?
     -- either way, it's interesting
     allow_productivity = true,
