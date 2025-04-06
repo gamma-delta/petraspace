@@ -34,6 +34,7 @@ local function to_rocket_juice(result, iconator, order_stub)
       type = "recipe",
       name = result .. "-from-" .. name,
       category = "chemistry-or-cryogenics",
+      enabled = false,
       ingredients = {{ type=type, name=name, amount=1*multiplier }},
       energy_required = 1,
       results = {{ type="fluid", name=result, amount=amount*multiplier }},
@@ -76,6 +77,7 @@ data:extend{
     -- So the play here is to just make a buttload of chemmy plants
     -- and use *efficiency* modules, not speed mods
     energy_required = 300,
+    enabled = false,
     subgroup = "chemistry",
     order = "d[electro]-a",
     icons = pglobals.icons.one_into_two(
@@ -97,6 +99,7 @@ data:extend{
       {type="fluid", name="oxygen", amount=100},
     },
     energy_required = 60,
+    enabled = false,
     subgroup = "chemistry",
     order = "d[electro]-b",
     -- TODO
@@ -111,6 +114,8 @@ data:extend{
 
   -- or you can do the one block vertical difficulty curve for the beef
   -- Phase 1: nitrogen compound oxidizers, ammonia or kerosene fuel
+  -- TODO: I should probably not unlock all of these with the LRS.
+  -- If I'm going to implement nitric acid I want it used all over the mod.
   {
     type = "recipe",
     name = "ammonia-synthesis",
@@ -129,6 +134,7 @@ data:extend{
       {property="atmospheric-nitrogen", min=30}
     },
     energy_required = 5,
+    enabled = false,
     results = {{type="fluid", name="ammonia", amount=10}},
     subgroup = "chemistry",
     order = "e[synthesis]-a",
@@ -145,6 +151,7 @@ data:extend{
       {type="fluid", name="oxygen", amount=20},
     },
     energy_required = 7,
+    enabled = false,
     results = {
       {type="fluid", name="nitric-acid", amount=10},
       -- turn this into steam for your n2o4!
@@ -165,6 +172,7 @@ data:extend{
       {type="item", name="copper-plate", amount=1},
     },
     energy_required = 35,
+    enabled = false,
     results = {
       {type="fluid", name="thruster-oxidizer", amount=300},
     },

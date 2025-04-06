@@ -7,7 +7,7 @@ data:extend{
     type = "recipe",
     name = "antimatter-magnetic-bottle",
     category = "particle-trap",
-    enabled = true,
+    enabled = false,
     energy_required = 1,
     ingredients = {
       { type="item", name="holmium-ore", amount=10, },
@@ -25,7 +25,7 @@ data:extend{
     type = "recipe",
     name = "refresh-magnetic-bottle",
     category = "electromagnetics",
-    enabled = true,
+    enabled = false,
     icon = "__petraspace__/graphics/icons/refresh-magnetic-bottle.png",
     energy_required = 0.5,
     ingredients = {

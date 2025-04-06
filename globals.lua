@@ -116,7 +116,7 @@ local icons = {
       {
         icon = out2,
         scale = 0.5,
-        shift = {-16, 16},
+        shift = {16, 16},
         draw_background = true
       }
     }
