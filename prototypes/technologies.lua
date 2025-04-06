@@ -143,13 +143,13 @@ data:extend{
     effects = { 
       recipe("lunar-rocket-silo"),
       recipe("water-electrolysis"),
-      recipe("hydrogen-to-thruster-fuel"),
-      recipe("oxygen-to-thruster-oxidizer"),
+      recipe("thruster-fuel-from-hydrogen"),
+      recipe("thruster-oxidizer-from-oxygen"),
 
       recipe("ammonia-synthesis"),
-      recipe("ammonia-to-thruster-fuel"),
+      recipe("thruster-fuel-from-ammonia"),
       recipe("nitric-acid"),
-      recipe("nitric-acid-to-thruster-oxidizer"),
+      recipe("thruster-oxidizer-from-nitric-acid"),
       recipe("n2o4-thruster-oxidizer"),
     }
   },
