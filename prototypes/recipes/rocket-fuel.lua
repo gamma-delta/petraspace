@@ -173,7 +173,7 @@ data:extend{
     icons = pglobals.icons.two_into_one(
       "__petraspace__/graphics/icons/fluid/molecule-nitric-acid.png",
       "__base__/graphics/icons/copper-plate.png",
-      "__space-age__/graphics/icons/fluid/thruster-oxidizer.png",
+      "__space-age__/graphics/icons/fluid/thruster-oxidizer.png"
     ),
   },
   to_fuel("rocket-fuel", 500, "item"),

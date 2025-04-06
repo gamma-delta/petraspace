@@ -40,7 +40,7 @@ local function viate_maria_edge_pebble(cfg)
       ((3 - abs(viate_elevation-10) + (viate_elevation<10)) * prob)
         + (prob * 0.2)
     ]],
-    control = "rocks",
+    -- control = "rocks",
   }
   rocc.collision_mask_connector = hit_itself
   data:extend{rocc}
@@ -78,7 +78,7 @@ local function viate_crater_lining_pebble(cfg)
     probability_expression = [[
       viate_above_basins * (viate_meteorness > 1.5) * (triangle > 0.95) * prob
     ]],
-    control = "rocks",
+    -- control = "rocks",
   }
   rocc.collision_mask = hit_itself
   data:extend{rocc}
