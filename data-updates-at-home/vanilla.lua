@@ -1,11 +1,25 @@
 local pglobals = require("__petraspace__/globals")
 local rocket_cap = 1000 * kg;
 
--- Make things use POC
+-- Fuck you make steel
+-- I think part of the vertical difficulty curve of bluence is
+-- that you have to make steel *and* oil, and steel requires
+-- a startlingly huge footprint
 table.insert(
-  data.raw["recipe"]["laser-turret"].ingredients,
-  {type="item", name="precision-optical-component", amount=5}
+  data.raw["recipe"]["logistic-science-pack"].ingredients, 
+  {type="item", name="steel-plate", amount=1}
 )
+table.insert(
+  data.raw["technology"]["logistic-science-pack"].prerequisites,
+  "steel-processing"
+)
+
+-- Make things use POC
+data.raw["recipe"]["laser-turret"].ingredients = {
+  -- vanilla is 10 grurcuits
+  {type="item", name="advanced-circuit", amount=10},
+  {type="item", name="precision-optical-component", amount=20},
+}
 table.insert(
   data.raw["recipe"]["night-vision-equipment"].ingredients,
   {type="item", name="precision-optical-component", amount=20}
