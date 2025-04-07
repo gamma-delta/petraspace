@@ -80,6 +80,7 @@ data:extend{
 -- I wonder why lamp isn't a prereq of optics anymore
 local laser = data.raw["technology"]["laser"]
 table.insert(laser.prerequisites, "lamp")
+table.insert(laser.prerequisites, "solar-panel")
 -- it doesn't have any effects by default. why include it??
 laser.effects = {{type="unlock-recipe", recipe="precision-optical-component-high-pressure"}}
 
@@ -92,7 +93,7 @@ data:extend{
     name = "orbital-science-pack",
     icon = "__petraspace__/graphics/technologies/orbital-science-pack.png",
     icon_size = 256,
-    prerequisites = { "low-density-structure", "laser" },
+    prerequisites = { "low-density-structure", "laser", "processing-unit" },
     unit = {
       count = 500,
       ingredients = science("rgb"),
@@ -115,7 +116,7 @@ data:extend{
       ingredients = science("2r2g2bo"),
       time = 60,
     },
-    effects = { 
+    effects = {
       {
         type = "unlock-space-location",
         space_location = "viate",
