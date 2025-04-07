@@ -138,7 +138,12 @@ data:extend{
     results = {{type="fluid", name="ammonia", amount=10}},
     subgroup = "chemistry",
     order = "e[synthesis]-a",
-    icon = "__space-age__/graphics/icons/fluid/ammonia.png",
+    -- Ignore the iron stick cause it's silly
+    icons = pglobals.icons.two_into_one(
+      "__base__/graphics/icons/fluid/petroleum-gas.png",
+      "__petraspace__/graphics/icons/fluid/molecule-hydrogen.png",
+      "__space-age__/graphics/icons/fluid/ammonia.png",
+    )
   },
   -- is this just silly?
   to_fuel("ammonia", 2),
