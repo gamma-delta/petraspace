@@ -142,7 +142,35 @@ local icons = {
         shift = {0, 8},
       },
     }
-  end
+  end,
+  three_into_one = function(in1, in2, in3, output)
+      -- Convention set by light oil cracking is to have the inputs under the out
+      return {
+        {
+          icon = in1,
+          scale = 0.5,
+          shift = {-16, -16},
+          draw_background = true
+        },
+        {
+          icon = in2,
+          scale = 0.5,
+          shift = {0, -16},
+          draw_background = true
+        },
+        {
+          icon = in3,
+          scale = 0.5,
+          shift = {0, -16},
+          draw_background = true
+        },
+        {
+          icon = output,
+          scale = 0.75,
+          shift = {0, 8},
+        },
+      }
+    end
 }
 
 return {

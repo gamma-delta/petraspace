@@ -1,3 +1,4 @@
+local pglobals = require "globals"
 local simple_bauxite = {
   {
     icon = "__base__/graphics/icons/fluid/sulfuric-acid.png",
@@ -67,7 +68,11 @@ data:extend{
     allow_productivity = true,
     allow_decomposition = false,
     -- TODO
-    icons = simple_bauxite,
+    icons = pglobals.icons.two_into_one(
+      "__base__/graphics/icons/fluid/sulfuric-acid.png",
+      "__base__/graphics/icons/fluid/steam.png",
+      "__petraspace__/graphics/icons/bauxite/1.png"
+    )
   },
   {
     type = "recipe",
@@ -91,18 +96,12 @@ data:extend{
     unlock_results = true,
     allow_productivity = true,
     allow_decomposition = true,
-    icons = {
-      {
-        icon = "__petraspace__/graphics/icons/bauxite/1.png",
-        scale = 0.75,
-        shift = { 0, -8 },
-      },
-      {
-        icon = "__petraspace__/graphics/icons/fluid/red-mud.png",
-        scale = 0.5,
-        shift = { 0, 8 },
-      },
-    }
+    icons = pglobals.icons.three_into_one(
+      "__base__/graphics/icons/fluid/sulfuric-acid.png",
+      "__space-age__/graphics/icons/calcite.png",
+      "__petraspace__/graphics/icons/bauxite/1.png",
+      "__petraspace__/graphics/icons/fluid/red-mud.png"
+    )
   },
   {
     type = "recipe",
@@ -127,7 +126,12 @@ data:extend{
     main_product = "molten-aluminum",
     allow_productivity = true,
     allow_decomposition = true,
-    icons = advanced_bauxite,
+    -- This should probably involve some kind of zapping
+    icons = pglobals.icons.two_into_one(
+      "__space-age__/graphics/icons/carbon-fiber.png",
+      "__petraspace__/graphics/icons/fluid/red-mud.png",
+      "__petraspace__/graphics/icons/fluid/molten-aluminum.png"
+    ),
   },
   {
     type = "recipe",

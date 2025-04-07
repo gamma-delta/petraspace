@@ -109,7 +109,10 @@ data:extend{
       -- after copper, before uranium
       order = "fa[bauxite-ore]",
       icon = "__petraspace__/graphics/icons/bauxite/1.png",
-      pictures = make_pics("bauxite", 4, {size=64, scale=0.5, mipmap_count = 4})
+      pictures = make_pics("bauxite", 4, {size=64, scale=0.5, mipmap_count = 4}),
+      -- Otherwise it will detect the "locked" recipe for petrichor enrichment
+      -- and restrict it.
+      flags = {"always-show"},
     }
   ),
   Table.merge(
