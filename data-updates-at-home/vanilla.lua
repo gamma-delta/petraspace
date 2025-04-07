@@ -14,11 +14,24 @@ table.insert(
   "steel-processing"
 )
 
+-- So why the hell can you research laser upgrades BEFORE
+-- laser turrets?
+table.insert(
+  data.raw["technology"]["laser-shooting-speed-1"].prerequisites,
+  "laser-turret"
+)
+table.insert(
+  data.raw["technology"]["laser-weapons-damage-1"].prerequisites,
+  "laser-turret"
+)
+
 -- Make things use POC
 data.raw["recipe"]["laser-turret"].ingredients = {
-  -- vanilla is 10 grurcuits
+  -- vanilla is 20 grurcuits
   {type="item", name="advanced-circuit", amount=10},
   {type="item", name="precision-optical-component", amount=20},
+  {type="item", name="steel-plate", amount=20},
+  {type="item", name="battery", amount=20},
 }
 table.insert(
   data.raw["recipe"]["night-vision-equipment"].ingredients,
