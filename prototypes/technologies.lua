@@ -134,8 +134,11 @@ data:extend{
     -- TODO
     icon = "__space-age__/graphics/technology/vulcanus.png",
     icon_size = 256,
-    -- why go up there if you don't know anything
-    prerequisites = { "discover-viate" },
+    prerequisites = { 
+      -- why go up there if you don't know anything
+      "discover-viate",
+      "electric-engine", "concrete"
+    },
     unit = {
       count = 500,
       ingredients = science("2r2g2bo"),
