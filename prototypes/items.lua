@@ -37,7 +37,8 @@ local function make_programmed_card(name, icon, order, spoil_time)
     name = name,
     icon = icon,
     order = order,
-    spoil_result = nil,
+    -- This way it actually shows in the UI that it spoils into something.
+    spoil_result = "copper-cable",
     spoil_ticks = spoil_time,
   })
 end
