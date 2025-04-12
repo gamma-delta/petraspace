@@ -12,6 +12,7 @@ local requires = {
   "fluids",
   "recipes",
   "entities/resources",
+  "combat-utils",
   "technologies",
   "entities/misc",
 
