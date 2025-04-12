@@ -142,7 +142,7 @@ data:extend{
     icons = pglobals.icons.two_into_one(
       "__base__/graphics/icons/fluid/petroleum-gas.png",
       "__petraspace__/graphics/icons/fluid/molecule-hydrogen.png",
-      "__space-age__/graphics/icons/fluid/ammonia.png",
+      "__space-age__/graphics/icons/fluid/ammonia.png"
     )
   },
   -- is this just silly?

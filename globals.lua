@@ -140,8 +140,23 @@ local icons = {
         icon = output,
         scale = 0.75,
         shift = {0, 8},
+        draw_background = true
       },
     }
+  end,
+  mooned = function(size, sprite)
+    return {
+      {
+        icon = sprite,
+      },
+      {
+        icon = "__base__/graphics/icons/signal/signal-moon.png",
+        scale = size/64 / 4,
+        shift = {120, 120},
+        draw_background = true,
+      },
+    }
+    
   end,
   three_into_one = function(in1, in2, in3, output)
       -- Convention set by light oil cracking is to have the inputs under the out

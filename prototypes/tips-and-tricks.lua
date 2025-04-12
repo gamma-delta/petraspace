@@ -33,7 +33,7 @@ data:extend{
     is_title = true,
     order = "!first",
     indent = 0,
-    trigger = {type="research", technology="lunar-rocket-silo"},
+    trigger = {type="research", technology="rocket-propellants"},
     simulation = rocket_juice.intro
   },
   {
@@ -44,7 +44,7 @@ data:extend{
     order = "a",
     indent = 1,
     tag = "[item=rocket-fuel]",
-    trigger = {type="research", technology="lunar-rocket-silo"},
+    trigger = {type="research", technology="rocket-propellants"},
     simulation = rocket_juice.many_kinds
   },
 }

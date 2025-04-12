@@ -111,7 +111,7 @@ data:extend{{
   distance = 12,
   orientation = 0.3,
   magnitude = 1.5,
-  order = "a[nauvis]-a",
+  order = "b[vulcanus]-a",
   subgroup = "planets",
   pollutant_type = nil,
   solar_power_in_space = 1000,
@@ -130,7 +130,6 @@ data:extend{{
   asteroid_spawn_definitions = {},
 
   surface_render_parameters = {
-    -- TODO: could maybe use this to render meteor shadows?
     clouds = nil,
     day_night_cycle_color_lookup = data.raw["planet"]["vulcanus"].
       surface_render_parameters.day_night_color_cycle_lookup

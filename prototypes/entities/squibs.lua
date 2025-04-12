@@ -19,6 +19,7 @@ data:extend{
     flags = { "not-on-map" },
     hidden = true,
     icon = "__base__/graphics/icons/explosion.png",
+    subcategory = "environment",
 
     ammo_category = "subatomic-mishap",
     trigger_radius = 10,

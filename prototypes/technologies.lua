@@ -1,6 +1,7 @@
 local Table = require("__stdlib2__/stdlib/utils/table")
 
 local icons = require("__petraspace__/prototypes/icons")
+local pglobals = require "globals"
 
 local function science(s)
   local mapping = {
@@ -80,7 +81,7 @@ data:extend{
 -- I wonder why lamp isn't a prereq of optics anymore
 local laser = data.raw["technology"]["laser"]
 table.insert(laser.prerequisites, "lamp")
-table.insert(laser.prerequisites, "solar-panel")
+table.insert(laser.prerequisites, "solar-energy")
 -- it doesn't have any effects by default. why include it??
 laser.effects = {{type="unlock-recipe", recipe="precision-optical-component-high-pressure"}}
 
@@ -107,12 +108,52 @@ data:extend{
   },
   {
     type = "technology",
-    name = "discover-viate",
-    icon = "__space-age__/graphics/technology/vulcanus.png",
-    icon_size = 256,
+    name = "rocket-propellants",
+    icon = "__petraspace__/graphics/technologies/electrolysis.png",
+    icon_size = 1024,
     prerequisites = { "orbital-science-pack" },
     unit = {
-      count = 500,
+      count = 250,
+      ingredients = science("2r2g2bo"),
+      time = 60,
+    },
+    effects = {
+      recipe("water-electrolysis"),
+      recipe("thruster-fuel-from-hydrogen"),
+      recipe("thruster-oxidizer-from-oxygen"),
+      recipe("thruster-fuel-from-rocket-fuel"),
+    }
+  },
+  {
+    type = "technology",
+    name = "nitric-propellants",
+    icon = "__petraspace__/graphics/technologies/nitric-propulsion.png",
+    icon_size = 1024,
+    prerequisites = { "rocket-propellants" },
+    unit = {
+      count = 100,
+      ingredients = science("rg4bo"),
+      time = 60,
+    },
+    effects = {
+      recipe("ammonia-synthesis"),
+      recipe("thruster-fuel-from-ammonia"),
+      recipe("nitric-acid"),
+      recipe("thruster-oxidizer-from-nitric-acid"),
+      recipe("n2o4-thruster-oxidizer"),
+    }
+  },
+  {
+    type = "technology",
+    name = "discover-viate",
+    icons = pglobals.icons.mooned(256, "__space-age__/graphics/technology/vulcanus.png"),
+    localised_description = {"space-location-description.viate"},
+    prerequisites = { 
+      "orbital-science-pack"
+      "rocket-propellant", "electric-engine", "concrete",
+    },
+    unit = {
+      count = 300,
       ingredients = science("2r2g2bo"),
       time = 60,
     },
@@ -123,11 +164,13 @@ data:extend{
         -- dunno what this does
         use_icon_overlay_constant = true,
       },
-      recipe("ice-melting"),
+      recipe("lunar-rocket-silo"),
+      -- recipe("ice-melting"),
       recipe("orbital-data-card-low-pressure"),
       recipe("precision-optical-component-low-pressure"),
     }
   },
+  --[[
   {
     type = "technology",
     name = "lunar-rocket-silo",
@@ -137,7 +180,8 @@ data:extend{
     prerequisites = { 
       -- why go up there if you don't know anything
       "discover-viate",
-      "electric-engine", "concrete"
+      "rocket-propellant",
+      "electric-engine", "concrete",
     },
     unit = {
       count = 500,
@@ -145,26 +189,20 @@ data:extend{
       time = 60,
     },
     effects = { 
-      recipe("lunar-rocket-silo"),
-      recipe("water-electrolysis"),
-      recipe("thruster-fuel-from-hydrogen"),
-      recipe("thruster-oxidizer-from-oxygen"),
-
-      recipe("ammonia-synthesis"),
-      recipe("thruster-fuel-from-ammonia"),
-      recipe("nitric-acid"),
-      recipe("thruster-oxidizer-from-nitric-acid"),
-      recipe("n2o4-thruster-oxidizer"),
     }
   },
+  ]]
 }
 
+-- Welcome to Viate
 data:extend{
   {
     type = "technology",
     name = "discover-regolith",
     icon = "__petraspace__/graphics/technologies/discover-regolith.png",
-    prerequisites = { "lunar-rocket-silo" },
+    -- Weird size
+    icon_size = 968,
+    prerequisites = { "discover-viate" },
     research_trigger = {
       type = "mine-entity",
       entity = "regolith-deposit",
@@ -182,17 +220,16 @@ data:extend{
 -- I'd rather have it be "melt or mine N ice", but these are both not
 -- possible in the trigger system due to WOKE
 local tech_cse = data.raw["technology"]["chcs-concentrated-solar-energy"]
-tech_cse.prerequisites = {"lunar-rocket-silo"}
+tech_cse.prerequisites = {"discover-viate"}
 tech_cse.unit = nil
 tech_cse.research_trigger = {
   type = "mine-entity",
   entity = "ice-deposit",
 }
+table.insert(tech_cse.effects, recipe("ice-melting"))
 
--- Okay so i guess you can skip Viate if you REALLY want to for some godforsaken
--- reason
 local tech_vanilla_spience = data.raw["technology"]["space-science-pack"]
-tech_vanilla_spience.prerequisites = {"lunar-rocket-silo"}
+tech_vanilla_spience.prerequisites = {"discover-viate"}
 tech_vanilla_spience.research_trigger = nil
 tech_vanilla_spience.unit = {
   count = 1000,
