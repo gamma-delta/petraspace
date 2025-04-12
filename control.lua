@@ -1,4 +1,5 @@
 local requires = {
+  "freeplay",
   "dust-pollution", "ore-inclusions", "rockets",
 }
 

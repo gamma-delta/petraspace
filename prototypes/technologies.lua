@@ -146,11 +146,12 @@ data:extend{
   {
     type = "technology",
     name = "discover-viate",
+    -- TODO fix this
     icons = pglobals.icons.mooned(256, "__space-age__/graphics/technology/vulcanus.png"),
     localised_description = {"space-location-description.viate"},
     prerequisites = { 
-      "orbital-science-pack"
-      "rocket-propellant", "electric-engine", "concrete",
+      "orbital-science-pack",
+      "rocket-propellants", "electric-engine", "concrete",
     },
     unit = {
       count = 300,

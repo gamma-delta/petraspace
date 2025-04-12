@@ -123,7 +123,7 @@ local lrs = pglobals.copy_then(
     -- always launches "to the moon"
     launch_to_space_platforms = false,
     rocket_entity = "lunar-rocket-rsr",
-    icons = pglobals.mooned("__base__/graphics/icons/rocket-silo.png")
+    icons = pglobals.icons.mooned(64, "__base__/graphics/icons/rocket-silo.png")
   }
 )
 lrs.door_back_sprite.filename = "__petraspace__/graphics/entities/lunar-rocket-silo/door-back.png"
