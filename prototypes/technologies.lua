@@ -147,7 +147,7 @@ data:extend{
     type = "technology",
     name = "discover-viate",
     -- TODO fix this
-    icons = pglobals.icons.mooned(256, "__space-age__/graphics/technology/vulcanus.png"),
+    icons = PlanetsLib.technology_icon_moon("__petraspace__/graphics/icons/space-location/viate.png", 2048),
     localised_description = {"space-location-description.viate"},
     prerequisites = { 
       "orbital-science-pack",

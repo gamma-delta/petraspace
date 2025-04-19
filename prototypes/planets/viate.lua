@@ -5,6 +5,8 @@ local Data = require("__stdlib2__/stdlib/data/data")
 local tile_collision_masks = require("__base__/prototypes/tile/tile-collision-masks")
 local tile_graphics = require("__base__/prototypes/tile/tile-graphics")
 local tile_spritesheet_layout = tile_graphics.tile_spritesheet_layout
+local tile_sounds = require("__base__/prototypes/tile/tile-sounds")
+local sa_tile_sounds = require("__space-age__/prototypes/tile/tile-sounds")
 
 local pglobals = require("globals")
 
@@ -371,13 +373,66 @@ data:extend{
       >
       slider_to_linear(control:viate_meteors:size, 0, 3)
     ]],
-  },
+  }
+}
+PlanetsLib:extend{
   {
     type = "planet",
     name = "viate",
-    icon = "__base__/graphics/icons/nauvis.png",
-    starmap_icon = "__base__/graphics/icons/starmap-planet-nauvis.png",
-    starmap_icon_size = 512,
+    icon = "__petraspace__/graphics/icons/space-location/viate.png",
+    icon_size = 2048,
+    starmap_icon = "__petraspace__/graphics/icons/space-location/viate.png",
+    starmap_icon_size = 2048,
+    orbit = {
+      parent={type="planet", name="nauvis"},
+      distance=1.2, orientation=0.7
+    },
+    magnitude = 0.6,
+    label_orientation = 0.5,
+    draw_orbit = false,
+
+    gravity_pull = 10,
+    order = "a[nauvis]-a",
+    subgroup = "planets",
+    pollutant_type = "dust",
+    solar_power_in_space = 300,
+    platform_procession_set =
+    {
+      arrival = {"planet-to-platform-b"},
+      departure = {"platform-to-planet-a"}
+    },
+    planet_procession_set =
+    {
+      arrival = {"platform-to-planet-b"},
+      departure = {"planet-to-platform-a"}
+    },
+    -- TODO figure out something for this
+    procession_graphic_catalogue = planet_catalogue_vulcanus,
+    surface_properties =
+    {
+      ["day-night-cycle"] = 31 * minute,
+      ["solar-power"] = 200,
+      pressure = 0,
+      gravity = 2,
+      ["magnetic-field"] = 0,
+    },
+    asteroid_spawn_influence = 1,
+    asteroid_spawn_definitions = {},
+    surface_render_parameters = {
+      -- TODO: could maybe use this to render meteor shadows?
+      clouds = nil,
+      day_night_cycle_color_lookup = {
+        -- sharpish transitions, i guess, to mimic the sharp
+        -- terminator that the real moon has
+        -- but it can't be too sharp because then the solar panel
+        -- power cut off looks really weird
+        -- TODO steal cerys' dynamic thing
+        { 0.30, "identity" },
+        { 0.45, "__petraspace__/graphics/luts/viate-night.png" },
+        { 0.65, "__petraspace__/graphics/luts/viate-night.png" },
+        { 0.75, "identity" },
+      }
+    },
     map_gen_settings = {
       property_expression_names = {
         elevation = "viate_elevation",
@@ -428,51 +483,6 @@ data:extend{
         } },
       }
     },
-    gravity_pull = 10,
-    distance = 12,
-    orientation = 0.2,
-    magnitude = 1.5,
-    order = "a[nauvis]-a",
-    subgroup = "planets",
-    pollutant_type = "dust",
-    solar_power_in_space = 300,
-    platform_procession_set =
-    {
-      arrival = {"planet-to-platform-b"},
-      departure = {"platform-to-planet-a"}
-    },
-    planet_procession_set =
-    {
-      arrival = {"platform-to-planet-b"},
-      departure = {"planet-to-platform-a"}
-    },
-    -- TODO figure out something for this
-    procession_graphic_catalogue = planet_catalogue_vulcanus,
-    surface_properties =
-    {
-      ["day-night-cycle"] = 31 * minute,
-      ["solar-power"] = 200,
-      pressure = 0,
-      gravity = 2,
-      ["magnetic-field"] = 0,
-    },
-    asteroid_spawn_influence = 1,
-    asteroid_spawn_definitions = {},
-    surface_render_parameters = {
-      -- TODO: could maybe use this to render meteor shadows?
-      clouds = nil,
-      day_night_cycle_color_lookup = {
-        -- sharpish transitions, i guess, to mimic the sharp
-        -- terminator that the real moon has
-        -- but it can't be too sharp because then the solar panel
-        -- power cut off looks really weird
-        -- TODO steal cerys' dynamic thing
-        { 0.30, "identity" },
-        { 0.45, "__petraspace__/graphics/luts/viate-night.png" },
-        { 0.65, "__petraspace__/graphics/luts/viate-night.png" },
-        { 0.75, "identity" },
-      }
-    }
   },
 }
 
@@ -516,6 +526,10 @@ local function viate_tile(cfg)
     collision_mask = tile_collision_masks.ground(),
     autoplace = cfg.autoplace,
     absorptions_per_second = cfg.absorptions_per_second,
+
+    walking_sound = cfg.walking_sound,
+    landing_steps_sound = sa_tile_sounds.landing.rock,
+    driving_sound = sa_tile_sounds.driving.stone,
 
     layer = viate_offset + cfg.offset,
     variants = tile_variations_template(
@@ -564,6 +578,7 @@ data:extend{
     autoplace = {probability_expression="viate_above_basins==0"},
     texture = "__petraspace__/graphics/tiles/viate/smooth-basalt.png",
     map_color = { 0.2, 0.21, 0.25 },
+    walking_sound = sa_tile_sounds.walking.rocky_stone({}),
     etc = {walking_speed_modifier = 1.2}
   },
   viate_tile{
@@ -578,6 +593,7 @@ data:extend{
     },
     texture = "__space-age__/graphics/terrain/aquilo/dust-crests.png",
     map_color = { 0.6, 0.61, 0.7 },
+    walking_sound = sa_tile_sounds.walking.rocky_stone({}),
     etc = { transitions=viate_transitions },
   },
   viate_tile{
@@ -592,6 +608,7 @@ data:extend{
     },
     texture = "__space-age__/graphics/terrain/aquilo/dust-lumpy.png",
     map_color = { 0.7, 0.71, 0.80 },
+    walking_sound = sa_tile_sounds.walking.rocky_stone({}),
     etc = { transitions=viate_transitions },
   },
   viate_tile{
@@ -606,6 +623,7 @@ data:extend{
     },
     texture = "__space-age__/graphics/terrain/aquilo/dust-patchy.png",
     map_color = { 0.8, 0.81, 0.85 },
+    walking_sound = tile_sounds.walking.sand,
     etc = { transitions=viate_transitions },
   },
 }

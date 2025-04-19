@@ -100,17 +100,21 @@ data:extend{
   ),
 }
 
-data:extend{{
+PlanetsLib:extend{{
   type = "planet",
   name = "lepton",
   icon = "__space-age__/graphics/icons/vulcanus.png",
   starmap_icon = "__space-age__/graphics/icons/starmap-planet-vulcanus.png",
   starmap_icon_size = 512,
+  orbit = {
+    parent={type="planet", name="vulcanus"},
+    distance=1, orientation=0.7
+  },
+  magnitude = 0.3,
+  label_orientation = 0.5,
+  draw_orbit = false,
 
   gravity_pull = 10,
-  distance = 12,
-  orientation = 0.3,
-  magnitude = 1.5,
   order = "b[vulcanus]-a",
   subgroup = "planets",
   pollutant_type = nil,
