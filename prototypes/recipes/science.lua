@@ -89,3 +89,4 @@ spience.ingredients = {
   {type="item", name="heat-pipe", amount=5},
   {type="item", name="rocket-fuel", amount=5},
 }
+spience.surface_conditions = {{ property=gravity, max=2.5 }}
