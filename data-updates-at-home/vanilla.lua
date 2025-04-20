@@ -133,5 +133,16 @@ data.raw["recipe"]["advanced-thruster-oxidizer"].hidden = true
 -- Perhaps this is how they propogate in the wild
 data.raw["tree"]["boompuff"].resistances = {
   -- They have 50 health by default
-  {type="explosive", decrease=-25}
+  -- I don't want any explosion to completely wipe out a grove, but i do want it to be
+  -- fairly deadly
+  {type="explosion", decrease=-10}
 }
+
+-- Make flamethrower turrets have Consequences
+-- It looks like each individual blob of flame in a stream is a separate object.
+-- They last for 2-3 seconds each.
+-- Let's make it as bad as a normal mining drill?
+for _,path in ipairs{"flamethrower-fire-stream", "handheld-flamethrower-fire-stream"} do
+  local obj = data.raw["stream"][path]
+  obj.emissions_per_second = {pollution=10/60}
+end
