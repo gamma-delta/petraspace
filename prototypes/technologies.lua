@@ -140,7 +140,7 @@ data:extend{
       recipe("thruster-fuel-from-ammonia"),
       recipe("nitric-acid"),
       recipe("thruster-oxidizer-from-nitric-acid"),
-      recipe("n2o4-thruster-oxidizer"),
+      -- recipe("n2o4-thruster-oxidizer"),
     }
   },
   {

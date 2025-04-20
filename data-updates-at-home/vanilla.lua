@@ -128,3 +128,10 @@ data.raw["recipe"]["thruster-fuel"].hidden = true
 data.raw["recipe"]["thruster-oxidizer"].hidden = true
 data.raw["recipe"]["advanced-thruster-fuel"].hidden = true
 data.raw["recipe"]["advanced-thruster-oxidizer"].hidden = true
+
+-- Make boompuffs weak to their own explosions
+-- Perhaps this is how they propogate in the wild
+data.raw["tree"]["boompuff"].resistances = {
+  -- They have 50 health by default
+  {type="explosive", decrease=-25}
+}

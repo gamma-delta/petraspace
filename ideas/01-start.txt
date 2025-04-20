@@ -11,18 +11,6 @@ MO here is making the early game more interesting
 - Precision optical components, for lasers.
   Difficult to craft on Nauvis due to high pressure (?)
 
-Circuits. I like Gregtech's implementation of circuits, how they get more complicated
-but cheaper overall.
-However this conflicts with recyclers... unless!
-- Make circuits out of tiers of substrate, wire, semiconductors, components
-
-  Sub Wir Sem Cmp
-G 1   1
-R 1   1   1
-B 2   2   1   1
-Q 2   2   2   2
-or something
-
 LDS requires aluminum. How do I make it prohibitively expensive but still possible on Nauvis?
 Drop from your crashed spaceship?
 (have since implemented this as bauxite inclusions)

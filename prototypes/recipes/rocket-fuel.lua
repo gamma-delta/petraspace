@@ -167,27 +167,28 @@ data:extend{
     order = "e[synthesis]-b",
   },
   to_oxy("nitric-acid", 2),
-  {
-    type = "recipe",
-    name = "n2o4-thruster-oxidizer",
-    category = "chemistry-or-cryogenics",
-    ingredients = {
-      {type="fluid", name="nitric-acid", amount=10},
-      {type="fluid", name="steam", amount=100},
-      {type="item", name="copper-plate", amount=1},
-    },
-    energy_required = 35,
-    enabled = false,
-    results = {
-      {type="fluid", name="thruster-oxidizer", amount=300},
-    },
-    subgroup = "rocket-juice",
-    order = "b[oxy]-a",
-    icons = pglobals.icons.two_into_one(
-      "__petraspace__/graphics/icons/fluid/molecule-nitric-acid.png",
-      "__base__/graphics/icons/copper-plate.png",
-      "__space-age__/graphics/icons/fluid/thruster-oxidizer.png"
-    ),
-  },
+  -- Do something with this later on Gleba probably
+  -- {
+  --   type = "recipe",
+  --   name = "n2o4-thruster-oxidizer",
+  --   category = "chemistry-or-cryogenics",
+  --   ingredients = {
+  --     {type="fluid", name="nitric-acid", amount=10},
+  --     {type="fluid", name="steam", amount=100},
+  --     {type="item", name="copper-plate", amount=1},
+  --   },
+  --   energy_required = 35,
+  --   enabled = false,
+  --   results = {
+  --     {type="fluid", name="thruster-oxidizer", amount=300},
+  --   },
+  --   subgroup = "rocket-juice",
+  --   order = "b[oxy]-a",
+  --   icons = pglobals.icons.two_into_one(
+  --     "__petraspace__/graphics/icons/fluid/molecule-nitric-acid.png",
+  --     "__base__/graphics/icons/copper-plate.png",
+  --     "__space-age__/graphics/icons/fluid/thruster-oxidizer.png"
+  --   ),
+  -- },
   to_fuel("rocket-fuel", 500, "item"),
 }
