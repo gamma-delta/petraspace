@@ -45,6 +45,7 @@ local function to_rocket_juice(result, iconator, order_stub)
         {type .. "-name." .. name},
       },
       icons = iconator(ingr_proto.icon),
+      allow_decomposition = false,
     }
   end
 end

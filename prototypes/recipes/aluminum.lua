@@ -53,6 +53,7 @@ data:extend{
     subgroup = "chemistry",
     order = "c[aluminum]-a",
     enabled = false,
+    allow_decomposition = false,
     ingredients = {
       {type="item", name="bauxite-ore", amount=5},
       {type="item", name="stone", amount=10},
@@ -81,6 +82,7 @@ data:extend{
     subgroup = "chemistry",
     order = "c[aluminum]-b",
     enabled = false,
+    allow_decomposition = false,
     ingredients = {
       { type="item", name="bauxite-ore", amount=100 },
       { type="item", name="calcite", amount=4 },
@@ -110,6 +112,7 @@ data:extend{
     subgroup = "chemistry",
     order = "c[aluminum]-c",
     enabled = false,
+    allow_decomposition = false,
     ingredients = {
       { type="fluid", name="bauxite-liquor", amount=100 },
       -- two electrodes, two items
@@ -125,7 +128,6 @@ data:extend{
     },
     main_product = "molten-aluminum",
     allow_productivity = true,
-    allow_decomposition = true,
     -- This should probably involve some kind of zapping
     icons = pglobals.icons.two_into_one(
       "__space-age__/graphics/icons/carbon-fiber.png",
@@ -147,7 +149,9 @@ data:extend{
     results = {
       { type="item", name="aluminum-plate", amount=1 },
     },
-    allow_decomposition = true,
+    -- This way the tooltip shows the native aluminum, not liquid,
+    -- which will be relavent for longer
+    allow_decomposition = false,
     allow_productivity = true,
   },
 }
