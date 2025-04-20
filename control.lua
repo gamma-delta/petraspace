@@ -1,9 +1,8 @@
-local requires = {
-  "freeplay",
-  "dust-pollution", "ore-inclusions", "rockets",
-  "combat-utils"
-}
+require "control/freeplay"
 
-for _,req in ipairs(requires) do
-  require("__petraspace__/control/" .. req)
-end
+local veh = require "__core__/lualib/event_handler"
+veh.add_libraries({
+  require("control/dust-pollution"),
+  require("control/ore-inclusions"),
+  require("control/rockets"),
+})

@@ -1,12 +1,8 @@
-local Event = require("__stdlib2__/stdlib/event/event").set_protected_mode(true)
-local Entity = require("__stdlib2__/stdlib/entity/entity")
--- extends lua's table, apparently?
-local table = require('__stdlib2__/stdlib/utils/table')
-
+local util = require "__core__/lualib/util"
 local putil = require("__petraspace__/control/utils")
 local pglobals = require("__petraspace__/globals")
 
-putil.register_any_built(function(evt)
+local on_any_built = putil.on_any_built(function(evt)
   if evt.entity.name ~= "lunar-rocket-silo" 
     and evt.entity.name ~= "rocket-silo" 
   then
@@ -35,10 +31,7 @@ putil.register_any_built(function(evt)
   end
 end)
 
--- This still doesn't work despite what rseding said on the forums
--- https://forums.factorio.com/viewtopic.php?p=667721#p667721
--- Just like in 1984
-Event.register(defines.events.on_rocket_launch_ordered, function(evt)
+local function on_rocket_launch(evt)
   local pod = evt.rocket.attached_cargo_pod
   if pod.name == "lunar-cargo-pod" then
     local origin_surface_name = 
@@ -46,7 +39,7 @@ Event.register(defines.events.on_rocket_launch_ordered, function(evt)
       and pod.cargo_pod_origin.surface
       and pod.cargo_pod_origin.surface.name
     local moony_dest = pglobals.planet_moon_map[origin_surface_name]
-    -- game.print("Found cargo pod " .. tostring(pod) .. ", sending to " .. tostring(moony_dest))
+    game.print("Found cargo pod " .. tostring(pod) .. ", sending to " .. tostring(moony_dest))
     if moony_dest then
       pod.cargo_pod_destination = {
         type = defines.cargo_destination.surface,
@@ -61,4 +54,11 @@ Event.register(defines.events.on_rocket_launch_ordered, function(evt)
       game.print("How did you manage to launch a lunar rocket on [planet=" .. origin_surface_name .. "] which doesn't have a partner body??? Stop that. You're *lucky* I let you get your items back. Please open a bug report")
     end
   end
-end)
+end
+
+return {
+  events = putil.smash_events{
+    on_any_built,
+    {[defines.events.on_rocket_launch_ordered] = on_rocket_launch}
+  },
+}

@@ -1,21 +1,71 @@
-local function register_any_built(callback)
-  local Event = require("__stdlib2__/stdlib/event/event").set_protected_mode(true)
+local utils = {}
+
+-- Return a table associated with the entity for extra data.
+-- This stores it by unit number! So be careful when iterating
+utils.extra = function(entity)
+  local entity_key
+  if type(entity) == "number" then
+    entity_key = entity
+  else
+    entity_key = entity.unit_number
+    if entity_key == nil then
+      error("Entity " .. tostring(entity) .. " did not have a unit number!"
+        .. " Remember to give it a unit number in prototypes")
+    end
+  end
+
+  if not storage.extras then storage.extras = {} end
+  if not storage.extras[entity_key] then storage.extras[entity_key] = {} end
+  return storage.extras[entity_key]
+end
+
+utils.smash_events = function(events_lists)
+  local evt_to_handlers = {}
+  for _,event_pack in ipairs(events_lists) do
+    for event,handler in pairs(event_pack) do
+      if not evt_to_handlers[event] then evt_to_handlers[event] = {} end
+      table.insert(evt_to_handlers[event], handler)
+    end
+  end
+  local out = {}
+  for evt,handlers in pairs(evt_to_handlers) do
+    out[evt] = function(evt_object)
+      for _,handler in ipairs(handlers) do
+        handler(evt_object)
+      end
+    end
+  end
+  return out
+end
+
+-- Return a table that you can splice into a vanilla event handler "veh"
+utils.on_any_built = function(callback)
   local cb2 = function(evt)
     evt["entity"] = evt.entity or evt.destination
     callback(evt)
   end
-  Event.register(defines.events.on_built_entity, cb2)
-  Event.register(defines.events.on_robot_built_entity, cb2)
-  Event.register(defines.events.on_entity_cloned, cb2)
-  Event.register(defines.events.on_space_platform_built_entity, cb2)
-  Event.register(defines.events.script_raised_built, cb2)
+  return {
+    [defines.events.on_built_entity] = cb2,
+    [defines.events.on_robot_built_entity] = cb2,
+    [defines.events.on_entity_cloned] = cb2,
+    [defines.events.on_space_platform_built_entity] = cb2,
+    [defines.events.script_raised_built] = cb2,
+    [defines.events.script_raised_revive] = cb2,
+  }
+end
+utils.on_any_removed = function(callback)
+  return {
+    [defines.events.on_entity_died] = callback,
+    [defines.events.on_player_mined_entity] = callback,
+    [defines.events.on_robot_mined_entity] = callback,
+    [defines.events.on_space_platform_mined_entity] = callback,
+    [defines.events.script_raised_destroy] = callback,
+  }
 end
 
-local function setup_on_type_by_tick(entity_name, ticks, fn)
-  -- Todo, do this spread across multiple ticks ig
-  local Event = require("__stdlib2__/stdlib/event/event")
-
-  local function register(evt)
+-- Returns a table for events and a table for on_nth_ticks
+utils.on_type_by_tick = function(entity_name, ticks, fn)
+  local events_tbl = utils.on_any_built(function(evt)
     if not storage.on_type_by_tick[entity_name] then
     -- A set of all those entities
       storage.on_type_by_tick[entity_name] = {}
@@ -26,11 +76,11 @@ local function setup_on_type_by_tick(entity_name, ticks, fn)
     if entity.name == entity_name then
       -- game.print("Registering " .. tostring(entity) .. " for tick evts")
       storage.on_type_by_tick[entity_name][entity] = true
+      game.print(serpent.block(storage.on_type_by_tick))
     end
-  end
-  register_any_built(register)
-  
-  Event.on_nth_tick(ticks, function()
+  end)
+
+  local function the_handler()
     -- i think storage doesn't exist properly until this point
     if not storage.on_type_by_tick then
       storage.on_type_by_tick = {}
@@ -53,10 +103,8 @@ local function setup_on_type_by_tick(entity_name, ticks, fn)
     for _,entity in ipairs(to_remove) do
       storage.on_type_by_tick[entity_name] = nil
     end
-  end)
+  end
+  return events_tbl, {[ticks] = the_handler}
 end
 
-return {
-  setup_on_type_by_tick = setup_on_type_by_tick,
-  register_any_built = register_any_built,
-}
+return utils

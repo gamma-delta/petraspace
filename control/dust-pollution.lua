@@ -1,8 +1,4 @@
-local Event = require("__stdlib2__/stdlib/event/event").set_protected_mode(true)
-local Entity = require("__stdlib2__/stdlib/entity/entity")
--- extends lua's table, apparently?
-local table = require('__stdlib2__/stdlib/utils/table')
-
+local util = require "__core__/lualib/util"
 local putil = require("__petraspace__/control/utils")
 
 local special_dust_immune = {
@@ -31,26 +27,36 @@ local function create_secret_beacon(evt)
       raise_built = true,
     }
     -- game.print("Created beacon " .. tostring(secret_beacon) .. " parented to " .. tostring(entity))
-    Entity.set_data(secret_beacon, { parent=entity })
+    local extra = putil.extra(secret_beacon)
+    extra.parent = entity
   end
 end
 
-putil.register_any_built(create_secret_beacon)
-
-putil.setup_on_type_by_tick("dust-secret-beacon", 60 * 10, function(secret_beacon)
-  local dat = Entity.get_data(secret_beacon)
-  if dat.parent.valid then
-    local pollution_to_slowdown_percent = settings.global["ps-dust-to-1percent-slower"].value
-    local pollution_amt = secret_beacon.surface.get_pollution(secret_beacon.position)
-    local module_count = math.floor(pollution_amt / pollution_to_slowdown_percent)
-    local mi = secret_beacon.get_module_inventory()
-    -- game.print("Putting " .. module_count .. " modules in " .. serpent.line(secret_beacon))
-    mi.clear()
-    if module_count > 0 then
-      mi.insert({ name="dust-secret-module", count=module_count })
+local otbt_events, otbt_nth = putil.on_type_by_tick(
+  "dust-secret-beacon", 60 * 10,
+  function(secret_beacon)
+    local dat = putil.extra(secret_beacon)
+    -- game.print("Secret beacon extra: " .. serpent.block(dat))
+    if dat.parent and dat.parent.valid then
+      local pollution_to_slowdown_percent = settings.global["ps-dust-to-1percent-slower"].value
+      local pollution_amt = secret_beacon.surface.get_pollution(secret_beacon.position)
+      local module_count = math.floor(pollution_amt / pollution_to_slowdown_percent)
+      local mi = secret_beacon.get_module_inventory()
+      -- game.print("Putting " .. module_count .. " modules in " .. serpent.line(secret_beacon))
+      mi.clear()
+      if module_count > 0 then
+        mi.insert({ name="dust-secret-module", count=module_count })
+      end
+    else
+      -- game.print("Beacon " .. tostring(secret_beacon) .. " was invalid, killing")
+      secret_beacon.die()
     end
-  else
-    -- game.print("Beacon " .. secret_beacon .. " was invalid, killing")
-    secret_beacon.die()
-  end
-end)
+  end)
+
+return {
+  events = putil.smash_events{
+    putil.on_any_built(create_secret_beacon),
+    otbt_events
+  },
+  on_nth_tick = otbt_nth
+}

@@ -1,9 +1,7 @@
 -- Code based on Mylon's DivOresity
 -- Thanks for making it MIT licensed, but less thanks for not distributing
 -- the source code anywhere...
-local Event = require("__stdlib2__/stdlib/event/event").set_protected_mode(true)
-local Entity = require("__stdlib2__/stdlib/entity/entity")
-
+-- Ideally this would be done at generation time :<
 local function add_inclusions(evt, ok_surface, target, new, probability, richness_coeff)
   local surface = evt.surface
   if surface.name ~= ok_surface then return end
@@ -25,6 +23,10 @@ local function add_inclusions(evt, ok_surface, target, new, probability, richnes
   end
 end
 
-Event.register(defines.events.on_chunk_generated, function(evt)
-  add_inclusions(evt, "nauvis", "stone", "bauxite-ore", 1/40, 2.5)
-end)
+return {
+  events = {
+    [defines.events.on_chunk_generated] = function(evt)
+      add_inclusions(evt, "nauvis", "stone", "bauxite-ore", 1/40, 2.5) 
+    end
+  }
+}

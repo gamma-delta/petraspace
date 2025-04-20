@@ -63,6 +63,7 @@ data:extend{
     flags = {
       "not-on-map", "not-flammable",
       "no-automated-item-insertion", "no-automated-item-removal",
+      "get-by-unit-number",
     },
   },
 }
