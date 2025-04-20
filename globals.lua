@@ -4,13 +4,13 @@ local planet_moon_map = {
 }
 
 local function copy_then(tbl, ...)
-  local Table = require("__stdlib2__/stdlib/utils/table")
-  local table2 = Table.deep_copy(tbl)
+  local table2 = util.copy(tbl)
   -- So PIL just lies to me and i have to use `...` and not `arg`
   -- also, i can't just ipairs over varargs due to ?????
   local varargs = table.pack(...)
   for _,splat in ipairs(varargs) do
-    table2 = Table.merge(table2, splat)
+    table2 = util.merge{table2, splat}
+    log("Merged: " .. serpent.line(table2))
   end
   return table2
 end

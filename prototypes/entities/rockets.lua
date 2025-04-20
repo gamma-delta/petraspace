@@ -1,9 +1,5 @@
-local Data = require("__stdlib2__/stdlib/data/data")
-local Table = require("__stdlib2__/stdlib/utils/table")
+local pglobals = require "globals"
 
-local pglobals = require("globals")
-
-data.raw["recipe"]["rocket-part"].hidden = true
 local function rocket_part_recipe(gravity)
   -- Nauvis at 10m/s^2 is our baseline.
   local default_fuel = 100
@@ -98,31 +94,35 @@ vanilla_rocket.rocket_sprite.layers[2].filename = "__petraspace__/graphics/entit
 
 data:extend{
   -- Make this a new entity so we can listen for it in events
-  Table.merge(
-    Data.Util.duplicate("cargo-pod", "cargo-pod", "lunar-cargo-pod"),
-    {}
+  pglobals.copy_then(
+    data.raw["cargo-pod"]["cargo-pod"],
+    {name="lunar-cargo-pod"}
   ),
-  Table.merge(
-    Data.Util.duplicate("rocket-silo-rocket", "rocket-silo-rocket", "lunar-rocket-rsr"),
+  pglobals.copy_then(
+    data.raw["rocket-silo-rocket"]["rocket-silo-rocket"],
     {
+      name = "lunar-rocket-rsr",
       cargo_pod_entity = "lunar-cargo-pod",
     }
   ),
-  Table.merge(
-    Data.Util.duplicate("item", "rocket-silo", "lunar-rocket-silo"),
+  pglobals.copy_then(
+    data.raw["item"]["rocket-silo"],
     {
+      name = "lunar-rocket-silo",
       place_result = "lunar-rocket-silo",
     }
   ),
 }
 
 local lrs = pglobals.copy_then(
-  Data.Util.duplicate("rocket-silo", "rocket-silo", "lunar-rocket-silo", "lunar-rocket-silo"),
+  data.raw["rocket-silo"]["rocket-silo"],
   {
+    name = "lunar-rocket-silo",
     surface_conditions = {{property = "gravity", min = 1}},
     -- always launches "to the moon"
     launch_to_space_platforms = false,
     rocket_entity = "lunar-rocket-rsr",
+    minable = {mining_time=1, result = "lunar-rocket-silo"},
     -- lmao
     icons = PlanetsLib.technology_icon_moon("__base__/graphics/icons/rocket-silo.png", 64)
   }

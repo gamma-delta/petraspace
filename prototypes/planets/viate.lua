@@ -1,6 +1,6 @@
-local Table = require("__stdlib2__/stdlib/utils/table")
+local pglobals = require("globals")
+
 local effects = require("__core__.lualib.surface-render-parameter-effects")
-local Data = require("__stdlib2__/stdlib/data/data")
 
 local tile_collision_masks = require("__base__/prototypes/tile/tile-collision-masks")
 local tile_graphics = require("__base__/prototypes/tile/tile-graphics")
@@ -8,16 +8,17 @@ local tile_spritesheet_layout = tile_graphics.tile_spritesheet_layout
 local tile_sounds = require("__base__/prototypes/tile/tile-sounds")
 local sa_tile_sounds = require("__space-age__/prototypes/tile/tile-sounds")
 
-local pglobals = require("globals")
 
 local hit_itself = {
   layers={water_tile=true, doodad=true},
   colliding_with_tiles=true
 }
 
-local viate_crust_decal = Data.Util.duplicate(
-  "optimized-decorative", "sand-decal", "viate-crust"
+local viate_crust_decal = pglobals.copy_then(
+  data.raw["optimized-decorative"]["sand-decal"],
+  {name="viate-crust"}
 )
+log(serpent.block(viate_crust_decal))
 viate_crust_decal.autoplace.probability_expression = [[
   (viate_elevation >= 20)
   * (viate_meteorness < 1) / (1-viate_meteorness) * 0.01
@@ -32,9 +33,8 @@ end
 data:extend{ viate_crust_decal }
 
 local function viate_maria_edge_pebble(cfg)
-  local rocc = Data.Util.duplicate(
-    "optimized-decorative", cfg.src, cfg.name
-  )
+  local rocc = util.copy(data.raw["optimized-decorative"][cfg.src])
+  rocc.name = cfg.name
   rocc.autoplace = {
     order = "a[doodad]-a[rock]-c[maria]-" .. cfg.order,
     local_expressions = { prob = cfg.prob } ,
@@ -67,9 +67,8 @@ viate_maria_edge_pebble{
 }
 
 local function viate_crater_lining_pebble(cfg)
-  local rocc = Data.Util.duplicate(
-    "optimized-decorative", cfg.src, cfg.name
-  )
+  local rocc = util.copy(data.raw["optimized-decorative"][cfg.src])
+  rocc.name = cfg.name
   rocc.autoplace = {
     order = "a[doodad]-a[rock]-d[crater]-" .. cfg.order,
     local_expressions = { 
@@ -106,7 +105,8 @@ viate_crater_lining_pebble{
 }
 
 local function viate_maria_flavor(cfg)
-  local deco = Data.Util.duplicate("optimized-decorative", cfg.src, cfg.name)
+  local deco = util.copy(data.raw["optimized-decorative"][cfg.src])
+  deco.name = cfg.name
   deco.autoplace = {
     -- Place after the maria liners so they don't overflow
     order = "a[doodad]-z[maria-flavor]-" .. cfg.order,
@@ -138,7 +138,8 @@ viate_maria_flavor{
 }
 
 local function viate_random_crater(cfg)
-  local deco = Data.Util.duplicate("optimized-decorative", cfg.src, cfg.name)
+  local deco = util.copy(data.raw["optimized-decorative"][cfg.src])
+  deco.name = cfg.name
   deco.autoplace = {
     -- Place after the maria liners so they don't overflow
     order = "a[doodad]-b[crater]-" .. cfg.order,
@@ -171,9 +172,10 @@ viate_random_crater{
 
 data:extend(
   {
-    Table.merge(
-      Data.Util.duplicate("simple-entity", "huge-volcanic-rock", "viate-meteorite"),
+    pglobals.copy_then(
+      data.raw["simple-entity"]["huge-volcanic-rock"],
       {
+        name = "viate-meteorite",
         autoplace = {
           probability_expression = "viate_meteor_spot > 0"
         },
@@ -517,35 +519,35 @@ local viate_transitions = {
 }
 
 local function viate_tile(cfg)
-  return Table.merge({
-    type = "tile",
-    name = cfg.name,
-    order = "b[natural]-j[viate]-" .. cfg.order,
-    subgroup = "viate-tiles",
+  return util.merge{
+    {
+      type = "tile",
+      name = cfg.name,
+      order = "b[natural]-j[viate]-" .. cfg.order,
+      subgroup = "viate-tiles",
 
-    collision_mask = tile_collision_masks.ground(),
-    autoplace = cfg.autoplace,
-    absorptions_per_second = cfg.absorptions_per_second,
+      collision_mask = tile_collision_masks.ground(),
+      autoplace = cfg.autoplace,
+      absorptions_per_second = cfg.absorptions_per_second,
 
-    walking_sound = cfg.walking_sound,
-    landing_steps_sound = sa_tile_sounds.landing.rock,
-    driving_sound = sa_tile_sounds.driving.stone,
+      walking_sound = cfg.walking_sound,
+      landing_steps_sound = sa_tile_sounds.landing.rock,
+      driving_sound = sa_tile_sounds.driving.stone,
 
-    layer = viate_offset + cfg.offset,
-    variants = tile_variations_template(
-      cfg.texture, "__base__/graphics/terrain/masks/transition-4.png",
-      {
-        max_size = 4,
-        [1] = { weights = {0.085, 0.085, 0.085, 0.085, 0.087, 0.085, 0.065, 0.085, 0.045, 0.045, 0.045, 0.045, 0.005, 0.025, 0.045, 0.045 } },
-        [2] = { probability = 1, weights = {0.018, 0.020, 0.015, 0.025, 0.015, 0.020, 0.025, 0.015, 0.025, 0.025, 0.010, 0.025, 0.020, 0.025, 0.025, 0.010 }, },
-        [4] = { probability = 0.1, weights = {0.018, 0.020, 0.015, 0.025, 0.015 }, },
-        --[8] = { probability = 1.00, weights = {0.090, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.025, 0.125, 0.005, 0.010, 0.100, 0.100, 0.010, 0.020, 0.020} }
-      }
-    ),
+      layer = viate_offset + cfg.offset,
+      variants = tile_variations_template(
+        cfg.texture, "__base__/graphics/terrain/masks/transition-4.png",
+        {
+          max_size = 4,
+          [1] = { weights = {0.085, 0.085, 0.085, 0.085, 0.087, 0.085, 0.065, 0.085, 0.045, 0.045, 0.045, 0.045, 0.005, 0.025, 0.045, 0.045 } },
+          [2] = { probability = 1, weights = {0.018, 0.020, 0.015, 0.025, 0.015, 0.020, 0.025, 0.015, 0.025, 0.025, 0.010, 0.025, 0.020, 0.025, 0.025, 0.010 }, },
+          [4] = { probability = 0.1, weights = {0.018, 0.020, 0.015, 0.025, 0.015 }, },
+          --[8] = { probability = 1.00, weights = {0.090, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.025, 0.125, 0.005, 0.010, 0.100, 0.100, 0.010, 0.020, 0.020} }
+        }),
     map_color = cfg.map_color,
-
     scorch_mark_color = {0.318, 0.222, 0.152},
-  }, cfg.etc)
+  },
+  cfg.etc}
 end
 
 local dusty_absorb = {

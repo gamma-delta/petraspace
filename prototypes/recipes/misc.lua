@@ -1,5 +1,3 @@
-local Table = require("__stdlib2__/stdlib/utils/table")
-
 local function poc_recipe(hi_pressure)
   local name = hi_pressure and "high-pressure" or "low-pressure"
   local pressure_bound = hi_pressure and "min" or "max"

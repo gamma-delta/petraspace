@@ -6,7 +6,6 @@
   "factorio_version": "2.0",
   "dependencies": [
     "space-age >= 2.0.0",
-    "stdlib2 >= 2.0.0",
     "ch-concentrated-solar",
     "PlanetsLib >= 1.2.20"
   ],

@@ -1,13 +1,13 @@
-local Data = require("__stdlib2__/stdlib/data/data")
-local Table = require("__stdlib2__/stdlib/utils/table")
+local pglobals = require "globals"
 
 local resource_autoplace = require("resource-autoplace")
 local factoriopedia_util = require("__base__/prototypes/factoriopedia-util")
 
 data:extend{
-  Table.merge(
-    Data.Util.duplicate("resource", "stone", "bauxite-ore"),
+  pglobals.copy_then(
+    data.raw["resource"]["stone"],
     {
+      name = "bauxite-ore",
       map_color = { 0.75, 0.50, 0.45 },
       mining_visualization_tint = { 0.75, 0.50, 0.45 },
       icon = "__petraspace__/graphics/icons/bauxite/1.png",
@@ -34,9 +34,10 @@ data:extend{
       },
     }
   ),
-  Table.merge(
-    Data.Util.duplicate("resource", "stone", "ice-deposit"),
+  pglobals.copy_then(
+    data.raw["resource"]["stone"],
     {
+      name = "ice-deposit",
       map_color = { 0.5, 0.7, 1.0 },
       mining_visualization_tint = { 0.75, 0.75, 0.1 },
       icon = "__space-age__/graphics/icons/ice.png",
@@ -77,9 +78,10 @@ data:extend{
       }
     }
   ),
-  Table.merge(
-    Data.Util.duplicate("resource", "stone", "regolith-deposit"),
+  pglobals.copy_then(
+    data.raw["resource"]["stone"],
     {
+      name = "regolith-deposit",
       -- dark brown?
       map_color = { 0.6, 0.2, 0.1 },
       -- mining_visualization_tint = { 0.75, 0.75, 0.1 },

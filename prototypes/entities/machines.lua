@@ -1,13 +1,11 @@
 -- Entities that are machines, and their items
-
-local Data = require("__stdlib2__/stdlib/data/data")
-local Table = require("__stdlib2__/stdlib/utils/table")
+local pglobals = require "globals"
 
 local item_sounds = require("__base__/prototypes/item_sounds")
 local sounds = require("__base__/prototypes/entity/sounds")
 
 local function metal_machine_item(entity_id, icon, subgroup, order, splat)
-  return Table.merge({
+  return util.merge{{
     type = "item",
     name = entity_id,
     icon = icon,
@@ -19,16 +17,14 @@ local function metal_machine_item(entity_id, icon, subgroup, order, splat)
     place_result = entity_id,
     stack_size = 10,
     weight = 1000*kg / 10,
-  }, splat)
+  }, splat}
 end
 
 data:extend{
 -- === Card programmers === --
-  Table.merge(
-    Data.Util.duplicate(
-      "assembling-machine", "assembling-machine-3",
-      "data-card-programmer", true
-    ), {
+  pglobals.copy_then(
+    data.raw["assembling-machine"]["assembling-machine-3"], {
+      name = "data-card-programmer",
       energy_usage = "500kW",
       crafting_speed = 1,
       crafting_categories = {"data-card-programming"},
@@ -47,9 +43,10 @@ data:extend{
     "production-machine", "ea[data-card-programmer]"
   ),
 -- === Dust === --
-  Table.merge(
-    Data.Util.duplicate("furnace", "electric-furnace", "dust-sprayer", true),
+  pglobals.copy_then(
+    data.raw["furnace"]["electric-furnace"],
     {
+      name = "dust-sprayer",
       -- a pump uses 30
       energy_usage = "50kW",
       crafting_speed = 1,

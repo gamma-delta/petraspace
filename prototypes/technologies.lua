@@ -1,7 +1,5 @@
-local Table = require("__stdlib2__/stdlib/utils/table")
-
-local icons = require("__petraspace__/prototypes/icons")
 local pglobals = require "globals"
+local util = require "__core__/lualib/util"
 
 local function science(s)
   local mapping = {
@@ -43,7 +41,7 @@ end
 
 -- Make sure that the labs can actually take all of this stuff
 for _,lab in pairs(data.raw["lab"]) do
-  Table.merge(lab.inputs, {"orbital-science-pack"}, true)
+  table.insert(lab.inputs, "orbital-science-pack")
 end
 
 data:extend{

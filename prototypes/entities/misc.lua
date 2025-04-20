@@ -1,9 +1,8 @@
-local Data = require("__stdlib2__/stdlib/data/data")
-local Table = require("__stdlib2__/stdlib/utils/table")
+local pglobals = require("globals")
 
 data:extend{
-  Table.merge(
-    Data.Util.duplicate("cliff", "cliff-vulcanus", "cliff-viate"),
-    {}
+  pglobals.copy_then(
+    data.raw["cliff"]["cliff-vulcanus"],
+    {name="cliff-viate"}
   )
 }

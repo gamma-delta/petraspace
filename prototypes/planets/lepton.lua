@@ -1,4 +1,3 @@
-local Table = require("__stdlib2__/stdlib/utils/table")
 local effects = require("__core__.lualib.surface-render-parameter-effects")
 
 local tile_collision_masks = require("__base__/prototypes/tile/tile-collision-masks")

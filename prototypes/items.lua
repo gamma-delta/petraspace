@@ -1,5 +1,5 @@
-local Data = require("__stdlib2__/stdlib/data/data")
-local Table = require("__stdlib2__/stdlib/utils/table")
+local pglobals = require "globals"
+local util = require "__core__/lualib/util"
 
 local item_sounds = require("__base__/prototypes/item_sounds")
 local spage_sounds = require("__space-age__/prototypes/item_sounds")
@@ -10,7 +10,7 @@ local rocket_cap = 1000 * kg;
 local function make_pics(prefix, count, etc)
   local out = {}
   for i=1,count do
-    local row = Table.merge(
+    local row = util.merge(
       {
         filename = 
           string.format("__petraspace__/graphics/icons/%s/%s.png", prefix, i)
@@ -22,25 +22,24 @@ local function make_pics(prefix, count, etc)
   return out
 end
 
-local function data_card_props() return {
-  type = "item",
-  subgroup = "data-cards",
-  stack_size = 100,
-  weight = rocket_cap / 1000,
-  pick_sound = item_sounds.electric_small_inventory_pickup,
-  drop_sound = item_sounds.electric_small_inventory_move,
-  move_sound = item_sounds.electric_small_inventory_move,
-} end
 local function make_programmed_card(name, icon, order, spoil_time)
-  -- apparently merge mutates.
-  return Table.merge(data_card_props(), {
+  return {
+    type = "item",
     name = name,
+    subgroup = "data-cards",
     icon = icon,
     order = order,
+
     -- This way it actually shows in the UI that it spoils into something.
     spoil_result = "copper-cable",
     spoil_ticks = spoil_time,
-  })
+
+    stack_size = 100,
+    weight = rocket_cap / 1000,
+    pick_sound = item_sounds.electric_small_inventory_pickup,
+    drop_sound = item_sounds.electric_small_inventory_move,
+    move_sound = item_sounds.electric_small_inventory_move,
+  }
 end
 
 data:extend{
@@ -62,9 +61,10 @@ data:extend{
 }
 
 data:extend{
-  Table.merge(
-    Data.Util.duplicate("item", "electronic-circuit", "precision-optical-component"),
+  pglobals.copy_then(
+    data.raw["item"]["electronic-circuit"],
     {
+      name = "precision-optical-component",
       -- between electric engines and robot frames
       order = "c[advanced-intermediates]-ba[poc]",
       icon = "__petraspace__/graphics/icons/precision-optical-component.png",
@@ -81,9 +81,10 @@ data:extend{
 
 -- Regolith
 data:extend{
-  Table.merge(
-    Data.Util.duplicate("item", "stone", "regolith"),
+  pglobals.copy_then(
+    data.raw["item"]["stone"],
     {
+      name = "regolith",
       subgroup = "raw-resource",
       -- after bauxite?
       order = "fb[regolith]",
@@ -103,9 +104,11 @@ data:extend{
     order = "ca",
   },
   
-  Table.merge(
-    Data.Util.duplicate("item", "iron-ore", "bauxite-ore"),
+  pglobals.copy_then(
+    data.raw["item"]["iron-ore"],
     {
+      -- yes, bauxite ore is redundant
+      name = "bauxite-ore",
       subgroup = "raw-resource",
       -- after copper, before uranium
       order = "fa[bauxite-ore]",
@@ -116,9 +119,10 @@ data:extend{
       flags = {"always-show"},
     }
   ),
-  Table.merge(
-    Data.Util.duplicate("item", "iron-ore", "native-aluminum"),
+  pglobals.copy_then(
+    data.raw["item"]["iron-ore"],
     {
+      name = "native-aluminum",
       subgroup = "aluminum-processes",
       -- after copper, before uranium
       order = "a[native-aluminum]",
@@ -126,9 +130,10 @@ data:extend{
       pictures = make_pics("native-aluminum", 3, {size=64, scale=0.5, mipmap_count = 4})
     }
   ),
-  Table.merge(
-    Data.Util.duplicate("item", "iron-plate", "aluminum-plate"),
+  pglobals.copy_then(
+    data.raw["item"]["iron-ore"],
     {
+      name = "aluminum-plate",
       weight = rocket_cap / 500,
       subgroup = "aluminum-processes",
       order = "b[aluminum-plate]",
@@ -188,9 +193,10 @@ data:extend{
 
 -- === Science! === --
 local function science_pack(name, order, icon, tint)
-  return Table.merge(
-    Data.Util.duplicate("tool", "automation-science-pack", name),
+  return pglobals.copy_then(
+    data.raw["tool"]["automation-science-pack"],
     {
+      name = name,
       icon = icon,
       order = order,
       random_tint_color = tint,
