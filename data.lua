@@ -9,6 +9,7 @@ local requires = {
   "fluids",
   "recipes",
   "entities/resources",
+  "entities/logistics",
   "technologies",
   "entities/misc",
 
