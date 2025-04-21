@@ -142,6 +142,40 @@ data:extend{
   ),
 }
 
+-- Gleba
+data:extend{
+  pglobals.copy_then(data.raw["capsule"]["yumako"], {
+    type = "item",
+    name = "boompuff-propagule",
+    icon = "__petraspace__/graphics/icons/boompuff-propagule.png",
+    order = "b[agriculture]-b[jellynut]-a[boompuff-propagule]",
+    -- place_result overrides the normal name/desc stuff
+    localised_name = {"item-name.boompuff-propagule"},
+    localised_description = {"item-description.boompuff-propagule"},
+    pictures = { sheet = {
+      filename = "__petraspace__/graphics/icons/boompuff-propagule-sheet.png",
+      width = 64, height = 64, scale = 0.5,
+      variation_count = 8,
+    }},
+    plant_result = "boompuff-plant",
+    place_result = "boompuff-plant",
+    -- no i'm not making it explode! i'm pulling that joke already
+    -- with particle physics!
+    -- i might steal lordmiguels' grenades-at-home tho
+    spoil_ticks = 5 * minute,
+    capsule_action = nil,
+    fuel_category = "chemical",
+    -- a little better than coal
+    fuel_value = "5MJ",
+  })
+}
+-- Stop burning these wet fruits that makes no sense
+for _,stopthat in ipairs{"yumako", "jellynut"} do
+  local it = data.raw["capsule"][stopthat]
+  it.fuel_value = nil
+  it.fuel_category = nil
+end
+
 -- Particle physics
 data:extend{
   {

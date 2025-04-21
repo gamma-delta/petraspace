@@ -129,15 +129,6 @@ data.raw["recipe"]["thruster-oxidizer"].hidden = true
 data.raw["recipe"]["advanced-thruster-fuel"].hidden = true
 data.raw["recipe"]["advanced-thruster-oxidizer"].hidden = true
 
--- Make boompuffs weak to their own explosions
--- Perhaps this is how they propogate in the wild
-data.raw["tree"]["boompuff"].resistances = {
-  -- They have 50 health by default
-  -- I don't want any explosion to completely wipe out a grove, but i do want it to be
-  -- fairly deadly
-  {type="explosion", decrease=-10}
-}
-
 -- Make flamethrower turrets have Consequences
 -- It looks like each individual blob of flame in a stream is a separate object.
 -- They last for 2-3 seconds each.

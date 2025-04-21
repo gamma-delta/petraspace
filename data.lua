@@ -3,6 +3,7 @@ local requires = {
 
   "planets",
 
+  "agriculture",
   "items",
   "entities/machines",
   "entities/rockets",
