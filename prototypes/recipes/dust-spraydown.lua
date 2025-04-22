@@ -12,7 +12,7 @@ data:extend{
       {type="item", name="pipe", amount=10},
       {type="item", name="low-density-structure", amount=1},
     },
-    results = {{type="item", name="dust-sprayer"}},
+    results = {{type="item", name="dust-sprayer", amount=1}},
     energy_required = 3,
   },
   {

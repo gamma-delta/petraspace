@@ -179,7 +179,18 @@ data:extend{
   {
     type = "item",
     name = "presto-fuel",
-    icon = "",
+    icon = "__base__/graphics/icons/rocket-fuel.png",
+    fuel_category = "chemical",
+    fuel_value = "1MJ",
+    fuel_acceleration_multiplier = 12.1,
+    fuel_top_speed_multiplier = 2,
+    subgroup = "intermediate-product",
+    order = "zz[presto-fuel]",
+    move_sound = item_sounds.fuel_cell_inventory_move,
+    pickup_sound = item_sounds.fuel_cell_inventory_pickup,
+    drop_sound = item_sounds.fuel_cell_inventory_move,
+    stack_size = 1,
+    weight = rocket_cap / 100
   }
 }
 
