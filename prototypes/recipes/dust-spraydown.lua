@@ -5,6 +5,18 @@ data:extend{
   },
   {
     type = "recipe",
+    name = "dust-sprayer",
+    enabled = false,
+    ingredients = {
+      {type="item", name="pump", amount=1},
+      {type="item", name="pipe", amount=10},
+      {type="item", name="low-density-structure", amount=1},
+    },
+    results = {{type="item", name="dust-sprayer"}},
+    energy_required = 3,
+  },
+  {
+    type = "recipe",
     name = "dust-spraydown-water",
     category = "dust-spraydown",
     subgroup = "chemistry",
@@ -12,7 +24,6 @@ data:extend{
     ingredients = {{ type="fluid", name="water", amount=200 }},
     results = {},
     energy_required = 1,
-    locked = true,
     -- prod mods add pollution, so does that make this even more effective?
     -- either way, it's interesting
     allow_productivity = true,

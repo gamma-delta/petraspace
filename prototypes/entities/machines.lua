@@ -48,7 +48,7 @@ data:extend{
     {
       name = "dust-sprayer",
       -- a pump uses 30
-      energy_usage = "50kW",
+      energy_usage = "70kW",
       crafting_speed = 1,
       crafting_categories = {"dust-spraydown"},
       energy_source = {

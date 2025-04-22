@@ -255,7 +255,7 @@ data:extend{
   -- Fulgora+Vulc already is ... deep oil ocean rails? seems lame.
   -- may play with that.
   -- Fulgora+Gleba is Logi system (complex robotics and swarming behaviors)
-  -- Gleba+Vulcanus is ... some kind of productivity probably. Or Fertilizer.
+  -- Gleba+Vulcanus is ... some kind of productivity probably? Or Fertilizer?
   {
     type = "technology",
     name = "advanced-bauxite-extraction",

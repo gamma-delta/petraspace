@@ -56,3 +56,5 @@ boompuff_plant.autoplace.tile_restriction = util.merge{
 boompuff_plant.autoplace.probability_expression = "0"
 
 data:extend{boompuff_plant}
+
+-- variations = gleba_tree_variations("boompuff", 14, 5, 0.9, nil, nil, util.by_pixel(49, -40)),
