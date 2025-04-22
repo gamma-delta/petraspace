@@ -175,6 +175,13 @@ for _,stopthat in ipairs{"yumako", "jellynut"} do
   it.fuel_value = nil
   it.fuel_category = nil
 end
+data:extend{
+  {
+    type = "item",
+    name = "presto-fuel",
+    icon = "",
+  }
+}
 
 -- Particle physics
 data:extend{
