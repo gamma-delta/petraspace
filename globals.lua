@@ -10,7 +10,6 @@ local function copy_then(tbl, ...)
   local varargs = table.pack(...)
   for _,splat in ipairs(varargs) do
     table2 = util.merge{table2, splat}
-    log("Merged: " .. serpent.line(table2))
   end
   return table2
 end

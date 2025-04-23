@@ -18,7 +18,6 @@ local viate_crust_decal = pglobals.copy_then(
   data.raw["optimized-decorative"]["sand-decal"],
   {name="viate-crust"}
 )
-log(serpent.block(viate_crust_decal))
 viate_crust_decal.autoplace.probability_expression = [[
   (viate_elevation >= 20)
   * (viate_meteorness < 1) / (1-viate_meteorness) * 0.01

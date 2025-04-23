@@ -41,20 +41,23 @@ local boompuff_plant = pglobals.copy_then(vanilla_boompuff, {
     -- violent red, from the harvest
     secondary = {r = 0.416, g = 0.165, b = 0.125, a = 1.000},
   },
-  -- Stop placing the cute decoratives everywhere
-  created_effect = nil,
   -- TODO: look into why they vibrate violenty
 })
+-- Stop placing the cute decoratives everywhere.
+-- Have to do this imperatively because lua ignores nil keys
+boompuff_plant.created_effect = nil
 -- The autoplace restriction is binding for some reason?
 -- Make them also plantable on yumako soil, idfk,
 -- I don't want to add special new yellow soil
 boompuff_plant.autoplace.tile_restriction = util.merge{
-  boompuff_plant.autoplace.tile_restriction,
+  -- todo this doesn't work? probably messed up a key somewhere
   data.raw["plant"]["yumako-tree"].autoplace.tile_restriction,
+  {"midland-yellow-crust", "midland-yellow-crust-2", "midland-yellow-crust-3", "midland-yellow-crust-4"},
 }
 -- Only plant "natural" boompuffs
-boompuff_plant.autoplace.probability_expression = "0"
+boompuff_plant.autoplace.probability_expression = 0.0
 
 data:extend{boompuff_plant}
 
--- variations = gleba_tree_variations("boompuff", 14, 5, 0.9, nil, nil, util.by_pixel(49, -40)),
+-- Need to have 3 slots now for propagules, wood, spoilage
+data.raw["agricultural-tower"]["agricultural-tower"].output_inventory_size = 3

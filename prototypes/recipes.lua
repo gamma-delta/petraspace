@@ -18,7 +18,11 @@ require("recipes/regolith")
 require("recipes/rocket-fuel")
 
 require("recipes/dust-spraydown")
-require("recipes/particle-accelerator")
+
+require("recipes/fulgora")
+require("recipes/vulcanus")
+require("recipes/gleba")
+
 require("recipes/misc")
 
 require("recipes/science")

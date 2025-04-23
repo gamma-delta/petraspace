@@ -250,6 +250,24 @@ tech_vanilla_rocket.effects = {
   recipe("space-platform-starter-pack"),
 }
 
+-- Gleba I
+data:extend{
+  {
+    type = "technology",
+    name = "boompuff",
+    icon = "__petraspace__/graphics/technologies/boompuff-agriculture.png",
+    icon_size = 256,
+    effects = {
+      { type="unlock-recipe", recipe="boompuff-processing" },
+    },
+    prerequisites = {"agriculture"},
+    research_trigger = {
+      type = "mine-entity",
+      entity = "boompuff",
+    }
+  }
+}
+
 data:extend{
   -- Each pair of inner planets has its own cool technology.
   -- Fulgora+Vulc already is ... deep oil ocean rails? seems lame.

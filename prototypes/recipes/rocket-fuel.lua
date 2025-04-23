@@ -45,7 +45,6 @@ local function to_rocket_juice(result, iconator, order_stub)
         {type .. "-name." .. name},
       },
       icons = iconator(ingr_proto.icon),
-      allow_decomposition = false,
     }
   end
 end
@@ -153,6 +152,7 @@ data:extend{
     name = "nitric-acid",
     category = "chemistry-or-cryogenics",
     ingredients = {
+      -- Yeah this is simple, but this is literally the ostwald process!
       {type="fluid", name="ammonia", amount=10},
       {type="fluid", name="oxygen", amount=20},
     },
@@ -168,7 +168,6 @@ data:extend{
     order = "e[synthesis]-b",
   },
   to_oxy("nitric-acid", 2),
-  -- Do something with this later on Gleba probably
   -- {
   --   type = "recipe",
   --   name = "n2o4-thruster-oxidizer",

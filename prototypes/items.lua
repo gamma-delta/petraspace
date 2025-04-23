@@ -1,22 +1,22 @@
 local pglobals = require "globals"
-local util = require "__core__/lualib/util"
 
 local item_sounds = require("__base__/prototypes/item_sounds")
 local spage_sounds = require("__space-age__/prototypes/item_sounds")
 local item_tints = require("__base__/prototypes/item-tints")
 
-local rocket_cap = 1000 * kg;
+local rocket_cap = 1000 * kg
 
 local function make_pics(prefix, count, etc)
   local out = {}
   for i=1,count do
-    local row = util.merge(
+    local row = util.merge{
       {
         filename = 
           string.format("__petraspace__/graphics/icons/%s/%s.png", prefix, i)
       },
       etc
-    )
+    }
+    log(serpent.line(row))
     table.insert(out, row)
   end
   return out
@@ -127,7 +127,7 @@ data:extend{
       -- after copper, before uranium
       order = "a[native-aluminum]",
       icon = "__petraspace__/graphics/icons/native-aluminum/1.png",
-      pictures = make_pics("native-aluminum", 3, {size=64, scale=0.5, mipmap_count = 4})
+      pictures = make_pics("native-aluminum", 3, {size=64, scale=0.5, mipmap_count=4})
     }
   ),
   pglobals.copy_then(
@@ -157,6 +157,9 @@ data:extend{
       width = 64, height = 64, scale = 0.5,
       variation_count = 8,
     }},
+    -- same as wood
+    stack_size = 100,
+    weight = rocket_cap / 500,
     plant_result = "boompuff-plant",
     place_result = "boompuff-plant",
     -- no i'm not making it explode! i'm pulling that joke already
@@ -167,7 +170,7 @@ data:extend{
     fuel_category = "chemical",
     -- a little better than coal
     fuel_value = "5MJ",
-  })
+  }),
 }
 -- Stop burning these wet fruits that makes no sense
 for _,stopthat in ipairs{"yumako", "jellynut"} do
@@ -175,7 +178,24 @@ for _,stopthat in ipairs{"yumako", "jellynut"} do
   it.fuel_value = nil
   it.fuel_category = nil
 end
+-- sigh
 data:extend{
+  {
+    name = "fertilizer",
+    type = "item",
+    icon = "__petraspace__/graphics/icons/fertilizer/1.png",
+    order = "c[nutrients]-z-a[fertilizer]",
+    pictures = make_pics("fertilizer", 3, {size=64, scale=0.5, mipmap_count=4}),
+    fuel_category = "nutrients",
+    fuel_value = "3MJ",
+    move_sound = spage_sounds.agriculture_inventory_move,
+    pickup_sound = spage_sounds.agriculture_inventory_pickup,
+    drop_sound = spage_sounds.agriculture_inventory_move,
+    stack_size = 100,
+    spoil_ticks = nil,
+    spoil_result = nil,
+    weight = rocket_cap / 1000,
+  },
   {
     type = "item",
     name = "presto-fuel",
@@ -184,13 +204,14 @@ data:extend{
     fuel_value = "1MJ",
     fuel_acceleration_multiplier = 12.1,
     fuel_top_speed_multiplier = 2,
+    subgroup = "agriculture-products",
     subgroup = "intermediate-product",
-    order = "zz[presto-fuel]",
+    order = "a[organic-products]-z-d[presto-fuel]",
     move_sound = item_sounds.fuel_cell_inventory_move,
     pickup_sound = item_sounds.fuel_cell_inventory_pickup,
     drop_sound = item_sounds.fuel_cell_inventory_move,
     stack_size = 1,
-    weight = rocket_cap / 100
+    weight = rocket_cap / 100,
   }
 }
 
