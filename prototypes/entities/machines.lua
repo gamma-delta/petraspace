@@ -133,36 +133,36 @@ end
 local ghx_pics = require("geothermal-heat-exchanger-gfx")
 data:extend{
   {
-    type = "heat-interface",
+    type = "reactor",
     name = "geothermal-heat-exchanger",
     flags = {"placeable-player", "placeable-neutral", "player-creation"},
     icon = "__petraspace__/graphics/icons/geothermal-heat-exchanger.png",
     minable = {mining_time=2, result = "geothermal-heat-exchanger"},
     selection_box = {{-4.5, -4.5}, {4.5, 4.5}},
-    collision_box = {{-4, -4}, {4, 4}},
-    impact_category = "metal",
-    -- these should never trigger
-    open_sound = sounds.steam_open,
-    close_sound = sounds.steam_close,
-    gui_mode = "admins",
-    stateless_visualisation = ghx_pics.normal,
+    collision_box = {{-4.3, -4.3}, {4.3, 4.3}},
     tile_width = 9,
     tile_height = 9,
+    impact_category = "metal",
+    open_sound = sounds.steam_open,
+    close_sound = sounds.steam_close,
+
+    energy_source = { type = "void" },
+    consumption = "500MW",
+    neighbor_bonus = 1,
+
+    stateless_visualisation = ghx_pics.normal,
+    working_light_picture = ghx_pics.working_animation,
 
     heat_buffer = {
-      -- have to set it to zero because you can't add fewer than
-      -- that many degrees ugh
-      default_temperature = 0,
-      min_working_temperature = 350,
+      default_temperature = 30,
+      min_working_temperature = 1000,
+      minimum_glow_temperature = 1000,
       max_temperature = 2000,
-      -- same as reactor, although it doesn't matter much
-      -- Need to use runtime scripting(waugh) to add heat.
-      specific_heat = "10MJ",
+      -- Make this rather high so it takes a while to heat up
+      -- Nuclear reactors are at 10MJ
+      specific_heat = "100MJ",
       -- this is what matters
       max_transfer = "1GW",
-      minimum_glow_temperature = 350,
-      -- This won't work because heat buffers can't be animated
-      -- heat_picture = apply_heat_pipe_glow(ghx_pics.heat),
       connections = {
         heat_connect(-2, -4.0, "north"),
         heat_connect(2, -4.0, "north"),
@@ -173,6 +173,8 @@ data:extend{
         heat_connect(4.0, -2, "east"),
         heat_connect(4.0, 2, "east"),
       },
+      -- pipe_covers = ghx_pics.heat_pipes,
+      -- heat_pipe_covers = ghx_pics.heat_pipes_hot,
     },
 
     -- Thankfully there is a lava_tile rule.

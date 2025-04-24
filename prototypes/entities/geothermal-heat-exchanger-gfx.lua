@@ -10,7 +10,7 @@ local PATH = "__petraspace__/graphics/entities/geothermal-heat-exchanger/"
 local width = SHEET_WIDTH / ACROSS
 local height = SHEET_HEIGHT / DOWN
 
-local shift = util.by_pixel(-5, -16)
+local shift = util.by_pixel(-6, -16)
 
 -- It's just a HeatInterface internally, so it has to be done with
 -- stateless visualisations.
@@ -64,12 +64,32 @@ local shadow = {
   scale = 0.5,
 }
 
+local heat_pipes = {
+  filename = PATH .. "heat-pipes.png",
+  width = 620, height = 670,
+  scale = 0.5,
+  shift = shift,
+  repeat_count = ACROSS * DOWN,
+}
+local heat_pipes_hot = apply_heat_pipe_glow{
+  filename = PATH .. "heat-pipes-hot.png",
+  width = 620, height = 670,
+  scale = 0.5,
+  shift = shift,
+  repeat_count = ACROSS * DOWN,
+}
+
 return {
   normal = {
-    animation = { layers = { base_anim, glow_1, glow_2 }},
+    animation = { layers = { 
+      base_anim,
+      heat_pipes,
+      -- glow_1,
+    }},
     shadow = shadow,
     -- TODO: lights
   },
-  -- This won't work because heat buffers cannot be animated.
-  -- heat = glow_2
+  working_animation = {
+    layers = { glow_2, heat_pipes_hot }
+  },
 }
