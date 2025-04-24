@@ -67,7 +67,7 @@ data:extend{
   {
     type = "recipe",
     name = "fertilizer",
-    icon = "__petraspace__/graphics/icons/fertilizer.png",
+    icon = "__petraspace__/graphics/icons/fertilizer/1.png",
     category = "organic",
     subgroup = "agriculture-products",
     order = "c[nutrients]-z-a[fertilizer]",

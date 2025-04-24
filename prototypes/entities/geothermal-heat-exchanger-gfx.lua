@@ -49,7 +49,7 @@ local glow_2 = {
   scale = 0.5,
   shift = shift,
   -- for some reason this thing has a black background
-  -- blend_mode = "additive",
+  blend_mode = "additive",
 }
 -- Not using the tokamak lightning ring thing
 -- fortunately it is on a separate layer
