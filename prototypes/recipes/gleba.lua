@@ -69,8 +69,8 @@ data:extend{
     name = "fertilizer",
     icons = pglobals.icons.two_into_one(
       "__petraspace__/graphics/icons/fluid/molecule-nitric-acid.png",
-      "__base__/graphics/icons/jelly.png",
-      "__base__/graphics/icons/explosives.png",
+      "__space-age__/graphics/icons/jelly.png",
+      "__base__/graphics/icons/explosives.png"
     ),
     category = "organic",
     subgroup = "agriculture-products",
