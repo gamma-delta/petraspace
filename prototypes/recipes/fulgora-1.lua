@@ -1,3 +1,12 @@
+-- Fiddle with scrapping
+local scrapping = data.raw["recipe"]["scrap-recycling"]
+for i, v in ipairs(scrapping.results) do
+  if v.name == "advanced-circuit" then
+    v.name = "precision-optical-component"
+    break
+  end
+end
+
 data:extend{
   {
     type = "recipe-category",

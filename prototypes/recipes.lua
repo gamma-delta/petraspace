@@ -1,8 +1,16 @@
 data:extend{
   {
     type = "recipe-category",
+    name = "data-card-programming",
+  },
+  {
+    type = "recipe-category",
     -- Chemmy plant or em plant
     name = "electrochemistry",
+  },
+  {
+    type = "recipe-category",
+    name = "dust-spraydown",
   },
   {
     type = "item-subgroup",
@@ -11,18 +19,14 @@ data:extend{
   },
 }
 
-require("recipes/aluminum")
+require("recipes/rocket-juice")
 
-require("recipes/regolith")
+require("recipes/nauvis-1")
+require("recipes/viate")
 
-require("recipes/rocket-fuel")
-
-require("recipes/dust-spraydown")
-
-require("recipes/fulgora")
-require("recipes/vulcanus")
-require("recipes/gleba")
-
-require("recipes/misc")
+require("recipes/fulgora-1")
+require("recipes/vulcanus-1")
+require("recipes/gleba-1")
+require("recipes/post-t1")
 
 require("recipes/science")

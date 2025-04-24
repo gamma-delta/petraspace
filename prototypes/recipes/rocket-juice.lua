@@ -1,4 +1,3 @@
--- And rocket oxidizer
 local pglobals = require("globals")
 
 data:extend{

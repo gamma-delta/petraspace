@@ -17,10 +17,6 @@ data:extend{
     allow_quality = true,
   },
   {
-    type = "recipe-category",
-    name = "data-card-programming",
-  },
-  {
     type = "recipe",
     name = "orbital-data-card-high-pressure",
     category = "data-card-programming",

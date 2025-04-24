@@ -1,80 +1,8 @@
+-- After conquering all planets once (where vanilla spage ends)
 local pglobals = require "globals"
-local simple_bauxite = {
-  {
-    icon = "__base__/graphics/icons/fluid/sulfuric-acid.png",
-    scale = 0.7,
-    shift = { -16, -16 },
-  },
-  {
-    icon = "__base__/graphics/icons/fluid/steam.png",
-    scale = 0.7,
-    shift = { 16, -16 },
-  },
-  {
-    icon = "__petraspace__/graphics/icons/bauxite/1.png",
-    scale = 0.75,
-    shift = { 0, 8 },
-  },
-}
-local advanced_bauxite = {
-  {
-    icon = "__petraspace__/graphics/icons/fluid/red-mud.png",
-    scale = 0.5,
-    shift = { -16, 16 },
-  },
-  {
-    icon = "__petraspace__/graphics/icons/fluid/molten-aluminum.png",
-    scale = 0.5,
-    shift = { 16, 16 },
-  },
-  {
-    icon = "__petraspace__/graphics/icons/bauxite/1.png",
-    scale = 0.75,
-    shift = { 0, -8 },
-  },
-}
 
+-- Petrichor enrichment process (holy shit hexcasting reference)
 data:extend{
-  {
-    type = "recipe",
-    name = "native-aluminum-to-plate",
-    category = "smelting",
-    order = "za[native-aluminum-to-plate]",
-    enabled = false,
-    energy_required = 3.2,
-    ingredients = {{ type="item", name="native-aluminum", amount=2 }},
-    results = {{ type="item", name="aluminum-plate", amount=1 }},
-  },
-  {
-    -- This recipe should mega suck
-    type = "recipe",
-    name = "simple-bauxite-extraction",
-    category = "chemistry",
-    subgroup = "chemistry",
-    order = "c[aluminum]-a",
-    enabled = false,
-    allow_decomposition = false,
-    ingredients = {
-      {type="item", name="bauxite-ore", amount=5},
-      {type="item", name="stone", amount=10},
-      {type="fluid", name="sulfuric-acid", amount=200},
-      {type="fluid", name="steam", amount=500},
-    },
-    energy_required = 30,
-    results = {
-      { type="item", name="native-aluminum", amount=1, },
-      { type="item", name="stone", amount_min=0, amount_max=5 },
-    },
-    auto_recycle = false,
-    allow_productivity = true,
-    allow_decomposition = false,
-    -- TODO
-    icons = pglobals.icons.two_into_one(
-      "__base__/graphics/icons/fluid/sulfuric-acid.png",
-      "__base__/graphics/icons/fluid/steam.png",
-      "__petraspace__/graphics/icons/bauxite/1.png"
-    )
-  },
   {
     type = "recipe",
     name = "bauxite-liquor",

@@ -152,3 +152,8 @@ vanilla_gleba_rocketfuel.icons = pglobals.icons.two_into_one(
 vanilla_gleba_rocketfuel.ingredients[2] = {
   type="item", name="boompuff-propagule", amount=5,
 }
+-- ONI reference, and give you something to do with your boompuff hydrogen
+table.insert(
+  data.raw["recipe"]["bioplastic"].ingredients,
+  {type="fluid", name="hydrogen", amount=10}
+)

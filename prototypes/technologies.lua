@@ -44,6 +44,19 @@ for _,lab in pairs(data.raw["lab"]) do
   table.insert(lab.inputs, "orbital-science-pack")
 end
 
+-- Fuck you make steel
+-- I think part of the vertical difficulty curve of bluence is
+-- that you have to make steel *and* oil, and steel requires
+-- a startlingly huge footprint
+table.insert(
+  data.raw["recipe"]["logistic-science-pack"].ingredients, 
+  {type="item", name="steel-plate", amount=1}
+)
+table.insert(
+  data.raw["technology"]["logistic-science-pack"].prerequisites,
+  "steel-processing"
+)
+
 data:extend{
   -- Should I do this as a tip and trick?
   {
@@ -82,6 +95,17 @@ table.insert(laser.prerequisites, "lamp")
 table.insert(laser.prerequisites, "solar-energy")
 -- it doesn't have any effects by default. why include it??
 laser.effects = {{type="unlock-recipe", recipe="precision-optical-component-high-pressure"}}
+
+-- So why the hell can you research laser upgrades BEFORE
+-- laser turrets?
+table.insert(
+  data.raw["technology"]["laser-shooting-speed-1"].prerequisites,
+  "laser-turret"
+)
+table.insert(
+  data.raw["technology"]["laser-weapons-damage-1"].prerequisites,
+  "laser-turret"
+)
 
 table.insert(data.raw["technology"]["low-density-structure"].prerequisites, "simple-bauxite-extraction")
 
@@ -250,6 +274,15 @@ tech_vanilla_rocket.effects = {
   recipe("space-platform-starter-pack"),
 }
 
+-- Vulcanus I
+local foundry_tech = data.raw["technology"]["foundry"]
+for i, v in ipairs(foundry_tech.effects) do
+  if v.type == "unlock-recipe" and v.recipe == "casting-low-density-structure" then
+    table.remove(foundry_tech.effects, i)
+    break
+  end
+end
+
 -- Gleba I
 data:extend{
   {
@@ -267,6 +300,7 @@ data:extend{
     }
   }
 }
+
 
 data:extend{
   -- Each pair of inner planets has its own cool technology.

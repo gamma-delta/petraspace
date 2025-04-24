@@ -26,4 +26,3 @@ end
 -- must do these here because otherwise quality can't make the recycling
 -- recipes correctly
 require "data-updates-at-home/vanilla"
-require "data-updates-at-home/ch-concentrated-solar"
