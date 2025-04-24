@@ -184,6 +184,7 @@ data:extend{
     name = "fertilizer",
     type = "item",
     icon = "__petraspace__/graphics/icons/fertilizer/1.png",
+    subgroup = "agriculture-products",
     order = "c[nutrients]-z-a[fertilizer]",
     pictures = make_pics("fertilizer", 3, {size=64, scale=0.5, mipmap_count=4}),
     fuel_category = "nutrients",

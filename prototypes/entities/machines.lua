@@ -4,6 +4,8 @@ local pglobals = require "globals"
 local item_sounds = require("__base__/prototypes/item_sounds")
 local sounds = require("__base__/prototypes/entity/sounds")
 
+local rocket_cap = 1000*kg
+
 local function metal_machine_item(entity_id, icon, subgroup, order, splat)
   return util.merge{{
     type = "item",
@@ -16,7 +18,7 @@ local function metal_machine_item(entity_id, icon, subgroup, order, splat)
     drop_sound = item_sounds.metal_large_inventory_move,
     place_result = entity_id,
     stack_size = 10,
-    weight = 1000*kg / 10,
+    weight = rocket_cap / 10,
   }, splat}
 end
 
@@ -119,8 +121,95 @@ data:extend{
     "electrostatic-funneler", "__base__/graphics/icons/fluid/steam.png",
     "production-machine", "wa[electrostatic]"
   ),
+}
 
-  -- Particle physics
+-- Vulcanus
+local function heat_connect(x, y, dir)
+  return {
+    position = { x, y },
+    direction = defines.direction[dir],
+  }
+end
+local ghx_pics = require("geothermal-heat-exchanger-gfx")
+data:extend{
+  {
+    type = "heat-interface",
+    name = "geothermal-heat-exchanger",
+    flags = {"placeable-player", "placeable-neutral", "player-creation"},
+    icon = "__petraspace__/graphics/icons/geothermal-heat-exchanger.png",
+    minable = {mining_time=2, result = "geothermal-heat-exchanger"},
+    selection_box = {{-4.5, -4.5}, {4.5, 4.5}},
+    collision_box = {{-4, -4}, {4, 4}},
+    impact_category = "metal",
+    -- these should never trigger
+    open_sound = sounds.steam_open,
+    close_sound = sounds.steam_close,
+    gui_mode = "admins",
+    stateless_visualisation = ghx_pics.normal,
+    tile_width = 9,
+    tile_height = 9,
+
+    heat_buffer = {
+      -- have to set it to zero because you can't add fewer than
+      -- that many degrees ugh
+      default_temperature = 0,
+      min_working_temperature = 350,
+      max_temperature = 2000,
+      -- same as reactor, although it doesn't matter much
+      -- Need to use runtime scripting(waugh) to add heat.
+      specific_heat = "10MJ",
+      -- this is what matters
+      max_transfer = "1GW",
+      minimum_glow_temperature = 350,
+      -- This won't work because heat buffers can't be animated
+      -- heat_picture = apply_heat_pipe_glow(ghx_pics.heat),
+      connections = {
+        heat_connect(-2, -4.0, "north"),
+        heat_connect(2, -4.0, "north"),
+        heat_connect(-2, 4.0, "south"),
+        heat_connect(2, 4.0, "south"),
+        heat_connect(-4.0, -2, "west"),
+        heat_connect(-4.0, 2, "west"),
+        heat_connect(4.0, -2, "east"),
+        heat_connect(4.0, 2, "east"),
+      },
+    },
+
+    -- Thankfully there is a lava_tile rule.
+    -- It looks like collision_mask and tile_buildability_rules are ANDed,
+    -- so unfortunately I do need to specify every tile individually.
+    -- Referencing offshore pumps. Same collision mask but w/ elevated rails
+    collision_mask = { layers = pglobals.set{ 
+      "object", "train", "is_object", "is_lower_object",
+      "elevated_rail",
+    }},
+    -- Require some lava in the middle. Everything else, anything goes
+    tile_buildability_rules = {
+      {
+        area = {{-2.4, -2.4}, {2.4, 2.4}},
+        required_tiles = {layers = {lava_tile=true}},
+        colliding_tiles = {layers = {ground_tile=true}},
+        -- remove_on_collision = true,
+      }
+    },
+    resistances = {
+      { type="fire", percent=100 },
+      { type="impact", percent=30 },
+    },
+    max_health = 300,
+    dying_explosion = "foundry-explosion",
+  },
+  metal_machine_item(
+    "geothermal-heat-exchanger",
+    "__petraspace__/graphics/icons/geothermal-heat-exchanger.png",
+    -- right before foundry
+    "smelting-machine", "cz[geothermal]",
+    { default_import_location = "vulcanus", weight = rocket_cap / 20 }
+  )
+}
+
+-- Particle physics
+data:extend{
   {
     type = "item-subgroup",
     name = "particle-accelerator-machines",

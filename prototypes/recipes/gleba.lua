@@ -67,11 +67,7 @@ data:extend{
   {
     type = "recipe",
     name = "fertilizer",
-    icons = pglobals.icons.two_into_one(
-      "__petraspace__/graphics/icons/fluid/molecule-nitric-acid.png",
-      "__space-age__/graphics/icons/jelly.png",
-      "__base__/graphics/icons/explosives.png"
-    ),
+    icon = "__petraspace__/graphics/icons/fertilizer.png",
     category = "organic",
     subgroup = "agriculture-products",
     order = "c[nutrients]-z-a[fertilizer]",
@@ -93,6 +89,11 @@ data:extend{
   {
     type = "recipe",
     name = "anje-explosives",
+    icons = pglobals.icons.two_into_one(
+      "__petraspace__/graphics/icons/fluid/molecule-nitric-acid.png",
+      "__space-age__/graphics/icons/jelly.png",
+      "__base__/graphics/icons/explosives.png"
+    ),
     category = "organic",
     subgroup = "agriculture-products",
     order = "a[organic-products]-z-b[anje-explosives]",

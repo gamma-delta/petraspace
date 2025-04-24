@@ -5,4 +5,5 @@ veh.add_libraries({
   require("control/dust-pollution"),
   require("control/ore-inclusions"),
   require("control/rockets"),
+  require("control/misc"),
 })
