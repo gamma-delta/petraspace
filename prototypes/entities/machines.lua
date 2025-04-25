@@ -150,13 +150,16 @@ data:extend{
     consumption = "500MW",
     neighbor_bonus = 1,
 
-    stateless_visualisation = ghx_pics.normal,
-    working_light_picture = ghx_pics.working_animation,
-
+    stateless_visualisation = {
+      animation = ghx_pics.normal,
+    },
+    water_reflection = ghx_pics.reflection,
+    lower_layer_picture = ghx_pics.heat_pipes,
+    heat_lower_layer_picture = apply_heat_pipe_glow(ghx_pics.heat_pipes_hot),
     heat_buffer = {
       default_temperature = 30,
-      min_working_temperature = 1000,
-      minimum_glow_temperature = 1000,
+      min_working_temperature = 350,
+      minimum_glow_temperature = 350,
       max_temperature = 2000,
       -- Make this rather high so it takes a while to heat up
       -- Nuclear reactors are at 10MJ
@@ -173,8 +176,13 @@ data:extend{
         heat_connect(4.0, -2, "east"),
         heat_connect(4.0, 2, "east"),
       },
-      -- pipe_covers = ghx_pics.heat_pipes,
-      -- heat_pipe_covers = ghx_pics.heat_pipes_hot,
+     -- pipe_covers = {
+      --   north = ghx_pics.heat_pipes,
+      --   east = ghx_pics.heat_pipes,
+      --   south = ghx_pics.heat_pipes,
+      --   west = ghx_pics.heat_pipes,
+      -- },
+      -- heat_pipe_covers = apply_heat_pipe_glow(ghx_pics.heat_pipes_hot)
     },
 
     -- Thankfully there is a lava_tile rule.
@@ -191,9 +199,16 @@ data:extend{
         area = {{-2.4, -2.4}, {2.4, 2.4}},
         required_tiles = {layers = {lava_tile=true}},
         colliding_tiles = {layers = {ground_tile=true}},
-        -- remove_on_collision = true,
+        remove_on_collision = true,
       }
     },
+    placeable_position_visualisation = {
+      filename = "__space-age__/graphics/icons/fluid/lava.png",
+      priority = "extra-high-no-scale",
+      size = 64,
+      scale = 0.5,
+    },
+    
     resistances = {
       { type="fire", percent=100 },
       { type="impact", percent=30 },
@@ -207,7 +222,7 @@ data:extend{
     -- right before foundry
     "smelting-machine", "cz[geothermal]",
     { default_import_location = "vulcanus", weight = rocket_cap / 20 }
-  )
+  ),
 }
 
 -- Particle physics

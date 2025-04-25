@@ -1,6 +1,5 @@
 local ACROSS = 10
 local DOWN = 8
-local SPEED = 0.2
 
 local SHEET_WIDTH = 5900
 local SHEET_HEIGHT = 5120
@@ -10,11 +9,9 @@ local PATH = "__petraspace__/graphics/entities/geothermal-heat-exchanger/"
 local width = SHEET_WIDTH / ACROSS
 local height = SHEET_HEIGHT / DOWN
 
-local shift = util.by_pixel(-6, -16)
+local SPEED = 0.2
 
--- It's just a HeatInterface internally, so it has to be done with
--- stateless visualisations.
--- Too bad.
+local shift = util.by_pixel(-6, -16)
 
 -- type Animation
 local base_anim = {
@@ -62,6 +59,10 @@ local shadow = {
   shift = util.by_pixel(-2, 0),
   draw_as_shadow = true,
   scale = 0.5,
+  repeat_count = ACROSS * DOWN,
+  -- must put this because all animations must play at the same speed
+  -- and otherwise the fake under entity whizzes around
+  animation_speed = SPEED,
 }
 
 local heat_pipes = {
@@ -69,27 +70,37 @@ local heat_pipes = {
   width = 620, height = 670,
   scale = 0.5,
   shift = shift,
-  repeat_count = ACROSS * DOWN,
 }
 local heat_pipes_hot = apply_heat_pipe_glow{
   filename = PATH .. "heat-pipes-hot.png",
   width = 620, height = 670,
   scale = 0.5,
   shift = shift,
-  repeat_count = ACROSS * DOWN,
 }
 
 return {
   normal = {
-    animation = { layers = { 
+    layers = {
+      shadow,
       base_anim,
-      heat_pipes,
-      -- glow_1,
-    }},
-    shadow = shadow,
-    -- TODO: lights
+      glow_2,
+    }
+    -- glow_1,
   },
-  working_animation = {
-    layers = { glow_2, heat_pipes_hot }
+  -- the load-bearing mspaint drawing
+  reflection = {
+    pictures = {
+      filename = PATH .. "reflection.png",
+      priority = "extra-high",
+      width = 118,
+      height = 128,
+      shift = util.by_pixel(0, 70),
+      variation_count = 1,
+      scale = 5,
+    },
+    rotate = false,
+    orientation_to_variation = false,
   },
+  heat_pipes = heat_pipes,
+  heat_pipes_hot = heat_pipes_hot,
 }
