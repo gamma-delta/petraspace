@@ -19,7 +19,60 @@ data:extend{
       {type="item", name="magnesium-slag", amount_min=0, amount_max=4}
     },
     main_product = "quicklime",
-  }
+  },
+  -- I don't THINK that you can infinitely generate resources like this
+  -- because you can't get 300% productivity without a prod research
+  {
+    type = "recipe",
+    name = "concrete-from-quicklime",
+    category = "metallurgy",
+    enabled = false,
+    auto_recycle = false,
+    allow_productivity = true,
+    allow_decomposition = false,
+    icons = pglobals.icons.two_into_one(
+      "__petraspace__/graphics/icons/quicklime/1.png",
+      "__space-age__/graphics/icons/fluid/molten-iron.png",
+      "__base__/graphics/icons/concrete.png"
+    ),
+    ingredients = {
+      {type="item", name="stone-brick", amount=20},
+      {type="item", name="quicklime", amount=1},
+      {type="fluid", name="molten-iron", amount=10},
+      {type="fluid", name="water", amount=100},
+    },
+    energy_required = 10,
+    results = {
+      {type="item", name="concrete", amount=20},
+    },
+    main_product = "concrete",
+  },
+  {
+    type = "recipe",
+    name = "refined-concrete-from-quicklime",
+    category = "metallurgy",
+    enabled = false,
+    auto_recycle = false,
+    allow_productivity = true,
+    allow_decomposition = false,
+    icons = pglobals.icons.two_into_one(
+      "__petraspace__/graphics/icons/quicklime/1.png",
+      "__space-age__/graphics/icons/fluid/molten-iron.png",
+      "__base__/graphics/icons/refined-concrete.png"
+    ),
+    ingredients = {
+      {type="item", name="concrete", amount=20},
+      {type="item", name="quicklime", amount=5},
+      {type="item", name="steel-plate", amount=1},
+      {type="fluid", name="molten-iron", amount=10},
+      {type="fluid", name="water", amount=100},
+    },
+    energy_required = 10,
+    results = {
+      {type="item", name="refined-concrete", amount=20},
+    },
+    main_product = "refined-concrete",
+  },
 }
 
 for _,calcite2lime in ipairs{

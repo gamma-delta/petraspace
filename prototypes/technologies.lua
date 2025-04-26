@@ -167,6 +167,24 @@ data:extend{
   },
   {
     type = "technology",
+    name = "thermodynamics",
+    icon = "__petraspace__/graphics/technologies/thermodynamics.png",
+    icon_size = 256,
+    prerequisites = { "chemical-science-pack" },
+    unit = {
+      count = 300,
+      ingredients = science("rgb"),
+      time = 30,
+    },
+    effects = {
+      recipe("heating-tower"),
+      recipe("heat-pipe"),
+      recipe("heat-exchanger"),
+      recipe("steam-turbine"),
+    }
+  },
+  {
+    type = "technology",
     name = "discover-viate",
     -- TODO fix this
     icons = PlanetsLib.technology_icon_moon("__petraspace__/graphics/icons/space-location/viate.png", 2048),
@@ -174,10 +192,11 @@ data:extend{
     prerequisites = { 
       "orbital-science-pack",
       "rocket-propellants", "electric-engine", "concrete",
+      "thermodynamics",
     },
     unit = {
       count = 300,
-      ingredients = science("2r2g2bo"),
+      ingredients = science("rgb2o"),
       time = 60,
     },
     effects = {
@@ -234,7 +253,7 @@ data:extend{
       recipe("washing-regolith"),
       recipe("dissolving-regolith"),
       recipe("stone-bricks-from-regolith"),
-      recipe("concrete-from-regolith"),
+      -- recipe("concrete-from-regolith"),
     },
   }
 }
@@ -249,7 +268,11 @@ tech_cse.research_trigger = {
   type = "mine-entity",
   entity = "ice-deposit",
 }
-table.insert(tech_cse.effects, recipe("ice-melting"))
+tech_cse.effects = {
+  recipe("chcs-solar-power-tower"),
+  recipe("chcs-heliostat-mirror"),
+  recipe("ice-melting"),
+}
 
 local tech_vanilla_spience = data.raw["technology"]["space-science-pack"]
 tech_vanilla_spience.prerequisites = {"discover-viate"}

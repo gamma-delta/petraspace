@@ -131,6 +131,7 @@ heat_pipe_recipe.ingredients = {
   { type="item", name="steel-plate", amount=2 },
   { type="fluid", name="water", amount=100 },
 }
+heat_pipe_recipe.allow_decomposition = true
 
 -- Fix up LDS recipe
 -- The molten one is in vulcanus-1

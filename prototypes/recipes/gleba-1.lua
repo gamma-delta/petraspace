@@ -43,6 +43,7 @@ data:extend{
     order = "a[organic-processes]-z-a[nitrogen-fixation]",
     enabled = false,
     allow_productivity = true,
+    allow_decomposition = false,
     energy_required = 7,
     ingredients = {
       -- IRL, the bio-catalyst used for this contains iron!
@@ -50,7 +51,7 @@ data:extend{
       -- Of course IRL soil-fixing bacteria make ammonia, not nitric acid,
       -- but what can I do
       {type="item", name="iron-bacteria", amount=1},
-      {type="item", name="spoilage", amount=50},
+      {type="item", name="spoilage", amount=200},
       {type="fluid", name="ammonia", amount=30},
     },
     results = {

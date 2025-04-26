@@ -146,6 +146,11 @@ local function heat_connect(x, y, dir)
   }
 end
 local ghx_pics = require("geothermal-heat-exchanger-gfx")
+local big_x = {
+  filename = "__core__/graphics/too-far.png",
+  size = 64, scale = 0.5,
+}
+
 data:extend{
   {
     type = "reactor",
@@ -192,10 +197,16 @@ data:extend{
         heat_connect(4.0, 2, "east"),
       },
       pipe_covers = {
+        --[[
         north = heat_pipe_direction_pic("north", false),
         east = heat_pipe_direction_pic("east", false),
         south = heat_pipe_direction_pic("south", false),
         west = heat_pipe_direction_pic("west", false),
+        ]]
+        north = big_x,
+        east = big_x,
+        south = big_x,
+        west = big_x,
       },
       heat_pipe_covers = {
         north = heat_pipe_direction_pic("north", true),
@@ -222,12 +233,21 @@ data:extend{
         remove_on_collision = true,
       }
     },
+    placeable_position_visualization = {
+      filename = "__core__/graphics/cursor-boxes-32x32.png",
+      priority = "extra-high-no-scale",
+      size = 64,
+      scale = 0.5,
+      x = 3 * 64
+    },
+    --[[
     placeable_position_visualisation = {
       filename = "__space-age__/graphics/icons/fluid/lava.png",
       priority = "extra-high-no-scale",
       size = 64,
       scale = 0.5,
     },
+    ]]
     
     resistances = {
       { type="fire", percent=100 },
@@ -251,10 +271,11 @@ local nothingburger = {
   filename = "__core__/graphics/empty.png",
   width = 1, height = 1
 }
-foundry.energy_usage = "2500kW"
+foundry.energy_usage = "50MW"
 foundry.energy_source = {
   type = "heat",
-  specific_heat = "10MJ",
+  -- every second while running, it goes down by 50c
+  specific_heat = "1MJ",
   default_temperature = 30,
   max_temperature = 2000,
   -- this is about the melting point of steel

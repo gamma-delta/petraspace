@@ -163,7 +163,7 @@ local icons = {
         {
           icon = in3,
           scale = 0.5,
-          shift = {0, -16},
+          shift = {16, -16},
           draw_background = true
         },
         {
