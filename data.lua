@@ -11,6 +11,7 @@ local requires = {
   "recipes",
   "entities/resources",
   "entities/logistics",
+  "entities/platforms",
   "technologies",
   "entities/misc",
 
