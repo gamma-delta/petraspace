@@ -212,28 +212,6 @@ data:extend{
       recipe("precision-optical-component-low-pressure"),
     }
   },
-  --[[
-  {
-    type = "technology",
-    name = "lunar-rocket-silo",
-    -- TODO
-    icon = "__space-age__/graphics/technology/vulcanus.png",
-    icon_size = 256,
-    prerequisites = { 
-      -- why go up there if you don't know anything
-      "discover-viate",
-      "rocket-propellant",
-      "electric-engine", "concrete",
-    },
-    unit = {
-      count = 500,
-      ingredients = science("2r2g2bo"),
-      time = 60,
-    },
-    effects = { 
-    }
-  },
-  ]]
 }
 
 -- Welcome to Viate
@@ -253,7 +231,6 @@ data:extend{
       recipe("washing-regolith"),
       recipe("dissolving-regolith"),
       recipe("stone-bricks-from-regolith"),
-      -- recipe("concrete-from-regolith"),
     },
   }
 }

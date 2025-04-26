@@ -32,31 +32,6 @@ data:extend{
       "__base__/graphics/icons/stone-brick.png"
     ),
   },
-  -- {
-  --   type = "recipe",
-  --   name = "concrete-from-regolith",
-  --   category = "crafting-with-fluid",
-  --   subgroup = "raw-material",
-  --   order = "c[chemistry]-za",
-  --   enabled = false,
-  --   energy_required = 10,
-  --   -- require sulfur?
-  --   -- see: https://en.wikipedia.org/wiki/Lunarcrete
-  --   ingredients = {
-  --     {type="item", name="regolith", amount=5},
-  --     {type="item", name="stone-brick", amount=5},
-  --     {type="fluid", name="water", amount=150},
-  --     -- this should probably require something somewhat scarce on Viate
-  --     -- so that you have an interesting choice for whether to go for it
-  --   },
-  --   results = {{type="item", name="concrete", amount=12}},
-  --   allow_productivity = true,
-  --   allow_decomposition = false,
-  --   icons = pglobals.icons.mini_over(
-  --     "__petraspace__/graphics/icons/regolith/1.png",
-  --     "__base__/graphics/icons/concrete.png"
-  --   ),
-  -- },
   {
     type = "recipe",
     name = "washing-regolith",

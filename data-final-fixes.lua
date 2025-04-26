@@ -45,12 +45,12 @@ for _,sp in ipairs{
   "production-science-pack",
   "utility-science-pack",
   "space-science-pack",
-  "metallurgy-science-pack",
+  "metallurgic-science-pack",
   "electromagnetic-science-pack",
   "agricultural-science-pack",
   "cryogenic-science-pack",
   "promethium-science-pack",
 } do
   local proto = data.raw["tool"][sp]
-  sp.localised_description = "technology-name." .. sp
+  proto.localised_description = "technology-name." .. sp
 end
