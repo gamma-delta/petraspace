@@ -60,3 +60,8 @@ for _,path in ipairs{"flamethrower-fire-stream", "handheld-flamethrower-fire-str
   local obj = data.raw["stream"][path]
   obj.emissions_per_second = {pollution=10/60}
 end
+
+-- Make oxide asteroids drop quicklime
+-- It turns out that we don't actually know very much about the makeup
+-- of comets, so this is 100% alright (lies)
+data.raw["recipe"]["advanced-oxide-asteroid-crushing"].results[2].name = "quicklime"

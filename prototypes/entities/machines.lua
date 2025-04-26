@@ -22,6 +22,21 @@ local function metal_machine_item(entity_id, icon, subgroup, order, splat)
   }, splat}
 end
 
+local function heat_pipe_direction_pic(direction, hot)
+  local img = hot and "heatex-endings-heated.png" or "heatex-endings.png"
+
+  local sx_map = {north=0, east=1, south=2, west=3}
+  local sx = sx_map[direction] * 64
+
+  local new_sprite = {
+    filename = "__base__/graphics/entity/heat-exchanger/" .. img,
+    x = sx, y = 0,
+    size = 64, scale = 0.5, priority = "high"
+  }
+  if hot then new_sprite = apply_heat_pipe_glow(new_sprite) end
+  return new_sprite
+end
+
 data:extend{
 -- === Card programmers === --
   pglobals.copy_then(
@@ -154,8 +169,8 @@ data:extend{
       animation = ghx_pics.normal,
     },
     water_reflection = ghx_pics.reflection,
-    lower_layer_picture = ghx_pics.heat_pipes,
-    heat_lower_layer_picture = apply_heat_pipe_glow(ghx_pics.heat_pipes_hot),
+    -- lower_layer_picture = ghx_pics.heat_pipes,
+    -- heat_lower_layer_picture = apply_heat_pipe_glow(ghx_pics.heat_pipes_hot),
     heat_buffer = {
       default_temperature = 30,
       min_working_temperature = 350,
@@ -163,7 +178,7 @@ data:extend{
       max_temperature = 2000,
       -- Make this rather high so it takes a while to heat up
       -- Nuclear reactors are at 10MJ
-      specific_heat = "100MJ",
+      specific_heat = "50MJ",
       -- this is what matters
       max_transfer = "1GW",
       connections = {
@@ -176,13 +191,18 @@ data:extend{
         heat_connect(4.0, -2, "east"),
         heat_connect(4.0, 2, "east"),
       },
-     -- pipe_covers = {
-      --   north = ghx_pics.heat_pipes,
-      --   east = ghx_pics.heat_pipes,
-      --   south = ghx_pics.heat_pipes,
-      --   west = ghx_pics.heat_pipes,
-      -- },
-      -- heat_pipe_covers = apply_heat_pipe_glow(ghx_pics.heat_pipes_hot)
+      pipe_covers = {
+        north = heat_pipe_direction_pic("north", false),
+        east = heat_pipe_direction_pic("east", false),
+        south = heat_pipe_direction_pic("south", false),
+        west = heat_pipe_direction_pic("west", false),
+      },
+      heat_pipe_covers = {
+        north = heat_pipe_direction_pic("north", true),
+        east = heat_pipe_direction_pic("east", true),
+        south = heat_pipe_direction_pic("south", true),
+        west = heat_pipe_direction_pic("west", true),
+      }
     },
 
     -- Thankfully there is a lava_tile rule.
@@ -224,6 +244,52 @@ data:extend{
     { default_import_location = "vulcanus", weight = rocket_cap / 20 }
   ),
 }
+-- Make the foundry worse
+local heatex = data.raw["boiler"]["heat-exchanger"]
+local foundry = data.raw["assembling-machine"]["foundry"]
+local nothingburger = {
+  filename = "__core__/graphics/empty.png",
+  width = 1, height = 1
+}
+foundry.energy_usage = "2500kW"
+foundry.energy_source = {
+  type = "heat",
+  specific_heat = "10MJ",
+  default_temperature = 30,
+  max_temperature = 2000,
+  -- this is about the melting point of steel
+  min_working_temperature = 1500,
+  -- so it heats up some time this century
+  max_transfer = "1GW",
+  connections = {
+    heat_connect(0, -2, "north"),
+    heat_connect(0, 2, "south"),
+    heat_connect(-2, 0, "west"),
+    heat_connect(2, 0, "east"),
+  },
+  pipe_covers = {
+    -- The north one is covered by the sprite
+    north = nothingburger,
+    east = heat_pipe_direction_pic("east", false),
+    south = heat_pipe_direction_pic("south", false),
+    west = heat_pipe_direction_pic("west", false),
+  },
+  heat_pipe_covers = {
+    north = nothingburger,
+    east = heat_pipe_direction_pic("east", true),
+    south = heat_pipe_direction_pic("south", true),
+    west = heat_pipe_direction_pic("west", true),
+  }
+}
+-- Make the nuclear reactor actually get that hot
+data.raw["reactor"]["nuclear-reactor"].heat_buffer.max_temperature = 2000
+-- Make heat pipes get that hot, and lower their specific heat
+local heat_pipe = data.raw["heat-pipe"]["heat-pipe"].heat_buffer
+heat_pipe.max_temperature = 2000
+-- it takes a WHOLE MEGAWATT to heat a heat pipe by 1 degree in vanilla.
+-- Jesus, no wonder reactors take so long to spin up.
+heat_pipe.specific_heat = "100kJ"
+heat_pipe.max_transfer = "100GW"
 
 -- Particle physics
 data:extend{

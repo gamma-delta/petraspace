@@ -12,11 +12,11 @@ local function make_pics(prefix, count, etc)
     local row = util.merge{
       {
         filename = 
-          string.format("__petraspace__/graphics/icons/%s/%s.png", prefix, i)
+          string.format("__petraspace__/graphics/icons/%s/%s.png", prefix, i),
+        size = 64, mipmap_count = 4, scale = 0.5,
       },
-      etc
+      etc or {}
     }
-    log(serpent.line(row))
     table.insert(out, row)
   end
   return out
@@ -89,7 +89,7 @@ data:extend{
       -- after bauxite?
       order = "fb[regolith]",
       icon = "__petraspace__/graphics/icons/regolith/1.png",
-      pictures = make_pics("regolith", 4, {size=64, scale=0.5, mipmap_count = 4})
+      pictures = make_pics("regolith", 4)
     }
   ),
 }
@@ -113,7 +113,7 @@ data:extend{
       -- after copper, before uranium
       order = "fa[bauxite-ore]",
       icon = "__petraspace__/graphics/icons/bauxite/1.png",
-      pictures = make_pics("bauxite", 4, {size=64, scale=0.5, mipmap_count = 4}),
+      pictures = make_pics("bauxite", 4),
       -- Otherwise it will detect the "locked" recipe for petrichor enrichment
       -- and restrict it.
       flags = {"always-show"},
@@ -127,7 +127,7 @@ data:extend{
       -- after copper, before uranium
       order = "a[native-aluminum]",
       icon = "__petraspace__/graphics/icons/native-aluminum/1.png",
-      pictures = make_pics("native-aluminum", 3, {size=64, scale=0.5, mipmap_count=4})
+      pictures = make_pics("native-aluminum", 3)
     }
   ),
   pglobals.copy_then(
@@ -140,6 +140,25 @@ data:extend{
       icon = "__petraspace__/graphics/icons/aluminum-plate.png",
     }
   ),
+}
+
+-- Vulcanus
+data:extend{
+  pglobals.copy_then(data.raw["item"]["calcite"], {
+    name = "quicklime",
+    order = "a[melting]-za",
+    icon = "__petraspace__/graphics/icons/quicklime/1.png",
+    pictures = make_pics("quicklime", 3),
+  }),
+  pglobals.copy_then(data.raw["item"]["tungsten-ore"], {
+    name = "magnesium-slag",
+    order = "za[refinement]-a[magnesium-slag]",
+    -- Using malcolm's titanium as "magnesium" to get the consistent color
+    -- in my mind magnesium is pinkish? but this is probably because of greg
+    -- Only using the first 3 images b/c they have better contrast
+    icon = "__petraspace__/graphics/icons/magnesium-slag/1.png",
+    pictures = make_pics("magnesium-slag", 3),
+  }),
 }
 
 -- Gleba
@@ -190,7 +209,7 @@ data:extend{
     fuel_category = "nutrients",
     fuel_value = "3MJ",
     move_sound = spage_sounds.agriculture_inventory_move,
-    pickup_sound = spage_sounds.agriculture_inventory_pickup,
+    pick_sound = spage_sounds.agriculture_inventory_pickup,
     drop_sound = spage_sounds.agriculture_inventory_move,
     stack_size = 100,
     spoil_ticks = nil,
@@ -209,7 +228,7 @@ data:extend{
     subgroup = "intermediate-product",
     order = "a[organic-products]-z-d[presto-fuel]",
     move_sound = item_sounds.fuel_cell_inventory_move,
-    pickup_sound = item_sounds.fuel_cell_inventory_pickup,
+    pick_sound = item_sounds.fuel_cell_inventory_pickup,
     drop_sound = item_sounds.fuel_cell_inventory_move,
     stack_size = 1,
     weight = rocket_cap / 100,

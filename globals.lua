@@ -1,6 +1,8 @@
 local planet_moon_map = {
   nauvis = "viate",
   viate = "nauvis",
+  vulcanus = "lepton",
+  lepton = "vulcanus",
 }
 
 local function copy_then(tbl, ...)

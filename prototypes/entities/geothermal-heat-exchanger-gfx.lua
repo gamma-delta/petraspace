@@ -70,12 +70,14 @@ local heat_pipes = {
   width = 620, height = 670,
   scale = 0.5,
   shift = shift,
+  repeat_count = ACROSS * DOWN,
 }
 local heat_pipes_hot = apply_heat_pipe_glow{
   filename = PATH .. "heat-pipes-hot.png",
   width = 620, height = 670,
   scale = 0.5,
   shift = shift,
+  repeat_count = ACROSS * DOWN,
 }
 
 return {
@@ -83,7 +85,9 @@ return {
     layers = {
       shadow,
       base_anim,
+      -- heat_pipes,
       glow_2,
+      -- heat_pipes_hot
     }
     -- glow_1,
   },
@@ -101,6 +105,4 @@ return {
     rotate = false,
     orientation_to_variation = false,
   },
-  heat_pipes = heat_pipes,
-  heat_pipes_hot = heat_pipes_hot,
 }
