@@ -61,3 +61,60 @@ data:extend{boompuff_plant}
 
 -- Need to have 3 slots now for propagules, wood, spoilage
 data.raw["agricultural-tower"]["agricultural-tower"].output_inventory_size = 3
+
+local function invincible()
+  local out = {}
+  for name,dmg in pairs(data.raw["damage-type"]) do
+    table.insert(out, {type=name, percent=100})
+  end
+  return out
+end
+
+-- Man-made horrors beyond YOUR comprehension!
+data:extend{
+  {
+    type = "furnace",
+    name = "mystery-flesh-pit",
+    flags = {
+      "placeable-neutral", "not-deconstructable", "not-blueprintable",
+      "not-repairable", "not-upgradable"
+    },
+    icon = "__space-age__/graphics/icons/big-stomper.png",
+    map_color = {0.12, 0.24, 0.27, 1.0},
+    -- Make the collision box much smaller,
+    -- because it's annoying to get caught on the invisible corners
+    tile_width = 12,
+    tile_height = 7,
+    collision_box = {{-5.4, -3.1}, {5.4, 3.1}},
+    selection_box = {{-6, -3.5}, {6, 3.5}},
+    remove_decoratives = "true",
+    selectable_priority = 60,
+    subgroup = "enemies",
+    order = "gleba-z",
+
+    crafting_speed = 1,
+    crafting_categories = {"mystery-flesh-pit"},
+    source_inventory_size = 1,
+    result_inventory_size = 12,
+    circuit_connector = nil,
+    circuit_connector_flipped = nil,
+    energy_usage = "1MW",
+    energy_source = {
+      type = "burner",
+      fuel_inventory_size = 1,
+      burner_usage = "mfp-scouts",
+      fuel_categories = {"mfp-scouts"},
+    },
+
+    integration_patch = {
+      filename = "__petraspace__/graphics/entities/mystery-flesh-pit/mystery-flesh-pit.png",
+      width = 960, height = 675, scale = 0.5,
+      surface = "gleba",
+    },
+
+    max_health = 999999999,
+    healing_per_tick = 999999999,
+    hide_resistances = true,
+    resistances = invincible(),
+  }
+}

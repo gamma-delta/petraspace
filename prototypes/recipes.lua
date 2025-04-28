@@ -13,6 +13,10 @@ data:extend{
     name = "dust-spraydown",
   },
   {
+    type = "recipe-category",
+    name = "mystery-flesh-pit",
+  },
+  {
     type = "item-subgroup",
     group = "intermediate-products",
     name = "chemistry",

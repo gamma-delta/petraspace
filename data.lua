@@ -4,7 +4,6 @@ local requires = {
 
   "planets",
 
-  "agriculture",
   "items",
   "entities/machines",
   "entities/rockets",
@@ -13,6 +12,7 @@ local requires = {
   "entities/resources",
   "entities/logistics",
   "entities/platforms",
+  "entities/gleba",
   "technologies",
   "entities/misc",
 
