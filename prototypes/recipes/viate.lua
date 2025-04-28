@@ -154,3 +154,11 @@ splatform_tiles.ingredients = {
   {type="item", name="electric-engine-unit", amount=10},
   {type="item", name="copper-cable", amount=50},
 }
+splatform_tiles.results[1].amount = 5
+local starterpack = data.raw["recipe"]["space-platform-starter-pack"]
+starterpack.ingredients = {
+  {type="item", name="space-platform-foundation", amount=60},
+  {type="item", name="electric-engine-unit", amount=50},
+  {type="item", name="processing-unit", amount=50},
+  {type="item", name="precision-optical-component", amount=50},
+}

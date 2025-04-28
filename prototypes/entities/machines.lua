@@ -154,8 +154,8 @@ Scooping another lordmiguel idea thanks :]
 I am just going to make them long and tall solar panels
 that only require the *center* tile to be placed on a foundation
 ]]
-
-local augh = pglobals.copy_then(data.raw["solar-panel"]["solar-panel"], {
+data:extend{
+  pglobals.copy_then(data.raw["solar-panel"]["solar-panel"], {
     name = "platform-solar-array",
     flags = {"placeable-player", "placeable-neutral", "player-creation"},
     icon = "__petraspace__/graphics/icons/platform-solar-array.png",
@@ -192,10 +192,7 @@ local augh = pglobals.copy_then(data.raw["solar-panel"]["solar-panel"], {
     energy_source = { type = "electric", usage_priority = "solar" },
     -- It is 10x as large as a solar panel; let's give 8x the power
     production = "480kW",
-  })
-log(serpent.block(augh))
-data:extend{
-  augh,
+  }),
   pglobals.copy_then(data.raw["item"]["solar-panel"], {
     name = "platform-solar-array",
     icon = "__petraspace__/graphics/icons/platform-solar-array.png",

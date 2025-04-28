@@ -80,7 +80,7 @@ data:extend{
       "not-repairable", "not-upgradable"
     },
     icon = "__space-age__/graphics/icons/big-stomper.png",
-    map_color = {0.12, 0.24, 0.27, 1.0},
+    map_color = {0.20, 0.06, 0.09, 1.0},
     -- Make the collision box much smaller,
     -- because it's annoying to get caught on the invisible corners
     tile_width = 12,
