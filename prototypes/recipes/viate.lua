@@ -2,19 +2,6 @@
 
 local pglobals = require("globals")
 
-local function icon_regolith_over(target, under)
-  return {
-    {
-      icon = target,
-    },
-    {
-      icon = "__petraspace__/graphics/icons/regolith/1.png",
-      scale = 0.3,
-      shift = {-8, -8}
-    },
-  }
-end
-
 -- Regolith
 data:extend{
   {
@@ -158,4 +145,12 @@ slt.ingredients = {
   {type = "item", name="aluminum-plate", amount=400},
   {type = "item", name="precision-optical-component", amount=100},
   {type = "item", name="electric-engine-unit", amount=20},
+}
+
+-- And now! Into space
+local splatform_tiles = data.raw["recipe"]["space-platform-foundation"]
+splatform_tiles.ingredients = {
+  {type="item", name="low-density-structure", amount=20},
+  {type="item", name="electric-engine-unit", amount=10},
+  {type="item", name="copper-cable", amount=50},
 }

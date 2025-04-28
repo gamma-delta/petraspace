@@ -1,4 +1,5 @@
 local requires = {
+  "random-things",
   "entities/squibs",
 
   "planets",

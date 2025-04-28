@@ -6,6 +6,14 @@ local sounds = require("__base__/prototypes/entity/sounds")
 
 local rocket_cap = 1000*kg
 
+local placevis = {
+  filename = "__core__/graphics/cursor-boxes-32x32.png",
+  priority = "extra-high-no-scale",
+  size = 64,
+  scale = 0.5,
+  x = 3 * 64
+}
+
 local function metal_machine_item(entity_id, icon, subgroup, order, splat)
   return util.merge{{
     type = "item",
@@ -59,7 +67,9 @@ data:extend{
     "data-card-programmer", "__base__/graphics/icons/fluid/steam.png",
     "production-machine", "ea[data-card-programmer]"
   ),
+}
 -- === Dust === --
+data:extend{
   pglobals.copy_then(
     data.raw["furnace"]["electric-furnace"],
     {
@@ -137,6 +147,66 @@ data:extend{
     "production-machine", "wa[electrostatic]"
   ),
 }
+
+-- Spaaaaace!
+--[[
+Scooping another lordmiguel idea thanks :]
+I am just going to make them long and tall solar panels
+that only require the *center* tile to be placed on a foundation
+]]
+
+local augh = pglobals.copy_then(data.raw["solar-panel"]["solar-panel"], {
+    name = "platform-solar-array",
+    flags = {"placeable-player", "placeable-neutral", "player-creation"},
+    icon = "__petraspace__/graphics/icons/platform-solar-array.png",
+    minable = { mining_time=1, result="platform-solar-array" },
+    -- 15 x 5
+    -- the picture is closer to 15x6, but hush
+    -- This collision box is mixel-y, but i would be surprised if anyone noticed
+    -- Basically it has a "real" footprint of 7 tiles high, but you can
+    -- cram another solar panel in right next to it
+    collision_box = {{-7.4, -2.9}, {7.4, 2.9}},
+    selection_box = {{-7.5, -3}, {7.5, 3}},
+    tile_width = 15, tile_height = 5,
+    surface_conditions = {{ property="gravity", max=0 }},
+    -- Asteroids only deal damage when hitting foundation, then they damage
+    -- whatever is on top.
+    -- So I can't make all of the panel take damage, ... just the
+    -- central spine you'll need to build
+    collision_mask = { layers = {
+      is_object=true, is_lower_object=true, transport_belt=true,
+    }},
+    tile_buildability_rules = {{
+      area={{-0.4, -0.4}, {0.4, 0.4}},
+      required_tiles={layers={ ground_tile=true }},
+      colliding_tiles={layers={ empty_space=true }},
+      remove_on_collision=true,
+    }},
+    placeable_position_visualization = placevis,
+    picture = {
+      filename = "__petraspace__/graphics/entities/platform-solar-array.png",
+      width = 955, height = 385,
+      scale = 0.5,
+    },
+    overlay = pglobals.null,
+    energy_source = { type = "electric", usage_priority = "solar" },
+    -- It is 10x as large as a solar panel; let's give 8x the power
+    production = "480kW",
+  })
+log(serpent.block(augh))
+data:extend{
+  augh,
+  pglobals.copy_then(data.raw["item"]["solar-panel"], {
+    name = "platform-solar-array",
+    icon = "__petraspace__/graphics/icons/platform-solar-array.png",
+    subgroup = "space-platform",
+    order = "az[platform-solar-array]",
+    stack_size = 10,
+    weight = rocket_cap / 10,
+    place_result = "platform-solar-array",
+  }),
+}
+
 
 -- Vulcanus
 local function heat_connect(x, y, dir)
@@ -233,13 +303,7 @@ data:extend{
         remove_on_collision = true,
       }
     },
-    placeable_position_visualization = {
-      filename = "__core__/graphics/cursor-boxes-32x32.png",
-      priority = "extra-high-no-scale",
-      size = 64,
-      scale = 0.5,
-      x = 3 * 64
-    },
+    placeable_position_visualization = placevis,
     --[[
     placeable_position_visualisation = {
       filename = "__space-age__/graphics/icons/fluid/lava.png",

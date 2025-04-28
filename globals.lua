@@ -1,23 +1,79 @@
-local planet_moon_map = {
+local pglobals = {
+  -- Gensym for nil
+  null = {},
+}
+
+pglobals.planet_moon_map = {
   nauvis = "viate",
   viate = "nauvis",
   vulcanus = "lepton",
   lepton = "vulcanus",
 }
+-- From util but listens to sentinels
+function pglobals.deepcopy(object)
+  if object == pglobals.null then return nil end
+  local lookup_table = {}
+  local function _copy(object)
+    if type(object) ~= "table" then
+      return object
+    elseif lookup_table[object] then
+      return lookup_table[object]
+    end
+    local new_table = {}
+    lookup_table[object] = new_table
+    for index, value in pairs(object) do
+      new_table[_copy(index)] = _copy(value)
+    end
+    return setmetatable(new_table, getmetatable(object))
+  end
+  return _copy(object)
+end
 
-local function copy_then(tbl, ...)
+function pglobals.merge(tables)
+  local ret = {}
+  for i, tab in ipairs(tables) do
+    for k, v in pairs(tab) do
+      if (type(v) == "table") then
+        if (type(ret[k] or false) == "table") then
+          ret[k] = pglobals.merge{ret[k], v}
+        else
+          ret[k] = pglobals.deepcopy(v)
+        end
+      else
+        ret[k] = v
+      end
+    end
+  end
+  return ret
+end
+ 
+function pglobals.merge1(tables)
+  local ret = {}
+  for i, tab in ipairs(tables) do
+    for k, v in pairs(tab) do
+      if (type(v) == "table") then
+        ret[k] = pglobals.deepcopy(v)
+      else
+        ret[k] = v
+      end
+    end
+  end
+  return ret
+end
+
+function pglobals.copy_then(tbl, ...)
   local table2 = util.copy(tbl)
   -- So PIL just lies to me and i have to use `...` and not `arg`
   -- also, i can't just ipairs over varargs due to ?????
   local varargs = table.pack(...)
   for _,splat in ipairs(varargs) do
-    table2 = util.merge{table2, splat}
+    table2 = pglobals.merge1{table2, splat}
   end
   return table2
 end
 
 -- Returns a function that makes a set, each key of the array mapped to default
-local function set_with(default)
+function pglobals.set_with(default)
   return function(array)
     local out = {}
     for _,v in ipairs(array) do
@@ -26,19 +82,19 @@ local function set_with(default)
     return out
   end
 end
-local function set(array)
-  return set_with(true)(array)
+function pglobals.set(array)
+  return pglobals.set_with(true)(array)
 end
 
-local function surface_prop(planet, prop_name)
+function pglobals.surface_prop(planet, prop_name)
   local default = data.raw["surface-property"].default_value
   
   local prop_value = data.raw["planet"].surface_properties[prop_name]
   return prop_value or default
 end
 
-local function make_empty_space(prefix, etc)
-  return copy_then(
+function pglobals.make_empty_space(prefix, etc)
+  return pglobals.copy_then(
     data.raw["tile"]["empty-space"],
     {
       name = prefix .. "-empty-space",
@@ -55,7 +111,7 @@ local function make_empty_space(prefix, etc)
   )
 end
 
-local function make_blobby_radius_expr(cfg)
+function pglobals.make_blobby_radius_expr(cfg)
   local out = {
     type = "noise-expression",
     name = cfg.name,
@@ -85,10 +141,10 @@ local function make_blobby_radius_expr(cfg)
           }/2+0.5 > (hang/lepton_overhang_ok*lepton_overhang_bonus))
     ]], cfg.seed)
   }
-  return copy_then(out, cfg.etc or {})
+  return pglobals.copy_then(out, cfg.etc or {})
 end
 
-local icons = {
+pglobals.icons = {
   mini_over = function(mini, background)
     return {
       {
@@ -175,12 +231,4 @@ local icons = {
     end
 }
 
-return {
-  planet_moon_map = planet_moon_map,
-  copy_then = copy_then,
-  set_with = set_with,
-  set = set,
-  make_empty_space = make_empty_space,
-  make_blobby_radius_expr = make_blobby_radius_expr,
-  icons = icons,
-}
+return pglobals
