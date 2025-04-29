@@ -18,4 +18,3 @@ data:extend{
 -- )
 -- bluescreen.variants.main[1].picture = "__petraspace__/graphics/tiles/bluescreen.png"
 -- data:extend{greenscreen, bluescreen}
-
