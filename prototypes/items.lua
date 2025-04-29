@@ -60,6 +60,7 @@ data:extend{
   ),
 }
 
+-- Common components
 data:extend{
   pglobals.copy_then(
     data.raw["item"]["electronic-circuit"],
@@ -77,21 +78,6 @@ data:extend{
       weight = rocket_cap / 400,
     }
   )
-}
-
--- Regolith
-data:extend{
-  pglobals.copy_then(
-    data.raw["item"]["stone"],
-    {
-      name = "regolith",
-      subgroup = "raw-resource",
-      -- after bauxite?
-      order = "fb[regolith]",
-      icon = "__petraspace__/graphics/icons/regolith/1.png",
-      pictures = make_pics("regolith", 4)
-    }
-  ),
 }
 
   -- === Aluminum === --
@@ -138,6 +124,21 @@ data:extend{
       subgroup = "aluminum-processes",
       order = "b[aluminum-plate]",
       icon = "__petraspace__/graphics/icons/aluminum-plate.png",
+    }
+  ),
+}
+
+-- Viate
+data:extend{
+  pglobals.copy_then(
+    data.raw["item"]["stone"],
+    {
+      name = "regolith",
+      subgroup = "raw-resource",
+      -- after bauxite?
+      order = "fb[regolith]",
+      icon = "__petraspace__/graphics/icons/regolith/1.png",
+      pictures = make_pics("regolith", 4)
     }
   ),
 }

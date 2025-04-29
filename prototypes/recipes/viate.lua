@@ -162,3 +162,52 @@ starterpack.ingredients = {
   {type="item", name="processing-unit", amount=50},
   {type="item", name="precision-optical-component", amount=50},
 }
+
+data:extend{
+  {
+    type = "recipe",
+    name = "empty-platform-tank",
+    category = "advanced-crafting",
+    enabled = false,
+    energy_required = 100,
+    ingredients = {
+      {type="item", name="low-density-structure", amount=20},
+      {type="item", name="iron-gear-wheel", amount=50},
+      {type="item", name="storage-tank", amount=5},
+      {type="item", name="pump", amount=5},
+    },
+    results = {{type="item", name="empty-platform-tank", amount=1}},
+    allow_productivity = true,
+    allow_decomposition = true,
+  },
+  {
+    type = "recipe",
+    name = "platform-fuel-tank",
+    category = "crafting-with-fluid",
+    enabled = false,
+    energy_required = 10,
+    ingredients = {
+      {type = "item", name="empty-platform-tank", amount=1},
+      {type = "fluid", name="thruster-fuel", amount=50000},
+    },
+    results = {{type="item", name="platform-fuel-tank", amount=1}},
+    allow_productivity = false,
+    allow_decomposition = true,
+    allow_quality = false,
+  },
+  {
+    type = "recipe",
+    name = "platform-oxidizer-tank",
+    category = "crafting-with-fluid",
+    enabled = false,
+    energy_required = 10,
+    ingredients = {
+      {type = "item", name="empty-platform-tank", amount=1},
+      {type = "fluid", name="thruster-oxidizer", amount=50000},
+    },
+    results = {{type="item", name="platform-oxidizer-tank", amount=1}},
+    allow_productivity = false,
+    allow_decomposition = true,
+    allow_quality = false,
+  },
+}

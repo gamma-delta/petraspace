@@ -82,7 +82,8 @@ local spience = data.raw["recipe"]["space-science-pack"]
 spience.ingredients = {
   {type="item", name="space-platform-foundation", amount=1},
   {type="item", name="precision-optical-component", amount=5},
-  {type="item", name="heat-pipe", amount=5},
+  {type="item", name="low-density-structure", amount=10},
+  {type="item", name="aluminum-plate", amount=10},
   {type="item", name="rocket-fuel", amount=5},
 }
 spience.surface_conditions = {{ property="gravity", max=2.5 }}

@@ -1,6 +1,7 @@
 local pglobals = {
   -- Gensym for nil
   null = {},
+  platform_juice_tank_volume = 50000
 }
 
 pglobals.planet_moon_map = {

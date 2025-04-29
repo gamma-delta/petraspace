@@ -260,6 +260,7 @@ tech_vanilla_spience.unit = {
   ingredients = science("rgbo"),
 }
 tech_vanilla_spience.effects = { recipe("space-science-pack") }
+-- SPACE AGE!
 local tech_vanilla_rocket = data.raw["technology"]["rocket-silo"]
 tech_vanilla_rocket.prerequisites = { "space-science-pack" }
 tech_vanilla_rocket.unit = {
@@ -273,6 +274,21 @@ tech_vanilla_rocket.effects = {
   recipe("space-platform-foundation"),
   recipe("space-platform-starter-pack"),
 }
+local tech_vanilla_splatform = data.raw["technology"]["space-platform"]
+tech_vanilla_splatform.effects = {
+  recipe("cargo-bay"),
+  recipe("thruster"),
+  recipe("empty-platform-tank"),
+  recipe("platform-fuel-tank"),
+  recipe("platform-oxidizer-tank"),
+}
+for _,planet_tech in ipairs{"vulcanus", "fulgora", "gleba"} do
+  local tech = data.raw["technology"]["planet-discovery-" .. planet_tech]
+  tech.prerequisites[1] = "space-platform"
+end
+local vanilla_thruster_tech = data.raw["technology"]["space-platform-thruster"]
+vanilla_thruster_tech.enabled = true
+vanilla_thruster_tech.visable_when_disabled = false
 
 -- Vulcanus I
 local foundry_tech = data.raw["technology"]["foundry"]

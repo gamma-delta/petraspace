@@ -26,10 +26,6 @@ local fill_up_rocket_juice = putil.on_any_built(function(evt)
   end
   if not juice_name then return end
 
-  entity.surface.create_entity{
-    name = "platform-juice-tank-secret-pump",
-    position = entity.position,
-  }
   entity.insert_fluid{
     name = juice_name,
     amount = entity.fluidbox.get_capacity(1)
@@ -38,8 +34,8 @@ end)
 
 -- Dust beacons are handled specially
 local COMPOUNDS = {
-  ["platform-fuel-tank"] = {"platform-juice-tank-secret-pump"},
-  ["platform-oxidizer-tank"] = {"platform-juice-tank-secret-pump"},
+  -- ["platform-fuel-tank"] = {"platform-juice-tank-secret-pump"},
+  -- ["platform-oxidizer-tank"] = {"platform-juice-tank-secret-pump"},
 }
 local kill_all_compounds = putil.on_any_removed(function(evt)
   local entity = evt.entity

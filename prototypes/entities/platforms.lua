@@ -3,14 +3,16 @@ local item_sounds = require("__base__/prototypes/item_sounds")
 local rocket_cap = 1000*kg
 
 -- TODO: fiddle with this amount
-local juice_tank_volume = 50000
 local pumping_speed = 20
-local function make_rocket_juice_tank_item(name, place_result)
+local function make_rocket_juice_tank_item(name, place_result, overlay)
   return {
     type = "item",
     name = name,
     stack_size = 1,
-    icon = "__base__/graphics/icons/storage-tank.png",
+    icons = pglobals.icons.mini_over(
+      overlay,
+      "__base__/graphics/icons/storage-tank.png"
+    ),
     subgroup = "space-related",
     -- TODO order
     inventory_move_sound = item_sounds.metal_large_inventory_move,
@@ -37,14 +39,12 @@ local function make_rocket_juice_tank(mode, juice_name)
     surface_conditions = {{property="gravity", max=0}},
 
     fluid_box = {
-      volume = juice_tank_volume,
+      volume = pglobals.platform_juice_tank_volume,
       filter = juice_name,
-      hide_connection_info = true,
       pipe_connections = {
-        -- This connects to the pump below
         {
           direction=defines.direction.south,
-          position={0, 0},
+          position={0, 5},
         },
       },
     },
@@ -61,43 +61,9 @@ local function make_rocket_juice_tank(mode, juice_name)
 end
 
 data:extend{
-  make_rocket_juice_tank_item("empty-platform-tank", nil),
-  make_rocket_juice_tank_item("platform-fuel-tank", "platform-fuel-tank"),
-  make_rocket_juice_tank_item("platform-oxidizer-tank", "platform-oxidizer-tank"),
+  make_rocket_juice_tank_item("empty-platform-tank", nil, "__core__/graphics/icons/alerts/fluid-icon-red.png"),
+  make_rocket_juice_tank_item("platform-fuel-tank", "platform-fuel-tank", "__space-age__/graphics/icons/fluid/thruster-fuel.png"),
+  make_rocket_juice_tank_item("platform-oxidizer-tank", "platform-oxidizer-tank", "__space-age__/graphics/icons/fluid/thruster-oxidizer.png"),
   make_rocket_juice_tank("fuel", "thruster-fuel"),
   make_rocket_juice_tank("oxidizer", "thruster-oxidizer"),
-  {
-    type = "pump",
-    name = "platform-juice-tank-secret-pump",
-    -- no idea what this does, but it's what the vanilla tank has
-    collision_box = {{-1.5, -5.5}, {1.5, 5.5}},
-    energy_source = { type = "void" },
-    energy_usage = "1W",
-    flow_scaling = false,
-    pumping_speed = pumping_speed,
-    flags = {
-      "not-on-map", "not-flammable",
-      "no-automated-item-insertion", "no-automated-item-removal",
-      "get-by-unit-number",
-    },
-    show_fluid_icon = false,
-    collision_mask = {layers={}},
-    hidden = true,
-    selectable_in_game = false,
-    fluid_box = {
-      pipe_covers = pglobals.copy_then(
-        pipecoverspictures(),
-        {
-          north = {filename="__core__/graphics/empty.png", size=1},
-          west = {filename="__core__/graphics/empty.png", size=1},
-          east = {filename="__core__/graphics/empty.png", size=1},
-        }
-      ),
-      volume = pumping_speed,
-      pipe_connections = {
-        {direction=defines.direction.north, position={0, 1}, flow_direction="input"},
-        {direction=defines.direction.south, position={0, 5}, flow_direction="output"},
-      }
-    }
-  }
 }
