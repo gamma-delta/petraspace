@@ -287,7 +287,7 @@ for _,planet_tech in ipairs{"vulcanus", "fulgora", "gleba"} do
   tech.prerequisites[1] = "space-platform"
 end
 local vanilla_thruster_tech = data.raw["technology"]["space-platform-thruster"]
-vanilla_thruster_tech.enabled = true
+vanilla_thruster_tech.enabled = false
 vanilla_thruster_tech.visable_when_disabled = false
 
 -- Vulcanus I

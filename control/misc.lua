@@ -52,6 +52,25 @@ local kill_all_compounds = putil.on_any_removed(function(evt)
   end
 end)
 
+local tmp_you_win = function(evt)
+  if evt.research.name ~= "space-platform" then return end
+  game.set_win_ending_info{
+    title="You win!",
+    message="This is all the content I have so far",
+    bullet_points={
+      "You rock",
+      "Wow they give you a lot of parameters here",
+      "Congration"
+    },
+    final_message = "A winner is you yay"
+  }
+  game.set_game_state{
+    can_continue=true,
+    game_finished=true,
+    player_won=true,
+  }
+end
+
 script.on_configuration_changed(function(_)
   for _,force in pairs(game.forces) do
     add_qai_techs(force)
@@ -66,6 +85,7 @@ return {
       [defines.events.on_force_created] = function(evt) 
         add_qai_techs(evt.force)
       end,
+      [defines.events.on_research_finished] = tmp_you_win
     }
   }
 }
