@@ -32,6 +32,11 @@ data:extend{
       factoriopedia_simulation = {
         init = make_resource("bauxite-ore"),
       },
+      -- Ore per cycle = yield% * 10
+      infinite = true,
+      minimum = 1,
+      normal = 10,
+      infinite_depletion_amount = 0.01,
     }
   ),
   pglobals.copy_then(

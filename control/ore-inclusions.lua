@@ -11,22 +11,20 @@ local function add_inclusions(evt, ok_surface, target, new, probability, richnes
   }
   for _,res in pairs(resources) do
     if math.random() < probability then
-      local new_richness = math.floor(res.amount * richness_coeff)
-      if new_richness < 1 then goto next end
+      local new_richness = math.ceil(res.amount * richness_coeff)
 
       surface.create_entity{
         name=new, position=res.position, amount=new_richness,
       }
       res.destroy()
     end
-    ::next::
   end
 end
 
 return {
   events = {
     [defines.events.on_chunk_generated] = function(evt)
-      add_inclusions(evt, "nauvis", "stone", "bauxite-ore", 1/40, 2.5) 
+      add_inclusions(evt, "nauvis", "stone", "bauxite-ore", 1/40, 0.001) 
     end
   }
 }
