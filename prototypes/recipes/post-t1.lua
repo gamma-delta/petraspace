@@ -52,7 +52,7 @@ data:extend{
     energy_required = 130,
     results = {
       { type="fluid", name="molten-aluminum", amount=50 },
-      { type="item", name="bauxite-ore", amount_min = 1, amount_max = 20, probability = 0.5 },
+      { type="item", name="iron-ore", amount_min = 0, amount_max = 20 },
     },
     main_product = "molten-aluminum",
     allow_productivity = true,

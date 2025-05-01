@@ -31,8 +31,6 @@ data:extend{
     energy_required = 30,
     results = {
       { type="item", name="native-aluminum", amount=1, },
-      -- Space age reference
-      { type="item", name="stone", amount_min=0, amount_max=5 },
     },
     auto_recycle = false,
     allow_productivity = true,
