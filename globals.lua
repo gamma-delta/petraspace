@@ -145,6 +145,14 @@ function pglobals.make_blobby_radius_expr(cfg)
   return pglobals.copy_then(out, cfg.etc or {})
 end
 
+pglobals.placevis = {
+  filename = "__core__/graphics/cursor-boxes-32x32.png",
+  priority = "extra-high-no-scale",
+  size = 64,
+  scale = 0.5,
+  x = 3 * 64
+}
+
 pglobals.icons = {
   mini_over = function(mini, background)
     return {

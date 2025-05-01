@@ -1,29 +1,26 @@
-local requires = {
-  "random-things",
-  "entities/squibs",
+require "prototypes/random-things"
+require "prototypes/entities/squibs"
 
-  "planets",
+require "prototypes/planets"
 
-  "items",
-  "entities/machines",
-  "entities/rockets",
-  "fluids",
-  "recipes",
-  "entities/resources",
-  "entities/logistics",
-  "entities/platforms",
-  "entities/gleba",
-  "technologies",
-  "entities/misc",
+require "prototypes/items"
+require "prototypes/entities/machines"
+require "prototypes/entities/rockets"
+require "prototypes/fluids"
+require "prototypes/recipes"
+require "prototypes/entities/resources"
+require "prototypes/entities/logistics"
+require "prototypes/entities/platforms"
+require "prototypes/entities/vulcanus"
+require "prototypes/entities/fulgora"
+require "prototypes/entities/gleba"
 
-  "dust-pollution",
+require "prototypes/technologies"
+require "prototypes/entities/misc"
 
-  "tips-and-tricks",
-}
+require "prototypes/dust-pollution"
 
-for _,req in ipairs(requires) do
-  require("__petraspace__/prototypes/" .. req)
-end
+require "prototypes/tips-and-tricks"
 
 -- must do these here because otherwise quality can't make the recycling
 -- recipes correctly
