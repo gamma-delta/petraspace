@@ -47,4 +47,39 @@ data:extend{
     trigger = {type="research", technology="rocket-propellants"},
     simulation = rocket_juice.many_kinds
   },
+
+  {
+    type = "tips-and-tricks-item-category",
+    name = "ps-misc",
+    order = "zzz",
+  },
+  {
+    type = "tips-and-tricks-item",
+    name = "misc-intro",
+    category = "ps-misc",
+    is_title = true,
+    order = "!first",
+    indent = 0,
+    starting_status = "unlocked",
+  },
+  {
+    type = "tips-and-tricks-item",
+    name = "flamethrower-suckening",
+    tag = "[item=flamethrower-turret]",
+    category = "ps-misc",
+    is_title = false,
+    order = "a",
+    indent = 1,
+    trigger = {type="research", technology="flamethrower"},
+  },
+  {
+    type = "tips-and-tricks-item",
+    name = "ps-rocket-weight",
+    tag = "[item=rocket-part]",
+    category = "ps-misc",
+    is_title = false,
+    order = "b",
+    indent = 1,
+    trigger = {type="build-entity", entity="lunar-rocket-silo"},
+  },
 }
