@@ -172,15 +172,10 @@ end
 
 function lrs_gui.check_update(evt)
   for _,player in ipairs(game.connected_players) do
-    local lrs = player.opened
-    if not lrs
-      or lrs.prototype.name ~= "rocket-silo"
-      or lrs.name ~= "lunar-rocket-silo"
-    then goto continue end
     local the_gui = player.gui.relative["ps-lrs"]
-    if not the_gui then goto continue end
-    lrs_gui.update_gui(lrs, the_gui)
-    ::continue::
+    if the_gui then
+      lrs_gui.update_gui(player.selected, the_gui)
+    end
   end
 end
 
