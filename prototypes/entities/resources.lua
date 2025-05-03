@@ -123,5 +123,31 @@ data:extend{
         init = make_resource("regolith-deposit"),
       }
     }
-  )
+  ),
 }
+
+local watery_oil = pglobals.copy_then(
+  data.raw["resource"]["crude-oil"],
+  {
+    name = "watery-crude-oil",
+    factoriopedia_simulation = {
+      init = make_resource("watery-crude-oil"),
+    },
+  }
+)
+local wo_sv = watery_oil.stateless_visualisation
+wo_sv[1].animation.filename = "__petraspace__/graphics/entities/evil-crude-oil.png"
+-- blue
+wo_sv[3].animation.tint[3] = wo_sv[3].animation.tint[3] * 1.5
+-- Stay on crude-oil autoplace
+table.insert(watery_oil.minable.results, {type="fluid", name="water", amount=2})
+-- Ideally the amount of water would not go down over time,
+-- but i don't have the autoplace chops to do that
+
+data:extend{watery_oil}
+
+-- Add resources to planets
+local nauvis = data.raw["planet"]["nauvis"]
+local nauvis_gen = nauvis.map_gen_settings.autoplace_settings["entity"].settings
+nauvis_gen["crude-oil"] = nil
+nauvis_gen["watery-crude-oil"] = {}
