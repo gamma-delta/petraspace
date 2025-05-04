@@ -41,6 +41,59 @@ fulgoran_lightningrod.chargable_graphics.charge_light = {
 local small_rod = data.raw["lightning-attractor"]["lightning-rod"]
 small_rod.range_elongation = 10
 
+-- Make the vault an accumulator
+local brightlines = {
+  filename = "__petraspace__/graphics/entities/fulgoran/vault-accumulator-light.png",
+  width = 960, height = 640,
+  scale = 0.5,
+  shift = util.by_pixel(18.5/2, -6/2), -- from vanilla
+  priority = "high",
+  line_length = 4,
+  frame_count = 16,
+  draw_as_glow = true,
+  blend_mode = "additive",
+}
+local vault = pglobals.copy_then(data.raw["simple-entity"]["fulgoran-ruin-vault"], {
+  type = "accumulator",
+  -- It's about 14x8. That could store 28 accumulators.
+  -- Let's make it 50 worth.
+  -- Slow charge speed, split-second discharge speed.
+  energy_source = {
+    type = "electric",
+    usage_priority = "tertiary",
+    buffer_capacity = (5 * 50) .. "MJ",
+    input_flow_limit = (300 * 20) .. "kW",
+    output_flow_limit = "1GW",
+  },
+  pictures = nil,
+  chargable_graphics = {
+    picture = util.sprite_load(
+      "__space-age__/graphics/decorative/fulgoran-ruin/fulgoran-ruin-vault",
+      {
+        scale = 0.5,
+      }
+    ),
+    -- For some reason, standard is that the *discharge* is brighter?
+    discharge_animation = {
+      layers = {
+        brightlines,
+      }
+    },
+    charge_animation = {
+      layers = {
+        pglobals.copy_then(brightlines, {
+          filename = "__petraspace__/graphics/entities/fulgoran/vault-accumulator-dark.png",
+          animation_speed = 0.51,
+        }),
+      }
+    },
+    -- idk this is what vanilla accumulator does
+    charge_cooldown = 30, discharge_cooldown = 60,
+  }
+})
+data.raw["simple-entity"]["fulgoran-ruin-vault"] = nil
+data:extend{vault}
+
 -- t1
 data:extend{
   {
