@@ -21,6 +21,23 @@ fulgoran_lightningrod.minable.mining_time = 5
 -- this has a range of 20 by default
 fulgoran_lightningrod.range_elongation = 25
 
+fulgoran_lightningrod.chargable_graphics.charge_light = {
+  intensity = 2.0,
+  size = 9.0,
+  minimum_darkness = 0.9,
+  add_perspective = true,
+  color = {0.9, 0.5, 0.95},
+  flicker_interval = 2,
+  flicker_min_modifier = 0.1,
+  flicker_max_modifier = 1.0,
+  offset_flicker = true,
+  shift = {0.5, -4.0},
+}
+-- Discharge lights look really naff.
+-- The orb on the top is not in the same place in every graphic.
+-- This looks OK for the lightning because it only connects for a split
+-- second, but the light is really clearly off-center most of the time
+
 local small_rod = data.raw["lightning-attractor"]["lightning-rod"]
 small_rod.range_elongation = 10
 
