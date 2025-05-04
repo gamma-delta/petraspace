@@ -8,8 +8,7 @@
     "space-age >= 2.0.0",
     "ch-concentrated-solar",
     "PlanetsLib >= 1.2.20",
-    "quick-adjustable-inserters >= 2.0.6",
-    "furnace-recipe-selection"
+    "quick-adjustable-inserters >= 2.0.6"
   ],
   "quality_required": true,
   "space_travel_required": true,

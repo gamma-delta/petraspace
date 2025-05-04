@@ -1,6 +1,26 @@
 local pglobals = require("__petraspace__/globals")
 local rocket_cap = 1000 * kg;
 
+-- Move gasses to be gasses
+local function togas(name, order)
+  local gas = data.raw["fluid"][name]
+  gas.subgroup = "gasses"
+  gas.order = "a[existing-gas]-" .. order
+end
+togas("steam", "a")
+togas("petroleum-gas", "b")
+togas("ammonia", "c")
+togas("fluorine", "d")
+-- i guess it's a "gas"
+-- source: they might be giants
+togas("fusion-plasma", "e")
+
+-- Assign crafting categories
+table.insert(data.raw["assembling-machine"]["chemical-plant"].crafting_categories, "electrochemistry")
+table.insert(data.raw["assembling-machine"]["electromagnetic-plant"].crafting_categories, "electrochemistry")
+table.insert(data.raw["furnace"]["stone-furnace"].crafting_categories, "dirty-smelting")
+table.insert(data.raw["furnace"]["steel-furnace"].crafting_categories, "dirty-smelting")
+
 -- Let you place the rocket silo on airless moons but not space platforms
 data.raw["rocket-silo"]["rocket-silo"].surface_conditions = 
   {{property="gravity", min=1}}
@@ -36,23 +56,6 @@ data.raw["item"]["assembling-machine-1"].weight = rocket_cap / 100
 -- frankly i'm surprised they didn't already update it
 data.raw["item"]["chemical-plant"].stack_size = 50
 data.raw["item"]["chemical-plant"].weight = rocket_cap / 50
-
--- Move gasses to be gasses
-local function togas(name, order)
-  local gas = data.raw["fluid"][name]
-  gas.subgroup = "gasses"
-  gas.order = "a[existing-gas]-" .. order
-end
-togas("steam", "a")
-togas("petroleum-gas", "b")
-togas("ammonia", "c")
-togas("fluorine", "d")
--- i guess it's a "gas"
--- source: they might be giants
-togas("fusion-plasma", "e")
-
-table.insert(data.raw["assembling-machine"]["chemical-plant"].crafting_categories, "electrochemistry")
-table.insert(data.raw["assembling-machine"]["electromagnetic-plant"].crafting_categories, "electrochemistry")
 
 -- Remove OG rocket juice recipes
 data.raw["recipe"]["thruster-fuel"].hidden = true

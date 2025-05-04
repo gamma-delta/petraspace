@@ -1,3 +1,4 @@
+local misc_tnt = require("prototypes/simulations/misc-tipsntricks")
 local viate_tnt = require("prototypes/simulations/viate-tipsntricks")
 local rocket_juice = require("prototypes/simulations/rocket-juice")
 
@@ -64,11 +65,22 @@ data:extend{
   },
   {
     type = "tips-and-tricks-item",
+    name = "dirty-steel",
+    tag = "[item=steel-plate]",
+    simulation = misc_tnt.dirty_steel,
+    category = "ps-misc",
+    is_title = false,
+    order = "a",
+    indent = 1,
+    trigger = {type="research", technology="steel-processing"},
+  },
+  {
+    type = "tips-and-tricks-item",
     name = "flamethrower-suckening",
     tag = "[item=flamethrower-turret]",
     category = "ps-misc",
     is_title = false,
-    order = "a",
+    order = "b",
     indent = 1,
     trigger = {type="research", technology="flamethrower"},
   },
@@ -78,7 +90,7 @@ data:extend{
     tag = "[item=rocket-part]",
     category = "ps-misc",
     is_title = false,
-    order = "b",
+    order = "c",
     indent = 1,
     trigger = {type="build-entity", entity="lunar-rocket-silo"},
   },

@@ -1,4 +1,5 @@
-local welcome = {
+local out = {}
+out.welcome = {
   planet = "viate",
   generate_map = true,
 
@@ -19,7 +20,7 @@ local welcome = {
   ]]
 }
 
-local dust = {
+out.dust = {
   planet = "viate",
   generate_map = false,
   checkerboard = true,
@@ -55,7 +56,4 @@ local dust = {
   ]]
 }
 
-return {
-  welcome = welcome,
-  dust = dust,
-}
+return out

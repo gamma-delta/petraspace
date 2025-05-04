@@ -1,6 +1,11 @@
 data:extend{
   {
     type = "recipe-category",
+    -- Smelting done in fueled furnaces
+    name = "dirty-smelting",
+  },
+  {
+    type = "recipe-category",
     name = "data-card-programming",
   },
   {
