@@ -54,3 +54,18 @@ for _,sp in ipairs{
   local proto = data.raw["tool"][sp]
   proto.localised_description = { "technology-description." .. sp }
 end
+
+-- Make self-recycling recipes produce much more pollution
+for _,recipe in pairs(data.raw["recipe"]) do
+  local ins = recipe.ingredients
+  local outs = recipe.results
+  if recipe.name:match("-recycling$")
+    and #ins == 1
+    and #outs == 1
+    and ins[1].name == outs[1].name
+  then
+    recipe.emissions_multiplier = 5
+  end
+end
+-- While i'm at it tweak other pollution amounts
+data.raw["recipe"]["scrap-recycling"].emissions_multiuplier = 0.1

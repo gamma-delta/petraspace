@@ -108,6 +108,7 @@ energy_dust(asm["assembling-machine-3"].energy_source, 20)
 energy_dust(asm["centrifuge"].energy_source, 30)
 local furnaces = data.raw["furnace"]
 energy_dust(furnaces["recycler"].energy_source, 15)
+energy_dust(data.raw["roboport"]["roboport"].energy_source, 30)
 
 -- todo: make tesla turrets dusty? it will be quite the PITA to impl
 -- you'll never use them on Viate or Fulgora anyways
