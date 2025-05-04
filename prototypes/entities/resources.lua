@@ -145,7 +145,10 @@ wo_sv[3].animation.tint[3] = wo_sv[3].animation.tint[3] * 1.5
 -- Nauvis will still try to use autoplace-spec:crude-oil, and the only thing
 -- assigned to that that is still allowed is this new watery oil.
 -- Add a helper line to the output so that the player knows it produces ~* some *~ water
-table.insert(watery_oil.minable.results, {type="fluid", name="water", amount=0})
+watery_oil.minable.results = {
+  {type="fluid", name="water", amount=10, probability=0.2},
+  {type="fluid", name="crude-oil", amount=10}
+}
 
 -- Spawn this with the ore inclusions script
 local oily_water = pglobals.copy_then(
@@ -173,7 +176,8 @@ local oily_water = pglobals.copy_then(
   }
 )
 
-data:extend{watery_oil, oily_water}
+-- data:extend{watery_oil, oily_water}
+data:extend{watery_oil}
 
 -- Add resources to planets
 local nauvis = data.raw["planet"]["nauvis"]

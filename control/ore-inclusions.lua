@@ -20,10 +20,11 @@ local function add_inclusions(evt)
           res.destroy()
         end
       elseif res.name == "watery-crude-oil" then
-          local new_richness = res.amount * 0.2
-          surface.create_entity{
-            name="watery-crude-oil-water", position=res.position, amount=new_richness,
-          }
+        -- local new_richness = res.amount * 0.2
+        -- surface.create_entity{
+        --   name="watery-crude-oil-water", position=res.position,
+        --   amount=new_richness,
+        -- }
       end
     end
   end
