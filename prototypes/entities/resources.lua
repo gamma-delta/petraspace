@@ -140,11 +140,40 @@ wo_sv[1].animation.filename = "__petraspace__/graphics/entities/evil-crude-oil.p
 -- blue
 wo_sv[3].animation.tint[3] = wo_sv[3].animation.tint[3] * 1.5
 -- Stay on crude-oil autoplace
-table.insert(watery_oil.minable.results, {type="fluid", name="water", amount=2})
--- Ideally the amount of water would not go down over time,
--- but i don't have the autoplace chops to do that
+-- The crude-oil *autoplace spec* usually only places an entity *crude-oil*.
+-- Below, I make it so entity:crude-oil cannot spawn on nauvis.
+-- Nauvis will still try to use autoplace-spec:crude-oil, and the only thing
+-- assigned to that that is still allowed is this new watery oil.
+-- Add a helper line to the output so that the player knows it produces ~* some *~ water
+table.insert(watery_oil.minable.results, {type="fluid", name="water", amount=0})
 
-data:extend{watery_oil}
+-- Spawn this with the ore inclusions script
+local oily_water = pglobals.copy_then(
+  data.raw["resource"]["crude-oil"],
+  {
+    name = "watery-crude-oil-water",
+    hidden = true,
+    highlight = false,
+    minimum = 60000,
+    normal = 100000,
+    infinite_depletion_amount = 5,
+    minable = {
+      mining_time = 1,
+      results = {{type="fluid", name="water", amount=10}}
+    },
+    stage_counts = {},
+    stages = nil,
+    stateless_visualisation = nil,
+    autoplace = nil,
+
+    selectable_in_game = false,
+    -- for editor mode
+    selection_priority = 255,
+    selection_box = {{-0.4, -0.4}, {0.4, 0.4}},
+  }
+)
+
+data:extend{watery_oil, oily_water}
 
 -- Add resources to planets
 local nauvis = data.raw["planet"]["nauvis"]

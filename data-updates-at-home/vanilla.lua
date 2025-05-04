@@ -127,3 +127,9 @@ data.raw["utility-constants"]["default"].space_platform_acceleration_expression 
 local thruster = data.raw["thruster"]["thruster"]
 thruster.min_performance.fluid_usage = thruster.min_performance.fluid_usage * 10
 thruster.max_performance.fluid_usage = thruster.max_performance.fluid_usage * 10
+
+-- Why is this a thing
+-- TODO: have this be an upgrade?
+data.raw["pump"]["pump"].flow_scaling = false
+-- make evil fluid mining work
+data.raw["mining-drill"]["pumpjack"].shuffle_resources_to_mine = true
