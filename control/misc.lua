@@ -71,6 +71,11 @@ local tmp_you_win = function(evt)
   }
 end
 
+script.on_init(function(_)
+  for _,force in pairs(game.forces) do
+    add_qai_techs(force)
+  end
+end)
 script.on_configuration_changed(function(_)
   for _,force in pairs(game.forces) do
     add_qai_techs(force)

@@ -44,6 +44,22 @@ for _,lab in pairs(data.raw["lab"]) do
   table.insert(lab.inputs, "orbital-science-pack")
 end
 
+-- Move fluid mining all the way to the beginning of the game
+local fluid_mining = data.raw["technology"]["uranium-mining"]
+fluid_mining.icon = "__petraspace__/graphics/technologies/fluid-mining.png"
+fluid_mining.prerequisites = {"electric-mining-drill"}
+fluid_mining.unit = {
+  count = 30,
+  ingredients = science("r"),
+  time = 10,
+}
+-- TODO: bump uranium processing to later in the tech tree.
+-- Fiddling with this now because it feels ugly, but will work on it more later
+data.raw["technology"]["uranium-processing"].prerequisites = {
+  "uranium-mining",
+  "chemical-science-pack",
+}
+
 -- Fuck you make steel
 -- I think part of the vertical difficulty curve of bluence is
 -- that you have to make steel *and* oil, and steel requires

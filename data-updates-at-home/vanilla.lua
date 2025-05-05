@@ -130,3 +130,9 @@ data.raw["utility-constants"]["default"].space_platform_acceleration_expression 
 local thruster = data.raw["thruster"]["thruster"]
 thruster.min_performance.fluid_usage = thruster.min_performance.fluid_usage * 10
 thruster.max_performance.fluid_usage = thruster.max_performance.fluid_usage * 10
+
+-- Make heating towers pollute more than burners
+-- Wiki says that HTs make 24MJ/pollution, boilers make 3.6MJ
+-- So HTs are 6 2/3 times better.
+local ht = data.raw["reactor"]["heating-tower"]
+ht.energy_source.emissions_per_minute.pollution = 100 * 20
