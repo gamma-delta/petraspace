@@ -2,7 +2,7 @@
 -- Thanks for making it MIT licensed, but less thanks for not distributing
 -- the source code anywhere...
 -- Ideally this would be done at generation time :<
-local function add_inclusions(evt, ok_surface, target, new, probability, richness_coeff)
+local function add_inclusions(evt)
   local surface = evt.surface
 
   if surface.name == "nauvis" then
@@ -26,7 +26,6 @@ local function add_inclusions(evt, ok_surface, target, new, probability, richnes
       end
     end
   end
-
 end
 
 return {
