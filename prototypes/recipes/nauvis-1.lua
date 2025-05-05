@@ -44,6 +44,8 @@ data:extend{
   },
 }
 
+-- Add some stuff for the early game.
+
 -- Steel needs nasty fuel
 data.raw["recipe"]["steel-plate"].category = "dirty-smelting"
 
@@ -142,3 +144,11 @@ data.raw["recipe"]["low-density-structure"].ingredients = {
   { type="item", name="aluminum-plate", amount=1 },
   { type="item", name="plastic-bar", amount=5 },
 }
+
+-- stop POSTING about SHOVING STONE INTO CHESTS
+-- this is only 1 iron plate per 50 stone, quite cheap,
+-- but it means you can't compress stone 50->1 and need to
+-- actually handle it.
+-- Turn it into ourple science or make your walls thicker or something.
+table.insert(data.raw["recipe"]["landfill"].ingredients, 
+  {type="item", name="iron-stick", amount=2})

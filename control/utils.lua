@@ -76,7 +76,7 @@ utils.on_type_by_tick = function(entity_name, ticks, fn)
     if entity.name == entity_name then
       -- game.print("Registering " .. tostring(entity) .. " for tick evts")
       storage.on_type_by_tick[entity_name][entity] = true
-      game.print(serpent.block(storage.on_type_by_tick))
+      -- game.print(serpent.block(storage.on_type_by_tick))
     end
   end)
 

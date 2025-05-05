@@ -123,5 +123,55 @@ data:extend{
         init = make_resource("regolith-deposit"),
       }
     }
-  )
+  ),
 }
+
+-- play with coal
+local anthracite = pglobals.copy_then(data.raw["resource"]["coal"], {
+  name = "anthracite-coal",
+  map_color = { 0, 0, 0 },
+  icon = "__base__/graphics/icons/coal.png",
+  minable = {
+    mining_particle = "coal-particle",
+    mining_time = 2,
+    result = "coal",
+    required_fluid = "steam",
+    -- 1 coal produces 4MJ * (60 steam/s / 1.8 MW) = 133 steam
+    -- However, this is per TEN ore mined. Of course the wiki does
+    -- not in any way mention this
+    fluid_amount = 200,
+  },
+  stages = { sheet = {
+    filename = "__petraspace__/graphics/entities/anthracite-coal.png",
+    priority = "extra-high",
+    size = 128,
+    frame_count = 8,
+    variation_count = 8,
+    scale = 0.5,
+  } },
+
+  factoriopedia_simulation = {
+    init = make_resource("anthracite-coal"),
+  }
+})
+-- override coal
+anthracite.autoplace.probability_expression = 
+  "(" .. anthracite.autoplace.richness_expression ..
+  ") > sqrt(distance + 100) * 100 + distance"
+anthracite.autoplace.richness_expression = 
+  "(" .. anthracite.autoplace.richness_expression .. ") * 1.7"
+data:extend{anthracite}
+
+-- Make OG coal spawn around anthracite
+local coal = data.raw["resource"]["coal"]
+coal.map_color = {0.1, 0.1, 0.1}
+-- spawn right after
+coal.autoplace.order = "ba"
+
+local nauvis_mgs = data.raw["planet"]["nauvis"].map_gen_settings
+nauvis_mgs.autoplace_settings.entity.settings["anthracite-coal"] = {}
+local vulcanus_mgs = data.raw["planet"]["vulcanus"].map_gen_settings
+vulcanus_mgs.property_expression_names["entity:coal:probability"] = nil
+vulcanus_mgs.property_expression_names["entity:coal:richness"] = nil
+vulcanus_mgs.property_expression_names["entity:anthracite-coal:probability"] = "vulcanus_coal_probability"
+vulcanus_mgs.property_expression_names["entity:anthracite-coal:richness"] = "vulcanus_coal_richness"
