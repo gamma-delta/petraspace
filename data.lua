@@ -14,6 +14,7 @@ require "prototypes/entities/platforms"
 require "prototypes/entities/vulcanus"
 require "prototypes/entities/fulgora"
 require "prototypes/entities/gleba"
+require "prototypes/entities/enemies/sapper"
 
 require "prototypes/technologies"
 require "prototypes/entities/misc"
