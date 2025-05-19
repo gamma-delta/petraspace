@@ -566,7 +566,7 @@ table.insert(spawner_units, {"small-sapper-pentapod",
 table.insert(spawner_units, {"medium-sapper-pentapod",
   {{0.1, 0.0}, {0.6, 0.35}, {0.9, 0.0}}})
 table.insert(spawner_units, {"big-sapper-pentapod",
-  {{6.0, 0.0}, {0.7, 0.2}, {0.95, 0.25}}})
+  {{0.6, 0.0}, {0.7, 0.2}, {0.95, 0.25}}})
 
 -- While i'm here, push back stompers
 for _,unit in ipairs(spawner_units) do

@@ -1,3 +1,12 @@
+-- Fuck you make steel
+-- I think part of the vertical difficulty curve of bluence is
+-- that you have to make steel *and* oil, and steel requires
+-- a startlingly huge footprint
+table.insert(
+  data.raw["recipe"]["logistic-science-pack"].ingredients, 
+  {type="item", name="steel-plate", amount=1}
+)
+
 data:extend{
   {
     type = "recipe",

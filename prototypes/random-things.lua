@@ -26,5 +26,9 @@ data:extend{
     type = "fuel-category",
     name = "mfp-scouts",
     fuel_value_type = {"description.mfp-scouts-energy-value"}
-  }
+  },
+  {
+    type = "fuel-category",
+    name = "antimatter",
+  },
 }

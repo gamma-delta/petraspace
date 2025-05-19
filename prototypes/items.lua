@@ -63,6 +63,15 @@ data:extend{
 -- Common components
 data:extend{
   pglobals.copy_then(
+    data.raw["item"]["plastic-bar"],
+    {
+      name = "circuit-substrate",
+      order = "b[circuits]-![circuit-substrate]",
+      icon = "__petraspace__/graphics/icons/circuit-substrate.png",
+      weight = rocket_cap / 1000,
+    }
+  ),
+  pglobals.copy_then(
     data.raw["item"]["electronic-circuit"],
     {
       name = "precision-optical-component",
@@ -283,6 +292,34 @@ data:extend{
     "__petraspace__/graphics/icons/orbital-data-card.png",
     "be", 60*60*15
   ),
+}
+
+data:extend{
+  {
+    type = "item",
+    name = "antimatter-cell",
+    stack_size = 1,
+    icons = {
+      { icon = "__petraspace__/graphics/icons/antimatter-cell.png" },
+      { icon = "__petraspace__/graphics/icons/antimatter-cell-glow.png" },
+    },
+    pictures = { layers = {
+      {
+        filename = "__petraspace__/graphics/icons/antimatter-cell.png",
+        size = 64,
+        scale = 0.5,
+      },
+      {
+        filename = "__petraspace__/graphics/icons/antimatter-cell-glow.png",
+        size = 64,
+        scale = 0.5,
+        draw_as_light = true,
+      },
+    }},
+
+    fuel_category = "antimatter",
+    fuel_value = "500GJ"
+  },
 }
 
 -- === Science! === --

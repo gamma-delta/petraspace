@@ -60,14 +60,10 @@ data.raw["technology"]["uranium-processing"].prerequisites = {
   "chemical-science-pack",
 }
 
--- Fuck you make steel
--- I think part of the vertical difficulty curve of bluence is
--- that you have to make steel *and* oil, and steel requires
--- a startlingly huge footprint
-table.insert(
-  data.raw["recipe"]["logistic-science-pack"].ingredients, 
-  {type="item", name="steel-plate", amount=1}
-)
+table.insert(data.raw["technology"]["electronics"].effects, recipe("circuit-substrate-stone"))
+table.insert(data.raw["technology"]["electronics"].effects, recipe("circuit-substrate-wood"))
+table.insert(data.raw["technology"]["plastics"].effects, recipe("circuit-substrate-plastic"))
+
 table.insert(
   data.raw["technology"]["logistic-science-pack"].prerequisites,
   "steel-processing"
@@ -277,6 +273,22 @@ tech_vanilla_spience.unit = {
 }
 tech_vanilla_spience.effects = { recipe("space-science-pack") }
 -- SPACE AGE!
+data:extend{
+  {
+    type = "technology",
+    name = "dust-spraydown",
+    -- TODO
+    icon = "__petraspace__/graphics/technologies/thermodynamics.png",
+    icon_size = 256,
+    prerequisites = { "space-science-pack" },
+    unit = { count = 50, time = 10, ingredients = science("s") },
+    effects = {
+      recipe("dust-sprayer"),
+      recipe("dust-spraydown-water"),
+    },
+  },
+}
+
 local tech_vanilla_rocket = data.raw["technology"]["rocket-silo"]
 tech_vanilla_rocket.prerequisites = { "space-science-pack" }
 tech_vanilla_rocket.unit = {
@@ -307,15 +319,18 @@ vanilla_thruster_tech.enabled = false
 vanilla_thruster_tech.visable_when_disabled = false
 
 -- Vulcanus I
-local foundry_tech = data.raw["technology"]["foundry"]
-for i, v in ipairs(foundry_tech.effects) do
-  if v.type == "unlock-recipe" and v.recipe == "casting-low-density-structure" then
-    table.remove(foundry_tech.effects, i)
-    break
-  end
-end
+pglobals.tech.remove_unlock("foundry", "casting-low-density-structure")
 
 -- Gleba I
+-- Strike out coal synth and good sulfur
+pglobals.tech.remove_unlock("rocket-turret", "coal-synthesis")
+pglobals.tech.remove_unlock("bioflux-processing", "biosulfur")
+
+table.insert(data.raw["technology"]["bacteria-cultivation"].effects, 
+  recipe("light-oil-reforming"))
+table.insert(data.raw["technology"]["bacteria-cultivation"].effects, 
+  recipe("heavy-oil-reforming"))
+
 data:extend{
   {
     type = "technology",
@@ -332,7 +347,6 @@ data:extend{
     }
   }
 }
-
 
 data:extend{
   -- Each pair of inner planets has its own cool technology.

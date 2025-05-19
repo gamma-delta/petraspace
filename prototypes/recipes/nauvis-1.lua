@@ -29,13 +29,10 @@ data:extend{
       {type="fluid", name="steam", amount=500},
     },
     energy_required = 30,
-    results = {
-      { type="item", name="native-aluminum", amount=1, },
-    },
+    results = {{type="item", name="native-aluminum", amount=1}},
     auto_recycle = false,
     allow_productivity = true,
     allow_decomposition = false,
-    -- TODO
     icons = pglobals.icons.two_into_one(
       "__base__/graphics/icons/fluid/sulfuric-acid.png",
       "__base__/graphics/icons/fluid/steam.png",
@@ -44,10 +41,113 @@ data:extend{
   },
 }
 
--- Add some stuff for the early game.
+-- Nauvian circuit substrate recipes
+-- This makes the fulgoran recycling ratios a little different,
+-- but you can still get plenty of iron from gears
+-- and copper from LDS and POC and whatever
+data:extend{
+  {
+    type = "recipe",
+    name = "circuit-substrate-stone",
+    subgroup = "intermediate-product",
+    order = "b[circuits]-![circuit-substrate]-a",
+    category = "crafting",
+    enabled = false,
+    ingredients = {
+      {type="item", name="stone-brick", amount=1},
+      {type="item", name="copper-plate", amount=1},
+    },
+    energy_required = 0.5,
+    results = {{type="item", name="circuit-substrate", amount=1}},
+    allow_productivity = true,
+    auto_recycle = false,
+    -- the "default" i suppose
+    allow_decomposition = true,
+    icons = pglobals.icons.mini_over(
+      "__base__/graphics/icons/stone-brick.png",
+      "__petraspace__/graphics/icons/circuit-substrate.png"
+    )
+  },
+  {
+    type = "recipe",
+    name = "circuit-substrate-wood",
+    subgroup = "intermediate-product",
+    order = "b[circuits]-![circuit-substrate]-b",
+    -- TODO: assembling or biochamber
+    -- For some reason organics-or-hand-crafting doesn't work in asm1
+    category = "electronics",
+    enabled = false,
+    ingredients = {
+      {type="item", name="wood", amount=2},
+      {type="item", name="copper-plate", amount=1},
+    },
+    energy_required = 1.0,
+    results = {{type="item", name="circuit-substrate", amount=2}},
+    allow_productivity = true,
+    auto_recycle = false,
+    allow_decomposition = false,
+    icons = pglobals.icons.mini_over(
+      "__base__/graphics/icons/wood.png",
+      "__petraspace__/graphics/icons/circuit-substrate.png"
+    )
+  },
+  {
+    type = "recipe",
+    name = "circuit-substrate-plastic",
+    subgroup = "intermediate-product",
+    order = "b[circuits]-![circuit-substrate]-c",
+    category = "electronics",
+    enabled = false,
+    ingredients = {
+      {type="item", name="plastic-bar", amount=10},
+      {type="item", name="copper-plate", amount=5},
+      {type="item", name="copper-cable", amount=15},
+    },
+    energy_required = 10.0,
+    results = {{type="item", name="circuit-substrate", amount=20}},
+    allow_productivity = true,
+    auto_recycle = false,
+    allow_decomposition = false,
+    icons = pglobals.icons.mini_over(
+      "__base__/graphics/icons/plastic-bar.png",
+      "__petraspace__/graphics/icons/circuit-substrate.png"
+    )
+  },
+}
+pglobals.recipe.replace("electronic-circuit", "iron-plate", "circuit-substrate")
+-- they are very tall
+table.insert(data.raw["recipe"]["advanced-circuit"].ingredients,
+  {type="item", name="circuit-substrate", amount=2})
+data.raw["recipe"]["processing-unit"].ingredients = {
+  {type="item", name="advanced-circuit", amount=2},
+  {type="item", name="electronic-circuit", amount=20},
+  {type="item", name="circuit-substrate", amount=5},
+  -- more properly, nitric acid is used for this
+  -- however, i want sulfuric and acid to have seperate identities.
+  -- Sulfuric is used for grungy mechanical processes
+  -- Nitric is used for clean futuristic processes
+  {type="fluid", name="sulfuric-acid", amount=20},
+}
 
 -- Steel needs nasty fuel
+-- Apparently there are only 4 smelting recipes in vanilla:
+-- iron, copper, steel, and bricks
 data.raw["recipe"]["steel-plate"].category = "dirty-smelting"
+
+-- Sulfur can be produced with only petro gas,
+-- so cracking can require sulfuric acid.
+pglobals.recipe.replace("heavy-oil-cracking", "water",
+  {type="fluid", name="sulfuric-acid", amount=20})
+pglobals.recipe.replace("light-oil-cracking", "water",
+  {type="fluid", name="sulfuric-acid", amount=20})
+
+-- Misc mall ingredient changes
+table.insert(data.raw["recipe"]["medium-electric-pole"].ingredients,
+  {type="item", name="stone-brick", amount=2})
+table.insert(data.raw["recipe"]["big-electric-pole"].ingredients,
+  {type="item", name="concrete", amount=2})
+table.insert(data.raw["recipe"]["substation"].ingredients,
+  {type="item", name="refined-concrete", amount=10})
 
 local function poc_recipe(hi_pressure)
   local name = hi_pressure and "high-pressure" or "low-pressure"

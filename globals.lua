@@ -153,6 +153,36 @@ pglobals.placevis = {
   x = 3 * 64
 }
 
+pglobals.recipe = {
+  replace = function(recipe_name, original, new)
+    local recipe = data.raw["recipe"][recipe_name]
+    for i,ingr in ipairs(recipe.ingredients) do
+      if ingr.name == original then
+        local new_tbl = new
+        if type(new) ~= "table" then
+          -- Keep count and type, swap name
+          new_tbl = pglobals.copy_then(ingr, {name=new})
+        end
+        recipe.ingredients[i] = new_tbl
+        return
+      end
+    end
+    log("warning! recipe " .. recipe.name .. " did not have ingredient " .. original)
+  end
+}
+
+pglobals.tech = {
+  remove_unlock = function(tech_name, recipe)
+    local tech = data.raw["technology"][tech_name]
+    for i, v in ipairs(tech.effects) do
+      if v.type == "unlock-recipe" and v.recipe == recipe then
+        table.remove(tech.effects, i)
+        return
+      end
+    end
+  end
+}
+
 pglobals.icons = {
   mini_over = function(mini, background)
     return {

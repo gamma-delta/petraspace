@@ -2,33 +2,90 @@ Decided to split this into multiple files for ease of use.
 
 Stage 1: Nauvis.
 
-Red, Green, and Blue Science.
-MO here is making the early game more interesting
-(is change for the sake of change worth it?)
-- Make steel require coal or carbon, so you can't make it without carbon.
-  Perhaps make foundry recipe require CO2?
-- Blurcuits require silicon, which is laboriously extracted from stone & sulfuric acid
-- Precision optical components, for lasers.
-  Difficult to craft on Nauvis due to high pressure (?)
+I want the early game to be different, but I don't want it to be making up mechanics
+to get mad at.
+Ugh I really don't want to add sand and silicon. Everyone adds sand and silicon.
+It is a good "cheat" for making the early game more interesting, though.
 
-LDS requires aluminum. How do I make it prohibitively expensive but still possible on Nauvis?
-Drop from your crashed spaceship?
-(have since implemented this as bauxite inclusions)
-Flying robot frames also probably require LDS?
+I could make a lot of "mall ingredients" require steel, like fast belts...
 
-Orbital data. Craft telescopes that you must supply with power and data cards.
-- Programmed data cards spoil into blank cards again
-- Nauvis does not produce very good orbital data due to high pressure
-- But Viate does! Hold your horses
-Astrodynamic science pack:
-- Orbital data card(s)
-- Space platform (now feat. LDS?)
-- Electric motor
-Consume some small number of these to discover Viate.
-(the engineer is incapable of looking up)
-The distance between Nauvis and Viate's orbits should be quite small.
+Circuits. Everyone always needs more circuits. The early-game intermediates are
+- Circuits
+- Gears
+- Steel
+One idea is to have a "simple" and "advanced" way to make early-game intermediates.
+Simple way is really slow, complex way has way more throughput.
+Planet's machines require the complex way.
 
-Do I want to make data cards really cheap and reusable?
-Or each one an investment?
-I like the second -- better reuse them because otherwise you're throwing away
-nice data cards.
+How do other overhauls change the early game?
+- SE:
+  = Burner age, which can die in a fire
+  = Meteorites and CMEs
+  = Many intermediates: small engines, motors, engines, sand&glass (augh), heat shields,
+  = Buildings require stone bricks and conc reat (BEPs require concrete! i knew i wasn't imagining that)
+  = Circuits require stone or wood (recycler breaks this w/o a "substrate" intermediate)
+- Krastorio
+  = Bootstrap with crashed ship machinery.
+    This might be a good way to pre-introduce advanced recipes!
+  = Worse ore ratios
+  = Burner furnaces suck
+  = Intermediates: Automation cores, inserter parts, electric components
+  = Cool new guns
+  = tEcH cArDs
+  = Offshore pumps require electricity, ofc, lmao
+- Factorio+
+  = New early-game miners: pick your poisons.
+
+Early-game intermediates ideas?
+- Engines: Vulc
+- Motors: Fulg
+- Precision movement: Gleba
+- Heat shielding / reinforced plating: Vulc
+- Circuits but worse: Fulgora
+- Cabling: Fulgora
+- Plastic: Glorbo
+- Basically anything oil: Glardo
+- (Interesting idea: Gleckler oil tech *starts* with gas and you thicken it twice)
+- Food?????
+
+SA's infinite prod researches indicate that each rocket part has an ingredient associated w/ each planet
+- LDS for Vulcanus
+- Blurcuits for Fulgora
+- Rocket fuel for Gleba
+Ofc I've changed it to be LDS, blurcuits, and POCs. But that ordering still seems to work.
+(NB I can re-add rocket control units and require whatever I want in addition to blurcuits
+in order to balance ... what if I required orbital data cards??)
+
+Circuits. Always back to circuits.
+The problem here is that adding better and better "electronic components" recipes
+reduces Fulgora's ability to crunch up circits into rudiments.
+(Again unless I make the better recipes be fluids or "trace amounts")
+I could use my tiered circuits idea ("my").
+The ingredients that are *mandatory* for red circuits can *boost*
+green circuits. And so on.
+- Copper wire
+- Substrate
+- Plastic
+- Sulfuric acid
+- Holmium soln (superconductors are "circuits" IG)
+- Whatever
+
+Do I go back to data cards?
+The problem is quality.
+But, if I do my ideas about changing/removing quality ...
+
+How do infinite productivity loops work anyways?
+In vanilla you can only do this with infinite productivity research.
+- +50% from planetary building inherently
+- +125% from up to 5 legendary prod 3s
+- = 175%
+- This leaves 125% to play with
+- So, I can add recipes that yield up to a little over 2x
+  efficiency?
+- Problem being that you can prod *those* recipes.
+
+Base: 1 -> 1
+Prod: 1 -> 2.75
+Plus: 1 -> 2
+PrPl: 1 -> 5.50 !!
+Probably many ways to fix this.
