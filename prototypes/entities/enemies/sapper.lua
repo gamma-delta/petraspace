@@ -36,7 +36,7 @@ local pentapod_lower_leg_dying_trigger_effect_positions = { 0.25, 0.5, 0.75, 1.0
 
 
 local function make_sapper(
-  prefix, scale, health, speed, power_draw, tints, factoriopedia_simulation, sounds
+  prefix, scale, health, speed, power_draw, buf_size, tints, factoriopedia_simulation, sounds
 )
   local tint_mask = tints.mask
   local tint_mask_thigh = tints.mask_thigh or tint_mask
@@ -324,7 +324,7 @@ local function make_sapper(
       energy_source = {
         type = "electric",
         usage_priority = "primary-input",
-        buffer_capacity = "500kJ",
+        buffer_capacity = buf_size,
         drain = power_draw,
         render_no_network_icon = false,
         render_no_power_icon = false,
@@ -537,21 +537,21 @@ end
 local small_color = {70, 110, 100, 255}
 local med_color = {90, 110, 110, 255}
 local large_color = {90, 120, 150, 255}
-make_sapper("small-", 0.7, 500, 1.95, "500kW", {
+make_sapper("small-", 0.7, 500, 1.95, "500kW", "1MJ", {
   mask = fade(small_color, 0.2),
   mask_thigh = fade(small_color, 0.4),
   body = small_color,
   projectile_mask = small_color,
   projectile = small_color,
 }, nil, space_age_sounds.strafer_pentapod.small)
-make_sapper("medium-", 0.9, 600, 1.90, "1MW", {
+make_sapper("medium-", 0.9, 600, 1.90, "1MW", "2.5MJ", {
   mask = fade(med_color, 0.2),
   mask_thigh = fade(med_color, 0.4),
   body = med_color,
   projectile_mask = med_color,
   projectile = med_color,
 }, nil, space_age_sounds.strafer_pentapod.medium)
-make_sapper("big-", 1.1, 800, 1.85, "3MW", {
+make_sapper("big-", 1.1, 800, 1.85, "3MW", "10MJ", {
   mask = fade(large_color, 0.2),
   mask_thigh = fade(large_color, 0.4),
   body = large_color,
@@ -573,4 +573,87 @@ for _,unit in ipairs(spawner_units) do
   if unit[1] == "small-stomper-pentapod" then
     unit[2] = {{0.0, 0.0}, {0.2, 0.0}, {0.3, 0.2}, {0.6, 0.0}}
   end
+end
+
+-- Make strafer projectiles able to get shot down
+for _,name in ipairs{"small-", "medium-", "big-"} do
+  local new_child_name = "ps-" .. name .. "strafer-projectile"
+  local og_projectile = data.raw["projectile"][name .. "strafer-projectile"]
+  local og_child = data.raw["unit"][name .. "wriggler-pentapod-premature"]
+  data:extend{{
+    type = "unit",
+    name = new_child_name,
+    movement_speed = 0.5,
+    distance_per_frame = 0.125,
+    distraction_cooldown = 10, -- ??
+    vision_distance = 100,
+    is_military_target = true,
+    flags = {"placeable-player", "placeable-enemy", "placeable-off-grid", "breaths-air", "not-repairable"},
+    icon = og_child.icon,
+    subgroup = "enemies",
+    impact_category = "organic",
+    max_health = 30,
+
+    strafe_settings = {
+      face_target = false,
+      ideal_distance = 0,
+      ideal_distance_tolerance = 0,
+    },
+
+    attack_parameters = {
+      type = "projectile",
+      -- it won't be rendered anyways
+      animation = og_projectile.animation,
+      cooldown = 10,
+      -- Fire the "projectile" when within 0.1 tiles of target
+      range = 0.1,
+      ammo_category = "biological",
+      ammo_type = {
+        action = {
+          -- Just kill myself. Spawning the child is done in the death trigger
+          type = "direct",
+          action_delivery = {
+            type = "instant",
+            -- i'm the source. explode kill die
+            source_effects = {
+              type = "damage",
+              damage = {type = "acid", amount = 9999999}
+            }
+          }
+        }
+      },
+    },
+    -- shot down:
+    dying_trigger_effect = og_projectile.action.action_delivery.target_effects,
+
+    run_animation = {
+      layers = { og_projectile.animation, og_projectile.shadow }
+    }
+  }}
+  
+  local strafer = data.raw["spider-unit"][name .. "strafer-pentapod"]
+  strafer.attack_parameters.range = 20
+  strafer.attack_parameters.cooldown = 5
+  -- "Aim" it towards the enemy position
+  strafer.attack_parameters.ammo_type.target_type = "entity"
+  strafer.attack_parameters.ammo_type.clamp_position = false
+
+  strafer.attack_parameters.ammo_type.action.collision_mask = {
+    layers = {strafer_anti_air_target = true}
+  }
+  strafer.attack_parameters.ammo_type.action.action_delivery = {
+    type = "instant",
+    target_effects = {
+      type = "create-entity",
+      entity_name = og_child.name,
+      check_buildability = true,
+      find_non_colliding_position = true
+    },
+  }
+end
+
+for _,rocket in ipairs{"rocket", "explosive-rocket"} do
+  local rkt = data.raw["projectile"][rocket]
+  if not rkt.collision_mask then rkt.collision_mask = {layers={}} end
+  rkt.collision_mask.layers["strafer_anti_air_target"] = true
 end

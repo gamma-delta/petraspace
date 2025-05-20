@@ -31,4 +31,8 @@ data:extend{
     type = "fuel-category",
     name = "antimatter",
   },
+  {
+    type = "collision-layer",
+    name = "strafer_anti_air_target"
+  },
 }
