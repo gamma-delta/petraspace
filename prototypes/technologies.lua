@@ -345,7 +345,39 @@ data:extend{
       type = "mine-entity",
       entity = "boompuff",
     }
-  }
+  },
+  {
+    type = "technology",
+    name = "fertilizer",
+    -- TODO
+    icon = "__petraspace__/graphics/technologies/boompuff-agriculture.png",
+    icon_size = 256,
+    effects = {
+      { type="unlock-recipe", recipe="fertilizer" },
+    },
+    prerequisites = {"agricultural-science-pack"},
+    unit = {
+      count = 1000,
+      ingredients = science("rgbyA"),
+      time = 60,
+    }
+  },
+  {
+    type = "technology",
+    name = "presto-fuel",
+    -- TODO
+    icon = "__petraspace__/graphics/technologies/boompuff-agriculture.png",
+    icon_size = 256,
+    effects = {
+      { type="unlock-recipe", recipe="presto-fuel" },
+    },
+    prerequisites = {"agricultural-science-pack"},
+    unit = {
+      count = 4000,
+      ingredients = science("rgbspyA"),
+      time = 60,
+    }
+  },
 }
 
 data:extend{
