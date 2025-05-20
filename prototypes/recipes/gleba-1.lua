@@ -158,7 +158,7 @@ data:extend{
     type = "recipe",
     name = "anfo-explosives",
     icons = pglobals.icons.two_into_one(
-      "__petraspace__/graphics/icons/fluid/molecule-nitric-acid.png",
+      "__petraspace__/graphics/icons/fertilizer/1.png",
       "__base__/graphics/icons/fluid/light-oil.png",
       "__base__/graphics/icons/explosives.png"
     ),
