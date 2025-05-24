@@ -1,0 +1,40 @@
+Each t2 science should use other planets' ingredients in *non-trivial* quantities.
+Well maybe it can use a little bit in trivial quantities but scale is interesting.
+
+Also on each t1 I've seeded a surprise tool that will help us later.
+(STTWHUL)
+
+== Vulcanus: Materials Science Pack ==
+(Is there a better name for this? Material science science pack. Material science science science science science science)
+
+STTWHUL: Mag slag from quickening and some other slag from geo heat exchangers.
+TODO: make GHX "burn" exchanger components that you eventually harvest the
+slag off of.
+IRL lava really has very little metal in it so I can invent whatever I want here.
+
+Make two alloys here: Pridwensteel and Magpie Alloy.
+Pridwensteel is preturnaturally tough, Magpie alloy is preturnaturally light
+and conductive.
+- Pridwensteel: W, DU, Steel, 
+- Magpie alloy: Al, Cu, Ho, Mg, Li
+
+How do I make gleba useful in any way? Yumako mash into intumescent barrier.
+
+== Fulgora: Subatomic Science Pack ==
+
+STTWHUL: Archaeological scrap. Analyze it with spectroscopy or grind it up
+for random bullshit.
+
+Something with jelly here? Laser calibration? Only good source of some resource?
+Organolanthanithenides?
+
+I might bump superconductors back to t2. Perhaps you can get it out of archa
+scrap?
+Holmium isn't actually used for that much, funnily enough. Perhaps you make it
+into electromagnets?
+Electromagnets recycle into unmagnetic iron?
+Superconductors are really fantastic technology IRL and I feel they should be
+pushed back.
+
+Idea: Electroplants require superconductors, which you can *only* get from
+archaeological scrap (and ruins?) at first.

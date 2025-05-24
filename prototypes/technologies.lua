@@ -321,6 +321,10 @@ vanilla_thruster_tech.visable_when_disabled = false
 -- Vulcanus I
 pglobals.tech.remove_unlock("foundry", "casting-low-density-structure")
 
+-- Fulgora I
+table.insert(data.raw["technology"]["recycling"].effects, 
+  recipe("archaeological-scrap-recycling"))
+
 -- Gleba I
 -- Strike out coal synth and good sulfur
 pglobals.tech.remove_unlock("rocket-turret", "coal-synthesis")

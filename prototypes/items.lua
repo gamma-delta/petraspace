@@ -171,6 +171,16 @@ data:extend{
   }),
 }
 
+-- Fulgora
+data:extend{
+  pglobals.copy_then(data.raw["item"]["scrap"], {
+    name = "archaeological-scrap",
+    order = "a[scrap]-b[archaelogicical-scrap]",
+    icon = "__petraspace__/graphics/icons/archaeological-scrap/1.png",
+    pictures = make_pics("archaeological-scrap", 3),
+  })
+}
+
 -- Gleba
 data:extend{
   pglobals.copy_then(data.raw["capsule"]["yumako"], {

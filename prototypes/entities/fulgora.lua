@@ -94,6 +94,31 @@ local vault = pglobals.copy_then(data.raw["simple-entity"]["fulgoran-ruin-vault"
 data.raw["simple-entity"]["fulgoran-ruin-vault"] = nil
 data:extend{vault}
 
+-- Add archy scrap to ruins
+for _,ruin in ipairs{
+  -- tiny doesn't drop anything
+  "fulgoran-ruin-small",
+  "fulgoran-ruin-medium", "fulgoran-ruin-stonehenge",
+  "fulgoran-ruin-big", "fulgoran-ruin-huge",
+  "fulgoran-ruin-colossal",
+} do
+  local proto = data.raw["simple-entity"][ruin]
+  local area = (proto.collision_box[2][1] - proto.collision_box[1][1]) 
+    * (proto.collision_box[2][2] - proto.collision_box[1][2])
+  table.insert(proto.minable.results, {
+    type = "item", name = "archaeological-scrap",
+    amount_min = math.ceil(area/4), amount_max = math.ceil(area/2)
+  })
+end
+table.insert(data.raw["accumulator"]["fulgoran-ruin-vault"].minable.results, {
+  type = "item", name = "archaeological-scrap",
+  amount = 100,
+})
+table.insert(data.raw["lightning-attractor"]["fulgoran-ruin-attractor"].minable.results, {
+  type = "item", name = "archaeological-scrap",
+  amount = 20,
+})
+
 -- t1
 data:extend{
   {

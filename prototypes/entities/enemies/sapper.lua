@@ -36,7 +36,7 @@ local pentapod_lower_leg_dying_trigger_effect_positions = { 0.25, 0.5, 0.75, 1.0
 
 
 local function make_sapper(
-  prefix, scale, health, speed, power_draw, tints, factoriopedia_simulation, sounds
+  prefix, scale, health, speed, power_draw, buf_size, tints, factoriopedia_simulation, sounds
 )
   local tint_mask = tints.mask
   local tint_mask_thigh = tints.mask_thigh or tint_mask
@@ -324,7 +324,7 @@ local function make_sapper(
       energy_source = {
         type = "electric",
         usage_priority = "primary-input",
-        buffer_capacity = "500kJ",
+        buffer_capacity = buf_size,
         drain = power_draw,
         render_no_network_icon = false,
         render_no_power_icon = false,
@@ -537,21 +537,21 @@ end
 local small_color = {70, 110, 100, 255}
 local med_color = {90, 110, 110, 255}
 local large_color = {90, 120, 150, 255}
-make_sapper("small-", 0.7, 500, 1.95, "500kW", {
+make_sapper("small-", 0.7, 500, 1.95, "500kW", "1MJ", {
   mask = fade(small_color, 0.2),
   mask_thigh = fade(small_color, 0.4),
   body = small_color,
   projectile_mask = small_color,
   projectile = small_color,
 }, nil, space_age_sounds.strafer_pentapod.small)
-make_sapper("medium-", 0.9, 600, 1.90, "1MW", {
+make_sapper("medium-", 0.9, 600, 1.90, "1MW", "2.5MJ", {
   mask = fade(med_color, 0.2),
   mask_thigh = fade(med_color, 0.4),
   body = med_color,
   projectile_mask = med_color,
   projectile = med_color,
 }, nil, space_age_sounds.strafer_pentapod.medium)
-make_sapper("big-", 1.1, 800, 1.85, "3MW", {
+make_sapper("big-", 1.1, 800, 1.85, "3MW", "8MJ", {
   mask = fade(large_color, 0.2),
   mask_thigh = fade(large_color, 0.4),
   body = large_color,
