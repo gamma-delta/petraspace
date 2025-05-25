@@ -73,9 +73,8 @@ data:extend{
     name = "circuit-substrate-wood",
     subgroup = "intermediate-product",
     order = "b[circuits]-![circuit-substrate]-b",
-    -- TODO: assembling or biochamber
-    -- For some reason organics-or-hand-crafting doesn't work in asm1
-    category = "electronics",
+    category = "crafting",
+    additional_categories = {"organic"},
     enabled = false,
     ingredients = {
       {type="item", name="wood", amount=2},

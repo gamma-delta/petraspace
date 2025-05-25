@@ -22,6 +22,10 @@ data:extend{
     name = "mystery-flesh-pit",
   },
   {
+    type = "recipe-category",
+    name = "particle-trap",
+  },
+  {
     type = "item-subgroup",
     group = "intermediate-products",
     name = "chemistry",

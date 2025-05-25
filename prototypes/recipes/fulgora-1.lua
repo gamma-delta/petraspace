@@ -1,3 +1,5 @@
+local pglobals = require "globals"
+
 -- Fiddle with scrapping
 -- The objective is to make iron much rarer.
 -- (although you really don't need that much Fe on Fulgora)
@@ -63,11 +65,13 @@ data:extend{{
   }
 }}
 
+pglobals.recipe.add("electromagnetic-plant",
+  {type="item", name="superconductor", amount=5})
+pglobals.recipe.add("lightning-rod", 
+  {type="item", name="supercapacitor", amount=2})
+
+-- t2
 data:extend{
-  {
-    type = "recipe-category",
-    name = "particle-trap",
-  },
   {
     type = "recipe",
     name = "antimatter-magnetic-bottle",

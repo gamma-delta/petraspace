@@ -168,6 +168,13 @@ pglobals.recipe = {
       end
     end
     log("warning! recipe " .. recipe.name .. " did not have ingredient " .. original)
+  end,
+  add = function(recipe_name, new, ...)
+    local news = table.pack(new, ...)
+    local recipe = data.raw["recipe"][recipe_name]
+    for _,new in ipairs(news) do
+      table.insert(recipe.ingredients, new)
+    end
   end
 }
 

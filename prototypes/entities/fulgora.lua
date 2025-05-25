@@ -18,8 +18,16 @@ fulgoran_lightningrod.energy_source = {
 }
 -- be REALLY SURE
 fulgoran_lightningrod.minable.mining_time = 5
--- this has a range of 20 by default
-fulgoran_lightningrod.range_elongation = 25
+-- this has a range of 20 by default, throw the player a bone
+fulgoran_lightningrod.range_elongation = 30
+-- default is place every 15
+fulgoran_lightningrod.autoplace.probability_expression = [[
+  min(
+    place_every_n(12,12,1,1),
+    0.1 * fulgora_artificial_mask + 0.2 * (fulgora_decorative_machine_density - 1.5)
+  ) + max(0, 10 * (1.5 - distance))
+]]
+-- i guess the final term is to make sure a bunch place at spawn
 
 fulgoran_lightningrod.chargable_graphics.charge_light = {
   intensity = 2.0,
@@ -52,6 +60,7 @@ local brightlines = {
   frame_count = 16,
   draw_as_glow = true,
   blend_mode = "additive",
+  animation_speed = 0.21
 }
 local vault = pglobals.copy_then(data.raw["simple-entity"]["fulgoran-ruin-vault"], {
   type = "accumulator",
@@ -77,13 +86,13 @@ local vault = pglobals.copy_then(data.raw["simple-entity"]["fulgoran-ruin-vault"
     discharge_animation = {
       layers = {
         brightlines,
-      }
+      },
     },
     charge_animation = {
       layers = {
         pglobals.copy_then(brightlines, {
           filename = "__petraspace__/graphics/entities/fulgoran/vault-accumulator-dark.png",
-          animation_speed = 0.51,
+          animation_speed = 0.11,
         }),
       }
     },

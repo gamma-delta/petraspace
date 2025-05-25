@@ -322,8 +322,43 @@ vanilla_thruster_tech.visable_when_disabled = false
 pglobals.tech.remove_unlock("foundry", "casting-low-density-structure")
 
 -- Fulgora I
-table.insert(data.raw["technology"]["recycling"].effects, 
-  recipe("archaeological-scrap-recycling"))
+-- Unlock recyclers by mining scrap, so you can keep the vaults for electricity
+local recyc = data.raw["technology"]["recycling"]
+recyc.research_trigger = {
+  type = "mine-entity",
+  entity = "scrap",
+}
+table.insert(recyc.effects, recipe("archaeological-scrap-recycling"))
+
+local em_plant = data.raw["technology"]["electromagnetic-plant"]
+em_plant.research_trigger = {
+  type = "craft-item",
+  item = "superconductor",
+  count = 5,
+}
+em_plant.effects = {
+  recipe("electromagnetic-plant"),
+  recipe("supercapacitor"),
+  recipe("electrolyte"),
+}
+
+-- Intermediate tech: Lightning rods
+pglobals.tech.remove_unlock("planet-discovery-fulgora", "lightning-rod")
+data:extend{
+  {
+    type = "technology",
+    name = "lightning-rod",
+    icon = "__petraspace__/graphics/technologies/lightning-rod.png",
+    icon_size = 256,
+    prerequisites = {"electromagnetic-science-pack"},
+    effects = {recipe("lightning-rod")},
+    unit = {
+      count = 100,
+      ingredients = science("E"),
+      time = 30
+    }
+  }
+}
 
 -- Gleba I
 -- Strike out coal synth and good sulfur
