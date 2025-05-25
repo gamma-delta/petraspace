@@ -21,11 +21,14 @@ Assets responsibly sourced from the following locations:
 
 I'd also like to give Malcolm Riley a special shout-out for publishing tutorials on how to make Factorio-like assets, and for being really kind when I reached out to him. I would not have made any Blender assets if not for them.
 
-The rest of them I made myself. I used Blender and GIMP for the sprites. I kitbashed a lot of the graphics together out of vanilla's sprites:
+The rest of them I made myself.
+I used Blender and GIMP for the sprites.
+I kitbashed a lot of the graphics together out of other sprites:
 - Lunar rocket silos
 - Boompuff propagules
 - Science packs
 - All the tiles
+- Archaeological scrap
 
 Pro tip: use GIMP's Rotate Color to recolor Factorio assets. Or, select by color with feathering, cut it, and paste it in a new layer with the blend mode set to "mix". Both look much better than plain tints.
 
