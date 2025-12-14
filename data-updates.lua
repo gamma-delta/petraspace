@@ -64,6 +64,8 @@ data.raw["thruster"]["thruster"].surface_conditions =
   {{property="gravity", max=0}}
 data.raw["asteroid-collector"]["asteroid-collector"].surface_conditions =
   {{property="gravity", max=0}}
+-- No repair of thrusters
+table.insert(data.raw["thruster"]["thruster"].flags, "not-repairable")
 
 -- Make slower items easier to ship up to space
 data.raw["item"]["transport-belt"].weight = rocket_cap / 200

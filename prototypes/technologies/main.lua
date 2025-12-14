@@ -493,9 +493,9 @@ data:extend{
 -- Strike out coal synth and good sulfur
 pglobals.tech.remove_unlock("rocket-turret", "coal-synthesis")
 
-table.insert(data.raw["technology"]["bacteria-cultivation"].effects, 
+table.insert(data.raw["technology"]["bacteria-cultivation"].effects,
   recipe("pktff-light-oil-reforming"))
-table.insert(data.raw["technology"]["bacteria-cultivation"].effects, 
+table.insert(data.raw["technology"]["bacteria-cultivation"].effects,
   recipe("pktff-heavy-oil-reforming"))
 -- With oil reformation, all the special bio-recipes are no longer
 -- necessary. (Plastic, rocket fuel, sulfur, and jelly.)
