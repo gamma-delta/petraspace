@@ -174,3 +174,6 @@ for _,ty in ipairs{"transport-belt", "underground-belt", "splitter"} do
 end
 no_scaffold("artillery-turret", {"artillery-turret"})
 -- Notable allowed things: Combinators mostly
+
+-- Nerf snapper nest health
+data.raw["unit-spawner"]["armoured-biter-spawner"].max_health = 400

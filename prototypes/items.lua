@@ -130,6 +130,8 @@ data:extend{
       -- Otherwise it will detect the "locked" recipe for petrichor enrichment
       -- and restrict it.
       flags = {"always-show"},
+      -- make it less oppressive to store
+      stack_size = 200,
     }
   ),
   pglobals.copy_then(
