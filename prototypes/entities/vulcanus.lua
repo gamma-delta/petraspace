@@ -172,13 +172,13 @@ foundry.energy_source = {
   },
   pipe_covers = {
     -- The north one is covered by the sprite
-    north = nothingburger,
+    north = pglobals.invisible,
     east = heat_pipe_direction_pic("east", false),
     south = heat_pipe_direction_pic("south", false),
     west = heat_pipe_direction_pic("west", false),
   },
   heat_pipe_covers = {
-    north = nothingburger,
+    north = pglobals.invisible,
     east = heat_pipe_direction_pic("east", true),
     south = heat_pipe_direction_pic("south", true),
     west = heat_pipe_direction_pic("west", true),

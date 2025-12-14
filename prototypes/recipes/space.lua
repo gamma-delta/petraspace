@@ -84,6 +84,18 @@ data:extend{
     energy_required = 60,
     results = {{type="item", name="pktff-space-platform-starter-pack-scaffolding", amount=1}},
   },
+  {
+    type = "recipe",
+    name = "pktff-basic-asteroid-collector",
+    enabled = false,
+    ingredients = {
+      {type="item", name="processing-unit", amount=5},
+      {type="item", name="electric-engine-unit", amount=10},
+      {type="item", name="long-handed-inserter", amount=5},
+    },
+    energy_required = 60,
+    results = {{type="item", name="pktff-space-platform-starter-pack-scaffolding", amount=1}},
+  },
 }
 
 -- Regolith

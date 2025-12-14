@@ -17,7 +17,6 @@ local function make_rocket_juice_tank_item(name, overlay)
     pick_sound = item_sounds.metal_large_inventory_pickup,
     drop_sound = item_sounds.metal_large_inventory_move,
     weight = rocket_cap,
-    place_result = place_result
   }
 end
 
@@ -80,4 +79,45 @@ data:extend{
     weight = rocket_cap / 10,
     place_result = "pktff-platform-solar-array",
   }),
+
+}
+
+local bad_collector = pglobals.copy_then(data.raw["asteroid-collector"]["asteroid-collector"], {
+  name = "pktff-basic-asteroid-collector",
+  subgroup = "space-platform",
+  energy_source = {type="void"},
+  passive_energy_usage = "69W",
+  arm_energy_usage = "69W",
+  arm_slow_energy_usage = "69W",
+  collection_radius = 2,
+  head_collection_radius = 1.5,
+  collection_box_offset = 1,
+  -- Make it a little slower than base to make it look like they're getting drawn in
+  arm_speed_base = 0.15,
+  minable = {mining_time = 0.2, result="pktff-basic-asteroid-collector"},
+  arm_extend_sound = pglobals.null,
+  arm_retract_sound = pglobals.null,
+})
+bad_collector.graphics_set.arm_head_animation = pglobals.invisible
+bad_collector.graphics_set.arm_head_top_animation = pglobals.invisible
+bad_collector.graphics_set.arm_link = {
+  direction_count = 1,
+  filename = "__core__/graphics/empty.png",
+  width = 1, height = 1
+}
+
+data:extend{
+  bad_collector,
+  pglobals.copy_then(data.raw["item"]["asteroid-collector"], {
+    type = "item",
+    name = "pktff-basic-asteroid-collector",
+    icon = Asset"graphics/icons/basic-asteroid-collector.png",
+    place_result = "pktff-basic-asteroid-collector",
+    -- TODO
+    subgroup = "space-platform",
+    -- right after cargo bay
+    order = "cz",
+    stack_size = 20,
+    weight = rocket_cap / 20,
+  })
 }

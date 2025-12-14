@@ -236,7 +236,7 @@ data:extend{
 
 local tech_vanilla_rocket = data.raw["technology"]["rocket-silo"]
 tech_vanilla_rocket.prerequisites = {
-  "processing-unit", "concrete", "electric-engine"
+  "processing-unit", "concrete", "electric-engine",  "pktff-orbital-science-pack"
 }
 tech_vanilla_rocket.unit = {
   count = 500,
@@ -256,6 +256,7 @@ tech_vanilla_rocket.effects = {
   recipe("pktff-thruster-fuel-from-rocket-fuel"),
   recipe("pktff-thruster-fuel-from-ammonia"),
   recipe("pktff-thruster-oxidizer-from-pktff-nitric-acid"),
+  {type = "unlock-space-platforms", modifier=true, hidden=true}
 }
 
 -- Welcome to Viate
@@ -327,12 +328,11 @@ tech_vanilla_splatform.unit = {
   time = 60,
   ingredients = science("rgbos")
 }
-
 tech_vanilla_splatform.effects = {
   recipe("space-platform-foundation"),
   recipe("cargo-bay"),
   recipe("crusher"),
-  recipe("asteroid-collector"),
+  recipe("pktff-basic-asteroid-collector"),
 }
 tech_vanilla_splatform.research_trigger = nil
 

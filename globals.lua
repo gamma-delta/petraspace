@@ -365,4 +365,9 @@ pglobals.script_created_effect = function(name)
   }
 end
 
+pglobals.invisible = {
+  filename = "__core__/graphics/empty.png",
+  width = 1, height = 1
+}
+
 return pglobals

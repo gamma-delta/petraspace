@@ -24,6 +24,9 @@ Assets responsibly sourced from the following locations:
 > I can't figure out how to contact YuokiTani to ask.
 > If I am doing something wrong please let me know and I will replace the assets.
 
+And some miscellany:
+- `@o5mo` for the basic asteroid collector icon
+
 I'd also like to give Malcolm Riley a special shout-out for publishing tutorials on how to make Factorio-like assets, and for being really kind when I reached out to him. I would not have made any Blender assets if not for them.
 
 The rest of them I made myself.
