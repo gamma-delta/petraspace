@@ -66,7 +66,7 @@ return {
     [defines.events.on_force_created] = function(evt)
       add_qai_techs(evt.force)
     end,
-    [defines.events.on_research_finished] = tmp_you_win,
+    -- [defines.events.on_research_finished] = tmp_you_win,
     [defines.events.on_surface_created] = function(evt)
       local surface = game.surfaces[evt.surface_index]
       if surface.name == "aquilo" then
