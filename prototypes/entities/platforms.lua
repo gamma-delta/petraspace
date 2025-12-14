@@ -121,3 +121,41 @@ data:extend{
     weight = rocket_cap / 20,
   })
 }
+
+local wc_thruster = pglobals.copy_then(data.raw["thruster"]["thruster"], {
+  name = "pktff-advanced-thruster",
+  max_health = 500,
+  minable = {mining_time=0.1, result="pktff-advanced-thruster"},
+})
+wc_thruster.graphics_set.animation = util.sprite_load(
+  Asset"graphics/entities/advanced-thruster/thruster",
+  {
+    animation_speed = 0.5,
+    frame_count = 64,
+    scale = 0.5,
+    shift = {0, 3},
+  }
+)
+local wcwv = wc_thruster.graphics_set.working_visualisations
+wcwv[#wcwv].animation = util.sprite_load(
+  Asset"graphics/entities/advanced-thruster/light",
+  {
+    animation_speed = 0.5,
+    frame_count = 64,
+    blend_mode = "additive",
+    draw_as_glow = true,
+    scale = 0.5,
+    shift = {0,3}
+  }
+)
+wc_thruster.graphics_set.flame_effect.filename = Asset"graphics/entities/advanced-thruster/flame.png"
+
+data:extend{
+  wc_thruster,
+  pglobals.copy_then(data.raw["item"]["thruster"], {
+    name = "pktff-advanced-thruster",
+    icon = Asset"graphics/icons/advanced-thruster.png",
+    place_result = "pktff-advanced-thruster",
+    order = "f[thruster]-a"
+  })
+}

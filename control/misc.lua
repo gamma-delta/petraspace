@@ -21,25 +21,6 @@ local function add_qai_techs_everywhere()
   end
 end
 
----@param evt EventData.on_script_trigger_effect
-local fill_up_rocket_juice = function(evt)
-  if evt.effect_id ~= "pktff-rocket-juice-tank" then return end
-  ---@type LuaEntity
-  local entity = evt.source_entity
-  local juice_name
-  if entity.name == "pktff-platform-fuel-tank" then
-    juice_name = "thruster-fuel"
-  elseif entity.name == "platform-oxidizer-tank" then
-    juice_name = "pktff-thruster-oxidizer"
-  end
-  if not juice_name then return end
-
-  entity.insert_fluid{
-    name = juice_name,
-    amount = entity.fluidbox.get_capacity(1)
-  }
-end
-
 local tmp_you_win = function(evt)
   if evt.research.name ~= "space-platform" then return end
   game.set_win_ending_info{
@@ -61,8 +42,6 @@ end
 
 return {
   events = {
-    [defines.events.on_script_trigger_effect] = fill_up_rocket_juice,
-
     [defines.events.on_force_created] = function(evt)
       add_qai_techs(evt.force)
     end,

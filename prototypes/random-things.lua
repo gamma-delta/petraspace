@@ -1,4 +1,5 @@
 local pglobals = require("globals")
+local asteroid_util = require("__space-age__/prototypes/planet/asteroid-spawn-definitions")
 
 data:extend{
   {
@@ -66,4 +67,24 @@ data:extend{
     name = "pktff-mfp-scouts",
     fuel_value_type = {"description.pktff-mfp-scouts-energy-value"}
   },
+
+  {
+    type = "space-connection",
+    name = "pktff-nauvis-viate",
+    subgroup = "planet-connections",
+    from = "nauvis",
+    to = "pktff-viate",
+    order = "!!!first",
+    length = 2000,
+    asteroid_spawn_definitions = asteroid_util.spawn_definitions({
+      probability_on_range_chunk = {
+        {position=0.1, probability=asteroid_util.nauvis_chunks, angle_when_stopped=asteroid_util.chunk_angle},
+        {position=0.9, probability=asteroid_util.nauvis_chunks, angle_when_stopped=asteroid_util.chunk_angle}
+      },
+      type_ratios = {
+        {position=0.1, ratios=asteroid_util.nauvis_ratio},
+        {position=0.9, ratios=asteroid_util.nauvis_ratio}
+      }
+    })
+  }
 }

@@ -4,6 +4,7 @@ veh.add_libraries({
   require("control/dust-pollution"),
   require("control/rockets"),
   require("control/demolisher-crafting"),
+  require("control/platforms"),
   require("control/misc"),
   require("control/compat"),
 })

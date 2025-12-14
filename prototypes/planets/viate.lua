@@ -9,6 +9,7 @@ local tile_spritesheet_layout = tile_graphics.tile_spritesheet_layout
 local tile_sounds = require("__base__/prototypes/tile/tile-sounds")
 local sa_tile_sounds = require("__space-age__/prototypes/tile/tile-sounds")
 
+local asteroid_util = require("__space-age__/prototypes/planet/asteroid-spawn-definitions")
 
 local hit_itself = {
   layers={water_tile=true, doodad=true},
@@ -428,7 +429,7 @@ PlanetsLib:extend{
       ["magnetic-field"] = 0,
     },
     asteroid_spawn_influence = 1,
-    asteroid_spawn_definitions = {},
+    asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_gleba, 0.1),
     surface_render_parameters = {
       -- TODO: could maybe use this to render meteor shadows?
       clouds = nil,

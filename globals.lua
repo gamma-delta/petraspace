@@ -72,6 +72,9 @@ function pglobals.concat(tables)
   return ret
 end
 
+---@generic T
+---@param tbl T
+---@return T
 function pglobals.copy_then(tbl, ...)
   local table2 = util.copy(tbl)
   -- So PIL just lies to me and i have to use `...` and not `arg`
