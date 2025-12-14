@@ -57,27 +57,13 @@ heat_pipe.specific_heat = "100kJ"
 heat_pipe.max_transfer = "100MW"
 
 -- Let you place the rocket silo on airless moons but not space platforms
-data.raw["rocket-silo"]["rocket-silo"].surface_conditions = 
+data.raw["rocket-silo"]["rocket-silo"].surface_conditions =
   {{property="gravity", min=1}}
 -- Thruster only on splatform
-data.raw["thruster"]["thruster"].surface_conditions = 
+data.raw["thruster"]["thruster"].surface_conditions =
   {{property="gravity", max=0}}
-
--- Augh
--- Stick anything in a lunar rocket silo
-local item_types = {
-  "item", "ammo", "capsule", "gun",
-  "item-with-entity-data", "item-with-label",
-  "item-with-inventory", "item-with-tags",
-  "module", "rail-planner", "tool", "armor", "repair-tool"
-  -- Omitting blueprint books, selection tools, and the
-  -- splatform starter pack
-}
-for _,item in pairs(data.raw["item"]) do
-  if item.send_to_orbit_mode == nil or item.send_to_orbit_mode == "not-sendable" then
-    item.send_to_orbit_mode = "manual"
-  end
-end
+data.raw["asteroid-collector"]["asteroid-collector"].surface_conditions =
+  {{property="gravity", max=0}}
 
 -- Make slower items easier to ship up to space
 data.raw["item"]["transport-belt"].weight = rocket_cap / 200

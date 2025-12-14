@@ -248,7 +248,6 @@ tech_vanilla_rocket.effects = {
   recipe("cargo-landing-pad"),
   recipe("pktff-space-platform-scaffolding"),
   recipe("pktff-space-platform-starter-pack-scaffolding"),
-  recipe("pktff-empty-platform-tank"),
   recipe("pktff-platform-fuel-tank"),
   recipe("pktff-platform-oxidizer-tank"),
   recipe("thruster"),

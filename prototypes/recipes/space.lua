@@ -191,6 +191,7 @@ data:extend{
     -- either way, it's interesting
     allow_productivity = true,
     allow_quality = false,
+    hidden = true,
 
     crafting_machine_tint = {
       primary = {r = 0.45, g = 0.78, b = 1.000, a = 1.000},
@@ -201,51 +202,45 @@ data:extend{
   }
 }
 
-data:extend{
-  {
-    type = "recipe",
-    name = "pktff-empty-platform-tank",
-    category = "advanced-crafting",
-    enabled = false,
-    energy_required = 100,
-    ingredients = {
-      {type="item", name="low-density-structure", amount=20},
-      {type="item", name="iron-gear-wheel", amount=50},
-      {type="item", name="storage-tank", amount=5},
-      {type="item", name="pump", amount=5},
+local function make_platform_tank_fill_drain(ty)
+  data:extend{
+    {
+      type = "recipe",
+      name = "pktff-platform-" .. ty .. "-tank",
+      category = "crafting-with-fluid",
+      enabled = false,
+      energy_required = 10,
+      ingredients = {
+        {type = "item", name="storage-tank", amount=1},
+        {type = "item", name="low-density-structure", amount=5},
+        {type = "fluid", name="thruster-" .. ty, amount=25000},
+      },
+      results = {{type="item", name="pktff-platform-" .. ty .. "-tank", amount=1}},
+      allow_productivity = false,
+      allow_decomposition = true,
+      allow_quality = false,
     },
-    results = {{type="item", name="pktff-empty-platform-tank", amount=1}},
-    allow_productivity = true,
-    allow_decomposition = true,
-  },
-  {
-    type = "recipe",
-    name = "pktff-platform-fuel-tank",
-    category = "crafting-with-fluid",
-    enabled = false,
-    energy_required = 10,
-    ingredients = {
-      {type = "item", name="pktff-empty-platform-tank", amount=1},
-      {type = "fluid", name="thruster-fuel", amount=50000},
+    {
+      type = "recipe",
+      name = "pktff-empty-platform-" .. ty .. "-tank",
+      category = "crafting-with-fluid",
+      enabled = false,
+      energy_required = 10,
+      ingredients = {{type="item", name="pktff-platform-" .. ty .. "-tank", amount=1}},
+      results = {
+        {type = "item", name="storage-tank", amount=1},
+        {type = "item", name="low-density-structure", amount=5},
+        {type = "fluid", name="thruster-" .. ty, amount=25000},
+      },
+      icons = pglobals.icons.mini_over(
+        "__space-age__/graphics/icons/fluid/thruster-" .. ty .. ".png",
+        "__base__/graphics/icons/storage-tank.png"
+      ),
+      allow_productivity = false,
+      allow_decomposition = false,
+      allow_quality = false,
     },
-    results = {{type="item", name="pktff-platform-fuel-tank", amount=1}},
-    allow_productivity = false,
-    allow_decomposition = true,
-    allow_quality = false,
-  },
-  {
-    type = "recipe",
-    name = "pktff-platform-oxidizer-tank",
-    category = "crafting-with-fluid",
-    enabled = false,
-    energy_required = 10,
-    ingredients = {
-      {type = "item", name="pktff-empty-platform-tank", amount=1},
-      {type = "fluid", name="thruster-oxidizer", amount=50000},
-    },
-    results = {{type="item", name="pktff-platform-oxidizer-tank", amount=1}},
-    allow_productivity = false,
-    allow_decomposition = true,
-    allow_quality = false,
-  },
-}
+  }
+end
+make_platform_tank_fill_drain("fuel")
+make_platform_tank_fill_drain("oxidizer")
