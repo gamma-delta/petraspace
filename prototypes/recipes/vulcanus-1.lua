@@ -134,5 +134,26 @@ data:extend{
     results = {
       {type="item", name="pktff-tungsten-steel-strongbox", amount=1},
     }
-  }
+  },
+  {
+    type = "recipe",
+    name = "pktff-advanced-thruster",
+    category = "metallurgy",
+    enabled = false,
+    -- TODO also does not recycle
+    allow_productivity = true,
+    allow_decomposition = true,
+    ingredients = {
+      {type="item", name="thruster", amount=4},
+      {type="item", name="tungsten-plate", amount=8},
+      {type="item", name="tungsten-carbide", amount=20},
+    },
+    energy_required = 8,
+    results = {
+      {type="item", name="pktff-advanced-thruster", amount=1},
+    },
+    surface_conditions = {
+      {property="pressure", min=4000, max=4000}
+    }
+  },
 }

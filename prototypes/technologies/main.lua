@@ -430,8 +430,8 @@ pglobals.tech.add_unlock("planet-discovery-vulcanus", "pktff-geothermal-heat-exc
 pglobals.tech.remove_unlock("foundry", "casting-low-density-structure")
 pglobals.tech.add_unlock("foundry", "pktff-lime-calcination")
 pglobals.tech.add_unlock("tungsten-steel", "pktff-tungsten-steel-strongbox")
--- Intermediate: tungsten heat pipes
 data:extend{
+  -- Intermediate: tungsten heat pipes
   {
     type = "technology",
     name = "pktff-tungsten-heat-pipe",
@@ -445,7 +445,22 @@ data:extend{
       ingredients = science("M"),
       time = 30,
     }
-  }
+  },
+  -- Space reward: WC thrusters
+  {
+    type = "technology",
+    name = "pktff-advanced-thruster",
+    -- TODO
+    icon = Asset"graphics/technologies/advanced-thruster.png",
+    icon_size = 256,
+    prerequisites = {"metallurgic-science-pack"},
+    effects = {recipe("pktff-advanced-thruster")},
+    unit = {
+      count = 500,
+      ingredients = science("rgbsM"),
+      time = 30,
+    }
+  },
 }
 
 -- Fulgora I
@@ -517,6 +532,7 @@ data:extend{
       entity = "boompuff",
     }
   },
+  -- Intermediate reward: fertilizer
   {
     type = "technology",
     name = "pktff-fertilizer",
@@ -529,9 +545,26 @@ data:extend{
     },
     prerequisites = {"agricultural-science-pack"},
     unit = {
-      count = 1000,
-      ingredients = science("rgbyA"),
-      time = 60,
+      count = 100,
+      ingredients = science("A"),
+      time = 30,
+    }
+  },
+  -- Space reward: Tentacle collectors
+  {
+    type = "technology",
+    name = "pktff-advanced-asteroid-collector",
+    -- TODO
+    icon = Asset"graphics/technologies/asteroid-collector.png",
+    icon_size = 560,
+    effects = {
+      { type="unlock-recipe", recipe="asteroid-collector" },
+    },
+    prerequisites = {"agricultural-science-pack"},
+    unit = {
+      count = 500,
+      ingredients = science("rgbsA"),
+      time = 30,
     }
   },
   {
