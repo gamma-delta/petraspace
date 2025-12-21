@@ -47,8 +47,62 @@ decryo_thruster_juice("oxidizer", "b[thruster-oxidizer]-zzz")
 
 local fluo_color = data.raw["fluid"]["fluoroketone-cold"].base_color
 local fluow_color = data.raw["fluid"]["fluoroketone-cold"].flow_color
+local fluo_tint = data.raw["recipe"]["fluoroketone-cooling"].crafting_machine_tint
 
 data:extend{
+  -- This is if you build a spaceship that only uses flkt for decryonizing juice.
+  {
+    type = "recipe",
+    name = "pktff-fluoroketone-heating",
+    icons = pglobals.icons.mini_over(
+      "__base__/graphics/icons/signal/signal-thermometer-red.png",
+      "__space-age__/graphics/icons/fluid/fluoroketone-hot.png"
+    ),
+    ingredients = {
+      {type="fluid", name="fluoroketone-cold", amount=10, ignored_by_stats=10},
+    },
+    energy_required = 1,
+    results = {
+      {type="fluid", name="fluoroketone-hot", amount=10, ignored_by_stats=10}
+    },
+    category = "cryogenics",
+    additional_categories = {"metallurgy"},
+    enabled = false,
+    allow_productivity = false,
+    crafting_machine_tint = fluo_tint,
+    subgroup = "aquilo-processes",
+    order = "b[fluoroketone]-c",
+    show_amount_in_title = false,
+    always_show_products = true,
+  },
+  {
+    type = "recipe",
+    name = "pktff-fluoroketone-heat-transfer",
+    icons = pglobals.icons.mini_over(
+      "__base__/graphics/icons/signal/signal-thermometer-red.png",
+      "__space-age__/graphics/icons/fluid/fluoroketone-hot.png"
+    ),
+    category = "cryogenics",
+    ingredients = {
+      {type="fluid", name="fluoroketone-hot", amount=10, ignored_by_stats=10},
+      {type="item", name="ice", amount=1},
+    },
+    energy_required = 2,
+    results = {
+      {type="fluid", name="fluoroketone-cold", amount=10, ignored_by_stats=10},
+      -- normally 20
+      {type="fluid", name="water", amount=15},
+    },
+    main_product = "fluoroketone-cold",
+    enabled = false,
+    allow_productivity = false,
+    crafting_machine_tint = fluo_tint,
+    subgroup = "aquilo-processes",
+    order = "b[fluoroketone]-d",
+    show_amount_in_title = false,
+    always_show_products = true,
+  },
+
   {
     type = "recipe",
     name = "pktff-ammonia-cryogenic-thruster-fuel",
@@ -174,6 +228,9 @@ data:extend{
       {type="fluid", name="fluoroketone-hot", amount=50,
         ignored_by_stats=50, ignored_by_productivity=9999},
     },
+    -- this is more for flavor than anything else.
+    -- hydrofluoric acid is a bad time!
+    emissions_multiplier = 10,
     main_product = "pktff-cryogenic-thruster-oxidizer",
     enabled = false,
 

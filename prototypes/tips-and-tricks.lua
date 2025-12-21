@@ -45,7 +45,7 @@ data:extend{
     order = "a[rocket-juice]-a",
     indent = 1,
     tag = "[item=thruster]",
-    trigger = {type="research", technology="rocket-silo"},
+    trigger = {type="research", technology="pktff-thruster-propellant"},
     simulation = rocket_juice.intro,
   },
   {

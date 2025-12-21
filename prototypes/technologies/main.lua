@@ -232,11 +232,33 @@ data:extend{
       recipe("pktff-precision-optical-component-low-pressure"),
     }
   },
+  {
+    type = "technology",
+    name = "pktff-thruster-propellant",
+    icon = Asset"graphics/technologies/thruster-propellant.png",
+    icon_size = 256,
+    prerequisites = { "pktff-advanced-chemistry" },
+    unit = {
+      count = 300,
+      ingredients = science("rg2b"),
+      time = 60,
+    },
+    effects = {
+      recipe("pktff-thruster-fuel-from-pktff-hydrogen"),
+      recipe("pktff-thruster-oxidizer-from-pktff-oxygen"),
+      recipe("pktff-thruster-fuel-from-rocket-fuel"),
+      recipe("pktff-thruster-fuel-from-ammonia"),
+      recipe("pktff-thruster-oxidizer-from-pktff-nitric-acid"),
+      recipe("pktff-platform-fuel-tank"),
+      recipe("pktff-platform-oxidizer-tank"),
+    },
+  },
 }
 
 local tech_vanilla_rocket = data.raw["technology"]["rocket-silo"]
 tech_vanilla_rocket.prerequisites = {
-  "processing-unit", "concrete", "electric-engine",  "pktff-orbital-science-pack"
+  "processing-unit", "concrete", "electric-engine",
+  "pktff-orbital-science-pack", "pktff-thruster-propellant",
 }
 tech_vanilla_rocket.unit = {
   count = 500,
@@ -248,14 +270,7 @@ tech_vanilla_rocket.effects = {
   recipe("cargo-landing-pad"),
   recipe("pktff-space-platform-scaffolding"),
   recipe("pktff-space-platform-starter-pack-scaffolding"),
-  recipe("pktff-platform-fuel-tank"),
-  recipe("pktff-platform-oxidizer-tank"),
   recipe("thruster"),
-  recipe("pktff-thruster-fuel-from-pktff-hydrogen"),
-  recipe("pktff-thruster-oxidizer-from-pktff-oxygen"),
-  recipe("pktff-thruster-fuel-from-rocket-fuel"),
-  recipe("pktff-thruster-fuel-from-ammonia"),
-  recipe("pktff-thruster-oxidizer-from-pktff-nitric-acid"),
   {type = "unlock-space-platforms", modifier=true, hidden=true}
 }
 
@@ -631,6 +646,47 @@ data:extend{
       recipe("casting-low-density-structure"),
     },
   }
+}
+
+-- Aquilo
+pglobals.tech.add_unlock("cryogenic-plant",
+  "pktff-fluoroketone-heating", "pktff-fluoroketone-heat-transfer"
+)
+data:extend{
+  {
+    type = "technology",
+    name = "pktff-cryogenic-thruster-propellant",
+    icon = Asset"graphics/technologies/cryogenic-thruster-propellant.png",
+    icon_size = 256,
+    prerequisites = {"cryogenic-science-pack"},
+    unit = {
+      count = 500,
+      ingredients = science("rgbspyMEAC"),
+      time = 60,
+    },
+    effects = {
+      recipe("pktff-ammonia-cryogenic-thruster-fuel"),
+      recipe("pktff-n2o4-cryogenic-thruster-oxidizer"),
+      recipe("pktff-decryonize-fuel"),
+      recipe("pktff-decryonize-oxidizer"),
+    },
+  },
+  {
+    type = "technology",
+    name = "pktff-li-f-h-tripropellant",
+    icon = Asset"graphics/technologies/li-f-h-tripropellant.png",
+    icon_size = 256,
+    prerequisites = {"pktff-cryogenic-thruster-propellant"},
+    unit = {
+      count = 2000,
+      ingredients = science("rg2bspyMEA2C"),
+      time = 60,
+    },
+    effects = {
+      recipe("pktff-lithium-hydrogen-cryogenic-thruster-fuel"),
+      recipe("pktff-fluorine-cryogenic-thruster-oxidizer"),
+    },
+  },
 }
 
 -- TEMP
