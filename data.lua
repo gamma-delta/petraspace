@@ -23,6 +23,7 @@ require "prototypes/recipes/vulcanus-1"
 require "prototypes/recipes/gleba-1"
 require "prototypes/recipes/fulgora-1"
 require "prototypes/recipes/post-inner-t1"
+require "prototypes/recipes/aquilo-1"
 require "prototypes/recipes/vulcanus-2"
 require "prototypes/recipes/science"
 
@@ -44,6 +45,7 @@ require "prototypes/recipe-updates/nauvis-nuclear"
 require "prototypes/recipe-updates/vulcanus"
 require "prototypes/recipe-updates/fulgora"
 require "prototypes/recipe-updates/gleba"
+require "prototypes/recipe-updates/aquilo"
 require "prototypes/recipe-updates/misc"
 
 -- jansharp, you are the BEST

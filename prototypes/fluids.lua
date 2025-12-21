@@ -93,4 +93,49 @@ data:extend{
   },
   -- unused-renders does not actually have N204, so
   -- nitric acid to oxidizer directly it is
+
+  {
+    type = "fluid",
+    name = "pktff-cryogenic-thruster-fuel",
+    icons = {
+      {
+        icon = Asset"graphics/icons/fluid/cryo-thruster-fuel.png",
+      },
+      {
+        icon = Asset"graphics/icons/cryo-snowflake.png",
+      },
+    },
+    subgroup = "fluid",
+    order = "b[new-fluid]-a[space]-c",
+    default_temperature = -180,
+    max_temperature = -180,
+    gas_temperature = 0,
+    -- you can't actually burn it but this is to indicate that its 10x as good
+    fuel_value = "500kJ",
+    -- Bass-boosted
+    base_color = { 0.8, 0.1, 0.0 },
+    flow_color = { 0.9, 0.6, 0.7 },
+    auto_barrel = false,
+  },
+  {
+    type = "fluid",
+    name = "pktff-cryogenic-thruster-oxidizer",
+    icons = {
+      {
+        icon = Asset"graphics/icons/fluid/cryo-thruster-oxidizer.png",
+      },
+      {
+        icon = Asset"graphics/icons/cryo-snowflake.png",
+      },
+    },
+    subgroup = "fluid",
+    order = "b[new-fluid]-a[space]-d",
+    default_temperature = -180,
+    max_temperature = -180,
+    gas_temperature = 0,
+    fuel_value = "500kJ",
+    base_color = { 0.0, 0.1, 0.7 },
+    flow_color = { 0.2, 0.8, 1.0 },
+    auto_barrel = false,
+  },
 }

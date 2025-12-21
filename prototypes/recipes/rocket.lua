@@ -1,17 +1,9 @@
 local pglobals = require("globals")
 
-local function rocket_juice_icon(result)
-  return function(original_icon)
-    return pglobals.icons.mini_over(original_icon, result)
-  end
-end
-local fuel_icon = rocket_juice_icon("__space-age__/graphics/icons/fluid/thruster-fuel.png")
-local oxy_icon = rocket_juice_icon("__space-age__/graphics/icons/fluid/thruster-oxidizer.png")
-
-local function to_rocket_juice(result, iconator, order_stub)
+local function to_rocket_juice(result, icon, order_stub)
   -- amount is the amount produced by 1 drop, or 1 item
   -- fluid ingredients are scaled by 10 first
-  return function (name, amount, type)
+  return function (name, amount, order, type)
     type = type or "fluid"
     local multiplier = (type == "fluid") and 10 or 1
 
@@ -29,17 +21,23 @@ local function to_rocket_juice(result, iconator, order_stub)
       energy_required = 1,
       results = {{ type="fluid", name=result, amount=amount*multiplier }},
       subgroup = "pktff-rocket-juice",
-      order = "z[auto]-" .. order_stub,
+      order = order_stub .. order,
       localised_name = {
         "recipe-name." .. "pktff-" .. result .. "-from-whatever",
         {type .. "-name." .. name},
       },
-      icons = iconator(ingr_proto.icon),
+      icons = pglobals.icons.mini_over(ingr_proto.icon, icon),
+      crafting_machine_tint = {
+        primary = juice_proto.base_color,
+        secondary = juice_proto.flow_color,
+        tertiary = juice_proto.base_color,
+        quaternary = juice_proto.flow_color,
+      },
     }
   end
 end
-local to_fuel = to_rocket_juice("thruster-fuel", fuel_icon, "a")
-local to_oxy = to_rocket_juice("thruster-oxidizer", oxy_icon, "b")
+local to_fuel = to_rocket_juice("thruster-fuel", "__space-age__/graphics/icons/fluid/thruster-fuel.png", "a[thruster-fuel]-")
+local to_oxy = to_rocket_juice("thruster-oxidizer", "__space-age__/graphics/icons/fluid/thruster-oxidizer.png", "b[thruster-oxidizer-]")
 
 --[[
   Water -> H2 + O2
@@ -52,13 +50,13 @@ local to_oxy = to_rocket_juice("thruster-oxidizer", oxy_icon, "b")
 
 data:extend{
   -- Phase 0: plain electrolysis
-  to_fuel("pktff-hydrogen", 0.5),
-  to_oxy("pktff-oxygen", 1),
+  to_fuel("pktff-hydrogen", 0.5, "a"),
+  to_oxy("pktff-oxygen", 1, "b"),
 
   -- or you can do the one block vertical difficulty curve for the beef
   -- Phase 1: nitrogen compound oxidizers, ammonia or kerosene fuel
-  to_fuel("ammonia", 2),
-  to_oxy("pktff-nitric-acid", 2),
+  to_fuel("ammonia", 2, "c"),
+  to_oxy("pktff-nitric-acid", 2, "a"),
   {
     type = "recipe",
     name = "pktff-n2o4-thruster-oxidizer",
@@ -74,14 +72,14 @@ data:extend{
       {type="fluid", name="thruster-oxidizer", amount=300},
     },
     subgroup = "pktff-rocket-juice",
-    order = "b[oxy]-a",
+    order = "b[thruster-oxidizer]-b",
     icons = pglobals.icons.two_into_one(
       Asset"graphics/icons/fluid/molecule-nitric-acid.png",
       "__base__/graphics/icons/copper-plate.png",
       "__space-age__/graphics/icons/fluid/thruster-oxidizer.png"
     ),
   },
-  to_fuel("rocket-fuel", 500, "item"),
+  to_fuel("rocket-fuel", 500, "d", "item"),
 }
 
 local function rocket_part_recipe(gravity)
