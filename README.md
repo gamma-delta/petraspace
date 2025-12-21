@@ -17,6 +17,7 @@ Assets responsibly sourced from the following locations:
 - Hydrogen, oxygen, nitric acid
 - Bauxite liquour
 - Electrolysis technology
+- Cryogenic thruster fuel and oxidizer
 
 [**VTK Cannon Turret**](https://github.com/VortiK/vtk-cannon-turret) for the shotgun turret graphics, originally by YuokiTani.
 
@@ -32,7 +33,6 @@ I'd also like to give Malcolm Riley a special shout-out for publishing tutorials
 The rest of them I made myself.
 I used Blender and GIMP for the sprites.
 I kitbashed a lot of the graphics together out of other sprites:
-- Lunar rocket silos
 - Boompuff propagules
 - Science packs
 - Some of the tiles
