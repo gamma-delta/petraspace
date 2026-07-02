@@ -5,7 +5,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-orbital-data-card-high-pressure",
-    category = "crafting",
+    categories = { "crafting" },
     enabled = false,
     ingredients = {
       { type="item", name="pktff-precision-optical-component", amount=1 },
@@ -25,7 +25,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-orbital-data-card-low-pressure",
-    category = "crafting",
+    categories = { "crafting" },
     enabled = false,
     ingredients = {
       { type="item", name="pktff-precision-optical-component", amount=1 },
@@ -46,7 +46,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-rocket-control-unit",
-    category = "crafting",
+    categories = { "crafting" },
     enabled = false,
     ingredients = {
       {type="item", name="pktff-orbital-data-card", amount=1},
@@ -103,7 +103,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-stone-bricks-from-regolith",
-    category = "smelting",
+    categories = { "smelting" },
     enabled = false,
     energy_required = 6.4,
     ingredients = {{type="item", name="pktff-regolith", amount=1}},
@@ -118,10 +118,9 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-washing-regolith",
-    category = "crafting-with-fluid",
+    categories = { "crafting-with-fluid", "centrifuging" },
     subgroup = "raw-material",
     order = "c[chemistry]-zb",
-    additional_categories = {"centrifuging"},
     enabled = false,
     energy_required = 8,
     ingredients = {
@@ -144,8 +143,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-dissolving-regolith",
-    category = "chemistry",
-    additional_categories = {"centrifuging"},
+    categories = { "chemistry", "centrifuging" },
     subgroup = "raw-material",
     order = "c[chemistry]-zc",
     enabled = false,
@@ -193,7 +191,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-dust-spraydown-water",
-    category = "pktff-dust-spraydown",
+    categories = { "pktff-dust-spraydown" },
     subgroup = "pktff-chemistry",
     icon = "__base__/graphics/icons/fluid/water.png",
     ingredients = {{ type="fluid", name="water", amount=200 }},
@@ -219,7 +217,7 @@ local function make_platform_tank_fill_drain(ty)
     {
       type = "recipe",
       name = "pktff-platform-" .. ty .. "-tank",
-      category = "crafting-with-fluid",
+      categories = { "crafting-with-fluid" },
       enabled = false,
       energy_required = 10,
       ingredients = {
@@ -235,7 +233,7 @@ local function make_platform_tank_fill_drain(ty)
     {
       type = "recipe",
       name = "pktff-empty-platform-" .. ty .. "-tank",
-      category = "crafting-with-fluid",
+      categories = { "crafting-with-fluid" },
       enabled = false,
       energy_required = 10,
       ingredients = {{type="item", name="pktff-platform-" .. ty .. "-tank", amount=1}},

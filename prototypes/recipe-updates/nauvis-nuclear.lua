@@ -11,7 +11,7 @@ centri_recipe.ingredients = {
   { type="item", name="uranium-238", amount=5 },
 }
 -- don't ask me how you make a centrifuge in a centrifuge
-centri_recipe.additional_categories = {"centrifuging"}
+centri_recipe.categories = { "crafting", "centrifuging"}
 centri_recipe.crafting_machine_tint = pglobals.colors.nuclear
 
 local reactor_recipe = data.raw["recipe"]["nuclear-reactor"]
@@ -25,7 +25,7 @@ data.raw["recipe"]["uranium-fuel-cell"] = {
   type = "recipe",
   name = "uranium-fuel-cell",
   enabled = false,
-  category = "centrifuging",
+  categories = { "centrifuging" },
   ingredients = {
     {type="item", name="uranium-235", amount=10},
     {type="item", name="uranium-238", amount=20},
@@ -63,7 +63,6 @@ for _,recipename in ipairs{
   "acid-neutralisation", "holmium-solution"
 } do
   local recipe = data.raw["recipe"][recipename]
-  recipe.category = "chemistry"
-  recipe.additional_categories = {"centrifuging"}
+  recipe.categories = { "chemistry", "centrifuging" }
 end
 data.raw["recipe"]["kovarex-enrichment-process"].hidden = true

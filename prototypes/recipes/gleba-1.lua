@@ -9,7 +9,7 @@ data:extend{
       "__space-age__/graphics/icons/fluid/ammonia.png",
       "__base__/graphics/icons/fluid/petroleum-gas.png"
     ),
-    category = "organic",
+    categories = { "organic" },
     subgroup = "agriculture-processes",
     order = "a[seeds]-z",
     enabled = false,
@@ -38,7 +38,7 @@ data:extend{
       "__space-age__/graphics/icons/iron-bacteria.png",
       Asset"graphics/icons/fluid/molecule-nitric-acid.png"
     ),
-    category = "organic",
+    categories = { "organic" },
     subgroup = "agriculture-processes",
     order = "e[bacteria]-z[new]-a[nitrogen-fixation]",
     enabled = false,
@@ -82,7 +82,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-light-oil-reforming",
-    category = "organic",
+    categories = { "organic" },
     subgroup = "agriculture-processes",
     order = "e[bacteria]-z[new]-b[light-oil-reforming]",
     enabled = false,
@@ -111,7 +111,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-heavy-oil-reforming",
-    category = "organic",
+    categories = { "organic" },
     subgroup = "agriculture-processes",
     order = "e[bacteria]-z[new]-c[heavy-oil-reforming]",
     enabled = false,
@@ -141,7 +141,7 @@ data:extend{
     type = "recipe",
     name = "pktff-fertilizer",
     icon = Asset"graphics/icons/fertilizer/1.png",
-    category = "organic",
+    categories = { "organic" },
     subgroup = "agriculture-products",
     order = "c[nutrients]-z-a[fertilizer]",
     enabled = false,
@@ -167,7 +167,7 @@ data:extend{
       "__base__/graphics/icons/fluid/light-oil.png",
       "__base__/graphics/icons/explosives.png"
     ),
-    category = "organic",
+    categories = { "organic" },
     subgroup = "agriculture-products",
     order = "a[organic-products]-z-b[anfo-explosives]",
     enabled = false,
@@ -187,7 +187,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-presto-fuel",
-    category = "chemistry-or-cryogenics",
+    categories = { "chemistry-or-cryogenics" },
     subgroup = "agriculture-products",
     order = "a[organic-products]-z-d[presto-fuel]",
     enabled = false,

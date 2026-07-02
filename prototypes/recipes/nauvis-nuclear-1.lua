@@ -5,7 +5,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-depleted-uranium",
-    category = "smelting",
+    categories = { "smelting" },
     ingredients = {{type="item", name="uranium-ore", amount=5}},
     energy_required = 16,
     results = {{type="item", name="uranium-238", amount=1}},
@@ -19,7 +19,7 @@ data:extend{
     name = "pktff-mox-fuel-cell",
     enabled = false,
     allow_productivity = true,
-    category = "centrifuging",
+    categories = { "centrifuging" },
     ingredients = {
       {type="item", name="uranium-235", amount=2},
       {type="item", name="pktff-plutonium", amount=10},
@@ -44,7 +44,7 @@ data:extend{
     name = "pktff-breeder-fuel-cell",
     enabled = false,
     allow_productivity = true,
-    category = "centrifuging",
+    categories = { "centrifuging" },
     ingredients = {
       {type="item", name="uranium-235", amount=2},
       {type="item", name="pktff-plutonium", amount=20},
@@ -69,7 +69,7 @@ data:extend{
     name = "pktff-breeder-fuel-cell-reprocessing",
     enabled = false,
     allow_productivity = true,
-    category = "centrifuging",
+    categories = { "centrifuging" },
     subgroup = "uranium-processing",
     order = "b[uranium-products]-za",
     -- TODO
@@ -108,7 +108,7 @@ data:extend{
     type = "recipe",
     name = "pktff-nuclear-waste-reprocessing",
     enabled = false,
-    category = "centrifuging",
+    categories = { "centrifuging" },
     subgroup = "uranium-processing",
     icons = pglobals.icons.mini_over(
       "__base__/graphics/icons/arrows/signal-shuffle.png",
@@ -143,7 +143,7 @@ data:extend{
     type = "recipe",
     name = "pktff-barreled-nuclear-waste",
     enabled = false,
-    category = "centrifuging",
+    categories = { "centrifuging" },
     subgroup = "uranium-processing",
     order = "z-b",
     ingredients = {
@@ -169,7 +169,7 @@ data:extend{
     type = "recipe",
     name = "pktff-nuclear-waste-dumping",
     enabled = false,
-    category = "centrifuging",
+    categories = { "centrifuging" },
     subgroup = "uranium-processing",
     order = "z-c",
     icons = pglobals.icons.mini_over(

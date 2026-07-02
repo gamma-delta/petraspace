@@ -41,7 +41,7 @@ data:extend{
     collision_box = {{-4.3, -4.3}, {4.3, 4.3}},
     tile_width = 9,
     tile_height = 9,
-    impact_category = "metal",
+    impact_categories = { "metal" },
     open_sound = sounds.steam_open,
     close_sound = sounds.steam_close,
 

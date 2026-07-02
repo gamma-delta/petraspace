@@ -4,7 +4,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-magpie-alloy",
-    category = "pktff-demolisher-squishing",
+    categories = { "pktff-demolisher-squishing" },
     hidden = true,
     enabled = false,
     ingredients = {

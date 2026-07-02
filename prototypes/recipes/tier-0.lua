@@ -6,7 +6,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-aluminum-plate",
-    category = "smelting",
+    categories = { "smelting" },
     order = "za[native-aluminum-to-plate]",
     enabled = false,
     energy_required = 3.2,
@@ -18,8 +18,7 @@ data:extend{
     -- This recipe should mega suck
     type = "recipe",
     name = "pktff-simple-bauxite-extraction",
-    category = "chemistry",
-    additional_categories = {"centrifuging"},
+    categories = { "chemistry", "centrifuging" },
     subgroup = "pktff-aluminum-processes",
     order = "c[aluminum]-a",
     enabled = false,
@@ -52,7 +51,7 @@ data:extend{
     name = "pktff-circuit-substrate-stone",
     subgroup = "intermediate-product",
     order = "b[circuits]-![circuit-substrate]-a",
-    category = "crafting",
+    categories = { "crafting" },
     enabled = false,
     ingredients = {
       {type="item", name="stone-brick", amount=1},
@@ -74,8 +73,7 @@ data:extend{
     name = "pktff-circuit-substrate-wood",
     subgroup = "intermediate-product",
     order = "b[circuits]-![circuit-substrate]-b",
-    category = "crafting",
-    additional_categories = {"organic"},
+    categories = { "crafting", "organic" },
     enabled = false,
     ingredients = {
       {type="item", name="wood", amount=2},
@@ -96,7 +94,7 @@ data:extend{
     name = "pktff-circuit-substrate-plastic",
     subgroup = "intermediate-product",
     order = "b[circuits]-![circuit-substrate]-c",
-    category = "electronics",
+    categories = { "electronics" },
     enabled = false,
     ingredients = {
       {type="item", name="plastic-bar", amount=10},
@@ -118,7 +116,7 @@ data:extend{
 data:extend{{
   type = "recipe",
   name = "pktff-shotgun-turret",
-  category = "crafting",
+  categories = { "crafting" },
   enabled = false,
   ingredients = {
     -- Haha
@@ -140,7 +138,7 @@ local function poc_recipe(hi_pressure)
     type = "recipe",
     name = "pktff-precision-optical-component-" .. name,
     -- it would probably just be bloat to add a "vacuum craftinginator"
-    category = "advanced-crafting",
+    categories = { "advanced-crafting" },
     enabled = false,
     -- i want your first craft of this on Viate to feel REALLY GOOD AND FAST
     -- therefore, the space recipe can't be *too* complicated, so you get to it soon.
@@ -176,7 +174,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-water-electrolysis",
-    category = "chemistry",
+    categories = { "chemistry" },
     ingredients = {
       {type="fluid", name="water", amount=100},
     },
@@ -200,7 +198,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-the-cooler-water-electrolysis",
-    category = "electromagnetics",
+    categories = { "electromagnetics" },
     ingredients = {
       {type="fluid", name="water", amount=100},
       {type="fluid", name="electrolyte", amount=10},
@@ -222,7 +220,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-ammonia-synthesis",
-    category = "chemistry-or-cryogenics",
+    categories = { "chemistry-or-cryogenics" },
     ingredients = {
       {type="fluid", name="petroleum-gas", amount=20},
       -- this way you have something to do with all that hydrogen,
@@ -252,8 +250,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-nitric-acid",
-    category = "oil-processing",
-    additional_categories = {"cryogenics"},
+    categories = { "oil-processing", "cryogenics" },
     ingredients = {
       -- Friendship ended with ostwald process
       -- now this made up thing is my new friend

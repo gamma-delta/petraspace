@@ -6,7 +6,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-bauxite-liquor",
-    category = "metallurgy",
+    categories = { "metallurgy" },
     subgroup = "pktff-aluminum-processes",
     order = "c[aluminum]-b",
     ingredients = {
@@ -34,7 +34,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-bauxite-liquor-electrolysis",
-    category = "electromagnetics",
+    categories = { "electromagnetics" },
     subgroup = "pktff-aluminum-processes",
     order = "c[aluminum]-c",
     enabled = false,
@@ -64,7 +64,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-casting-aluminum-plate",
-    category = "metallurgy",
+    categories = { "metallurgy" },
     subgroup = "pktff-aluminum-processes",
     order = "zd[casting-aluminum-plate]",
     enabled = false,

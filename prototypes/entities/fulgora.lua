@@ -165,7 +165,7 @@ data:extend{
     },
     collision_box = {{-0.7, -0.7}, {0.7, 0.7}},
     selection_box = {{-1, -1}, {1, 1}},
-    impact_category = "metal",
+    impact_categories = { "metal" },
     open_sound = sounds.electric_large_open,
     close_sound = sounds.electric_large_close,
   },

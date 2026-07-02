@@ -28,7 +28,7 @@ table.insert(data.raw["recipe"]["landfill"].ingredients,
 -- Steel needs nasty fuel
 -- Apparently there are only 4 smelting recipes in vanilla:
 -- iron, copper, steel, and bricks
-data.raw["recipe"]["steel-plate"].category = "pktff-dirty-smelting"
+data.raw["recipe"]["steel-plate"].categories = { "pktff-dirty-smelting" }
 
 -- Misc mall ingredient changes
 table.insert(data.raw["recipe"]["medium-electric-pole"].ingredients,
@@ -52,7 +52,7 @@ pglobals.recipe.replace("combat-shotgun", "wood",
   {type="item", name="pktff-aluminum-plate", amount=5})
 -- SLEGT: Now on Nauvis!
 local slegt_recipe = data.raw["recipe"]["snouz_long_electric_gun_turret"]
-slegt_recipe.category = "crafting"
+slegt_recipe.categories = { "crafting" }
 slegt_recipe.energy_required = 5
 slegt_recipe.ingredients = {
   {type="item", name="gun-turret", amount=2},
@@ -86,7 +86,7 @@ pglobals.recipe.replace("flying-robot-frame", "steel-plate", "low-density-struct
 
 -- These things are SO expensive. Why?
 local heat_pipe_recipe = data.raw["recipe"]["heat-pipe"]
-heat_pipe_recipe.category = "advanced-crafting"
+heat_pipe_recipe.categories = { "advanced-crafting" }
 heat_pipe_recipe.ingredients = {
   { type="item", name="copper-plate", amount=5 },
   { type="item", name="steel-plate", amount=2 },

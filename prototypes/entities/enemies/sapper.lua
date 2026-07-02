@@ -324,7 +324,7 @@ local function make_sapper(
       is_military_target = true,
       flags = {"placeable-player", "placeable-enemy", "placeable-off-grid", "breaths-air", "not-repairable"},
       subgroup = "enemies",
-      impact_category = "organic",
+      impact_categories = { "organic" },
       resistances = util.table.deepcopy(sapper_resistances),
       max_health = health / 2,
       collision_box = {{-0.5, -0.5}, {0.5, 0.5}},
@@ -372,7 +372,7 @@ local function make_sapper(
       factoriopedia_simulation = factoriopedia_simulation,
       order = "gleba-b-sapper-"..tostring(scale),
       subgroup = "enemies",
-      impact_category = "organic",
+      impact_categories = { "organic" },
       resistances = util.table.deepcopy(sapper_resistances),
       healing_per_tick = health/500/60,
       distraction_cooldown = 30,
@@ -382,7 +382,7 @@ local function make_sapper(
       attack_parameters =
       {
         type = "projectile",
-        ammo_category = "biological",
+        ammo_categories = { "biological" },
         cooldown = 400,
         cooldown_deviation = 0.15,
         range = 0.5,

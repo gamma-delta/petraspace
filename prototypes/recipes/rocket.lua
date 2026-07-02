@@ -15,7 +15,7 @@ local function to_rocket_juice(result, icon, order_stub)
     return {
       type = "recipe",
       name = "pktff-" .. result .. "-from-" .. name,
-      category = "chemistry-or-cryogenics",
+      categories = { "chemistry-or-cryogenics" },
       enabled = false,
       ingredients = {{ type=type, name=name, amount=1*multiplier }},
       energy_required = 1,
@@ -60,7 +60,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-n2o4-thruster-oxidizer",
-    category = "chemistry-or-cryogenics",
+    categories = { "chemistry-or-cryogenics" },
     ingredients = {
       {type="fluid", name="pktff-nitric-acid", amount=10},
       {type="fluid", name="steam", amount=100},
@@ -96,7 +96,7 @@ local function rocket_part_recipe(gravity)
     hide_from_player_crafting = true,
     auto_recycle = false,
     hidden = gravity ~= 10,
-    category = "rocket-building",
+    categories = { "rocket-building" },
     ingredients =
     {
       -- Vulcanus

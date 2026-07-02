@@ -17,7 +17,7 @@ data:extend{
         icon = "__quality__/graphics/icons/recycling-top.png"
       }
     },
-    category = "recycling",
+    categories = { "recycling" },
     subgroup = "fulgora-processes",
     order = "a[trash]-b",
     auto_recycle = false,
@@ -43,7 +43,7 @@ data:extend{
     type = "recipe",
     name = "pktff-fulgoran-sludge-refining",
     icon = Asset"graphics/icons/fluid/fulgoran-sludge.png",
-    category = "oil-processing",
+    categories = { "oil-processing" },
     subgroup = "fulgora-processes",
     order = "az[after-trash]-a",
     enabled = false,

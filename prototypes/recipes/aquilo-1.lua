@@ -12,7 +12,7 @@ local function decryo_thruster_juice(ty, order)
         {icon = Asset"graphics/icons/fluid/half-cryo-thruster-" .. ty .. ".png"},
         {icon = Asset"graphics/icons/cryo-snowflake.png"}
       },
-      category = "cryogenics",
+      categories = { "cryogenics" },
 
       ingredients = {
         {type="fluid", name="pktff-cryogenic-thruster-" .. ty, amount=10},
@@ -65,8 +65,7 @@ data:extend{
     results = {
       {type="fluid", name="fluoroketone-hot", amount=10, ignored_by_stats=10}
     },
-    category = "cryogenics",
-    additional_categories = {"metallurgy"},
+    categories = { "cryogenics" ,"metallurgy" },
     enabled = false,
     allow_productivity = false,
     crafting_machine_tint = fluo_tint,
@@ -82,7 +81,7 @@ data:extend{
       "__base__/graphics/icons/signal/signal-thermometer-red.png",
       "__space-age__/graphics/icons/fluid/fluoroketone-hot.png"
     ),
-    category = "cryogenics",
+    categories = { "cryogenics" },
     ingredients = {
       {type="fluid", name="fluoroketone-hot", amount=10, ignored_by_stats=10},
       {type="item", name="ice", amount=1},
@@ -110,7 +109,7 @@ data:extend{
       "__space-age__/graphics/icons/fluid/ammonia.png",
       Asset"graphics/icons/fluid/cryo-thruster-fuel.png"
     ),
-    category = "cryogenics",
+    categories = { "cryogenics" },
     ingredients = {
       {type="fluid", name="ammonia", amount=100},
       {type="fluid", name="fluoroketone-cold", amount=10, ignored_by_stats=8},
@@ -143,7 +142,7 @@ data:extend{
       Asset"graphics/icons/fluid/molecule-hydrogen.png",
       Asset"graphics/icons/fluid/cryo-thruster-fuel.png"
     ),
-    category = "cryogenics",
+    categories = { "cryogenics" },
     ingredients = {
       {type="item", name="lithium-plate", amount=1},
       {type="fluid", name="pktff-hydrogen", amount=100},
@@ -180,7 +179,7 @@ data:extend{
       "__space-age__/graphics/icons/fluid/molten-copper.png",
       Asset"graphics/icons/fluid/cryo-thruster-oxidizer.png"
     ),
-    category = "cryogenics",
+    categories = { "cryogenics" },
     ingredients = {
       {type="fluid", name="pktff-nitric-acid", amount=100},
       {type="item", name="ice", amount=10},
@@ -216,7 +215,7 @@ data:extend{
       "__space-age__/graphics/icons/fluid/fluorine.png",
       Asset"graphics/icons/fluid/cryo-thruster-oxidizer.png"
     ),
-    category = "cryogenics",
+    categories = { "cryogenics" },
     ingredients = {
       {type="fluid", name="fluorine", amount=100},
       {type="fluid", name="fluoroketone-cold", amount=100, ignored_by_stats=50},

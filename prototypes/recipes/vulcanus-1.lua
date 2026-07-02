@@ -4,8 +4,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-geothermal-heat-exchanger",
-    category = "crafting",
-    additional_categories = {"metallurgy"},
+    categories = { "crafting", "metallurgy" },
     enabled = false,
     ingredients = {
       {type="item", name="heating-tower", amount=4},
@@ -18,7 +17,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-lime-calcination",
-    category = "metallurgy",
+    categories = { "metallurgy" },
     enabled = false,
     show_amount_in_title = false,
     surface_properties = {
@@ -44,7 +43,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-concrete-from-quicklime",
-    category = "metallurgy",
+    categories = { "metallurgy" },
     enabled = false,
     auto_recycle = false,
     allow_productivity = true,
@@ -69,7 +68,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-refined-concrete-from-quicklime",
-    category = "metallurgy",
+    categories = { "metallurgy" },
     enabled = false,
     auto_recycle = false,
     allow_productivity = true,
@@ -98,7 +97,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-tungsten-heat-pipe",
-    category = "metallurgy",
+    categories = { "metallurgy" },
     enabled = false,
     -- TODO this does not recycle
     -- big mining drills and turbelts are ~* hard coded *~ I GUESS,
@@ -121,7 +120,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-tungsten-steel-strongbox",
-    category = "metallurgy",
+    categories = { "metallurgy" },
     enabled = false,
     -- TODO also does not recycle
     allow_productivity = false,
@@ -138,7 +137,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-advanced-thruster",
-    category = "metallurgy",
+    categories = { "metallurgy" },
     enabled = false,
     -- TODO also does not recycle
     allow_productivity = true,
