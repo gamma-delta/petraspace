@@ -235,6 +235,7 @@ data:extend{
           use_shooter_direction = true,
           turn_range = 1 / 3,
           damage_modifier = 2,
+          ammo_categories = {"shotgun-shell", "cannon-shell"},
 
           -- Based on the gfx
           projectile_creation_distance = 1.5,

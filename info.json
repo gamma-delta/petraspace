@@ -1,27 +1,21 @@
 {
   "name": "pk-the-first-frontier",
-  "version": "0.1.4",
-  "title": "The First Frontier (Playtest 4, Foundry, 2025-12-14)",
+  "version": "0.2.0",
+  "title": "The First Frontier",
   "author": "petrak@",
-  "factorio_version": "2.0",
+  "factorio_version": "2.1",
   "dependencies": [
     "space-age >= 2.0.0",
     "PlanetsLib >= 1.2.20",
     "ch-concentrated-solar",
-    "quick-adjustable-inserters >= 2.0.6",
     "snouz_long_electric_gun_turret >= 1.0.5",
-    "ArmouredBiters >= 1.2.0",
     "better-asteroid-resistance >= 0.0.3",
-    "diurnal-dynamics >= 0.14.2",
-
     "? blueprint-shotgun >= 0.2.13",
     "? barrel-stages >= 2.0.0",
     "? barelling-group2 >= 0.5.0",
-
     "? tintable-centrifuges >= 0.1.1",
     "? fire-lights >= 0.13.3",
-    "? DiscoScience >= 2.0.1",
-    "? visible-planets >= 1.4.8"
+    "? DiscoScience >= 2.0.1"
   ],
   "quality_required": true,
   "space_travel_required": true,

@@ -176,4 +176,5 @@ no_scaffold("artillery-turret", {"artillery-turret"})
 -- Notable allowed things: Combinators mostly
 
 -- Nerf snapper nest health
-data.raw["unit-spawner"]["armoured-biter-spawner"].max_health = 400
+-- TODO: armored biters 2.1
+-- data.raw["unit-spawner"]["armoured-biter-spawner"].max_health = 400

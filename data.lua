@@ -49,6 +49,7 @@ require "prototypes/recipe-updates/aquilo"
 require "prototypes/recipe-updates/misc"
 
 -- jansharp, you are the BEST
-local qai = require "__quick-adjustable-inserters__/data_api"
-qai.exclude("")
-qai.include(qai.to_plain_pattern("tentacle-inserter"))
+-- TODO: quick-adjustable-inserters 2.1
+-- local qai = require "__quick-adjustable-inserters__/data_api"
+-- qai.exclude("")
+-- qai.include(qai.to_plain_pattern("tentacle-inserter"))
