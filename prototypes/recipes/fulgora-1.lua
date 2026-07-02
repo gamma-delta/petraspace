@@ -61,8 +61,6 @@ data:extend{
       {type="fluid", name="heavy-oil", amount=30},
       {type="fluid", name="sulfuric-acid", amount=20},
       {type="item", name="scrap", amount_min=0, amount_max=10},
-      -- hur hur hur
-      {type="item", name="plastic-bar", amount=1, probability=0.2},
     }
   }
 }
