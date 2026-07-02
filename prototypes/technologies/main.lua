@@ -85,7 +85,7 @@ data:extend{
     effects = {},
     research_trigger = {
       type = "mine-entity",
-      entity = "pktff-bauxite-ore",
+      entities = {"pktff-bauxite-ore"},
     },
   },
   {
@@ -284,9 +284,9 @@ data:extend{
     prerequisites = { "pktff-discover-viate" },
     research_trigger = {
       type = "mine-entity",
-      entity = "pktff-regolith-deposit",
+      entities = {"pktff-regolith-deposit"},
     },
-    effects = { 
+    effects = {
       recipe("pktff-washing-regolith"),
       recipe("pktff-dissolving-regolith"),
       recipe("pktff-stone-bricks-from-regolith"),
@@ -302,7 +302,7 @@ tech_cse.prerequisites = {"pktff-discover-viate"}
 tech_cse.unit = nil
 tech_cse.research_trigger = {
   type = "mine-entity",
-  entity = "pktff-ice-deposit",
+  entities = { "pktff-ice-deposit" },
 }
 tech_cse.effects = {
   recipe("chcs-solar-power-tower"),
@@ -483,7 +483,7 @@ data:extend{
 local recyc = data.raw["technology"]["recycling"]
 recyc.research_trigger = {
   type = "mine-entity",
-  entity = "scrap",
+  entities = { "scrap" },
 }
 table.insert(recyc.effects, recipe("pktff-archaeological-scrap-recycling"))
 table.insert(recyc.effects, recipe("pktff-fulgoran-sludge-refining"))
@@ -544,7 +544,7 @@ data:extend{
     prerequisites = {"agriculture"},
     research_trigger = {
       type = "mine-entity",
-      entity = "boompuff",
+      entities = { "boompuff", "pktff-boompuff-plant" },
     }
   },
   -- Intermediate reward: fertilizer
