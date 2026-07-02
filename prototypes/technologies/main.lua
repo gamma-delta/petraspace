@@ -135,10 +135,15 @@ heating_tower.effects = {
 }
 
 -- Military stuff
+-- Replace the original gun-turret with our own tech so we can get the levels
 data:extend{
   pglobals.copy_then(data.raw["technology"]["gun-turret"], {
-    name = "pktff-shotgun-turret",
-    prerequisites = {"military-science-pack"},
+    name = "pktff-gun-turret-1",
+    localised_description = {"technology-description.gun-turret"}
+  }),
+  pglobals.copy_then(data.raw["technology"]["gun-turret"], {
+    name = "pktff-gun-turret-2",
+    prerequisites = {"military-science-pack", "pktff-gun-turret-1"},
     unit = {
       count = 100,
       ingredients = science("rgm"),
@@ -146,19 +151,25 @@ data:extend{
     },
     effects = {
       recipe("pktff-shotgun-turret")
-    }
+    },
+    localised_description = {"technology-description.pktff-gun-turret-2"}
+  }),
+  pglobals.copy_then(data.raw["technology"]["snouz_long_electric_gun_turret"], {
+    name = "pktff-gun-turret-3",
+    prerequisites = {"military-3", "laser", "pktff-gun-turret-2"},
+    unit = {
+      -- The military sciences are pretty cheap in the vanilla game,
+      -- presumably cause you want to do it fast if you're under biter attack.
+      count = 100,
+      ingredients = science("rgbm"),
+      time = 30,
+    },
+    localised_description = {"technology-description.snouz_long_electric_gun_turret"}
   })
 }
+data.raw["technology"]["gun-turret"].hidden = true
+data.raw["technology"]["snouz_long_electric_gun_turret"].hidden = true
 
-local slegt_tech = data.raw["technology"]["snouz_long_electric_gun_turret"]
-slegt_tech.prerequisites = {"military-3", "laser"}
-slegt_tech.unit = {
-  -- The military sciences are pretty cheap in the vanilla game,
-  -- presumably cause you want to do it fast if you're under biter attack.
-  count = 100,
-  ingredients = science("rgbm"),
-  time = 30,
-}
 -- Combat shotguns use Al instead of wood now
 table.insert(data.raw["technology"]["military-3"].prerequisites,
   "pktff-simple-bauxite-extraction")
