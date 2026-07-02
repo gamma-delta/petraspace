@@ -52,9 +52,14 @@ purple_sci.ingredients = {
 }
 purple_sci.results[1].amount = 5
 -- On average, slowly consumes waste. But like really, really slowly
-table.insert(purple_sci.results,
-  {type="item", name="pktff-nuclear-waste", amount=1, probability = 0.99,
-    ignored_by_productivity = 9999, ignored_by_stats=1})
+table.insert(purple_sci.results, {
+  type="item",
+  name="pktff-nuclear-waste",
+  amount=1,
+  independent_probability = 0.99,
+  ignored_by_productivity = 9999,
+  ignored_by_stats=1
+})
 purple_sci.main_product = "production-science-pack"
 
 local yellow_sci = data.raw["recipe"]["utility-science-pack"]
@@ -65,9 +70,14 @@ yellow_sci.ingredients = {
   {type="item", name="pktff-plutonium", amount=1, ignored_by_stats=1},
 }
 yellow_sci.results[1].amount = 5
-table.insert(yellow_sci.results,
-  {type="item", name="pktff-plutonium", amount=1, probability = 0.99,
-    ignored_by_productivity = 9999, ignored_by_stats=1})
+table.insert(yellow_sci.results, {
+  type="item",
+  name="pktff-plutonium",
+  amount=1,
+  independent_probability = 0.99,
+  ignored_by_productivity = 9999,
+  ignored_by_stats=1
+})
 yellow_sci.main_product = "utility-science-pack"
 
 -- Forces reliance on the old bauxite recipe

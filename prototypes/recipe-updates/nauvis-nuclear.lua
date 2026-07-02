@@ -52,8 +52,8 @@ cell_reproc.crafting_machine_tint = {
 cell_reproc.ingredients[1].amount = 1
 cell_reproc.results = {
   -- 1/4 input U
-  {type="item", name="uranium-238", amount=1, probability = 0.5},
-  {type="item", name="pktff-plutonium", amount=1, probability = 0.8},
+  {type="item", name="uranium-238", amount=1, independent_probability = 0.5},
+  {type="item", name="pktff-plutonium", amount=1, independent_probability = 0.8},
   pglobals.recipe.nuclear_waste(5),
 }
 

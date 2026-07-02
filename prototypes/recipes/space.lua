@@ -165,7 +165,7 @@ data:extend{
       -- should barely close the loop.
       -- However you also need enough iron ore to react it ...
       -- You will probably be relying on shipments of S from Nauvis for a while.
-      {type="item", name="sulfur", amount=1, probability=0.8},
+      {type="item", name="sulfur", amount=1, independent_probability=0.8},
     },
     icons = pglobals.icons.mini_over(
       "__base__/graphics/icons/fluid/sulfuric-acid.png",
