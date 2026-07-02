@@ -51,10 +51,10 @@ for _,sp in ipairs{
   "cryogenic-science-pack",
   "promethium-science-pack",
 } do
-  local proto = data.raw["tool"][sp]
+  local proto = data.raw["item"][sp]
   proto.localised_description = { "technology-description." .. sp }
 end
-data.raw["tool"]["space-science-pack"].localised_description = {"technology-description.space-science-pack-space-age"}
+data.raw["item"]["space-science-pack"].localised_description = {"technology-description.space-science-pack-space-age"}
 
 -- Make self-recycling recipes produce much more pollution
 for _,recipe in pairs(data.raw["recipe"]) do
