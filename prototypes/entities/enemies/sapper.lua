@@ -1,6 +1,5 @@
 local pglobals = require "globals"
 local base_sounds = require("__base__/prototypes/entity/sounds")
-local gleba_ai_settings = require ("__space-age__.prototypes.entity.gleba-ai-settings")
 local space_age_sounds = require("__space-age__/prototypes/entity/sounds")
 
 local spage_enemies = require("__space-age__/prototypes/entity/enemies")
@@ -426,23 +425,21 @@ local function make_sapper(
         },
       },
       vision_distance = 40,
-      ai_settings = util.merge(
-      {
-        gleba_ai_settings,
+      ai_settings = {
+        destroy_when_commands_fail = true,
+        allow_try_return_to_spawner = true,
+        strafe_settings =
         {
-          strafe_settings =
-          {
-            max_distance = 12,
-            ideal_distance = 4,
-            ideal_distance_tolerance = 1,
-            ideal_distance_variance = 1,
-            ideal_distance_importance = 0.5,
-            ideal_distance_importance_variance = 0.1,
-            face_target = true
-          },
-          size_in_group = 3,
-        }
-      }),
+          max_distance = 12,
+          ideal_distance = 4,
+          ideal_distance_tolerance = 1,
+          ideal_distance_variance = 1,
+          ideal_distance_importance = 0.5,
+          ideal_distance_importance_variance = 0.1,
+          face_target = true
+        },
+        size_in_group = 3,
+      },
       absorptions_to_join_attack = { spores = 15 },
       corpse = prefix .. "strafer-corpse",
       dying_explosion = prefix .. "strafer-pentapod-die",
