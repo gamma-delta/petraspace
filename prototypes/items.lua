@@ -411,7 +411,7 @@ data:extend {
 -- === Science! === --
 local function science_pack(name, order, icon, tint)
   return pglobals.copy_then(
-    data.raw["tool"]["automation-science-pack"],
+    data.raw["item"]["automation-science-pack"],
     {
       name = name,
       icon = icon,
