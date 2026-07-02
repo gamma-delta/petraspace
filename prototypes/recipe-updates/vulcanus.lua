@@ -5,7 +5,7 @@ for _,calcite2lime in ipairs{
   -- Calcite is now Vulcanus-only! Quicklime can be obtained from space.
   -- If I end up implementing glass, then calcite can be used for
   -- more efficiency there too.
-  "molten-iron", "molten-copper",
+  "iron-ore-melting", "copper-ore-melting",
   "molten-iron-from-lava", "molten-copper-from-lava",
   "acid-neutralisation",
   -- just like expanding grout!
