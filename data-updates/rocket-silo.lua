@@ -1,4 +1,6 @@
 local pglobals = require "globals"
+local assembler_pics = require("__base__/prototypes/entity/assembler-pictures")
+require("__base__/prototypes/entity/pipecovers")
 
 local vanilla_rs = data.raw["rocket-silo"]["rocket-silo"]
 vanilla_rs.fluid_boxes_off_when_no_fluid_recipe = false
@@ -7,7 +9,7 @@ vanilla_rs.fluid_boxes = {
   {
     production_type = "input",
     volume = 1000,
-    pipe_picture = assembler2pipepictures(),
+    pipe_picture = assembler_pics.assembler3pipepictures,
     pipe_covers = pipecoverspictures(),
     pipe_connections = {
       { flow_direction="input", direction = defines.direction.south, position = {-1, 4} },
@@ -20,7 +22,7 @@ vanilla_rs.fluid_boxes = {
   {
     production_type = "input",
     volume = 1000,
-    pipe_picture = assembler2pipepictures(),
+    pipe_picture = assembler_pics.assembler3pipepictures,
     pipe_covers = pipecoverspictures(),
     pipe_connections = {
       { flow_direction="input", direction = defines.direction.south, position = {1, 4} },

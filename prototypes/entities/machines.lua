@@ -3,6 +3,7 @@ local pglobals = require "globals"
 
 local item_sounds = require("__base__/prototypes/item_sounds")
 local sounds = require("__base__/prototypes/entity/sounds")
+require("__base__/prototypes/entity/pipecovers")
 
 local rocket_cap = 1000*kg
 
