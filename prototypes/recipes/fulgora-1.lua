@@ -7,14 +7,14 @@ data:extend{
     name = "pktff-archaeological-scrap-recycling",
     icons = {
       {
-        icon = "__quality__/graphics/icons/recycling.png"
+        icon = "__recycler__/graphics/icons/recycling.png"
       },
       {
         icon = Asset"graphics/icons/archaeological-scrap/1.png",
         scale = 0.4
       },
       {
-        icon = "__quality__/graphics/icons/recycling-top.png"
+        icon = "__recycler__/graphics/icons/recycling-top.png"
       }
     },
     categories = { "recycling" },

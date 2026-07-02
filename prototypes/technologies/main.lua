@@ -571,7 +571,7 @@ data:extend{
     name = "pktff-advanced-asteroid-collector",
     -- TODO
     icon = Asset"graphics/technologies/asteroid-collector.png",
-    icon_size = 560,
+    icon_size = 520,
     effects = {
       { type="unlock-recipe", recipe="asteroid-collector" },
     },

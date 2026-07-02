@@ -28,7 +28,7 @@ end
 local ghx_pics = require("geothermal-heat-exchanger-gfx")
 local big_x = {
   filename = "__core__/graphics/too-far.png",
-  size = 64, scale = 0.5,
+  size = 32, scale = 0.5,
 }
 data:extend{
   {
