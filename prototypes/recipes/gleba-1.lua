@@ -57,12 +57,10 @@ data:extend{
       {type="item", name="jelly", amount=4},
       {type="fluid", name="ammonia", amount=30},
     },
-    reset_freshness_on_craft = true,
-    result_is_always_fresh = true,
     results = {
       -- Maybe you get more nitrogen out of the atmosphere idk
       {type="fluid", name="pktff-nitric-acid", amount=50},
-      {type="item", name="iron-bacteria", amount_min=0, amount_max=2},
+      {type="item", name="iron-bacteria", amount_min=0, amount_max=2, always_fresh = true},
     },
     -- TODO
     crafting_machine_tint = {
