@@ -201,7 +201,7 @@ pglobals.recipe = {
       type = "item",
       name = name,
       amount = 1,
-      probability = prob,
+      independent_probability = prob,
       show_details_in_recipe_tooltip = false,
     }
   end,

@@ -94,7 +94,7 @@ data:extend{
     name = "pktff-circuit-substrate-plastic",
     subgroup = "intermediate-product",
     order = "b[circuits]-![circuit-substrate]-c",
-    categories = { "electronics" },
+    categories = { "crafting", "electromagnetics" },
     enabled = false,
     ingredients = {
       {type="item", name="plastic-bar", amount=10},
@@ -220,7 +220,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-ammonia-synthesis",
-    categories = { "chemistry-or-cryogenics" },
+    categories = { "chemistry", "cryogenics" },
     ingredients = {
       {type="fluid", name="petroleum-gas", amount=20},
       -- this way you have something to do with all that hydrogen,

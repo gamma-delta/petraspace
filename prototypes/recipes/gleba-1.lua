@@ -185,7 +185,7 @@ data:extend{
   {
     type = "recipe",
     name = "pktff-presto-fuel",
-    categories = { "chemistry-or-cryogenics" },
+    categories = { "organic", "cryogenics" },
     subgroup = "agriculture-products",
     order = "a[organic-products]-z-d[presto-fuel]",
     enabled = false,

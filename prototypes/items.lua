@@ -364,7 +364,7 @@ data:extend{
     subgroup = "agriculture-products",
     order = "c[nutrients]-z-a[fertilizer]",
     pictures = make_pics("fertilizer", 3, {size=64, scale=0.5, mipmap_count=4}),
-    fuel_categories = { "nutrients" },
+    fuel_category = "nutrients",
     -- nutrience is 2MJ
     fuel_value = "1.5MJ",
     inventory_move_sound = spage_sounds.agriculture_inventory_move,
@@ -380,7 +380,7 @@ data:extend{
     type = "item",
     name = "pktff-presto-fuel",
     icon = "__base__/graphics/icons/rocket-fuel.png",
-    fuel_categories = { "chemical" },
+    fuel_category = "chemical",
     fuel_value = "1MJ",
     fuel_acceleration_multiplier = 12.1,
     fuel_top_speed_multiplier = 2,
