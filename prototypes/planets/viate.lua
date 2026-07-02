@@ -220,17 +220,17 @@ data:extend{
     -- size = 0 value
     -- frequency = noise scale
     name = "pktff_viate_basin",
-    categories = { "terrain" },
+    category =  "terrain",
   },
   {
     type = "autoplace-control",
     name = "pktff_viate_spotness",
-    categories = { "terrain" },
+    category =  "terrain",
   },
   {
     type = "autoplace-control",
     name = "pktff_viate_meteors",
-    categories = { "terrain" },
+    category =  "terrain",
   },
   -- Cliffs won't spawn at y=0, so make a HUGE difference in height
   -- and just make the basins really really deep.
